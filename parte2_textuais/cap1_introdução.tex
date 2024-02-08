@@ -1,0 +1,72 @@
+\lstset{
+	language=Python,
+	tabsize=3,
+	basicstyl  e=\small\linespread{0.8}\ttfamily,
+	keywordstyle=\bfseries\color{blue},
+	commentstyle=\color{green!40!black},
+	frame=single,
+	breaklines=false,
+	breakatwhitespace=false
+}
+
+\pagenumbering{arabic}
+
+\chapter{Introdução}
+
+\section{Microrredes CC e Estratégias de Controle em Rede}
+
+Microrredes isoladas são sistemas elétricos de pequeno porte com geração distribuída, armazenamento e carga local \commentiury{adicionar uma ref}. Elas apresentam características notavelmente distintas do sistema de energia convencional, especialmente no que tange ao controle de rede. A peculiaridade da natureza CC das microrredes traz consigo desafios específicos, demandando a formulação e implementação de estratégias de controle eficazes. A seguir, aprofundaremos alguns aspectos cruciais que ilustram a complexidade intrínseca desse cenário dinâmico.
+
+Um dos principais desafios do controle de microrredes isoladas é a falta de sincronismo. Em sistemas convencionais, a frequência da rede é mantida constante por geradores sincronizados. No entanto, em microrredes isoladas, a geração distribuída é geralmente composta por sistemas de energia renovável, como painéis solares e turbinas eólicas, que não são sincronizadas \commentiury{adicionar uma ref}. Isso pode levar a flutuações na frequência da rede que podem prejudicar o desempenho dos equipamentos e até mesmo levar a faltas \commentiury{adicionar uma ref}. Outro desafio é a falta de estabilidade dessas redes. Microrredes isoladas são sistemas mais sensíveis a perturbações do que sistemas convencionais. Isso ocorre porque elas têm menor capacidade de absorção de energia de reserva, o que as torna mais suscetíveis a oscilações \commentiury{adicionar uma ref}.
+
+Apesar dos desafios, microrredes isoladas também oferecem oportunidades para o controle de rede. Por exemplo, a geração distribuída pode ser usada para melhorar a qualidade da energia. As fontes renováveis são geralmente mais consistentes do que as fontes convencionais, o que pode ajudar a reduzir a flutuação da tensão e da frequência da rede \commentiury{adicionar uma ref}. Além disso, microrredes isoladas podem ser usadas para aumentar a confiabilidade do fornecimento de energia \commentiury{adicionar uma ref}. A geração distribuída pode fornecer energia local, mesmo em caso de falha na rede principal.
+
+A inserção de recursos energéticos distribuídos (REDs) nas microrredes, como geração solar e eólica, traz desafios operacionais, como a \commentiury{dificuldade na???} garantia da estabilidade do sistema e o compartilhamento eficiente de potência. Para enfrentar esses desafios, recentes estudos \commentiury{quais estudos? refs} propuseram esquemas de controle hierárquico para microrredes, com foco primordial na provisão de reserva. A reserva é a capacidade de um sistema elétrico de fornecer potência adicional para compensar eventos inesperados, como falhas de geração ou cargas inesperadas \commentiury{adicionar uma ref}. Ela desempenha um papel crucial na robustez das microrredes isoladas, que não possuem conexão com a rede elétrica principal. \commentiury{Sugiro mover o parágrafo (e o prox) para antes do anterior, pois a forma atual está um pouco repetitiva,}
+
+A provisão de reserva emerge como fator crucial em microrredes isoladas, garantindo a continuidade do fornecimento de energia diante de falhas ou variações na demanda \commentiury{adicionar uma ref}. A reserva pré-primária, ao tirar proveito da inércia rotacional dos geradores, mantém a estabilidade da rede, enquanto a reserva primária envolve fontes controláveis, ajustando-se conforme necessário para fornecer potência adicional \commentiury{adicionar uma ref}.
+
+Os esquemas de controle hierárquico para microrredes, compostos por três níveis - primário, secundário e terciário - desempenham funções específicas para aprimorar o desempenho global. O nível primário visa assegurar a estabilidade local, monitorando e ajustando a frequência e a tensão para mantê-las dentro de limites aceitáveis \commentiury{adicionar uma ref}. No nível secundário, a coordenação das ações das unidades geradoras é priorizada para garantir o compartilhamento eficiente de potência, visando minimizar perdas e otimizar a eficiência do sistema. Por fim, o nível terciário assume a responsabilidade de coordenar as ações tanto das unidades geradoras quanto dos consumidores, almejando a minimização dos custos operacionais. Esses esquemas hierárquicos, ao atuarem de maneira integrada, demonstram o potencial de aprimorar significativamente a confiabilidade e eficiência das microrredes isoladas \commentiury{adicionar uma ref}.
+
+\commentiury{Aqui eu acho que cabe comentar um pouco sobre as redes elétricas inteligentes e a integração de recursos de comunicação nessas redes antes de levar ao ponto do ETC...}
+
+A crescente inserção de recursos energéticos distribuídos (REDs) nas microrredes CC traz desafios operacionais \commentiury{Aqui você diz pela terceira vez a mesma coisa. O ideal seria condensar os desafios relacionados na mesma parte do texto para não ficar repetitivo.}, como a necessidade de garantir a confiabilidade e eficiência do sistema. O controle centralizado tradicional é limitado em sua capacidade de resposta a eventos imprevisíveis, como falhas de componentes ou variações na demanda. Diante desse cenário, as Estratégias de Controle Acionado por Evento (ETCs) emergem como uma alternativa promissora para o controle de microrredes CC. As ETCs realizam tarefas de controle em resposta a eventos específicos, permitindo uma alocação de recursos mais eficiente e uma resposta mais rápida a mudanças nas condições operacionais. \commentiury{Veja que a motivação principal ao uso de ETC é a limitação de recursos de comunicação, o que se torna importante nas redes inteligentes que usam extensivamente tecnologias de comunicação. Acho que isso precisa ser melhor abordado e motivado.} 
+
+As estratégias de controle acionado por evento (ETCs) \commentiury{Não entendi o "s" do acrônimo} apresentam diversas vantagens, como eficiência na alocação de recursos, rápida resposta a mudanças nas condições operacionais e alta adaptabilidade. Essas vantagens são possíveis porque as ETCs realizam tarefas de controle apenas quando necessário, reduzindo o desperdício de recursos e garante a confiabilidade do sistema. Além disso, as ETCs são altamente adaptáveis, podendo ser ajustadas às mudanças nas condições operacionais ou na configuração do sistema.
+
+No entanto, o acionamento por eventos também apresentam desafios, como o projeto de gatilhos \commentiury{embora o termo "gatilho" seja totalmente correto, eu utilizaria "mecanismo de acionamento" } eficazes e o desenvolvimento de sistemas adaptativos confiáveis. O projeto de gatilhos eficazes é essencial para garantir o desempenho das ETCs, pois eles são responsáveis por determinar quando as tarefas de controle devem ser executadas. \commentiury{Não entendi onde essa discussão sobre adaptativos contribui.} O desenvolvimento de sistemas adaptativos confiáveis também é um desafio técnico, pois é necessário garantir que esses sistemas sejam capazes de se adaptar às mudanças nas condições operacionais sem comprometer a confiabilidade do sistema. Apesar desses desafios, o emprego de estratégias de ETC apresenta um potencial significativo para aprimorar o desempenho das microrredes CC, especialmente em aplicações críticas em tempo real. As ETCs podem ajudar a reduzir o consumo de energia, melhorar a resposta a eventos imprevisíveis e aumentar a robustez dos sistemas \commentiury{Essa afirmação precisa ser suportada por uma referência}.
+
+\commentiury{Acho interessante discutir as "classificações" de ETC por aqui.}
+
+Com base na análise das microrredes CC e considerando as particularidades das estratégias de Controle Acionado por Evento (ETCs), Este trabalho apresenta contribuições significativas \commentiury{eu retiraria o "significativas" e deixaria os adjetivos subjetivos por conta dos leitores} para o controle de microrredes CC. A principal inovação é a definição de propriedades específicas para a verificação da segurança e eficiência dessas microrredes. Além disso, a proposta contempla a criação de modelos que abrangem a regulação de tensão e aprimoramento da qualidade de energia, contribuindo para a estabilidade local, compartilhamento eficiente de potência e otimização econômica. Essas contribuições exploram novos horizontes no campo do controle de microrredes CC e sublinham a importância de estratégias formais para garantir a segurança, eficiência e adaptabilidade desses sistemas em constante evolução.
+
+\commentiury{Vamos revisar juntos o último parágrafo e os objetivos.}
+
+\section{Objetivos}
+
+\subsection{Objetivos Gerais}
+
+O objetivo deste trabalho é avaliar e aprimorar estratégias de controle acionado por eventos (ETC) em microrredes de corrente contínua (CC), visando a otimização do funcionamento desses sistemas em ambientes descentralizados e voltados para redes distribuídas. A pesquisa se propõe a realizar uma análise abrangente das estratégias de ETC, explorando tecnologias recentes e investigando sua aplicabilidade específica nas microrredes de CC. O foco principal é contribuir para o fornecimento de energia eficiente e confiável nesse contexto dinâmico.
+
+\subsection{Objetivos Específicos}
+Para alcançar o objetivo geral, serão delineados os seguintes objetivos específicos que direcionarão as atividades do projeto:
+
+\begin{enumerate}
+	\item[(1)] Desenvolver um modelo específico de microrrede CC
+	\item[(2)] Implementar um simulador de uma microrrede a partir do modelo desenvolvido
+	\item[(3)] Projetar e avaliar diferentes estratégias de controle baseados no ETC para a microrrede CC
+	\item[(4)] Aplicar LMIs para análise e controle do sistema
+\end{enumerate}
+
+\section{Organização do Trabalho}
+
+O presente trabalho encontra-se estruturado em quatro capítulos dos quais, o primeiro é composto por esta introdução ao trabalho.
+
+O Capítulo \ref{cap2}, "Revisão Bibliográfica", abrange a fundamentação teórica, destacando o Sistema de Controle ETC, Microrredes CC e LMIs. A segunda parte revisita Trabalhos Relacionados, focando em Controle Acionado por Eventos e Controle em Rede, estabelecendo bases para o projeto.
+
+O Capítulo \ref{cap3}, "Modelos e Protótipo", destaca a criação de modelos específicos para microrredes CC e aborda o desenvolvimento do protótipo, essencial para a implementação e teste das estratégias de Controle Acionado por Eventos propostas.
+
+O Capítulo \ref{cap4}, "Avaliação de ETC", concentra-se na análise e avaliação das estratégias de Controle Acionado por Eventos (ETC) \commentiury{se você já usou o acrônimo, não precisa repitir a definição... sugiro usar um pacote de gerenciamento de acrônimos para evitar o problema.} implementadas. Este capítulo examina o desempenho das estratégias em microrredes de corrente contínua, considerando métricas como eficiência energética, confiabilidade do sistema e adaptabilidade às condições operacionais.
+
+O Capítulo \ref{cap5}, "Conclusão", apresenta as principais descobertas do projeto, destacando conclusões derivadas da avaliação das estratégias de Controle Acionado por Eventos em microrredes de corrente contínua.
+
+% Fim Capítulo
