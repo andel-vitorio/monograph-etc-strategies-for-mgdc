@@ -34,14 +34,15 @@
 \usepackage{adjustbox}      % Possibilita ajustar as tabelas as margens
 \usepackage{rotating}       % Rotaciona tabelas
 
-\usepackage{indentfirst}
+\usepackage[acronym]{glossaries}
 
-
+\makenoidxglossaries
 
 \newcommand{\PR}[1]{\ensuremath{\left[#1\right]}}
 \newcommand{\PC}[1]{\ensuremath{\left(#1\right)}}
 \newcommand{\chav}[1]{\ensuremath{\left\{#1\right\}}}
 
+\newcommand{\commentiury}[1]{{\color{blue}[IB: #1]}}
 
 %\usepackage[inline]{showlabels} % Mostra os labels das equações
 %\usepackage[notcite,notref]{showkeys} % Mostra todo os labels
@@ -133,6 +134,18 @@
   Prof. Dr. Iury Valente de Bessa
 }
 
+% Abreviaturas e Siglas
+% \renewcommand{\acrfullformat}[2]{#1~(#2)}
+
+\newacronym{mgcc}{MGCC}{Microrrede de Distribuição em Corrente Contínua}
+\newacronym{red}{RED}{Recurso Energético Distribuído}
+\newacronym{cc}{CC}{Corrente Contínua}
+\newacronym{gd}{GD}{Geração Distribuída}
+\newacronym{mr}{MR}{Microrredes}
+\newacronym{etc}{ETC}{Controle Acionado por Eventos (do inglês, \textit{Event-Triggered Control})}
+\newacronym{etm}{ETM}{Mecanismo de Acionamento de Eventos (do inglês, \textit{Event-Triggering Mechanism})}
+\newacronym{nmg}{NMGs}{Microrrede em Rede (do inglês, \textit{Networked Microgrid})}
+
 %-----------------------------------------------------
 %\usepackage{ulem}
 %\newcommand{\commentib}[1]{{\color{red} [IB: #1]}}
@@ -169,8 +182,7 @@
 %\bibliographystyle{plainnat} % Ordem alfabética
 %\bibliographystyle{apa}      % Ordem alfabética
 
-\bibliography{referencias}
-
+\bibliography{referencias.bib}
 
 
 \appendix
