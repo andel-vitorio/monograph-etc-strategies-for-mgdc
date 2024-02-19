@@ -1,20 +1,92 @@
 \chapter{Revisão Bibliográfica} \label{cap2}
+
 \section{Fundamentação Teórica}
 
-\subsection{Estabilidade no sentido Lyapunov}
-\subsection{LMIs}
-\subsection{Sistema de Controle ETC}
+\subsection{Estabilidade no sentido \textit{Lyapunov}}
+
+% Introdução do teorema de Lyapunov
+Os métodos de análise de estabilidade desenvolvidos por \textit{Lyapunov} são geralmente reconhecidos como base para a compreensão da estabilidade em sistemas dinâmicos. No ano de 1892, o matemático e engenheiro russo, \textit{Aleksandr Mikhailovich Lyapunov} (1857-1917), propôs abordagens que desempenham um papel crucial na compreensão e caracterização da estabilidade dos sistemas no ponto de equilíbrio. \cite{lyapunov1892}. Em essência, ela se concentra na análise do comportamento das soluções de sistemas dinâmicos em torno de pontos de equilíbrio, estabelecendo critérios para determinar a estabilidade desses pontos, sejam eles estáveis, instáveis ou assintoticamente estáveis. Desta forma, oferece métodos sistemáticos para avaliar a estabilidade de sistemas, tanto autônomos quanto não autônomos, abrangendo desde sistemas lineares até não lineares. \cite{khalil2002}. Ao fornecer condições suficientes para a estabilidade, os métodos de \textit{Lyapunov} oferecem uma estrutura poderosa para analisar e projetar sistemas dinâmicos com garantias de estabilidade desejadas.
+
+% Bases para o teorema de Lyapunov
+Considere o seguinte sistema dinâmico $\dot{x} = f(x)$, onde $f: D \rightarrow \mathbb{R}^n$ é um mapeamento \textit{Lipschitz} local do domínio $D \subset \mathbb{R}^n$ em $\mathbb{R}^n$. Assuma que $\bar{x} \in D$ seja o ponto de equilíbrio do sistema, ou seja, $f(\bar{x}) = 0$. Devido à possibilidade de transladar qualquer ponto de equilíbrio de um sistema para a origem através de mudanças de variáveis, podemos, sem perda de generalização, definir a estabilidade do sistema no ponto de equilíbrio na origem, ou seja, $\bar{x} = 0$. Assim, a definição da estabilidade do ponto de equilíbrio, conforme Khalil, é apresentada a seguir. \cite{khalil2002}.
+
+\begin{definition}
+  O ponto de equilíbrio $\bar{x} = 0$ é
+
+  \begin{enumerate}
+    \item[$\bullet$] estável se, para cada $\epsilon > 0$, existe $\delta = \delta(\epsilon) > 0$, tal que,
+          $$ \lVert x(0)\rVert < \delta \Rightarrow \lVert x(t)\rVert < \epsilon, \hspace{0.3cm} \forall \, t \geq 0$$
+    \item[$\bullet$] instável, se não for estável.
+    \item[$\bullet$] assintoticamente estável, se for estável e $\delta$ possa   ser escolhido de forma que:
+          $$ \lVert x(0)\rVert < \delta \Rightarrow \lim_{t \rightarrow \infty}x(t) = 0$$
+  \end{enumerate}
+\end{definition}
+
+Portanto, para demostrar que o ponto de equilíbrio $\bar{x} = 0$ é estável, para qualquer valor de $\epsilon$, deve-se obter um valor de $\delta$, possivelmente dependente de $\epsilon$, de modo que uma trajetória que comece em uma vizinhança $\delta$ da origem nunca sairá da vizinhança $\epsilon$. \cite{khalil2002}.
+
+Khalil, em seu livro \textit{Nonlinear Systems}, demonstrou que a estabilidade do ponto de equilíbrio de um sistema de pêndulo pode ser compreendida através do uso de conceitos de energia. Ele definiu a energia do pêndulo como a soma de suas energias potencial e cinética, com a escolha da referência da energia potencial de modo que a energia do pêndulo na origem seja nula. Ao desconsiderar o atrito, tornando o sistema conservativo e, consequentemente, mantendo a energia do sistema constante, observou-se a formação de um contorno fechado em torno do ponto de origem, especialmente para pequenos valores de energia do sistema. Assim, o ponto de origem é identificado como um ponto de equilíbrio estável. Para sistemas dissipativos, nos quais a energia do sistema diminui ao longo do tempo, ele observou que o sistema converge para a origem conforme o tempo tende ao infinito. Portanto, é possível determinar a estabilidade do ponto de equilíbrio analisando a derivada da função energia ao longo das trajetórias do sistema. \cite{khalil2002}.
+
+Em 1892, Lyapunov afirmou que outras funções, além da energia, podem ser utilizadas para determinar a estabilidade do ponto de equilíbrio. \cite{lyapunov1892}. Dado $V : D \rightarrow \mathbb{R}$ uma função contínua diferenciável definida no domínio $D \subset \mathbb{R}^n$ que contém o ponto de origem. A derivada da função $V$ ao longo da trajetória de $f(x)$, denotado por $\dot{V}(x)$, demostrada por Khalil, \cite{khalil2002}, é dada por:
+
+$$ \dot{V}(x) = \frac{\partial V}{\partial x}f(x) $$
+
+Se $\phi(t;x)$ é a solução de $f(x)$ que inicia no estado inicial $x$ no tempo $t = 0$, então:
+
+$$ \dot{V}(x) = \left. \frac{d}{dt}f(\phi(t;x))\right|_{t=0} $$
+
+Portanto, se $\dot{V}(x)$ é negativo, $V$ decresce ao longo da solução de $f(x)$.
+
+% Esta é um boa forma de apresentar o teorema?
+Com base nos conceitos apresentados até o momento, o teorema de estabilidade de Lyapunov pode ser definido como:
+
+\begin{theorem}
+  Seja $x = 0$ o ponto de equilíbrio para f(x) e seja $D \subset \mathbb{R}^n$ um domínio contendo $x = 0$. Seja $V : D \rightarrow \mathbb{R}$ uma função diferenciável contínua tal que:
+  \begin{gather}
+    V(0) = 0 \quad \text{e} \quad V(x) > 0 \quad \mathrm{em} \quad D - \{0\} \label{eq:lyapunov1} \\
+    \dot{V}(x) \leq 0 \quad \mathrm{em} \quad D - \{0\} \label{eq:lyapunov2}
+  \end{gather}
+  Então, $x=0$ é estável. Além disto, se
+  \begin{equation}
+    \dot{V}(x) < 0 \quad \mathrm{em} \quad D - \{0\} \label{eq:lyapunov3}
+  \end{equation}
+  então, $x=0$ é assintoticamente estável.
+\end{theorem}
+
+%  Definição das função de Lyapunov, superfície de Lyapunov, e função DP e SDP.
+Uma função $V(x)$ é chamada de função de Lyapunov quando é contínua e diferenciável, satisfazendo as equações \eqref{eq:lyapunov1} e \eqref{eq:lyapunov2}. A superfície $V(x) = c$, para qualquer $c > 0$, é referida como superfície de Lyapunov. Se $V(x)$ atende à condição \eqref{eq:lyapunov2}, isto é, $V(0) = 0$ e $V(x) > 0$ para $x \neq 0$, ela é considerada definida positiva. No caso em que $V(x)$ satisfaz $V(x) \geq 0$ para $x \neq 0$, ela é denominada semidefinida positiva. Uma função $V(x)$ é classificada como definida negativa ou semidefinida negativa se $-V(a)$ é definida positiva ou semidefinida positiva, respectivamente. Se $V(x)$ não se enquadra em nenhum desses casos, é considerada indefinida. Com essa terminologia, o teorema de Lyapunov pode ser reformulado, indicando que a origem é estável se existe uma função $V(x)$ definida positiva, continuamente diferenciável, tal que $\dot{V}(x)$ seja semidefinida negativa. Além disso, a estabilidade assintótica é alcançada quando $\dot{V}(x)$ é definida negativa. \cite{khalil2002}.
+
+%  Definição das Matrizes SDP E DP
+Uma classe de funções escalares para as quais a determinação do sinal pode ser facilmente realizada é a classe das funções quadráticas, representadas por:
+
+$$ V(x) = x^T P x = \sum_{i=1}^n \sum_{j=1}^n p_{ij} x_i x_j $$
+
+\noindent onde $P$ é uma matriz real simétrica. Nesse caso, $V(x)$ é positiva definida ou positiva semidefinida se, e somente se, todos os autovalores de $P$ são positivos ou não negativos, o que ocorre se e somente se todos os menores principais de $P$ são positivos ou não negativos, respectivamente. Se $V(x) = x^T P x$ é positiva definida ou positiva semidefinida, dizemos que a matriz $P$ é positiva definida ou positiva semidefinida, representado por $P > 0$ ou $P \geq 0$, respectivamente. \cite{khalil2002}.
+
+%  To-do: adicionar um conclusão e uma ponte para LMIs
+\subsection{Desigualdades Matriciais Lineares}
+
+% Introdução às LMIs
+As desigualdades matriciais lineares (\acrshortpl{lmi}, do inglês \textit{Linear Matrix Inequalities}) são de grande importância na teoria de controle e sistemas, fornecendo uma estrutura significativa para a formulação e resolução de uma variedade de problemas. Este conjunto de técnicas permite a representação de restrições complexas em termos de desigualdades lineares entre matrizes, possibilitando a abordagem de questões como estabilidade, desempenho e síntese de controladores de forma unificada. \cite{boyd1994}.
+
+Os métodos de Lyapunov tradicionalmente empregados na análise de estabilidade de sistemas dinâmicos têm sido estendidos para permitir a formulação de \acrshortpl{lmi}, proporcionando assim uma base teórica sólida para a resolução de problemas de otimização e controle. Essa conexão entre \acrshortpl{lmi} e Lyapunov não apenas simplifica a análise e a síntese de sistemas complexos, mas também oferece uma estrutura matemática para abordar uma variedade de questões de controle de forma eficiente e sistemática. \cite{boyd1994}.
+
+% História das LMIs
+A análise de sistemas dinâmicos por meios de \acrshortpl{lmi} surgiu a mais de um século. Lyapunov introduziu seus teoremas que estabelecem que a equação diferencial \begin{equation}\dot{x}(t) = Ax(t)\end{equation} é estável se, e somente se, existe uma matriz definida positiva $P$ tal que \begin{equation}A^T P + P A < 0\end{equation} \cite{lyapunov1892}. Essa condição, conhecida como desigualdade de Lyapunov em $P$, é uma forma específica de \acrshort{lmi}. Lyapunov também demonstrou que essa LMI inicial poderia ser resolvida explicitamente. Na prática, é possível escolher qualquer $Q = Q^T > 0$ e resolver a equação linear $A^T P + P A = -Q$ para a matriz $P$. Se o sistema for estável, a matriz $P$ resultante será definida positiva. Assim, a desigualdade de Lyapunov foi a primeira \acrshort{lmi} utilizada para analisar a estabilidade de sistemas dinâmicos, oferecendo uma solução analítica por meio da resolução de um conjunto de equações lineares. \cite{lyapunov1892,boyd1994}.
+
+Após os trabalhos iniciais de Lyapunov, na década de 1940, pesquisadores soviéticos como Lur'e e Postnikov aplicaram seus métodos em problemas práticos de controle, focando especialmente na estabilidade de sistemas com não-linearidades nos atuadores. Embora suas soluções fossem resolvidas manualmente e aplicáveis apenas a sistemas menores, esse trabalho foi crucial para demonstrar a viabilidade das ideias de Lyapunov na engenharia de controle. O avanço seguinte, nos anos 1960, trouxe métodos gráficos mais acessíveis, expandindo o alcance para sistemas mais complexos e estabelecendo as bases para a resolução computacional das LMIs, marcando assim uma nova fase na teoria do controle. \cite{boyd1994}.
+
+% Definição de um LMI
+% Transformar as seguintes definição utilizando o formato de teoremas
+Uma \acrshort{lmi} é expressa pela equação \begin{equation} F(x) \triangleq F_0 + \sum_{i=0}^{m}(x_iF_i) > 0 \label{eq:lmi1}\end{equation} onde $x \in \mathbb{R}^m$ é a variável e as matrizes simétricas $F_i \in \mathbb{R}^{n \times n}, \, i = 0, . . . , m$, são fornecidas. Nesta expressão, o símbolo de desigualdade indica que $F(x)$ é definida positiva. Além disso, há \acrshortpl{lmi} não estritas, representadas pela forma \begin{equation} F(x) \geq 0 \end{equation}
+
+% To-do: Adicionar junto com o teorema.
+% To-do: Adicionar a definição de diag em símbolos
+Múltiplas \acrshortpl{lmi}  $F_{(1)}(x) > 0, \, ..., \, F_{(p)}(x) > 0$ podem ser expressas como uma única \acrshort{lmi} $\mathbf{diag}(F_{(1)}(x), \, ..., \, F_{(p)}(x)) > 0$. Além disto, quando as matrizes $F_i$ são diagonais, a LMI $F(x) > 0$ é apenas um conjunto de desigualdades lineares. As desigualdades não lineares (convexas) são convertidas para a forma LMI usando complementos de Schur.
+
+A \acrshort{lmi} \eqref{eq:lmi1} é uma restrição convexa em $x$, tornando o conjunto $\{x \, | \, F(x) > 0\}$ convexo e pode representar uma ampla variedade de restrições convexas em $x$, incluindo desigualdades lineares, quadráticas, de norma de matriz, bem como restrições comuns em teoria de controle, como desigualdades matriciais quadráticas convexas e de Lyapunov. \cite{boyd1994}.
+
+
+\subsection{Sistema de Controle Acionado por Eventos}
 
 \section{Trabalhos Relacionados}
 \subsection{ETC e Controle em rede para conversores}
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
