@@ -10,6 +10,7 @@
 			   12pt     % Tamanho da fonte
 			   ]{book}  % Classe do documento
 
+\usepackage{dashbox}
 % Pacotes --> \usepackage[OPÇÕES]{PACOTE}
 \usepackage[utf8]{inputenc} % Codificação do documento (conversão automática dos acentos) 
 \usepackage[brazil]{babel}  % Traduz palavras chaves para o PT-BR (ex.: abstract->resumo)
@@ -22,7 +23,7 @@
 \usepackage{amssymb} 		% Símbolos adicionais no documento \mathbb{R}
 \usepackage{mathrsfs}       % Símbolos da transformadas de Laplace e Fourier \mathscr{•}
 \usepackage{float}			% Possibila posicionar tabelas e figuras em uma posição específica [H]
-\usepackage[round]{natbib}% Inclui mais possibilidades de citações \citep{•}
+\usepackage[numbers]{natbib}% Inclui mais possibilidades de citações \citep{•}
 \usepackage{fancyhdr}       % Possibilita a alteração de cabeçalho e rodapé
 \usepackage{longtable}      % Possiblita a quebra de tabelas em duas páginas
 \usepackage{multirow}		% Possibilita multiplas linhas em tabelas
@@ -33,10 +34,6 @@
 \usepackage{arydshln}       % Possibilita inserir linhas pontilhadas em tabelas 
 \usepackage{adjustbox}      % Possibilita ajustar as tabelas as margens
 \usepackage{rotating}       % Rotaciona tabelas
-
-\usepackage[acronym]{glossaries}
-
-\makenoidxglossaries
 
 \newcommand{\PR}[1]{\ensuremath{\left[#1\right]}}
 \newcommand{\PC}[1]{\ensuremath{\left(#1\right)}}
@@ -61,13 +58,17 @@
 
 % Possibilita hiperlinks no texto
 \usepackage[pdftex,
-			%backref,
+			% backref,
 			linktocpage = false,
 			colorlinks  = true,
-			linkcolor   = blue,
+			linkcolor   = black,
 			anchorcolor = blue,
 			citecolor   = blue,
 			urlcolor    = blue]{hyperref}
+
+      
+\usepackage[acronym, shortcuts]{glossaries}
+\makenoidxglossaries
 
 % Comandos auxiliares --> \nomecomando{COMANDO}{•}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % Tabelas: {|C{2cm}|C{5cm}|}
@@ -134,6 +135,9 @@
   Prof. Dr. Iury Valente de Bessa
 }
 
+\newtheorem{definition}{Definição}
+\newtheorem{theorem}{Teorema}
+
 % Abreviaturas e Siglas
 % \renewcommand{\acrfullformat}[2]{#1~(#2)}
 
@@ -141,10 +145,21 @@
 \newacronym{red}{RED}{Recurso Energético Distribuído}
 \newacronym{cc}{CC}{Corrente Contínua}
 \newacronym{gd}{GD}{Geração Distribuída}
+\newacronym[\glslongpluralkey={sistemas de controle em rede}]{scr}{SCR}{sistema de controle em rede}
 \newacronym{mr}{MR}{Microrredes}
 \newacronym{etc}{ETC}{Controle Acionado por Eventos (do inglês, \textit{Event-Triggered Control})}
 \newacronym{etm}{ETM}{Mecanismo de Acionamento de Eventos (do inglês, \textit{Event-Triggering Mechanism})}
 \newacronym{nmg}{NMGs}{Microrrede em Rede (do inglês, \textit{Networked Microgrid})}
+\newacronym{lmi}{LMI}{Desigualdades Matriciais Lineares (do inglês, \textit{Linear Matrix Inequalities})}
+\newacronym{zoh}{ZOH}{segurador de ordem zero - do inglês, \textit{zero-order mechanism}}
+\newacronym[\glslongpluralkey={lineares e invariantes no tempo}]{lit}{LIT}{linear e invariante no tempo}
+\newacronym[\glslongpluralkey={lineares a parâmetro variante - do inglês, \textit{lineares parameter varying}}]{lpv}{LPV}{Linear a parâmetro variante - do inglês, \textit{linear parameter varying }}
+\newacronym[\glslongpluralkey={intervalos mínimos entre eventos}]{imee}{IMEE}{intervalo mínimo entre eventos}
+\newacronym[\glslongpluralkey={esquemas de comunicação acionado por eventos}]{ecae}{ECAE}{esquema de comunicação acionado por eventos}
+\newacronym[\glslongpluralkey={limites de tempo finito}]{ltf}{LTF}{limites de tempo finito}
+\newacronym{efes}{EFES}{estabilidade finita de entrada-saída}
+\newacronym{ees}{EES}{estabilidade entrada-estado}
+\newacronym{cmd}{CMD}{controle por modo deslizantes}
 
 %-----------------------------------------------------
 %\usepackage{ulem}
@@ -167,7 +182,7 @@
 \include{parte1_pre-textuais/item11_lista_de_figuras}
 \include{parte1_pre-textuais/item12_lista_de_tabelas}
 \include{parte1_pre-textuais/item13_lista_de_siglas}
-%\include{parte1_pre-textuais/item14_lista_de_simbolos}
+\include{parte1_pre-textuais/item14_lista_de_simbolos}
 \include{parte1_pre-textuais/item15_sumario}
 
 \include{parte2_textuais/cap1_introdução}
