@@ -35,10 +35,6 @@
 \usepackage{adjustbox}      % Possibilita ajustar as tabelas as margens
 \usepackage{rotating}       % Rotaciona tabelas
 
-\usepackage[acronym]{glossaries}
-
-\makenoidxglossaries
-
 \newcommand{\PR}[1]{\ensuremath{\left[#1\right]}}
 \newcommand{\PC}[1]{\ensuremath{\left(#1\right)}}
 \newcommand{\chav}[1]{\ensuremath{\left\{#1\right\}}}
@@ -62,13 +58,17 @@
 
 % Possibilita hiperlinks no texto
 \usepackage[pdftex,
-			%backref,
+			% backref,
 			linktocpage = false,
 			colorlinks  = true,
-			linkcolor   = blue,
+			linkcolor   = black,
 			anchorcolor = blue,
 			citecolor   = blue,
 			urlcolor    = blue]{hyperref}
+
+      
+\usepackage[acronym, shortcuts]{glossaries}
+\makenoidxglossaries
 
 % Comandos auxiliares --> \nomecomando{COMANDO}{•}
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}} % Tabelas: {|C{2cm}|C{5cm}|}
@@ -152,7 +152,14 @@
 \newacronym{nmg}{NMGs}{Microrrede em Rede (do inglês, \textit{Networked Microgrid})}
 \newacronym{lmi}{LMI}{Desigualdades Matriciais Lineares (do inglês, \textit{Linear Matrix Inequalities})}
 \newacronym{zoh}{ZOH}{segurador de ordem zero - do inglês, \textit{zero-order mechanism}}
-\newacronym[\glslongpluralkey={lineareas e invariantes no tempo}]{lit}{LIT}{linear e invariante no tempo}
+\newacronym[\glslongpluralkey={lineares e invariantes no tempo}]{lit}{LIT}{linear e invariante no tempo}
+\newacronym[\glslongpluralkey={lineares a parâmetro variante - do inglês, \textit{lineares parameter varying}}]{lpv}{LPV}{Linear a parâmetro variante - do inglês, \textit{linear parameter varying }}
+\newacronym[\glslongpluralkey={intervalos mínimos entre eventos}]{imee}{IMEE}{intervalo mínimo entre eventos}
+\newacronym[\glslongpluralkey={esquemas de comunicação acionado por eventos}]{ecae}{ECAE}{esquema de comunicação acionado por eventos}
+\newacronym[\glslongpluralkey={limites de tempo finito}]{ltf}{LTF}{limites de tempo finito}
+\newacronym{efes}{EFES}{estabilidade finita de entrada-saída}
+\newacronym{ees}{EES}{estabilidade entrada-estado}
+\newacronym{cmd}{CMD}{controle por modo deslizantes}
 
 %-----------------------------------------------------
 %\usepackage{ulem}
