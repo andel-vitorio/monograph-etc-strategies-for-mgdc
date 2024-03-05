@@ -23,7 +23,7 @@
 \usepackage{amssymb} 		% Símbolos adicionais no documento \mathbb{R}
 \usepackage{mathrsfs}       % Símbolos da transformadas de Laplace e Fourier \mathscr{•}
 \usepackage{float}			% Possibila posicionar tabelas e figuras em uma posição específica [H]
-\usepackage[numbers]{natbib}% Inclui mais possibilidades de citações \citep{•}
+\usepackage[round]{natbib}% Inclui mais possibilidades de citações \citep{•}
 \usepackage{fancyhdr}       % Possibilita a alteração de cabeçalho e rodapé
 \usepackage{longtable}      % Possiblita a quebra de tabelas em duas páginas
 \usepackage{multirow}		% Possibilita multiplas linhas em tabelas
@@ -34,6 +34,7 @@
 \usepackage{arydshln}       % Possibilita inserir linhas pontilhadas em tabelas 
 \usepackage{adjustbox}      % Possibilita ajustar as tabelas as margens
 \usepackage{rotating}       % Rotaciona tabelas
+% \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
 
 \newcommand{\PR}[1]{\ensuremath{\left[#1\right]}}
 \newcommand{\PC}[1]{\ensuremath{\left(#1\right)}}
@@ -88,6 +89,7 @@
 % Definição de novas cores
 \definecolor{mygreen}{RGB}{0, 115, 0}
 \definecolor{mylilas}{RGB}{170,55,240}
+\definecolor{blue}{RGB}{41,5,195}
 
 \lstset{ % -> \usepackage{listings}
   language=Matlab,
@@ -142,9 +144,13 @@
 % \renewcommand{\acrfullformat}[2]{#1~(#2)}
 
 \newacronym{mgcc}{MGCC}{Microrrede de Distribuição em Corrente Contínua}
+\newacronym[\glslongpluralkey={sistemas de distribuição de corrente contínua}]{sdcc}{SDCC}{sistemas de distribuição de corrente contínua}
 \newacronym{red}{RED}{Recurso Energético Distribuído}
 \newacronym{cc}{CC}{Corrente Contínua}
+\newacronym{ca}{CA}{corrente alternada}
 \newacronym{gd}{GD}{Geração Distribuída}
+\newacronym[\glslongpluralkey={fontes de energia renovável}]{fer}{FER}{fonte de energia renovável}
+\newacronym[\glslongpluralkey={sistenas de armazenamento de energia}]{sae}{SAE}{sistema de armazenamento de energia}
 \newacronym[\glslongpluralkey={sistemas de controle em rede}]{scr}{SCR}{sistema de controle em rede}
 \newacronym{mr}{MR}{Microrredes}
 \newacronym{etc}{ETC}{Controle Acionado por Eventos (do inglês, \textit{Event-Triggered Control})}
@@ -160,6 +166,10 @@
 \newacronym{efes}{EFES}{estabilidade finita de entrada-saída}
 \newacronym{ees}{EES}{estabilidade entrada-estado}
 \newacronym{cmd}{CMD}{controle por modo deslizantes}
+\newacronym[\glslongpluralkey={cargas de potência constante - do inglês, \textit{constant power loads}}]{cpl}{CPL}{carga de potência constante - do inglês, \textit{constant power load}}
+\newacronym{mms}{MMS}{modelo médio do sistema}
+\newacronym[\glslongpluralkey={modelos de pequenos sinais}]{mps}{MPS}{modelo de pequenos sinais}
+
 
 %-----------------------------------------------------
 %\usepackage{ulem}
