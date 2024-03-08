@@ -1,18 +1,100 @@
 \chapter{Conversores CC com Cargas de Potência Constante} \label{cap3}
 
-\section{Microrredes CC}
+\section{Microrredes de Corrente Contínua}
 
-No século XX, a "Guerra das Correntes" entre defensores da \acrshortpl{ca}, liderados por \textit{Westinghouse} e \textit{Tesla}, e proponentes da \acrshort{cc}, liderados por \textit{Edison}, resultou na prevalência da \acrshort{ca} devido à sua facilidade de expansão da rede. Apesar disso, a \acrshort{cc} permaneceu relevante com os avanços na eletrônica de potência. Paralelamente, a crescente adoção de microrredes \acrshortpl{mr}, com \acrfullpl{fer}, \acrfullpl{sae} e novas cargas, reflete preocupações ambientais e escassez de combustíveis fósseis, mas sua integração descoordenada apresenta desafios técnicos e operacionais, como perfil de tensão comprometido e congestionamentos nas linhas de transmissão. \cite{Elsayed2015, Dragicevic2015}.
+No século XX, a "Guerra das Correntes" entre defensores da \acrshortpl{ca}, liderados por \textit{Westinghouse} e \textit{Tesla}, e proponentes da \acrshort{cc}, liderados por \textit{Edison}, resultou na prevalência da \acrshort{ca} devido à sua facilidade de expansão da rede. Apesar disso, a \acrshort{cc} permaneceu relevante com os avanços na eletrônica de potência. Paralelamente, a crescente adoção de microrredes \acrshortpl{cc}, com \acrfullpl{fer}, \acrfullpl{sae} e novas cargas, reflete das preocupações ambientais e escassez de combustíveis fósseis, mas sua integração descoordenada apresenta desafios técnicos e operacionais, como perfil de tensão comprometido e congestionamentos nas linhas de transmissão. \cite{Elsayed2015, Dragicevic2015}.
 
 A proposta das \acrshortpl{mr} surgiu como uma solução há mais de uma década. As \acrshortpl{mr}, operando em modo isolado ou conectadas à rede, podem ser classificadas como \acrshortpl{mr} de \acrshort{ca} ou \acrshort{cc}, sendo a \acrshort{mr} de \acrshort{cc} mais atraente devido à sua maior eficiência e melhor interface com diversos tipos de \acrshort{fer} e \acrshort{sae}. Além disso, ao serem acopladas em torno de um barramento \acrshort{cc}, as \acrfullpl{mr} eliminam problemas como fluxo de potência reativa e regulação de frequência, resultando em sistemas de controle menos complexos. \cite{Dragicevic2015}.
 
 Vários setores empregam \acrfullpl{sdcc}, como espaçonaves, centros de dados, telecomunicações, tração e sistemas de energia a bordo de navios. Por exemplo, a Estação Espacial Internacional utiliza \acrshortpl{sdcc} para operar suas vastas necessidades de energia. Alguns centros de dados também adotaram sistemas \acrshort{cc}, resultando em economia significativa de energia em comparação com sistemas \acrshort{ca} tradicionais. Na área de telecomunicações, os sistemas de distribuição de energia de 48V são amplamente empregados para garantir alta confiabilidade e eficiência. Além disso, sistemas de tração, como bondes e metrôs, preferem distribuição \acrshort{cc} devido à facilidade de interface com motores \acrshort{cc}. Esses sistemas também permitem maior eficiência e controlabilidade. Em sistemas de energia a bordo de navios, a distribuição zonal \acrshort{cc} é uma opção popular devido à sua confiabilidade e facilidade de proteção. \cite{Elsayed2015}.
 
-Desta forma, o design de sistemas de distribuição \acrshort{cc} tem recebido atenção crescente, especialmente devido a adaptação de equipamentos projetados originalmente para \acrshort{ca}. Modelos simplificados são essenciais para compreender o comportamento da carga em operação \acrshort{cc}. Comparando configurações de cabos, descobriu-se que sistemas \acrshort{cc} podem superar \acrshort{cc} em termos de capacidade de transferência de energia, \cite{Salomonsson2007}. Em um estudo sobre microrredes \acrshort{cc} em centros de dados, \cite{Salomonsson2008}, foi proposto um sistema de controle adaptativo para otimizar o fluxo de energia e minimizar perdas. A coordenação entre conversores é crucial para garantir o fornecimento contínuo de energia às cargas sensíveis. Essas pesquisas contribuem para uma compreensão mais profunda do design e controle de sistemas de distribuição DC.
+Desta forma, o design de sistemas de distribuição \acrshort{cc} tem recebido atenção crescente, especialmente devido a adaptação de equipamentos projetados originalmente para \acrshort{ca}. Modelos simplificados são essenciais para compreender o comportamento da carga em operação \acrshort{cc}. Comparando configurações de cabos, descobriu-se que sistemas \acrshort{cc} podem superar \acrshort{cc} em termos de capacidade de transferência de energia, \cite{Salomonsson2007}. Em um estudo sobre microrredes \acrshort{cc} em centros de dados, \cite{Salomonsson2008}, foi proposto um sistema de controle adaptativo para otimizar o fluxo de energia e minimizar perdas. Essas pesquisas contribuem para uma compreensão mais profunda do design e controle de sistemas de distribuição DC.
+
+Nas microrredes \acrshort{cc}, os conversores \acrshort{cc}-\acrshort{cc} são essenciais para regular a tensão do sistema, permitindo a integração de fontes renováveis e tradicionais de energia. Ao conectar esses conversores em microrredes com \acrfull{cpl}, surgem desafios como o efeito de impedância negativa, que pode causar oscilações indesejadas devido à interação com estas cargas. Diversas técnicas de controle, como filtros RL ou RC, controle preditivo e técnicas de controle robusto, têm sido propostas para mitigar essas oscilações e garantir a estabilidade do sistema. A análise experimental dessas técnicas é fundamental para avaliar sua eficácia e aplicabilidade em diferentes topologias de microrredes, fornecendo compreensões importantes para o projeto e operação desses sistemas de distribuição de energia. \cite{Bessa2020}.
 
 \section{Conversores CC e Cargas de Potência Constante}
 
+Os conversores \acrshort{cc}-\acrshort{cc} são circuitos que transferem energia elétrica de uma fonte de entrada para uma de saída. Estes conversores operam por meio de semicondutores que atuam como interruptores, controlando o fluxo de energia através de elementos passivos, como indutores e capacitores. O variável fundamental para determinar a operação do conversor é a razão cíclica, ou ciclo de trabalho, que define a proporção de tempo em que os interruptores permanecem ligados e desligados. Entre as diversas topologias de conversores \acrshort{cc}-\acrshort{cc}, destacam-se os conversores Buck e Boost, que serão abordados neste trabalho.
 
+\subsection{Conversor Buck}
+
+% Buck: Introdução
+O conversor \acrshort{cc}-\acrshort{cc} abaixador de tensão, mais conhecido como conversor Buck, produz uma tensão de saída média menor que a entrada. Isso ocorre devido à conservação de energia, resultando em uma corrente de saída média maior que a corrente de entrada média. Teoricamente, o conversor Buck permite uma variação contínua da tensão na carga, de zero até a tensão de entrada. \cite{martins2008}.
+
+% Buck: Configuração Básica
+A configuração básica do conversor Buck é apresentada na \autoref{fig:basic-buck-converter}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.27\textwidth]{figuras/basic_buck_conversor.eps}
+  \caption{Configuração básica do conversor Buck.}
+  \label{fig:basic-buck-converter}
+\end{figure}
+
+% Buck: Valor médio de tensão
+O valor médio da tensão da carga, $\bar{v}_{out}$ é descrito como: \begin{equation} \bar{v}_{out} = \frac{t_c}{T}v_{in}, \end{equation} onde, $t_c$ é o tempo em que a chave $S$ permanece fechada, $t_a$ é o tempo em que a chave permanece aberta, e $T = t_c + t_a$ é o período de chaveamento. \cite{martins2008}.
+
+% Buck: parâmetros do circuito
+A razão cíclica, ou duty cycle, é definida como: \begin{equation} d = \frac{t_c}{T}. \end{equation} Logo, \begin{equation} \bar{v}_{out} = dv_{in}. \label{eq:buck-1}\end{equation} A partir desta equação, pode-se definir a corrente média: \begin{equation} \bar{i} = d\frac{v_{in}}{R}. \end{equation} E por fim, a potência de entrada é dada pela expressão: \begin{equation} P_{in} = d \frac{v_{in}^2}{R}. \end{equation}
+
+% Buck: linearidade
+A partir da \autoref{eq:buck-1} pode-se observar que a tensão média sobre a carga é diretamente linear a tensão de entrada, cuja taxa de variação é igual ao valor do duty cycle $d$. Isto possibilita o controle da tensão média sobre a carga por meio da razão cíclica. Tal controle pode ser através da variação do tempo de condução $t_c$ da chave $S$. Desta forma, para $t_c = 0 \Rightarrow d = 0$ e $t_c = T \Rightarrow d = 1$, que representam a chave permanentemente aberta e fechada, respectivamente. Assim, a potência transferida à carga pode ser controlada, variando a sua tensão média entre 0 e $v_{in}$. \cite{martins2008}.
+
+% Buck: buck com carga RLE - introdução
+Para uma análise mais abrangente, é relevante mencionar o conversor Buck que alimenta uma carga RLE composta por resistor, indutor e uma fonte de tensão, conforme apresentado na \autoref{fig:buck_converter_rle}. No entanto, é crucial entender que uma fonte de tensão só pode ser conectada a uma carga com características de fonte de corrente. Isso implica que uma carga que se comporte como uma fonte de tensão deve ser associada em série com um indutor para refletir o comportamento de uma fonte de corrente. Além disso, é importante destacar que interromper abruptamente uma fonte de corrente, ou uma carga com tais características, não é permitido. Em situações onde essa operação é necessária, como em sistemas de eletrônica de potência, utiliza-se um diodo em antiparalelo com a fonte (ou carga) que será interrompida. \cite{martins2008}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.33\textwidth]{figuras/buck_converter_rle.eps}
+  \caption{1ª Etapa}
+  \label{fig:buck_converter_rle}
+\end{figure}
+
+% Buck: buck com carga RLE - funcionamento
+Considerando essas premissas, podemos analisar as fases de funcionamento do conversor Buck ao alimentar uma carga RLE. Na primeira fase, ilustrada na \autoref{fig:buck_converter_rle_s1}, a chave do conversor está fechada, permitindo que a corrente da carga flua da fonte para a carga, o que representa a transferência de energia da fonte para a carga. Na próxima fase, ilustrada na \autoref{fig:buck_converter_rle_s2}, a chave é aberta, e a corrente da carga é direcionada através do diodo, marcando a fase de roda livre do conversor. A falta do diodo nessa fase poderia resultar em tensões prejudiciais sobre a chave do conversor durante a transição entre as fases de operação. \cite{martins2008}.
+
+\begin{figure}[H]
+  \captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}[t]{0.33\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/buck_converter_rle_s1.eps}
+    \caption{1ª Etapa}
+    \label{fig:buck_converter_rle_s1}
+  \end{subfigure}
+  \hfil
+  \begin{subfigure}[t]{0.33\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/buck_converter_rle_s2.eps}
+    \caption{2ª Etapa}
+    \label{fig:buck_converter_rle_s2}
+  \end{subfigure}
+  \caption{Etapas de funcionamento do conversor Buck com carga RLE. As linhas tracejadas indicam que a corrente no ramo é nula.}
+  \label{fig:buck_converter_rle}
+\end{figure}
+
+A corrente proveniente da fonte que alimenta o conversor Buck tem uma natureza pulsante, o que resulta em dois inconvenientes significativos. Em primeiro lugar, a presença de um elevado conteúdo harmônico pode causar perturbações radioelétricas, potencialmente interferindo com equipamentos de comunicação e sinalização. Além disso, caso haja indutância em série com a fonte, mesmo que seja de natureza parasitária, no momento da abertura da chave, podem ser geradas sobretensões potencialmente destrutivas para os semicondutores de potência. Para superar essas dificuldades, recomenda-se a implementação de um filtro LC ou RLC, como ilustrado na \autoref{fig:buck_with_current_filter}. Em casos onde um conversor Buck precisa fornecer uma saída com uma tensão contínua de baixa ondulação, é essencial incluir um filtro passa-baixa composto por um indutor e um capacitor, conforme ilustrado na \autoref{fig:buck_with_voltage_filter}. \cite{martins2008}.
+
+\begin{figure}[H]
+  \captionsetup{justification=centering}
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/buck_with_current_filter.eps}
+    \caption{Filtragem da corrente de entrada}
+    \label{fig:buck_with_current_filter}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/buck_with_voltage_filter.eps}
+    \caption{Filtragem da tensão de saída.}
+    \label{fig:buck_with_voltage_filter}
+  \end{subfigure}
+  \caption{Conversor Buck com filtros.}
+\end{figure}
+
+\subsection{Conversor Boost}
 
 \section{Modelagem Matemática}
 

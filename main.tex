@@ -17,10 +17,12 @@
 \usepackage{indentfirst}    % Indenta o primeiro parágrafo de cada seção
 \usepackage{setspace}		% Possibilita a alteração do espaçamento entre linhas
 \usepackage{graphicx}       % Possibilita a inserção de figuras
-\usepackage{subfig}     % Possibilita a inserção de subfiguras
+\usepackage{subcaption}  % Possibilita a inserção de subfiguras
 \usepackage{pdfpages}       % Possibilita a inserção de páginas em pdf
 \usepackage{amsmath}        % Inclui funções adicionais no ambiente matemático \eqref{•} \dfrac{•}{•}
 \usepackage{amssymb} 		% Símbolos adicionais no documento \mathbb{R}
+\usepackage{amsfonts}
+\usepackage{amsthm}
 \usepackage{mathrsfs}       % Símbolos da transformadas de Laplace e Fourier \mathscr{•}
 \usepackage{float}			% Possibila posicionar tabelas e figuras em uma posição específica [H]
 \usepackage[round]{natbib}% Inclui mais possibilidades de citações \citep{•}
@@ -35,6 +37,8 @@
 \usepackage{adjustbox}      % Possibilita ajustar as tabelas as margens
 \usepackage{rotating}       % Rotaciona tabelas
 % \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+\usepackage{tikz}     
 
 \newcommand{\PR}[1]{\ensuremath{\left[#1\right]}}
 \newcommand{\PC}[1]{\ensuremath{\left(#1\right)}}
@@ -150,7 +154,7 @@
 \newacronym{ca}{CA}{corrente alternada}
 \newacronym{gd}{GD}{Geração Distribuída}
 \newacronym[\glslongpluralkey={fontes de energia renovável}]{fer}{FER}{fonte de energia renovável}
-\newacronym[\glslongpluralkey={sistenas de armazenamento de energia}]{sae}{SAE}{sistema de armazenamento de energia}
+\newacronym[\glslongpluralkey={sistemas de armazenamento de energia}]{sae}{SAE}{sistema de armazenamento de energia}
 \newacronym[\glslongpluralkey={sistemas de controle em rede}]{scr}{SCR}{sistema de controle em rede}
 \newacronym{mr}{MR}{Microrredes}
 \newacronym{etc}{ETC}{controle acionado por eventos - do inglês, \textit{event-triggered control}}
