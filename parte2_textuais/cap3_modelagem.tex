@@ -4,15 +4,37 @@
 
 No século XX, a "Guerra das Correntes" entre defensores da \acrshortpl{ca}, liderados por \textit{Westinghouse} e \textit{Tesla}, e proponentes da \acrshort{cc}, liderados por \textit{Edison}, resultou na prevalência da \acrshort{ca} devido à sua facilidade de expansão da rede. Apesar disso, a \acrshort{cc} permaneceu relevante com os avanços na eletrônica de potência. Paralelamente, a crescente adoção de microrredes \acrshortpl{cc}, com \acrfullpl{fer}, \acrfullpl{sae} e novas cargas, reflete das preocupações ambientais e escassez de combustíveis fósseis, mas sua integração descoordenada apresenta desafios técnicos e operacionais, como perfil de tensão comprometido e congestionamentos nas linhas de transmissão. \cite{Elsayed2015, Dragicevic2015}.
 
-A proposta das \acrshortpl{mr} surgiu como uma solução há mais de uma década. As \acrshortpl{mr}, operando em modo isolado ou conectadas à rede, podem ser classificadas como \acrshortpl{mr} de \acrshort{ca} ou \acrshort{cc}, sendo a \acrshort{mr} de \acrshort{cc} mais atraente devido à sua maior eficiência e melhor interface com diversos tipos de \acrshort{fer} e \acrshort{sae}. Além disso, ao serem acopladas em torno de um barramento \acrshort{cc}, as \acrfullpl{mr} eliminam problemas como fluxo de potência reativa e regulação de frequência, resultando em sistemas de controle menos complexos. \cite{Dragicevic2015}.
+A proposta das \acrshortpl{mr} surgiu como uma solução há mais de uma década. As \acrshortpl{mr} operando em modo isolado ou conectadas à rede, podem ser classificadas como \acrshortpl{mr} de \acrshort{ca} ou \acrshort{cc}. Devido à sua maior eficiência e melhor interface com diversos tipos de \acrshort{fer} e \acrshort{sae}, a s\acrshortpl{mr} de \acrshort{cc}, cuja estrutura básica está representada na \autoref{fig:microgrid}, é mais atraente. Além disso, ao serem acopladas em torno de um barramento \acrshort{cc}, as \acrshortpl{mr} eliminam problemas como fluxo de potência reativa e regulação de frequência, resultando em sistemas de controle menos complexos. \cite{Dragicevic2015}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.87\textwidth]{figuras/microgrid.eps}
+  \caption{Estrutura básica de uma microrrede.}
+  \label{fig:microgrid}
+\end{figure}
 
 Vários setores empregam \acrfullpl{sdcc}, como espaçonaves, centros de dados, telecomunicações, tração e sistemas de energia a bordo de navios. Por exemplo, a Estação Espacial Internacional utiliza \acrshortpl{sdcc} para operar suas vastas necessidades de energia. Alguns centros de dados também adotaram sistemas \acrshort{cc}, resultando em economia significativa de energia em comparação com sistemas \acrshort{ca} tradicionais. Na área de telecomunicações, os sistemas de distribuição de energia de 48V são amplamente empregados para garantir alta confiabilidade e eficiência. Além disso, sistemas de tração, como bondes e metrôs, preferem distribuição \acrshort{cc} devido à facilidade de interface com motores \acrshort{cc}. Esses sistemas também permitem maior eficiência e controlabilidade. Em sistemas de energia a bordo de navios, a distribuição zonal \acrshort{cc} é uma opção popular devido à sua confiabilidade e facilidade de proteção. \cite{Elsayed2015}.
 
 Desta forma, o design de sistemas de distribuição \acrshort{cc} tem recebido atenção crescente, especialmente devido a adaptação de equipamentos projetados originalmente para \acrshort{ca}. Modelos simplificados são essenciais para compreender o comportamento da carga em operação \acrshort{cc}. Comparando configurações de cabos, descobriu-se que sistemas \acrshort{cc} podem superar \acrshort{cc} em termos de capacidade de transferência de energia, \cite{Salomonsson2007}. Em um estudo sobre microrredes \acrshort{cc} em centros de dados, \cite{Salomonsson2008}, foi proposto um sistema de controle adaptativo para otimizar o fluxo de energia e minimizar perdas. Essas pesquisas contribuem para uma compreensão mais profunda do design e controle de sistemas de distribuição DC.
 
-Nas microrredes \acrshort{cc}, os conversores \acrshort{cc}-\acrshort{cc} são essenciais para regular a tensão do sistema, permitindo a integração de fontes renováveis e tradicionais de energia. Ao conectar esses conversores em microrredes com \acrfull{cpl}, surgem desafios como o efeito de impedância negativa, que pode causar oscilações indesejadas devido à interação com estas cargas. Diversas técnicas de controle, como filtros RL ou RC, controle preditivo e técnicas de controle robusto, têm sido propostas para mitigar essas oscilações e garantir a estabilidade do sistema. A análise experimental dessas técnicas é fundamental para avaliar sua eficácia e aplicabilidade em diferentes topologias de microrredes, fornecendo compreensões importantes para o projeto e operação desses sistemas de distribuição de energia. \cite{Bessa2020}.
+% MR: Conversores e CPLs - Introdução
+Os conversores \acrshort{cc}-\acrshort{cc} são dispositivos bastante utilizados para regular a tensão nas \acrshortpl{mr} \acrshort{cc}, facilitando a integração de fontes de energia renovável e tradicional. Contudo, grande quantidades de conversores conectados nas \acrshortpl{mr} \acrshort{cc} pode afetar a estabilidade do sistema. Além disto, estes conversores podem energizar \acrfullpl{cpl}, cujo circuito equivalente está descrito na figura a seguir:
 
-\section{Conversores CC e Cargas de Potência Constante}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{figuras/cpl_circuit.eps}
+  \caption{Circuito simplificado de uma CPL.}
+  \label{fig:cpl_circuit}
+\end{figure}
+
+\noindent A partir deste circuito, pode-se derivar a seguinte equação dinâmica: \begin{equation} i_{\text{CPL}}(t) = i_R(t) + I_{\text{CPL}} = \frac{P_{\text{CPL}}}{(v_{\text{CPL}}(t))^2} + I_{\text{CPL}} \label{eq:cpl-circuit},\end{equation} onde $P_{\text{CPL}}$ representa a potência da \acrshort{cpl}. Ao linearizar a equação dinâmica \eqref{eq:cpl-circuit} em torno do ponto de operação $P_0$ para a potência da \acrshort{cpl} e $V_0$ para a tensão da \acrshort{cpl}, pode-se obter a seguinte expressão: \begin{equation} \delta i_{\text{CPL}}(t) = - \frac{P_0}{{V_0}^2}\delta v_{\text{CPL}}(t) + I_{\text{CPL}}. \end{equation} Considerando que $\frac{1}{R_0} = - \frac{P_0}{{V_0}^2}$, é possível observar a presença de uma impedância negativa e, da equação \eqref{eq:cpl-circuit}, a não linearidade da \acrshort{cpl}. Estas característica podem causar oscilações indesejadas que podem causar instabilidade e colapso do sistema das \acrshortpl{mr}. \cite{Bessa2020, Amiri2020}.
+
+% MR: Soluções Propostas
+Para resolver esses problemas, foram propostas várias técnicas de controle, incluindo filtros RL ou RC, controle preditivo, técnicas robustas, o uso de resistência virtual e métodos de controle não lineares, como controle de modo deslizante e controle preditivo de modelo. O desenvolvimento de controladores robustos e observadores de distúrbios é comum para manter a estabilidade, com o método de backstepping considerado particularmente eficaz. No entanto, desafios adicionais surgem devido à incerteza nos parâmetros do conversor e distúrbios associados aos \acrshortpl{cpl}, exigindo abordagens mais sofisticadas de controle e análise de estabilidade. \cite{Bessa2020, Amiri2020}.
+
+
+
+\section{Conversores \acrshort{cc}-\acrshort{cc}}
 
 Os conversores \acrshort{cc}-\acrshort{cc} são circuitos que transferem energia elétrica de uma fonte de entrada para uma de saída. Estes conversores operam por meio de semicondutores que atuam como interruptores, controlando o fluxo de energia através de elementos passivos, como indutores e capacitores. O variável fundamental para determinar a operação do conversor é a razão cíclica, ou ciclo de trabalho, que define a proporção de tempo em que os interruptores permanecem ligados e desligados. Entre as diversas topologias de conversores \acrshort{cc}-\acrshort{cc}, destacam-se os conversores Buck e Boost, que serão abordados neste trabalho.
 
@@ -73,6 +95,7 @@ Considerando essas premissas, podemos analisar as fases de funcionamento do conv
   \label{fig:buck_converter_rle}
 \end{figure}
 
+% Buck: Filtros
 A corrente proveniente da fonte que alimenta o conversor Buck tem uma natureza pulsante, o que resulta em dois inconvenientes significativos. Em primeiro lugar, a presença de um elevado conteúdo harmônico pode causar perturbações radioelétricas, potencialmente interferindo com equipamentos de comunicação e sinalização. Além disso, caso haja indutância em série com a fonte, mesmo que seja de natureza parasitária, no momento da abertura da chave, podem ser geradas sobretensões potencialmente destrutivas para os semicondutores de potência. Para superar essas dificuldades, recomenda-se a implementação de um filtro LC ou RLC, como ilustrado na \autoref{fig:buck_with_current_filter}. Em casos onde um conversor Buck precisa fornecer uma saída com uma tensão contínua de baixa ondulação, é essencial incluir um filtro passa-baixa composto por um indutor e um capacitor, conforme ilustrado na \autoref{fig:buck_with_voltage_filter}. \cite{martins2008}.
 
 \begin{figure}[H]
@@ -84,7 +107,7 @@ A corrente proveniente da fonte que alimenta o conversor Buck tem uma natureza p
     \caption{Filtragem da corrente de entrada}
     \label{fig:buck_with_current_filter}
   \end{subfigure}
-  \hfill
+  \hfil
   \begin{subfigure}[t]{0.45\textwidth}
     \centering
     \includegraphics[width=\textwidth]{figuras/buck_with_voltage_filter.eps}
@@ -95,6 +118,64 @@ A corrente proveniente da fonte que alimenta o conversor Buck tem uma natureza p
 \end{figure}
 
 \subsection{Conversor Boost}
+
+% Boost: Introdução
+O conversor \acrshort{cc}-\acrshort{cc} de elevação de tensão, conhecido como conversor Boost, tem sua tensão média de saída teoricamente equivalente à tensão de alimentação. Embora sua estrutura utilize uma quantidade semelhante de componentes ao conversor Buck, estes são reorganizados para formar uma nova topologia. Essa configuração envolve a adição de uma indutância em série com a fonte de alimentação, transformando-a em uma fonte de corrente. Consequentemente, a carga deve ser projetada para se comportar como uma fonte de tensão, conforme as premissas estabelecidas anteriormente. \cite{martins2008}.
+
+% Boost: Estrutura básica
+A \autoref{fig:basic_boost_converter_a} apresenta a estrutura básica do conversor Boost. Em altas frequências de chaveamento, a corrente de entrada pode ser considerada constante, denotada por $i_{in}$, e o circuito pode ser representado conforme ilustrado na \autoref{fig:basic_boost_converter_b}. \cite{martins2008}.
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}[b]{0.33\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/basic_boost_converter_a.eps}
+    \caption{}
+    \label{fig:basic_boost_converter_a}
+  \end{subfigure}%
+  \hfil
+  \begin{subfigure}[b]{0.37\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/basic_boost_converter_b.eps}
+    \caption{}
+    \label{fig:basic_boost_converter_b}
+  \end{subfigure}
+  \caption{Estrutura básica do conversor Boost.}
+  \label{fig:boost_converter}
+\end{figure}
+
+% Boost: Etapas de funcionamento
+O conversor Boost, ilustrado na \autoref{fig:boost_converter}, opera em duas etapas distintas, descritas como segue: na fase inicial $(0, t_c)$, representada na \autoref{fig:boost_converter_s1}, o processo tem início com o fechamento da chave S. Nesse intervalo, o diodo D é polarizado inversamente, isolando o estágio de saída da fonte de alimentação $i_{in}$, que está em curto-circuito. A corrente na chave é equivalente à corrente da fonte de alimentação, enquanto a corrente no diodo D é nula. Essa fase é concluída quando a chave S é aberta. Na segunda etapa $(t_c, T)$, representada na \autoref{fig:boost_converter_s2}, ocorre a condução do diodo D quando a chave S é aberta, permitindo que a fonte de corrente $i_{in}$ entregue energia à carga. Durante esse período, a corrente na chave é nula, e a corrente no diodo D é igual à corrente da fonte de alimentação. O término dessa etapa ocorre com o fechamento da chave S, dando início novamente à primeira etapa. \cite{martins2008}.
+
+\begin{figure}[h]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}[b]{0.37\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/boost_converter_s1.eps}
+    \caption{Primeira etapa.}
+    \label{fig:boost_converter_s1}
+  \end{subfigure}%
+  \hfil
+  \begin{subfigure}[b]{0.37\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figuras/boost_converter_s2.eps}
+    \caption{Segunda etapa.}
+    \label{fig:boost_converter_s2}
+  \end{subfigure}
+  \caption{Etapas de funcionamento do conversor Boost. As linhas tracejadas indicam que a corrente é nulo no ramo.}
+\end{figure}
+
+% Boost: Capacitor em paralelo com a carga
+Como visto anteriormente, a fonte de alimentação $V_{in}$, conectada em série com um indutor $L$, age como uma fonte de corrente. Portanto, a carga deve operar como uma fonte de tensão. Logo, se a carga for indutiva, é necessário conectar em paralelo a ela um capacitor de valor apropriado, conforme ilustrado na figura abaixo. \cite{martins2008}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figuras/boost_converter_capacitor.eps}
+  \caption{Conversor Boost com capacitor em paralelo com a carga.}
+  \label{fig:boost_converter_capacitor}
+\end{figure}
 
 \section{Modelagem Matemática}
 
