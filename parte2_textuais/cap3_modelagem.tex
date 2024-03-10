@@ -206,15 +206,8 @@ Conforme abordado na \autoref{section:buck_converter}, a tensão fornecida pelo 
 % Modelagem Buck: Tensão do capacitor
 Por meio da \acrfull{lkc}, pode-se definir a corrente do indutor $i_{L}$ como a soma das correntes através do capacitor $C$, da resistência $R_C$ e da \acrshort{cpl}: \begin{equation} i_L(t) = i_C(t) + i_R(t) + i_{CPL}(t). \end{equation} Dessa forma, considerando $i_C(t) = C\dt{v}_C$, $i_R(t) = \frac{v_C(t)}{R_C}$ e $i_{CPL}(t)$ definida em \eqref{eq:cpl_current}, obtém-se: \begin{equation} i_L(t) = C\dt{v}_C + \frac{v_C(t)}{R_C} + \frac{P_{CPL}}{v_C(t)}. \end{equation} Logo, a equação dinâmica da tensão do capacitor é expressa por: \begin{equation} \dt{v}_C = \frac{1}{C} i_L(t) - \frac{1}{CR_C}v_C(t) - \frac{P_{CPL}}{Cv_C(t)} \label{eq:buck_converter_voltage} \end{equation}
 
-
 % Modelagem Buck: Modelo não-linear
-A partir das equações dinâmicas \eqref{eq:buck_converter_current} e \eqref{eq:buck_converter_voltage}, pode-se estabelecer o modelo dinâmico do sistema como segue: \begin{equation}\begin{cases} \dt{i}_L &=  - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{in}}{L}d(t)  \\ \dt{v}_C &= \frac{1}{C} i_L(t) - \frac{1}{C R_C} v_C(t) - \frac{1}{C v_C(t)} P_{CPL}(t) \label{eq:buck_converter_cpl} \end{cases}, \end{equation} onde $i_L(t)$ e $v_C(t)$ são os estados do sistema, e $d(t)$ e $P_{CPL}(t)$ são as entradas.
-
-% Modelagem Buck: Modelo linearizado - introdução
-Da equação \eqref{eq:buck_converter_cpl}, constata-se que o sistema é não linear, devido à presença de um termo não linear na equação dinâmica da tensão do capacitor. Para abordar essa não linearidade, é possível linearizar o sistema e representá-lo por meio de um conjunto de equações diferenciais que descrevem as variações na corrente do indutor e na tensão do capacitor em torno de um ponto de operação.
-
-% Modelagem Buck: Modelo linearizado - desenvolvimento
-Considerando o sistema linearizado descrito por: \begin{equation} \dot{x} = Ax(t) + B_uu(t) + B_ww(t), \end{equation} onde  $x = \begin{bmatrix} \delta i_L & \delta v_C \end{bmatrix} ^ T$ representa o estado do sistema, $u = \delta d$ é a entrada do sistema e $w = \delta P_{CPL}$ é o sinal de pertubação. Além disto, $A \in \mathbb{R}^{n \times n}$, $B_u \text{ e } B_w \in \mathbb{R}^{n \times 1}$, são obtidos por meio das matrizes jacobianas das equações em (\ref{eq:buck_converter_cpl}), em torno do ponto de operação $P_0 = ({i_L}_0, \, {v_C}_0, \, {d}_0, \, {P_{CPL}}_0)$. Portanto, o sistema linearizado obtido pode ser expresso como: \begin{equation} \begin{bmatrix} \dot{\delta i_L} \\ \dot{\delta v_C} \end{bmatrix} = \begin{bmatrix} -\frac{R_L}{L} & -\frac{1}{L}  \\ \frac{1}{C}    & \frac{1}{C}\left(\frac{{P_{CPL}}_0}{{{{v_{C}}_0}^2}} - \frac{1}{R_C}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\frac{V_{in}}{L}} \\ 0 \end{bmatrix} \delta d(t) + \begin{bmatrix} 0 \\ {-\frac{1}{C{v_C}_0}} \end{bmatrix} \delta P_{CPL}(t)\end{equation}
+A partir das equações dinâmicas \eqref{eq:buck_converter_current} e \eqref{eq:buck_converter_voltage}, pode-se estabelecer o modelo dinâmico do sistema como segue: \begin{equation}\begin{cases} \dt{i}_L &=  - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{in}}{L}d(t)  \\ \dt{v}_C &= \frac{1}{C} i_L(t) - \frac{1}{C R_C} v_C(t) - \frac{1}{C v_C(t)} P_{CPL}(t) \label{eq:buck_nonlinear_system} \end{cases}, \end{equation} onde $i_L(t)$ e $v_C(t)$ são os estados do sistema, e $d(t)$ e $P_{CPL}(t)$ são as entradas.
 
 \subsection{Conversor Boost}
 
@@ -227,13 +220,39 @@ O segundo sistema utilizada neste estudo consiste em um conversor Boost conectad
   \label{fig:boost_converter_cpl}
 \end{figure}
 
-Por meio da relação entre a tensão de entrada e a tensão média de saída do conversor Boost, conforme descrito na equação \eqref{eq:boost_converter_voltage_transfer}, e da \acrshort{lkt}, obtém-se: \begin{equation} L \dt{i}_L - \frac{1}{1-d} v_{\text{in}} - v_c(t) = 0. \end{equation} Dessa forma, a equação dinâmica da corrente do indutor é expressa como: \begin{equation} \dt{i}_L = \frac{1}{L}v_{\text{in}} - \frac{1-d}{L}v_C(t) \label{eq:boost_converter_current}. \end{equation} 
+Por meio da relação entre a tensão de entrada e a tensão média de saída do conversor Boost, conforme descrito na equação \eqref{eq:boost_converter_voltage_transfer}, e da \acrshort{lkt}, obtém-se: \begin{equation} L \dt{i}_L - \frac{1}{1-d} v_{\text{in}} - v_c(t) = 0. \end{equation} Dessa forma, a equação dinâmica da corrente do indutor é expressa como: \begin{equation} \dt{i}_L = \frac{1}{L}v_{\text{in}} - \frac{1-d}{L}v_C(t) \label{eq:boost_converter_current}. \end{equation}
 
 Ao aplicar a \acrshort{lkc}, temos que a corrente do diodo é igual à soma das correntes do capacitor, do resistor e da corrente $i_{CPL}(t)$, definida em \eqref{eq:cpl_current}. A corrente do diodo é igual à corrente média de saída do conversor Boost, expressa na equação \eqref{eq:boost_converter_current_transfer}. Portanto, \begin{equation} (1 - d) i_{\text{in}}(t) = C\dt{v}_C + \frac{v_C(t)}{R} + \frac{P_{CPL}(t)}{v_C(t)}.\end{equation} Considerando altas frequências de chaveamento, a corrente média de entrada pode ser considerada igual à corrente do indutor. Assim, a equação dinâmica da tensão do capacitor pode ser expressa como: \begin{equation} \dt{v}_C = \frac{1 - d}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{CPL}(t). \label{eq:boost_converter_voltage}\end{equation}
 
-Desse modo, o modelo dinâmico médio do segundo sistema pode ser formulado a partir das equações \eqref{eq:boost_converter_current} e \eqref{eq:boost_converter_voltage}. Esse modelo é expresso como segue: \begin{equation} \begin{cases} \dt{i}_L = - \frac{1-d(t)}{L}v_C(t) + \frac{1}{L}v_{\text{in}}\\ \dt{v}_C = \frac{1 - d(t)}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{CPL}(t). \end{cases} \end{equation}
+Desse modo, o modelo dinâmico médio do segundo sistema pode ser formulado a partir das equações \eqref{eq:boost_converter_current} e \eqref{eq:boost_converter_voltage}. Este modelo é representado por: \begin{equation} \begin{cases} \dt{i}_L(t) = - \frac{1-d(t)}{L}v_C(t) + \frac{1}{L}v_{in}(t) \\ \dt{v}_C(t) = \frac{1 - d(t)}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{CPL}(t). \label{eq:boost_nonlinear_system}\end{cases} \end{equation} As grandezas $i_L(t)$ e $v_C(t)$ representam os estados do sistema. Enquanto que $d(t)$ e $P_{CPL}(t)$ representam as entadas do sistema, onde o duty cycle é controlável e a potência da \acrshort{cpl} é considerada a pertubação do sistema.
 
-% Modelagem Boost: Linearização
+\subsection{Linearização dos modelos obtidos}
 
+% Linearização - introdução
+Por causa da presença de não linearidades em ambos os modelos, \eqref{eq:buck_nonlinear_system} e \eqref{eq:boost_nonlinear_system}, eles são intrinsecamente não lineares. Para abordar essa não linearidade, pode-se linearizá-los, obtendo um conjunto de equações diferenciais que descrevem as pequenas variações em torno de um ponto de equilíbrio predefinido $P_{\text{op}}$ nos estados dos sistemas, $i_L(t)$ e $v_C(t)$.
+
+% Linearização - sistema linearizado genérico
+Para linearizar os modelos, utiliza-se a aproximação de primeira ordem por série de Taylor em torno do ponto de equilíbrio $P_{\text{eq}} = ({i_L}_{\text{eq}}, \, {v_C}_{\text{eq}}, \, {d}_{\text{eq}}, \, {P_{CPL}}_{\text{eq}})$, conforme descrito a seguir: \begin{gather}  \dt{\delta i_L} = \frac{\partial \dt{i}_L}{\partial i_L}\delta i_L(t) + \frac{\partial \dt{i}_L}{\partial v_C}\delta v_C(t) + \frac{\partial {\dt{i}_L}}{\partial d}\delta d(t) + \frac{\partial {\dt{i}_L}}{\partial P_{CPL}}\delta P_{CPL}(t) \\ \nonumber \\ \dt{\delta v_C} = \frac{\partial \dt{v}_C}{\partial i_L}\delta i_L(t) + \frac{\partial \dt{v}_C}{\partial v_C}\delta v_C(t) + \frac{\partial \dt{v}_C}{\partial d}\delta d(t) + \frac{\partial \dt{v}_C}{\partial P_{CPL}}\delta P_{CPL}(t), \end{gather} onde, o símbolo $\delta$ indica a variação da variável em relação ao ponto de equilíbrio, isto é, \begin{equation} \delta f(t) = f(t) - f_{\text{op}}. \label{eq:delta}\end{equation}
+
+% Linearização - conversor buck
+A partir dessas equações, podemos derivar as expressões linearizadas de $\dt{i}_L$ e $\dt{v}_C$ para o primeiro sistema, como mostrado abaixo: \begin{equation} \begin{cases} \delta \dt{i}_L &= -\frac{R_L}{L} \delta i_L(t) - \frac{1}{L} \delta v_C(t) + \frac{v_{\text{in}}}{L} \delta d(t) \\ \delta \dt{v}_C &= \frac{1}{C} \delta i_L(t) + \frac{1}{C} \left(\frac{{P_{CPL}}_{\text{eq}}}{{v_C}^2_{\text{eq}}} - \frac{1}{R_C}\right) \delta v_C(t) - \frac{1}{C{v_C}_{\text{eq}}} \delta P_{CPL}(t), \end{cases} \end{equation} ou, na forma de espaço de estados: \begin{equation} \begin{bmatrix} \dt{\delta i_L} \\ \dt{\delta v_C} \end{bmatrix} = \begin{bmatrix} \displaystyle -\frac{R_L}{L} & \displaystyle -\frac{1}{L}  \\\\ \displaystyle \frac{1}{C} & \displaystyle \frac{1}{C}\left(\frac{{P_{CPL}}_{\text{eq}}}{{{v_{C}}^2_{\text{eq}}}} - \frac{1}{R_C}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\displaystyle \frac{v_{in}}{L}} & 0 \\ \\ 0 & \displaystyle {-\frac{1}{C{v_C}_{\text{eq}}}} \end{bmatrix}  \begin{bmatrix} \delta d(t) \\ \delta P_{CPL}(t) \end{bmatrix}. \label{eq:buck_linear_system}\end{equation}
+
+Para o segundo modelo dinâmico \eqref{eq:boost_nonlinear_system}, têm-se: \begin{equation} \begin{cases} \delta \dt{i}_L &= - \frac{1 - d_{\text{eq}}}{L} \delta v_C(t) + \frac{{v_C}_{\text{eq}}}{L}\delta d(t) \\ \delta \dt{v}_C &= \frac{1 - d_{\text{eq}}}{C} \delta i_L(t) + \frac{1}{C} \left(\frac{{P_{CPL}}_{\text{eq}}}{{v_C}^2_{\text{eq}}} - \frac{1}{R}\right) \delta v_C(t) - \frac{{i_L}_{\text{eq}}}{C} \delta d(t) - \frac{1}{C{v_C}_{\text{eq}}} \delta P_{CPL}(t), \end{cases} \end{equation} ou, na forma de espaço de estados: \begin{equation} \begin{bmatrix} \dt{\delta i_L} \\ \dt{\delta v_C} \end{bmatrix} = \begin{bmatrix} \displaystyle 0 & \displaystyle -\frac{1 - d_{\text{eq}}}{L}  \\\\ \displaystyle \frac{1 - d_{\text{eq}}}{C} & \displaystyle \frac{1}{C}\left(\frac{{P_{CPL}}_{\text{eq}}}{{{v_{C}}^2_{\text{eq}}}} - \frac{1}{R}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\displaystyle \frac{{v_C}_{\text{eq}}}{L}} & 0 \\ \\ - \frac{{i_L}_{\text{eq}}}{C} & \displaystyle {-\frac{1}{C{v_C}_{\text{eq}}}} \end{bmatrix}  \begin{bmatrix} \delta d(t) \\ \delta P_{CPL}(t) \end{bmatrix}. \label{eq:boost_linear_system}\end{equation}
 
 \section{Simulação}
+
+% Linearização - matriz jacobiana
+% A definição da matriz jacobiana é apresenta a seguir: 
+
+% \begin{definition}
+%   Seja uma função $f: \mathbb{R}^n \rightarrow \mathbb{R}^m$, onde $f$ é composta por funções componentes $f_i: \mathbb{R}^n \rightarrow \mathbb{R}$ para todo $i \in \mathbb{N}_{\leq m}$, dependente das variáveis $x_j$, para todo $j \in \mathbb{N}_{\leq n}$. A matriz jacobiana de $f$, denotada por $J_f(x_1, x_2, ..., x_n)$, é uma matriz $m \times n$ definida como:
+  
+%   \begin{equation}
+%     J_f(x_1, ..., x_n) =
+%     \begin{bmatrix}
+%       \frac{\partial F_1}{\partial x_1} & \dots  & \frac{\partial F_1}{\partial x_n} \\
+%       \dots                             & \ddots & \dots                             \\
+%       \frac{\partial F_m}{\partial x_1} & \dots  & \frac{\partial F_m}{\partial x_n} \\
+%     \end{bmatrix}
+%   \end{equation}
+% \end{definition}
