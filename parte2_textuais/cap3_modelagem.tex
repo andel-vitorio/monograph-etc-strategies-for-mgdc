@@ -32,13 +32,11 @@ Os conversores \acrshort{cc}-\acrshort{cc} são dispositivos bastante utilizados
 % MR: Soluções Propostas
 Para resolver esses problemas, foram propostas várias técnicas de controle, incluindo filtros RL ou RC, controle preditivo, técnicas robustas, o uso de resistência virtual e métodos de controle não lineares, como controle de modo deslizante e controle preditivo de modelo. O desenvolvimento de controladores robustos e observadores de distúrbios é comum para manter a estabilidade, com o método de backstepping considerado particularmente eficaz. No entanto, desafios adicionais surgem devido à incerteza nos parâmetros do conversor e distúrbios associados aos \acrshortpl{cpl}, exigindo abordagens mais sofisticadas de controle e análise de estabilidade. \cite{Bessa2020, Amiri2020}.
 
-
-
 \section{Conversores \acrshort{cc}-\acrshort{cc}}
 
 Os conversores \acrshort{cc}-\acrshort{cc} são circuitos que transferem energia elétrica de uma fonte de entrada para uma de saída. Estes conversores operam por meio de semicondutores que atuam como interruptores, controlando o fluxo de energia através de elementos passivos, como indutores e capacitores. O variável fundamental para determinar a operação do conversor é a razão cíclica, ou ciclo de trabalho, que define a proporção de tempo em que os interruptores permanecem ligados e desligados. Entre as diversas topologias de conversores \acrshort{cc}-\acrshort{cc}, destacam-se os conversores Buck e Boost, que serão abordados neste trabalho.
 
-\subsection{Conversor Buck}
+\subsection{Conversor Buck} \label{section:buck_converter}
 
 % Buck: Introdução
 O conversor \acrshort{cc}-\acrshort{cc} abaixador de tensão, mais conhecido como conversor Buck, produz uma tensão de saída média menor que a entrada. Isso ocorre devido à conservação de energia, resultando em uma corrente de saída média maior que a corrente de entrada média. Teoricamente, o conversor Buck permite uma variação contínua da tensão na carga, de zero até a tensão de entrada. \cite{martins2008}.
@@ -57,10 +55,10 @@ A configuração básica do conversor Buck é apresentada na \autoref{fig:basic-
 O valor médio da tensão da carga, $\bar{v}_{out}$ é descrito como: \begin{equation} \bar{v}_{out} = \frac{t_c}{T}v_{in}, \end{equation} onde, $t_c$ é o tempo em que a chave $S$ permanece fechada, $t_a$ é o tempo em que a chave permanece aberta, e $T = t_c + t_a$ é o período de chaveamento. \cite{martins2008}.
 
 % Buck: parâmetros do circuito
-A razão cíclica, ou duty cycle, é definida como: \begin{equation} d = \frac{t_c}{T}. \end{equation} Logo, \begin{equation} \bar{v}_{out} = dv_{in}. \label{eq:buck-1}\end{equation} A partir desta equação, pode-se definir a corrente média: \begin{equation} \bar{i} = d\frac{v_{in}}{R}. \end{equation} E por fim, a potência de entrada é dada pela expressão: \begin{equation} P_{in} = d \frac{v_{in}^2}{R}. \end{equation}
+A razão cíclica, ou duty cycle, é definida como: \begin{equation} d = \frac{t_c}{T}. \end{equation} Logo, obtêm-se a característica de transferência do conversor Buck: \begin{equation} \bar{v}_{out} = dv_{in}. \label{eq:buck_feature}\end{equation} A partir desta equação, pode-se definir a corrente média: \begin{equation} \bar{i} = d\frac{v_{in}}{R}. \end{equation} E por fim, a potência de entrada é dada pela expressão: \begin{equation} P_{in} = d \frac{v_{in}^2}{R}. \end{equation}
 
 % Buck: linearidade
-A partir da \autoref{eq:buck-1} pode-se observar que a tensão média sobre a carga é diretamente linear a tensão de entrada, cuja taxa de variação é igual ao valor do duty cycle $d$. Isto possibilita o controle da tensão média sobre a carga por meio da razão cíclica. Tal controle pode ser através da variação do tempo de condução $t_c$ da chave $S$. Desta forma, para $t_c = 0 \Rightarrow d = 0$ e $t_c = T \Rightarrow d = 1$, que representam a chave permanentemente aberta e fechada, respectivamente. Assim, a potência transferida à carga pode ser controlada, variando a sua tensão média entre 0 e $v_{in}$. \cite{martins2008}.
+A partir da equação \eqref{eq:buck_feature}, pode-se observar que a tensão média sobre a carga é diretamente linear a tensão de entrada, cuja taxa de variação é igual ao valor do duty cycle $d$. Isto possibilita o controle da tensão média sobre a carga por meio da razão cíclica. Tal controle pode ser através da variação do tempo de condução $t_c$ da chave $S$. Desta forma, para $t_c = 0 \Rightarrow d = 0$ e $t_c = T \Rightarrow d = 1$, que representam a chave permanentemente aberta e fechada, respectivamente. Assim, a potência transferida à carga pode ser controlada, variando a sua tensão média entre 0 e $v_{in}$. \cite{martins2008}.
 
 % Buck: buck com carga RLE - introdução
 Para uma análise mais abrangente, é relevante mencionar o conversor Buck que alimenta uma carga RLE composta por resistor, indutor e uma fonte de tensão, conforme apresentado na \autoref{fig:buck_converter_rle}. No entanto, é crucial entender que uma fonte de tensão só pode ser conectada a uma carga com características de fonte de corrente. Isso implica que uma carga que se comporte como uma fonte de tensão deve ser associada em série com um indutor para refletir o comportamento de uma fonte de corrente. Além disso, é importante destacar que interromper abruptamente uma fonte de corrente, ou uma carga com tais características, não é permitido. Em situações onde essa operação é necessária, como em sistemas de eletrônica de potência, utiliza-se um diodo em antiparalelo com a fonte (ou carga) que será interrompida. \cite{martins2008}.
@@ -92,7 +90,6 @@ Considerando essas premissas, podemos analisar as fases de funcionamento do conv
     \label{fig:buck_converter_rle_s2}
   \end{subfigure}
   \caption{Etapas de funcionamento do conversor Buck com carga RLE. As linhas tracejadas indicam que a corrente no ramo é nula.}
-  \label{fig:buck_converter_rle}
 \end{figure}
 
 % Buck: Filtros
@@ -145,6 +142,14 @@ A \autoref{fig:basic_boost_converter_a} apresenta a estrutura básica do convers
   \label{fig:boost_converter}
 \end{figure}
 
+% Boost: relação tensão entrada-saída
+Considerando que a chave $S$ opera com frequência fixa e duty cycle variável, podemos expressar a energia fornecida pela fonte de entrada $v_{in}$ como: \begin{equation} \mathcal{E}_{in} = v_{in} i_{in} T, \end{equation} E a energia recebida pela carga como: \begin{equation} \mathcal{E}_{out} = v_{out} i_{in} t_a. \end{equation} Portanto, a energia recebida pela carga é dada por: \begin{equation} \mathcal{E}_{out} = v_{out} i_{in} (T - t_c). \end{equation} Considerando o sistema conservativo, isto é, $\mathcal{E}_{in} = \mathcal{E}_{out}$, obtemos: \begin{equation} v_{in} i_{in} T = v_{out} i_{in} (T - t_c). \end{equation} Assim, \begin{equation} \frac{v_{out}}{v_{in}} = \frac{1}{1-d} \label{eq:ideal_feature_boost}.\end{equation} Esta última equação representa a característica ideal de transferência do conversor Boost. Quando o duty cycle $d$ tende a 1, $v_{out}$ tende ao infinito. Além disso, a tensão mínima de saída é igual à tensão de entrada $v_{in}$. \cite{martins2008}.
+
+% Boost: relação corrente entrada-saída
+A potência de entrada e saída são definidas da seguinte forma: \begin{align} P_{\text{in}} &= v_{\text{in}} \cdot i_{\text{md}} \\ P_{\text{out}} &= v_{\text{out}} \cdot i_{\text{out}}, \end{align} onde $i_{\text{md}}$ é a corrente média da entrada do conversor Boost. A partir destas equações e considerando que o conversor é conservativo, ou seja, $P_{\text{in}} = P_{\text{out}}$, tem-se: \begin{gather} v_{in} i_{\text{md}} = v_{\text{out}}i_{\text{out}} \\ \frac{i_{\text{out}}}{i_{md}} = \frac{v_{\text{in}}}{v_{\text{out}}} \label{eq:boost_converter_iv} \end{gather}
+
+A partir das equações \eqref{eq:ideal_feature_boost} e \eqref{eq:boost_converter_iv}, a relação entre a corrente média de saída a corrente média de saída pode ser expressa como: \begin{equation} i_{\text{out}} = (1 - d) \cdot i_{\text{in}} \label{eq:boost_converter_current_transfer} \end{equation} e relação entre a tensão de entrada e tensão média de saída como: \begin{equation} v_{\text{out}} = \frac{1}{(1 - d)} \cdot v_{\text{in}}. \label{eq:boost_converter_voltage_transfer}\end{equation}
+
 % Boost: Etapas de funcionamento
 O conversor Boost, ilustrado na \autoref{fig:boost_converter}, opera em duas etapas distintas, descritas como segue: na fase inicial $(0, t_c)$, representada na \autoref{fig:boost_converter_s1}, o processo tem início com o fechamento da chave S. Nesse intervalo, o diodo D é polarizado inversamente, isolando o estágio de saída da fonte de alimentação $i_{in}$, que está em curto-circuito. A corrente na chave é equivalente à corrente da fonte de alimentação, enquanto a corrente no diodo D é nula. Essa fase é concluída quando a chave S é aberta. Na segunda etapa $(t_c, T)$, representada na \autoref{fig:boost_converter_s2}, ocorre a condução do diodo D quando a chave S é aberta, permitindo que a fonte de corrente $i_{in}$ entregue energia à carga. Durante esse período, a corrente na chave é nula, e a corrente no diodo D é igual à corrente da fonte de alimentação. O término dessa etapa ocorre com o fechamento da chave S, dando início novamente à primeira etapa. \cite{martins2008}.
 
@@ -179,101 +184,56 @@ Como visto anteriormente, a fonte de alimentação $V_{in}$, conectada em série
 
 \section{Modelagem Matemática}
 
-% Introdução
-% To-do: não esquecer de apresentar a forma completa da CPL
-Nesta seção, aprofundaremos na modelagem matemática de uma microrrede, concentrando em um conversor buck operando em conjunto com uma \acrshort{cpl}. O conversor buck assume um papel fundamental na conversão de alta para baixa tensão contínua, enquanto a \acrshort{cpl} representa um tipo de carga com uma demanda de potência invariável, mesmo diante de flutuações na tensão de entrada. Essa análise aprofundada tem como objetivo desvendar os princípios basilares que regem essa configuração específica da microrrede, lançando as bases para análises subsequentes e o desenvolvimento de estratégias de controle eficazes.
+% Modelagem: Introdução
+Nesta seção, será discutida a modelagem matemática de conversores Buck e Boost conectados a uma \acrshort{cpl}. O conversor Buck reduz a tensão contínua de alta para baixa, enquanto o conversor Boost a eleva de baixa para alta. A \acrshort{cpl} demanda potência constante, independentemente da tensão de entrada. Desta forma, pode-se obter uma base sólida para análises subsequentes e o desenvolvimento de estratégias de \acrshort{etc}.
 
-Para facilitar cálculos e análises, este sistema simplificado será composta por um conversor buck e a \acrshort{cpl} será modelada como uma fonte de corrente, como apresentado na \autoref{fig:circuit1}. Essa modelagem captura o comportamento essencial que permite o estudo aprofundado das estratégias de \acrshort{etc} para conversores \acrshort{cc}. No circuito apresentado, os componentes incluem resistores ($R_L$, $R_C$), um capacitor ($C$) e um indutor ($L$). O parâmetro $d$ representa o \textit{duty cycle}, enquanto $I_{\acrshort{cpl}}$ indica a corrente da \acrshort{cpl}. Além disso, são observadas as tensões de entrada ($V_{in}$) e saída ($V_{out}$). Esses elementos desempenham papéis essenciais na operação e caracterização do circuito em questão, contribuindo para a compreensão abrangente de seu funcionamento e comportamento.
+\subsection{Conversor Buck}
+
+% Modelagem Buck: Apresentação do circuito
+O sistema inicialmente utilizado neste estudo é um conversor constituído por um conversor Buck básico com filtro de tensão de saída $RLC$ conectado a uma \acrshort{cpl}. A \acrshort{cpl} é representada por um resistor e uma fonte de corrente dependente da potência da \acrshort{cpl}, conforme a seguinte equação: \begin{equation} i_{CPL}(t) = \frac{P_{CPL}(t)}{v_{out}(t)} \label{eq:cpl_current} \end{equation} onde $i_{CPL}(t)$ é a corrente da \acrshort{cpl} em função do tempo, a $P_{CPL}(t)$ é a potência da \acrshort{cpl} e $v_{out}(t)$ é a tensão de saída do conversor em função do tempo.
 
 \begin{figure}[H]
   \centering
-  % \vspace{3ex}
-  \includegraphics[scale=2.5]{figuras/buck_conversor_with_cpl_circuit.eps}
+  \captionsetup{justification=centering}
+  \includegraphics[width=0.87\textwidth]{figuras/buck_converter_circuit.eps}
   \caption{Circuito \textit{Buck} com \acrshort{cpl}.}
   \label{fig:circuit1}
 \end{figure}
 
-% Introdução para o desenvolvimento das equações
-% To-do: não esquecer de apresentar a forma completa do MMS e do MPS
-% Dúvida: É para ser mais detalhista na obtenção das equações?
-As equações que regem o comportamento do sistema são derivadas das leis fundamentais da eletricidade. O modelo matemático do conversor \textit{buck} se baseia no \acrshort{mms}. Apesar da natureza não linear intrínseca dos conversores, a prática usual é empregar \acrshort{mps} para obter uma representação linearizada em torno do ponto de operação. Para tal, o circuito é analisado em duas situações distintas: chave fechada e chave aberta.
+% Modelagem Buck: Corrente do indutor
+Conforme abordado na \autoref{section:buck_converter}, a tensão fornecida pelo conversor Buck para o restante do circuito é igual ao produto entre a tensão de entrada $v_{in}$ e o duty cycle $d(t)$. Considerando esta característica e aplicando a \acrfull{lkt} no filtro, obtém-se a seguinte equação: \begin{equation} d(t)v_{in} - L \dt{i}_L - R_L i_L(t) - v_C(t) = 0, \end{equation} onde $i_L$ é corrente no indutor e $v_C$ é a tensão sobre o capacitor. Desta forma, é possível determinar a equação dinâmica da corrente do indutor, que é: \begin{equation} \dt{i}_L = - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{in}}{L}d(t). \label{eq:buck_converter_current} \end{equation}
 
-% Modelagem do sistema para chave fechada
-Na situação em que a chave está fechada, o circuito pode ser simplificado para um circuito série composto por uma fonte de tensão, um resistor e uma indutância, como ilustrado na \autoref{fig:circuit2}.
+% Modelagem Buck: Tensão do capacitor
+Por meio da \acrfull{lkc}, pode-se definir a corrente do indutor $i_{L}$ como a soma das correntes através do capacitor $C$, da resistência $R_C$ e da \acrshort{cpl}: \begin{equation} i_L(t) = i_C(t) + i_R(t) + i_{CPL}(t). \end{equation} Dessa forma, considerando $i_C(t) = C\dt{v}_C$, $i_R(t) = \frac{v_C(t)}{R_C}$ e $i_{CPL}(t)$ definida em \eqref{eq:cpl_current}, obtém-se: \begin{equation} i_L(t) = C\dt{v}_C + \frac{v_C(t)}{R_C} + \frac{P_{CPL}}{v_C(t)}. \end{equation} Logo, a equação dinâmica da tensão do capacitor é expressa por: \begin{equation} \dt{v}_C = \frac{1}{C} i_L(t) - \frac{1}{CR_C}v_C(t) - \frac{P_{CPL}}{Cv_C(t)} \label{eq:buck_converter_voltage} \end{equation}
 
-\begin{figure}[H]
-  \centering
-  % \vspace{3ex}
-  \includegraphics[scale=2.5]{figuras/buck_conversor_with_cpl_circuit_m1.eps}
-  \caption{Circuito com a chave fechada.}
-  \label{fig:circuit2}
-\end{figure}
 
-\noindent As equações que descrevem esse circuito são apresentadas abaixo:
-% Lembrança: Faltou explica o que seria a Pcpl
+% Modelagem Buck: Modelo não-linear
+A partir das equações dinâmicas \eqref{eq:buck_converter_current} e \eqref{eq:buck_converter_voltage}, pode-se estabelecer o modelo dinâmico do sistema como segue: \begin{equation}\begin{cases} \dt{i}_L &=  - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{in}}{L}d(t)  \\ \dt{v}_C &= \frac{1}{C} i_L(t) - \frac{1}{C R_C} v_C(t) - \frac{1}{C v_C(t)} P_{CPL}(t) \label{eq:buck_converter_cpl} \end{cases}, \end{equation} onde $i_L(t)$ e $v_C(t)$ são os estados do sistema, e $d(t)$ e $P_{CPL}(t)$ são as entradas.
 
-\begin{equation}
-  \begin{cases}
-    \frac{d}{dt}i_L =  \frac{1}{L} V_{in}  - \frac{R_L}{L} i_L - \frac{1}{L} v_C \\
-    \frac{d}{dt} v_C = \frac{1}{C} i_L - \frac{1}{C R_C} v_C - \frac{1}{C v_C} P_{CPL}
-    \label{eq:circuito-m1}
-  \end{cases}
-\end{equation}
-\\
-\indent Na segunda situação, a chave está aberta e, consequentemente, a fonte de tensão é desconectada do circuito. Essa situação é representada na \autoref{fig:circuit3}.
+% Modelagem Buck: Modelo linearizado - introdução
+Da equação \eqref{eq:buck_converter_cpl}, constata-se que o sistema é não linear, devido à presença de um termo não linear na equação dinâmica da tensão do capacitor. Para abordar essa não linearidade, é possível linearizar o sistema e representá-lo por meio de um conjunto de equações diferenciais que descrevem as variações na corrente do indutor e na tensão do capacitor em torno de um ponto de operação.
+
+% Modelagem Buck: Modelo linearizado - desenvolvimento
+Considerando o sistema linearizado descrito por: \begin{equation} \dot{x} = Ax(t) + B_uu(t) + B_ww(t), \end{equation} onde  $x = \begin{bmatrix} \delta i_L & \delta v_C \end{bmatrix} ^ T$ representa o estado do sistema, $u = \delta d$ é a entrada do sistema e $w = \delta P_{CPL}$ é o sinal de pertubação. Além disto, $A \in \mathbb{R}^{n \times n}$, $B_u \text{ e } B_w \in \mathbb{R}^{n \times 1}$, são obtidos por meio das matrizes jacobianas das equações em (\ref{eq:buck_converter_cpl}), em torno do ponto de operação $P_0 = ({i_L}_0, \, {v_C}_0, \, {d}_0, \, {P_{CPL}}_0)$. Portanto, o sistema linearizado obtido pode ser expresso como: \begin{equation} \begin{bmatrix} \dot{\delta i_L} \\ \dot{\delta v_C} \end{bmatrix} = \begin{bmatrix} -\frac{R_L}{L} & -\frac{1}{L}  \\ \frac{1}{C}    & \frac{1}{C}\left(\frac{{P_{CPL}}_0}{{{{v_{C}}_0}^2}} - \frac{1}{R_C}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\frac{V_{in}}{L}} \\ 0 \end{bmatrix} \delta d(t) + \begin{bmatrix} 0 \\ {-\frac{1}{C{v_C}_0}} \end{bmatrix} \delta P_{CPL}(t)\end{equation}
+
+\subsection{Conversor Boost}
+
+O segundo sistema utilizada neste estudo consiste em um conversor Boost conectado a uma \acrshort{cpl}, onde um capacitor é adicionado em paralelo, uma vez que a carga é considerada possuir características indutivas. A modelagem da \acrshort{cpl} segue a mesma metodologia do sistema anterior, representando-a por uma fonte de corrente dependente. A Figura \autoref{fig:boost_converter_cpl} ilustra o circuito completo deste sistema para a modelagem.
 
 \begin{figure}[H]
   \centering
-  % \vspace{3ex}
-  \includegraphics[scale=2.5]{figuras/buck_conversor_with_cpl_circuit_m2.eps}
-  \caption{Circuito com a chave aberta.}
-  \label{fig:circuit3}
+  \includegraphics[width=.73\textwidth]{figuras/boost_converter_cpl.eps}
+  \caption{Conversor Boost conectado a uma \acrshort{cpl}.}
+  \label{fig:boost_converter_cpl}
 \end{figure}
 
-Neste caso, as equações que descrevem o circuito quando a chave está aberta são:
+Por meio da relação entre a tensão de entrada e a tensão média de saída do conversor Boost, conforme descrito na equação \eqref{eq:boost_converter_voltage_transfer}, e da \acrshort{lkt}, obtém-se: \begin{equation} L \dt{i}_L - \frac{1}{1-d} v_{\text{in}} - v_c(t) = 0. \end{equation} Dessa forma, a equação dinâmica da corrente do indutor é expressa como: \begin{equation} \dt{i}_L = \frac{1}{L}v_{\text{in}} - \frac{1-d}{L}v_C(t) \label{eq:boost_converter_current}. \end{equation} 
 
-\begin{equation}
-  \begin{cases}
-    \frac{d}{dt}i_L  & = \frac{V_{in}}{L} d - \frac{R_L}{L} i_L - \frac{1}{L} v_C        \\
-    \frac{d}{dt} v_C & = \frac{1}{C} i_L - \frac{1}{C R_C} v_C - \frac{1}{C v_C} P_{CPL}
-    \label{eq:circuito-m2}
-  \end{cases}
-\end{equation}
-\\
-A partir da \autoref{eq:circuito-m1} e \autoref{eq:circuito-m2}, derivadas anteriormente, podemos estabelecer as seguintes equações diferenciais, as quais caracterizam o \acrshort{mms} e fornecem uma descrição do comportamento do circuito durante a operação contínua da chave.
+Ao aplicar a \acrshort{lkc}, temos que a corrente do diodo é igual à soma das correntes do capacitor, do resistor e da corrente $i_{CPL}(t)$, definida em \eqref{eq:cpl_current}. A corrente do diodo é igual à corrente média de saída do conversor Boost, expressa na equação \eqref{eq:boost_converter_current_transfer}. Portanto, \begin{equation} (1 - d) i_{\text{in}}(t) = C\dt{v}_C + \frac{v_C(t)}{R} + \frac{P_{CPL}(t)}{v_C(t)}.\end{equation} Considerando altas frequências de chaveamento, a corrente média de entrada pode ser considerada igual à corrente do indutor. Assim, a equação dinâmica da tensão do capacitor pode ser expressa como: \begin{equation} \dt{v}_C = \frac{1 - d}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{CPL}(t). \label{eq:boost_converter_voltage}\end{equation}
 
-\begin{equation}
-  \begin{cases}
-    \frac{d}{dt}i_L  & = \frac{V_{in}}{L} d - \frac{R_L}{L} i_L - \frac{1}{L} v_C        \\
-    \frac{d}{dt} v_C & = \frac{1}{C} i_L - \frac{1}{C R_C} v_C - \frac{1}{C v_C} P_{CPL}
-    \label{eq:nonlinear-system}
-  \end{cases}
-\end{equation}
-\\
-\indent Por meio da \autoref{eq:nonlinear-system}, onde é apresentado o sistema não linear, pode-se obter o sistema linearizado em torno dos pontos de operação. Esse sistema linear é representado por um conjunto de equações diferenciais, que descrevem as variações no tempo das grandezas $\delta i_L$ e $\delta v_C$, representando as alterações na corrente do indutor e na tensão do capacitor, respectivamente.
+Desse modo, o modelo dinâmico médio do segundo sistema pode ser formulado a partir das equações \eqref{eq:boost_converter_current} e \eqref{eq:boost_converter_voltage}. Esse modelo é expresso como segue: \begin{equation} \begin{cases} \dt{i}_L = - \frac{1-d(t)}{L}v_C(t) + \frac{1}{L}v_{\text{in}}\\ \dt{v}_C = \frac{1 - d(t)}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{CPL}(t). \end{cases} \end{equation}
 
-Considerando o sistema linearizado descrito por: \begin{equation} \dot{x} = Ax(t) + B_uu(t) + B_ww(t), \end{equation} onde  $x = \begin{bmatrix} \delta i_L & \delta v_C \end{bmatrix} ^ T$ representa o estado do sistema, $u = \delta d$ é a entrada do sistema e $w = \delta P_{CPL}$ é o sinal de pertubação. Além disto, $A \in \mathbb{R}^{n \times n}$, $B_u \text{ e } B_w \in \mathbb{R}^{n \times 1}$, são obtidos por meio das matrizes jacobianas das equações em (\ref{eq:nonlinear-system}), em torno do ponto de equilíbrio $P_{eq} = ({i_L}_0, \hspace{0.07cm} {v_C}_0, \hspace{0.07cm} {d}_0, \hspace{0.07cm} {P_{CPL}}_0)$. Portanto, o sistema linearizado obtido pode ser expresso como:
+% Modelagem Boost: Linearização
 
-\begin{equation}
-  \begin{bmatrix}
-    \dot{\delta i_L} \\ \dot{\delta v_C}
-  \end{bmatrix}
-  =
-  \begin{bmatrix}
-    -\frac{R_L}{L} & -\frac{1}{L}                                                                \\
-    \frac{1}{C}    & \frac{1}{C}\left(\frac{{P_{CPL}}_0}{{{{v_{C}}_0}^2}} - \frac{1}{R_C}\right)
-  \end{bmatrix}
-  \begin{bmatrix}
-    \delta i_L \\ \delta v_C
-  \end{bmatrix}
-  +
-  \begin{bmatrix}
-    {\frac{V_{in}}{L}} & 0                     \\
-    0                  & {-\frac{1}{C{v_C}_0}}
-  \end{bmatrix}
-  \begin{bmatrix}
-    \delta d \\ \delta P_{CPL}
-  \end{bmatrix}
-\end{equation}
 
 \section{Simulação}
