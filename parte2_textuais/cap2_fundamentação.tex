@@ -83,7 +83,7 @@ Múltiplas \acrshortpl{lmi}  $F_{(1)}(x) > 0, \, ..., \, F_{(p)}(x) > 0$ podem s
 
 A \acrshort{lmi} \eqref{eq:lmi1} é uma restrição convexa em $x$, tornando o conjunto $\{x \, : \, F(x) > 0\}$ convexo e pode representar uma ampla variedade de restrições convexas em $x$, incluindo desigualdades lineares, quadráticas, de norma de matriz, bem como restrições comuns em teoria de controle, como desigualdades matriciais quadráticas convexas e de Lyapunov. \cite{boyd1994}.
 
-\subsection{Sistemas de Controle Baseado em Eventos}
+\subsection{Sistemas de Controle Baseado em Eventos} \label{subsection:etc}
 
 % ETC: Introdução
 O \acrfull{etc}, surgindo como uma solução, se destaca em \acrfullpl{scr}, onde conectam componentes como sensores, controladores e atuadores através de uma rede compartilhada. Enquanto os \acrshortpl{scr} geralmente adotam o controle periódico, o que pode causar congestionamentos e desperdícios de recursos, o \acrshort{etc} executa tarefas apenas quando necessárias, minimizando estes problemas. Ele pode ser modelado de diversas formas, com destaque para o modelo de atraso de tempo, que permite lidar com atrasos de transmissão e otimizar ganhos de controle. Esses modelos despertam interesse entre pesquisadores, especialmente em estudos de estabilidade e design de controladores \cite{peng2018}.
@@ -142,7 +142,7 @@ A seguinte lei de controle de realimentação de estado, com ganhos escalonados,
 Quando uma amostra de dados é transmitida no tempo do evento $t_k$, o estado disponível para o controlador é atualizado para $\hat{x}(t) = x(t_k)$, para todo $t \in [t_k, t_{k+1})$. Como é utilizado um \acrshort{zoh}, $\hat{x}(t)$ é mantido constante até o próximo tempo de evento $t_{k+1}$, o que induz o erro de transmissão \begin{equation}e(t) = \hat{x}(t) - x(t) \label{eq:etm-error},\end{equation} $\forall t \in [t_k, t_{k+1})$. \cite{coutinho2021}.
 
 % ETM: Tempo de ocorrência dos eventos e a variável interna dinâmica
-O tempo de ocorrência dos eventos é determinado pela seguinte equação: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t) < 0) \}, \, \forall k \in \mathbb{N}, \end{equation} onde $\theta \in \mathbb{R}_{\geq 0}$ é um parâmetro de projeto e a função de acionamento $\Gamma(x, e)$ é definida como: \begin{equation} \label{eq:etm-gama} \Gamma(x, e) = x^T \Psi x - e^T \Xi e - \zeta (x,e), \end{equation} com \begin{equation} \zeta(x, e) = 2x^TPB(x)(K(\hat{x}) - K(x))(x+e). \end{equation} A dinâmica da variável interna do \acrshort{etm} é definida como: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \end{equation} onde $\lambda \in R_{\geq} 0 $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$. \cite{coutinho2021}.
+O tempo de ocorrência dos eventos é determinado pela seguinte equação: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t) < 0) \}, \, \forall k \in \mathbb{N}, \label{eq:etm-dynamic-trigger}\end{equation} onde $\theta \in \mathbb{R}_{\geq 0}$ é um parâmetro de projeto e a função de acionamento $\Gamma(x, e)$ é definida como: \begin{equation} \label{eq:etm-gama} \Gamma(x, e) = x^T \Psi x - e^T \Xi e - \zeta (x,e), \end{equation} com \begin{equation} \zeta(x, e) = 2x^TPB(x)(K(\hat{x}) - K(x))(x+e). \end{equation} A dinâmica da variável interna do \acrshort{etm} é definida como: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:dynamic-etm}\end{equation} onde $\lambda \in R_{\geq} 0 $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$. \cite{coutinho2021}.
 
 % ETM: Condições de Co-design
 
@@ -152,7 +152,7 @@ A condição suficiente proposta para projeto por co-design para o ETC contínuo
   Dados $\theta, \eta_0 \in \mathbb{R}_{\geq 0}$, e $\lambda \in \mathbb{R}_{> 0}$, se existirem as matrizes $\tilde{K}_j \in \mathbb{R}^{m \times n}, j \in B_p$. e matrizes simétricas positivas definidas $\Xi, \Psi, X \in \mathbb{R}$, satisfazendo as seguintes \acrshortpl{lmi}:
   \begin{equation}
     \sum_{(\mathbf{i}, \mathbf{j}) \in \mathscr{P} (\mathbf{m},\mathbf{n})} \Upsilon_{\mathbf{ij}} < 0, \quad \forall \mathbf{m}, \mathbf{n} \in B_p^+,
-    \label{eq:2.18}
+    \label{eq:constraints_1}
   \end{equation}
   onde
   \begin{equation}
@@ -170,9 +170,9 @@ A condição suficiente proposta para projeto por co-design para o ETC contínuo
   com $V(x)=x^TPx$.
 \end{theorem}
 
-Para reduzir o número de eventos gerados, Coutinho propôs o seguinte problema de otimização convexa que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{equation}\underset{Q, X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}_\mathbf{j}}\min \quad \mathbf{tr}(\tilde{\Xi} + \tilde{\Psi} + Q).\end{equation} Este problema é sujeito a restrições apresentadas no \autoref{theorem:constraints-2} e à seguinte \acrshort{lmi} de restrição \begin{equation}\begin{bmatrix}
+Para reduzir o número de eventos gerados, Coutinho propôs o seguinte problema de otimização convexa que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{equation}\underset{Q, X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}_\mathbf{j}}\min \quad \mathbf{tr}(\tilde{\Xi} + \tilde{\Psi} + Q). \label{eq:optimization_problem}\end{equation} Este problema é sujeito a restrições apresentadas em \ref{eq:constraints_1} e à seguinte \acrshort{lmi} de restrição \begin{equation}\begin{bmatrix}
   -Q & I \\ \star & -X
-\end{bmatrix} < 0.\end{equation} A solução deste problema tende a minimizar os autovalores de $Q$, $\tilde{\Xi}$ e $\tilde{\Psi}$ e a reduzir os tempos entre os eventos. \cite{coutinho2021}.
+\end{bmatrix} < 0. \label{eq:constraints_2}\end{equation} A solução deste problema tende a minimizar os autovalores de $Q$, $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. \cite{coutinho2021}.
 
 Ao considerar um valor de $\theta$ suficientemente grande, o \acrshort{etm} dinâmico converge para uma versão estática, que se torna completamente independente de $\eta(t)$, conforme descrito a seguir: \begin{equation} t_0 = 0, \quad t_{k+1} = \inf\{t > t_k : \Gamma(x, e) < 0\}, \forall k \in \mathbb{N}, \end{equation} onde $\Gamma(x, e)$ é definido em \eqref{eq:etm-gama}. \cite{coutinho2021}.
 

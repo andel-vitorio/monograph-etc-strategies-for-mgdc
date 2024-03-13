@@ -38,7 +38,8 @@
 \usepackage{rotating}       % Rotaciona tabelas
 % \usepackage[alf]{abntex2cite}	% Citações padrão ABNT
 
-\usepackage{tikz}     
+\usepackage{tikz}
+\usepackage{courier}     
 
 \newcommand{\PR}[1]{\ensuremath{\left[#1\right]}}
 \newcommand{\PC}[1]{\ensuremath{\left(#1\right)}}
@@ -95,13 +96,34 @@
 \definecolor{mylilas}{RGB}{170,55,240}
 \definecolor{blue}{RGB}{41,5,195}
 
-\lstset{ % -> \usepackage{listings}
-  language=Matlab,
-  basicstyle=\ttfamily\small, 
-  morekeywords={matlab2tikz},
-  keywordstyle=\color{blue}, 
-  stringstyle=\color{mylilas}, 
-  commentstyle=\color{mygreen}, 
+% \lstset{ % -> \usepackage{listings}
+%   language=Matlab,
+%   basicstyle=\ttfamily\small, 
+%   morekeywords={matlab2tikz},
+%   keywordstyle=\color{blue}, 
+%   stringstyle=\color{mylilas}, 
+%   commentstyle=\color{mygreen}, 
+%   extendedchars=true,
+%   showspaces=false,
+%   showstringspaces=false,
+%   numbers=left,
+%   numberstyle=\tiny,
+%   breaklines=true,
+%   breakautoindent=true,
+%   captionpos=b,
+%   xrightmargin=0pt,
+%   xleftmargin=15pt,
+% }
+
+\renewcommand{\lstlistingname}{Código}
+\lstset{
+  language=Python,
+  tabsize=2,
+  basicstyle=\small\linespread{1.2}\ttfamily,
+  keywordstyle=\bfseries\color[gray]{0.2},
+  commentstyle=\color{darkgray}\textit,
+  breaklines=true,
+  breakatwhitespace=false,
   extendedchars=true,
   showspaces=false,
   showstringspaces=false,
@@ -112,8 +134,9 @@
   captionpos=b,
   xrightmargin=0pt,
   xleftmargin=15pt,
+  % inputencoding=utf8,
+  literate={á}{{\'a}}1 {à}{{\`a}}1 {â}{{\^a}}1 {ã}{{\~a}}1 {é}{{\'e}}1 {ê}{{\^e}}1 {ë}{{\"e}}1 {í}{{\'i}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {õ}{{\~o}}1 {ó}{{\'o}}1 {ô}{{\^o}}1 {ú}{{\'u}}1 {δ}{{\ensuremath{\delta}}}1 {Ξ}{{\ensuremath{\Xi}}}1 {Ψ}{{\ensuremath{\Psi}}}1 {Γ}{{\ensuremath{\Gamma}}}1 {λ}{{\ensuremath{\lambda}}}1 {θ}{{\ensuremath{\theta}}}1
 }
-
 
 % Novos comandos --> \newcommand{COMANDO}{DEFINIÇÃO}
 \newcommand{\instituicao} {
