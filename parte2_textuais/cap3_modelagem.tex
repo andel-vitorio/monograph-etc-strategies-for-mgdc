@@ -802,9 +802,10 @@ O código \ref{cod:closed_loop} cria um sistema de controle em malha fechada par
   step = 1e-6
   timepts = np.arange(0, 1. + step, step)
 
-  δPcpl = δX0[1]
+  # Simulação para a pertubação constante
+  δPcpl = 0.
 
-  # Simulação para a entrada não constante
+  # Simulação para a pertubação não constante
   # δPcpl = np.zeros_like(timepts)
   # δPcpl[np.where(timepts >= 0.3)] = 20
   # δPcpl[np.where(timepts >= 0.6)] = 30
