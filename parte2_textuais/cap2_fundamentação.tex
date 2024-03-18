@@ -111,7 +111,7 @@ Os efeitos induzidos aos estados transmitidos pela rede de comunicação $\mathc
 % As diferentes abordagem de \acrshort{etc} abrangem investigações em controladores de retroalimentação de estado, observadores, \acrshortpl{etm} estáticos e dinâmicos, com o intuito de assegurar a estabilidade e o desempenho em malha fechada em uma variedade de sistemas, tais como sistemas \acrfullpl{lit} \cite{Zong2023,Wu2021}, sistemas de \textit{Lur'e} \cite{Zhang2017} e modelos \textit{fuzzy Takagi-Sugeno} \cite{Pan2017}. O foco está em estabelecer condições práticas e numericamente solucionáveis que simplifiquem o projeto eficaz de sistemas de controle complexos.
 
 % ---------------------------------------------------------------------------
-\subsubsection{\acrshort{etm} estático, adaptativo e dinâmico}
+\subsubsection{\acrshort{etm} estático, adaptativo e dinâmico} \label{section:etm_classification}
 
 % ETM dinâmico e estático: introdução
 Os modelos de \acrshort{etm} podem ser classificados com base na sua lei de acionamento de eventos, que pode ser estática ou dinâmica. No contexto do ETM estático e do modelo apresentado na \autoref{fig:closed_loop_etc}, o acionamento dos eventos de transmissão de novos dados é determinado por uma função de evento estática representada por: \begin{equation}
@@ -207,7 +207,7 @@ A área de sistemas \acrshort{etc} já possui diversas técnicas estabelecidas q
 
 % To-do: Explicar sobre o comportamento Zeno na fundamentação
 % Dúvida: É para ser mais detalhistas em cada trabalho?
-No estudo realizado por Coutinho \cite{coutinho2021}, é investigado o \textit{co-design} de controladores de retroalimentação de estado, e \acrshortpl{etm} contínuos e dinâmicos para sistemas comutados não lineares representados por modelos \textit{quasi} \acrfullpl{lpv}. A condição de \textit{co-design} é derivada com base na teoria da estabilidade de Lyapunov para garantir a estabilidade assintótica do sistema Lyapunov em malha fechada. Para lidar com o fenômeno assíncrono entre o controlador e os parâmetros do modelo \textit{quasi}-\acrshort{lpv} induzido pela ação do \acrshort{etm}, é proposta uma função de acionamento que cancela essa influência, resultando em uma condição de \textit{co-design} menos conservadora. Também é introduzido um problema de otimização convexa para aumentar os tempos entre eventos. Ademais, é demonstrada a existência de um \acrfull{imee} para o \textit{etc} contínuo proposto, evitando o comportamento \textit{Zeno}. Além disso, são apresentadas as vantagens da abordagem de \textit{co-design} dinâmico sobre a abordagem baseada em emulação e sua versão estática.
+Em sua pesquisa, \cite{coutinho2021} investigou sobre um modelo de \acrshort{etm} dinâmico e estático, sobre o qual este projeto se fundamenta. Esse modelo permite o projeto simultâneo do \acrshort{etm} e do controlador, utilizando a abordagem de co-design para garantir a estabilidade do sistema em malha fechada. O estudo também demonstra a existência de um \acrfull{imee} positivo para evitar comportamento de Zeno, tornando-o aplicável em redes de comunicação com largura de banda finita. Por fim, ele aborda otimização para ampliar os intervalos entre eventos, visando minimizar a quantidade de eventos gerados pelo \acrshort{etm}.
 
 % Lembrete: Este trabalho apresenta a definição de zoh
 % Dúvida: Há um termo melhor para 'switched systems'?

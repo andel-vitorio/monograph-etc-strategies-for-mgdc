@@ -326,9 +326,9 @@ Dois modelos dinâmicos do conversor Buck, com os mesmos parâmetros de circuito
     \midrule
     Tensão de entrada & $v_{\mathrm{in}}$ & 48,00 & V \\
     Resistência de enrolamento do indutor & $r_L$ & 0,10 & $\Omega$ \\
-    Carga de Resistência Constante & $r_{C}$ & 10,00 & $\Omega$ \\
-    Indutância & $L$ & 10,00 & mH \\
-    Capacitância  & $C$ & 470 & $\mu$C \\
+    Carga de Resistência Constante & $r_{C}$ & 20,00 & $\Omega$ \\
+    Indutância & $L$ & 1,00 & mH \\
+    Capacitância  & $C$ & 2,20 & mC \\
     \bottomrule
   \end{tabular}
   \caption{Parâmetros do circuito do conversor Buck.}
@@ -347,23 +347,21 @@ A \autoref{table:op_parameters_buck} apresenta os pontos de operação de cada m
     \cmidrule{3-4}
      &  & Buck 1 & Buck 2 &  \\
     \midrule
-    Potência da \acrshort{cpl} & ${P_{\mathrm{cpl}}}_o$ & 25,00  & 100,00 & W \\
-    Tensão do capacitor & ${v_C}_{\mathrm{o}}$ & 28,50 & 28,00  & V \\
-    Corrente do indutor & ${i_L}_{\mathrm{o}}$ & 3,69 & 6,37 & A \\
-    \textit{Duty cycle} & $d_{\mathrm{o}}$ & 0,59 & 0,60 & - \\  
+    Potência da \acrshort{cpl} & ${P_{\mathrm{cpl}}}_o$ & 50,00  & 250,00 & W \\
+    Tensão do capacitor & ${v_C}_{\mathrm{o}}$ & 28,00 & 28,00  & V \\
+    Corrente do indutor & ${i_L}_{\mathrm{o}}$ & 3,19 & 10,33 & A \\
+    \textit{Duty cycle} & $d_{\mathrm{o}}$ & 0,58 & 0,60 & - \\  
     \bottomrule
   \end{tabular}
   \caption{Pontos de operação do dois modelos do conversor Buck.}
   \label{table:op_parameters_buck}
 \end{table}
 
-Por fim, o período de simulação é de 0 a 50 milissegundos. No primeiro modelo, a variação da corrente do indutor no instante inicial $\delta i_{L}(0)$ é de $-0,32 \textrm{ A}$  e a variação da tensão do capacitor $\delta v_{C}(0)$ é de $-1,40 \textrm{ V}$. No segundo modelo,  $\delta i_{L}(0) = -0,18 \textrm{ A}$ e  $\delta v_{C}(0) = -1,40 \textrm{ V}$.
+Por fim, o período de simulação é de 0 a 100 milissegundos. No primeiro modelo, a variação da corrente do indutor no instante inicial $\delta i_{L}(0)$ é de $-0,32 \textrm{ A}$  e a variação da tensão do capacitor $\delta v_{C}(0)$ é de $-1,40 \textrm{ V}$. No segundo modelo,  $\delta i_{L}(0) = -0,18 \textrm{ A}$ e  $\delta v_{C}(0) = -1,40 \textrm{ V}$.
 
 \subsubsection{Sinais de Entrada Constantes}
 
-A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes. Para isso, definiu-se que as entradas do sistema seriam exatamente iguais aos seus valores no ponto de operação. Portanto, a variação em torno do \acrshort{po} é nula, logo, $\delta d(t) = 0$ e $\delta P_{\mathrm{cpl}}(t) = 0 \,\mathrm{W}$. Os resultados obtidos nesta simulação do primeiro modelo do conversor Buck está apresentado na \autoref{fig:simulation_1_buck_1} e, do segundo modelo, na \autoref{fig:simulation_1_buck_2}.
-
-Na \autoref{fig:simulation_1_buck_1}, observa-se que o modelo apresenta comportamento estável no ponto de operação. A corrente do indutor e a tensão do capacitor convergem para seus valores no ponto de operação em um curto período de tempo. Não há divergência significativa entre o modelo não linear e o modelo linearizado, indicando a precisão do modelo linearizado para representar o comportamento do sistema. 
+A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores no \acrshort{po}. Não há diferença significativa entre os modelos não linear e linearizado, validando a precisão deste último na representação do sistema.
 
 \begin{figure}[H]
   \centering
@@ -372,8 +370,7 @@ Na \autoref{fig:simulation_1_buck_1}, observa-se que o modelo apresenta comporta
   \label{fig:simulation_1_buck_1}
 \end{figure}
 
-No segundo modelo, no entanto, tanto a corrente do indutor quanto a tensão do capacitor apresentam um aumento gradativo e não se estabilizam, conforme mostrado na \autoref{fig:simulation_1_buck_2}. Portanto, o segundo modelo não converge para um estado estacionário, o que indica instabilidade. Ademais, ao comparar os modelos não lineares e os linearizados, observa-se que os gráficos da corrente do indutor e da tensão do capacitor apresentam diferenças visíveis a partir de $t = 0,04 \, \mathrm{s}$. Essas diferenças podem gerar uma divergência entre os valores desejados e os valores reais, o que deve ser considerado na análise do sistema em malha fechada.
-
+No segundo modelo, no entanto, tanto a corrente do indutor quanto a tensão do capacitor apresentam um aumento gradativo e não se estabilizam, conforme mostrado na \autoref{fig:simulation_1_buck_2}. Portanto, o segundo modelo não converge para um estado estacionário, o que indica instabilidade. Ademais, o modelo linearizado apresentou grande precisão, sem diferenças significativa.
 
 \begin{figure}[H]
   \centering
@@ -382,3 +379,12 @@ No segundo modelo, no entanto, tanto a corrente do indutor quanto a tensão do c
   \label{fig:simulation_1_buck_2}
 \end{figure}
 
+\subsubsection{Sinal de pertubação $P_{\textrm{cpl}}$ variável}
+
+
+
+\subsection{Conversor Boost}
+
+\subsubsection{Sinais de Entrada Constantes}
+
+\subsubsection{Sinal de pertubação $P_{\textrm{cpl}}$ variável}

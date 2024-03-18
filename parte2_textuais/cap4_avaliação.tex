@@ -2,59 +2,53 @@
 
 % Essa análise fornece insights sobre a aplicação das abordagens de ETC e permite comparar suas vantagens e desvantagens.
 
-% ETM: Apresentação do trabalho de Coutinho
-Em sua pesquisa, Coutinho investigou um modelo de \acrshort{etm} dinâmico e estático, sobre o qual este projeto se fundamenta. Este modelo baseia-se em uma condição suficiente para permitir o projeto simultâneo do \acrshort{etm} e do controlador com ganhos escalonados, por meio da abordagem por co-design, garantindo a estabilidade assintótica da origem do sistema em malha fechada. Além disso, ele provou a existência de um \acrfull{imee} positivo que evita a existência de comportamento de Zeno a fim de garantir sua aplicabilidade, pois as redes de comunicação não têm largura de banda infinita para suportar tempos entre eventos arbitrariamente próximos. Por fim, aborda um problema de otimização visando a ampliação dos intervalos entre eventos, com o objetivo de minimizar a quantidade de eventos gerados pelo \acrshort{etm}. \cite{coutinho2021}.
+
+\section{Modelo de \acrshort{etm} para Sistemas Lineares}
 
 % ETM: Apresentação do sistema dinâmico
-O modelo proposto por Coutinho para o \acrshort{etm} dinâmico considera uma classe específica de sistemas não lineares, representada pela equação diferencial abaixo: \begin{equation} \dot{x}(t) = A(x(t))x(t) + B(x(t))u(t). \label{eq:etm-sys}\end{equation} Nesta equação, $ x(t) \in D \subset \mathbb{R}^n $ representa o estado do sistema, $ u(t) \in \mathbb{R}^m $ é a entrada de controle, e $ A: D \rightarrow \mathbb{R}^{n \times n} $ e $ B: D \rightarrow \mathbb{R}^{n \times m} $ são funções contínuas de matriz, com a restrição de que $ B(x) \neq 0 $ para todo $ x \in D $. Os termos não lineares nos coeficientes dependentes do estado, $ A(x) $ e $ B(x) $, são representados por $ z_j: D \rightarrow \mathbb{R} $, onde $ j \in \mathbb{N}_{\leq p} $, e são denominados funções de escalonamento. Aqui, $ D \subset \mathbb{R}^n $ é um politopo convexo que inclui a origem, sendo esta considerada o ponto de equilíbrio de interesse. \cite{coutinho2021}.
-
-% Definição das funções de escalonamento e de ponderamento
-% Warning Este texto é praticamente igual a do Coutinho
-Dado que as funções de escalonamento $z_j(x)$ são contínuas e $D$ é um conjunto compacto, podemos inferir a existência de limites, de forma que: \begin{equation} z_{j}^0 \leq z_j(x) \leq z_{j}^0, \quad \forall j \in \mathbb{N}_{\leq p}. \end{equation} Assim, cada função de escalonamento $z_j(x)$ pode ser representada de maneira equivalente como: \begin{equation} z_j(x) = w_0^j(x)z_j^0 + w_{1}^j(x)z_{j}^1 = \sum_{i_j=0}^{1} w_{i_j}^j(x)z_i^{i_j}, \end{equation} onde as funções de ponderação dependentes do estado são definidas como: \begin{equation} w_0^j(x) := \frac{z_j^1 - z_j(x)}{z_j^1 - z_j^0}, \quad w_1^j(x) := 1 - w_0^j(x), \end{equation} com $0 \leq w_i^j(x) \leq 1$, $i_j \in \mathbb{B}$, $j \in \mathbb{N}_{\leq p}$. Portanto, para todo $x \in D$, o sistema não linear \eqref{eq:etm-sys} pode ser equivalente ao seguinte modelo quasi-LPV poliédrico: \begin{equation} \dot{x}(t) = \sum_{i \in \mathbb{B}_p} w_i(x(t))(A_i x(t) + B_i u(t)), \label{eq:etm-politopic} \end{equation} onde os parâmetros dependentes do estado são definidos como: \begin{equation} w_i(x) := \prod_{j=1}^{p} w_{ij}^j(x), \end{equation} sendo $i = (i_1, ..., i_p) \in \mathbb{B}_p$. Por definição, observamos que a propriedade de soma convexa permanece válida para os parâmetros: \begin{equation} \sum_{i \in \mathbb{B}_p} w_i(x) = 1, \quad 0 \leq w_i(x) \leq 1, \quad \forall i \in \mathbb{B}_p, \end{equation} garantindo que as matrizes: \begin{equation} \left. A_i := A(x) \right|_{w_i(x)=1}, \quad \left.B_i := B(x) \right|_{w_i(x)=1}, \end{equation} definem os vértices do modelo quasi-LPV poliédrico \eqref{eq:etm-politopic}. \cite{coutinho2021}.
-
-% ETM: Lei de controle 
-A seguinte lei de controle de realimentação de estado, com ganhos escalonados, é considerada para estabilizar o sistema \eqref{eq:etm-sys}:
-\begin{equation} u(t) = K(\hat{x}(t))\hat{x}(t) = \sum_{j \in Bp} w_j(\hat{x}(t))K_j\hat{x}(t) \end{equation} onde $ \hat{x}(t) $ representa a informação de estado disponível para o controlador através do ETM. A matriz dependente de estado $ K : D \rightarrow \mathbb{R}^{m \times n} $ é assumida como dependente das funções de escalonamento de \eqref{eq:etm-sys}, de modo que um controlador programado para ganho com ganhos $ K_j = K(\hat{x}) $ possa ser parametrizado em termos dos parâmetros $ w_j(\hat{x}) $. \cite{coutinho2021}.
+Nesta pesquisa, é proposto um modelo de \acrshort{etm} dinâmico para sistemas lineares, representada pela equação diferencial abaixo: \begin{equation} \dot{x}(t) = Ax(t) + Bu(t). \label{eq:linear_system_etm}\end{equation} Nesta equação, $ x(t) \in \mathbb{R}^n $ representa o estado do sistema, $ u(t) \in \mathbb{R}^m $ é a entrada de controle, e $ A \in \mathbb{R}^{n \times n} $ e $ B \in \mathbb{R}^{n \times m}$ são a matriz de estados e a matriz de entrada, respectivamente. Além disto, a origem do sistema é considerada o ponto de equilíbrio de interesse.
 
 % ETM: Apresentação do erro de transmissão
-Quando uma amostra de dados é transmitida no tempo do evento $t_k$, o estado disponível para o controlador é atualizado para $\hat{x}(t) = x(t_k)$, para todo $t \in [t_k, t_{k+1})$. Como é utilizado um \acrshort{zoh}, $\hat{x}(t)$ é mantido constante até o próximo tempo de evento $t_{k+1}$, o que induz o erro de transmissão \begin{equation}e(t) = \hat{x}(t) - x(t) \label{eq:etm-error},\end{equation} $\forall t \in [t_k, t_{k+1})$. \cite{coutinho2021}.
+Como discutido na seção \ref{section:etm_classification}, quando uma amostra de dados é transmitida no tempo de evento $t_k$, o estado disponível para o controlador é atualizado para $\hat{x}(t) = x(t_k)$, para todo $t$ no intervalo $[t_k, t_{k+1})$. Ao utilizar um \acrshort{zoh}, $\hat{x}(t)$ é mantido constante até o próximo tempo de evento $t_{k+1}$, resultando no erro de transmissão representado por: \begin{equation}
+  e(t) = \hat{x}(t) - x(t), \quad \forall t \in [t_k, t_{k+1}).
+\end{equation} Este erro ocorre durante o intervalo de tempo entre eventos, $ [t_k, t_{k+1})$.
 
-% ETM: Tempo de ocorrência dos eventos e a variável interna dinâmica
-O tempo de ocorrência dos eventos é determinado pela seguinte equação: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t) < 0) \}, \, \forall k \in \mathbb{N}, \label{eq:etm-dynamic-trigger}\end{equation} onde $\theta \in \mathbb{R}_{\geq 0}$ é um parâmetro de projeto e a função de acionamento $\Gamma(x, e)$ é definida como: \begin{equation} \label{eq:etm-gama} \Gamma(x, e) = x^T \Psi x - e^T \Xi e - \zeta (x,e), \end{equation} com \begin{equation} \zeta(x, e) = 2x^TPB(x)(K(\hat{x}) - K(x))(x+e). \end{equation} A dinâmica da variável interna do \acrshort{etm} é definida como: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:dynamic-etm}\end{equation} onde $\lambda \in R_{\geq} 0 $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$. \cite{coutinho2021}.
+% Adicionar um conclusão
 
-% ETM: Condições de Co-design
+\subsection{\acrshort{etm} Estático e Dinâmico}
 
-A condição suficiente proposta para projeto por co-design para o ETC contínuo  e o controlador por ganhos escalonados é declarada a seguir.
+% Resumo sobre o ETM estático
+Como discutido anteriormente, o \acrshort{etm} estático opera considerando apenas os estados atuais do sistema $x(t)$ e o erro de transmissão $e(t)$. A sua lei de acionamento de eventos é definida como: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \Gamma(x(t), e(t)) < 0 \}, \, \forall k \in \mathbb{N},\end{equation} onde $\Gamma(x, e)$ representa a função de evento do \acrshort{etm}. Adicionalmente, para uma classe específica de funções $\Gamma$ dada por \begin{equation}
+  \Gamma(x(t), e(t)) = \sigma \alpha(\|x(t)\|) - \beta(\|e(t)\|),
+\end{equation} com $\sigma \in (0,1)$, o sistema em malha fechada é assintoticamente estável.
+
+% Função evento proposta
+Com base nisso, é proposta uma função de evento onde $\alpha(\|x(t)\|) = x^T(t)\Psi x(t)$, $\beta(\|e(t)\|) = e^T(t)\Xi e(t)$ e $\sigma = 1$, ou seja: \begin{equation}
+  \Gamma(x(t), e(t)) = x^T(t)\Psi x(t) - e^T(t)\Xi e(t),
+  \label{eq:static_etm_gamma}
+\end{equation} onde $\Psi, \, \Xi \in \mathbb{R}^{n \times n}$ e a condição suficiente para o projeto do \acrshort{etm} por co-design para o \acrshort{etc} contínuo e o controlador por realimentação de estados é declarada a seguir:
+
 \begin{theorem}
   \label{theorem:constraints-2}
-  Dados $\theta, \eta_0 \in \mathbb{R}_{\geq 0}$, e $\lambda \in \mathbb{R}_{> 0}$, se existirem as matrizes $\tilde{K}_j \in \mathbb{R}^{m \times n}, j \in B_p$. e matrizes simétricas positivas definidas $\Xi, \Psi, X \in \mathbb{R}$, satisfazendo as seguintes \acrshortpl{lmi}:
+  Se existirem matrizes semidefinidas positivas $\Xi, \Psi, X \in \mathbb{R}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a seguinte \acrshort{lmi}:
   \begin{equation}
-    \sum_{(\mathbf{i}, \mathbf{j}) \in \mathscr{P} (\mathbf{m},\mathbf{n})} \Upsilon_{\mathbf{ij}} < 0, \quad \forall \mathbf{m}, \mathbf{n} \in B_p^+,
-    \label{eq:constraints_1}
-  \end{equation}
-  onde
-  \begin{equation}
-    \Upsilon_{\mathbf{ij}} :=
     \begin{bmatrix}
-      He(A_\mathbf{i}X +B_\mathbf{i}\tilde{K}_\mathbf{j}) & B_\mathbf{i}\tilde{K}_{\mathbf{j}} & X             \\
-      \star                                               & -\tilde{\Xi}                       & 0             \\
-      \star                                               & \star                              & -\tilde{\Psi}
-    \end{bmatrix},
+      \mathrm{He}(AX +B\tilde{K}) & B\tilde{K}   & X             \\
+      \star              & -\tilde{\Xi} & 0             \\
+      \star              & \star        & -\tilde{\Psi}
+    \end{bmatrix} < 0,
+    \label{eq:etm_lmi_1}
   \end{equation}
-  então, a origem do sistema de malha fechada é assintoticamente estável com $K_j = \tilde{K}_jX^{-1}$, $j \in B^p$, $\Xi= X^{-1}\tilde{\Xi}X$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e função de Lyapunov
-  \begin{equation}
-    W(x, \eta) = V(x) + \eta,
-  \end{equation}
-  com $V(x)=x^TPx$.
+  então, a origem do sistema de malha fechada é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e a função de Lyapunov $V(x)=x^TPx$.
 \end{theorem}
 
-Para reduzir o número de eventos gerados, Coutinho propôs o seguinte problema de otimização convexa que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{equation}\underset{Q, X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}_\mathbf{j}}\min \quad \mathbf{tr}(\tilde{\Xi} + \tilde{\Psi} + Q). \label{eq:optimization_problem}\end{equation} Este problema é sujeito a restrições apresentadas em \ref{eq:constraints_1} e à seguinte \acrshort{lmi} de restrição \begin{equation}\begin{bmatrix}
-  -Q & I \\ \star & -X
-\end{bmatrix} < 0. \label{eq:constraints_2}\end{equation} A solução deste problema tende a minimizar os autovalores de $Q$, $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. \cite{coutinho2021}. Se o problema for factível, é possível determinar as variáveis do problema e obter os parâmetros de projeto do ETM através das seguintes relações matemáticas: \begin{equation}
-  \Xi = X ^ {-1} \tilde{\Xi} X, \hspace{1cm}
-  \Psi = \tilde{\Psi} ^ {-1}, \hspace{1cm}
-  K = \tilde{K} X^{-1}.
-  \label{eq:etm_parameters}
-\end{equation}
+% ETM: Tempo de ocorrência dos eventos e a variável interna dinâmica
+No \acrshort{etm} dinâmico, a lei de acionamento de eventos é definida como: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t) < 0) \}, \, \forall k \in \mathbb{N} \end{equation} onde $\theta \in \mathbb{R}_{\geq 0}$ é um parâmetro de projeto, a função de evento $\Gamma(x, e)$ é a mesma definida para o \acrshort{etm} estático, em \eqref{eq:static_etm_gamma} e $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:dynamic-etm}\end{equation} onde $\lambda \in R_{\geq} 0 $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$.
 
-Ao considerar um valor de $\theta$ suficientemente grande, o \acrshort{etm} dinâmico converge para uma versão estática, que se torna completamente independente de $\eta(t)$, conforme descrito a seguir: \begin{equation} t_0 = 0, \quad t_{k+1} = \inf\{t > t_k : \Gamma(x, e) < 0\}, \forall k \in \mathbb{N}, \end{equation} onde $\Gamma(x, e)$ é definido em \eqref{eq:etm-gama}. \cite{coutinho2021}.
+% ETM: Condições de Co-design
+\subsection{Otimização do \acrshort{etm}}
+
+
+Para reduzir o número de eventos gerados, é proposto o seguinte problema de otimização convexa que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{equation}\underset{Q, X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathbf{tr}(\tilde{\Xi} + \tilde{\Psi} + Q). \label{eq:optimization_problem}\end{equation} Este problema é sujeito a \acrshort{lmi} apresentada em \eqref{eq:etm_lmi_1} e à seguinte \acrshort{lmi}: \begin{equation}\begin{bmatrix}
+  -Q & I \\ \star & -X
+\end{bmatrix} < 0. \label{eq:constraints_2}\end{equation} A solução deste problema tende a minimizar os autovalores de $Q$, $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Se o problema for factível, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
