@@ -309,13 +309,13 @@ A partir dessas equações, podemos derivar as expressões linearizadas de $\dt{
 
 Para o segundo modelo dinâmico \eqref{eq:boost_nonlinear_system}, têm-se: \begin{equation} \begin{cases} \delta \dt{i}_L &= - \frac{1 - d_{\text{eq}}}{L} \delta v_C(t) + \frac{{v_C}_{\text{eq}}}{L}\delta d(t) \\ \delta \dt{v}_C &= \frac{1 - d_{\text{eq}}}{C} \delta i_L(t) + \frac{1}{C} \left(\frac{{P_{CPL}}_{\text{eq}}}{{v_C}^2_{\text{eq}}} - \frac{1}{R}\right) \delta v_C(t) - \frac{{i_L}_{\text{eq}}}{C} \delta d(t) - \frac{1}{C{v_C}_{\text{eq}}} \delta P_{CPL}(t), \end{cases} \end{equation} ou, expresso na forma de espaço de estados: \begin{equation} \begin{bmatrix} \dt{\delta i_L} \\ \dt{\delta v_C} \end{bmatrix} = \begin{bmatrix} \displaystyle 0 & \displaystyle -\frac{1 - d_{\text{eq}}}{L}  \\\\ \displaystyle \frac{1 - d_{\text{eq}}}{C} & \displaystyle \frac{1}{C}\left(\frac{{P_{CPL}}_{\text{eq}}}{{{v_{C}}^2_{\text{eq}}}} - \frac{1}{R}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\displaystyle \frac{{v_C}_{\text{eq}}}{L}} & 0 \\ \\ - \frac{{i_L}_{\text{eq}}}{C} & \displaystyle {-\frac{1}{C{v_C}_{\text{eq}}}} \end{bmatrix}  \begin{bmatrix} \delta d(t) \\ \delta P_{CPL}(t) \end{bmatrix}. \label{eq:boost_linear_system}\end{equation}
 
-\section{Simulação}
+\section{Simulação dos Conversores em Malha Aberta}
 
-Nesta seção, será realizada uma análise dos dois conversores \acrshort{cc}-\acrshort{cc} em malha aberta, analisando suas respostas em diversos cenários e condições operacionais. Utilizou-se a linguagem de programação Python juntamente com bibliotecas especializadas em simulação de sistemas dinâmicos para simular os modelos não-lineares transladados e os linearizados dos conversores obtidos na seção anterior. Com base nos resultados obtidos, é possível observar a influência de fatores como a variação das entradas e das condições de operação nos comportamentos dos conversores.
+Nesta seção, será realizada uma análise dos dois conversores \acrshort{cc}-\acrshort{cc} em malha aberta, analisando suas respostas em diversos cenários e condições operacionais. Utilizou-se a linguagem de programação Python juntamente com bibliotecas especializadas em simulação de sistemas dinâmicos para simular os modelos não lineares transladados e os linearizados dos conversores obtidos na seção anterior. Com base nos resultados obtidos, é possível observar a influência de fatores como a variação das entradas e das condições de operação nos comportamentos dos conversores.
 
 \subsection{Conversor Buck}
 
-Dois modelos dinâmicos do conversor Buck, com os mesmos parâmetros de circuito, mas com pontos de operação distintos, foram utilizados para a análise em malha aberta. Cada conversor foi analisado utilizando o seu modelo não linear na forma transladada \eqref{eq:translated_nonlinear_buck} e o modelo linearizado \eqref{eq:buck_linear_system}. Os parâmetros do circuito, comuns aos dois modelos, estão detalhados na \autoref{table:circuit_parameter_buck}.
+O conversor Buck foi analisado em dois pontos de operação distintos $P_{\mathrm{op}, 1}$ e $P_{\mathrm{op}, 2}$, considerando seu modelo não linear na forma transladada \eqref{eq:translated_nonlinear_buck} e seu modelo linearizado \eqref{eq:buck_linear_system}. Foram utilizados nas simulações, os parâmetros do circuito detalhados na \autoref{table:circuit_parameter_buck}.
 
 \vspace{8pt}
 \begin{table}[H]
@@ -335,7 +335,7 @@ Dois modelos dinâmicos do conversor Buck, com os mesmos parâmetros de circuito
   \label{table:circuit_parameter_buck}
 \end{table}
 
-A \autoref{table:op_parameters_buck} apresenta os pontos de operação de cada modelo do conversor Buck ("Buck 1" e "Buck 2"). Nesses pontos, a potência da carga e a tensão do capacitor são definidas, enquanto a corrente do indutor e o \textit{duty cycle} são calculados a partir da tensão do capacitor e da potência da carga, utilizando as equações \eqref{eq:translation_buck_iL_op} e \eqref{eq:tranlation_buck_d_op}, respectivamente.
+A \autoref{table:op_parameters_buck} apresenta os pontos de operação do conversor Buck utilizados na simulação, $P_{\mathrm{op}, 1}$ e $P_{\mathrm{op}, 2}$. Nesses pontos, a potência da carga e a tensão do capacitor são definidas, enquanto a corrente do indutor e o \textit{duty cycle} são calculados a partir da tensão do capacitor e da potência da carga, utilizando as equações \eqref{eq:translation_buck_iL_op} e \eqref{eq:tranlation_buck_d_op}, respectivamente.
 
 \vspace{8pt}
 \begin{table}[H]
@@ -345,41 +345,110 @@ A \autoref{table:op_parameters_buck} apresenta os pontos de operação de cada m
     \toprule
     \multirow{2}{*}{\centering Parâmetros} & \multirow{2}{*}{\centering Símbolo} & \multicolumn{2}{c}{\centering Valor} & \multirow{2}{*}{\centering Unidade} \\
     \cmidrule{3-4}
-     &  & Buck 1 & Buck 2 &  \\
+     &  & $P_{\mathrm{op}, 1}$ & $P_{\mathrm{op}, 2}$ &  \\
     \midrule
     Potência da \acrshort{cpl} & ${P_{\mathrm{cpl}}}_o$ & 50,00  & 250,00 & W \\
     Tensão do capacitor & ${v_C}_{\mathrm{o}}$ & 28,00 & 28,00  & V \\
     Corrente do indutor & ${i_L}_{\mathrm{o}}$ & 3,19 & 10,33 & A \\
-    \textit{Duty cycle} & $d_{\mathrm{o}}$ & 0,58 & 0,60 & - \\  
+    \textit{Duty cycle} & $d_{\mathrm{o}}$ & 0,59 & 0,60 & - \\  
     \bottomrule
   \end{tabular}
   \caption{Pontos de operação do dois modelos do conversor Buck.}
   \label{table:op_parameters_buck}
 \end{table}
 
-Por fim, o período de simulação é de 0 a 100 milissegundos. No primeiro modelo, a variação da corrente do indutor no instante inicial $\delta i_{L}(0)$ é de $-0,32 \textrm{ A}$  e a variação da tensão do capacitor $\delta v_{C}(0)$ é de $-1,40 \textrm{ V}$. No segundo modelo,  $\delta i_{L}(0) = -0,18 \textrm{ A}$ e  $\delta v_{C}(0) = -1,40 \textrm{ V}$.
+Por fim, ao considerar o Buck em torno de $P_{\mathrm{op}, 1}$, a variação da corrente do indutor no instante inicial $\delta i_{L}(0)$ é de $-0,32 \textrm{ A}$, enquanto a variação da tensão do capacitor $\delta v_{C}(0)$ é de $-1,40 \textrm{ V}$. Para o ponto $P_{\mathrm{op}, 2}$, foi definido $\delta i_{L}(0) = -0,18 \textrm{ A}$ e $\delta v_{C}(0) = -1,40 \textrm{ V}$. 
 
 \subsubsection{Sinais de Entrada Constantes}
 
-A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores no \acrshort{po}. Não há diferença significativa entre os modelos não linear e linearizado, validando a precisão deste último na representação do sistema.
+A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores definidos no \acrshort{po}. Não há diferença significativa entre os modelos não linear e linearizado, validando a precisão deste último na representação do sistema.
 
 \begin{figure}[H]
   \centering
+  \captionsetup{justification=centering}
   \includegraphics[width=1.\textwidth]{figuras/buck/simulation_1.eps}
-  \caption{Simulação do primeiro modelo do conversor Buck com entradas constantes.}
+  \caption{Simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{op}, 1}$ sob entradas constantes.}
   \label{fig:simulation_1_buck_1}
 \end{figure}
 
-No segundo modelo, no entanto, tanto a corrente do indutor quanto a tensão do capacitor apresentam um aumento gradativo e não se estabilizam, conforme mostrado na \autoref{fig:simulation_1_buck_2}. Portanto, o segundo modelo não converge para um estado estacionário, o que indica instabilidade. Ademais, o modelo linearizado apresentou grande precisão, sem diferenças significativa.
+Para o conversor em torno do ponto $P_{\mathrm{op}, 2}$, no entanto, tanto a corrente do indutor quanto a tensão do capacitor apresentam um aumento gradativo e não se estabilizam, conforme mostrado na \autoref{fig:simulation_1_buck_2}. Portanto, não converge para um estado estacionário, o que indica instabilidade. Ademais, o modelo linearizado apresentou grande precisão, sem diferenças significativa.
 
 \begin{figure}[H]
   \centering
+  \captionsetup{justification=centering}
   \includegraphics[width=1.\textwidth]{figuras/buck/simulation_2.eps}
-  \caption{Simulação do segundo modelo do conversor Buck com entradas constantes.}
+  \caption{Simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{op}, 2}$ sob entradas constantes.}
   \label{fig:simulation_1_buck_2}
 \end{figure}
 
 \subsubsection{Sinal de pertubação $P_{\textrm{cpl}}$ variável}
+
+A segunda simulação avaliou o impacto do sinal de perturbação $P_{cpl}$ no conversor Buck, variando a potência da \acrshort{cpl}. A \autoref{fig:power_cpl_variation} apresenta os valores do sinal de pertubação durante a simulação do conversor operando em torno do ponto $P_{\mathrm{op}, 1}$ definido anteriormente.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{figuras/buck/power_cpl_variation.eps}
+  \captionsetup{justification=centering}
+  \caption{Sinal de perturbação $P_{cpl}$ durante a 2ª simulação do conversor Buck em torno do $P_{\mathrm{op}, 1}$.}
+  \label{fig:power_cpl_variation}
+\end{figure}
+
+O sinal de pertubação $P_{cpl}$ para o conversor operando em torno do $P_{\mathrm{op}, 2}$ está apresentado na \autoref{fig:sim2_power_cpl_variation}. Devido o ponto de operação $P_{\mathrm{op}, 2}$ ser instável, o tempo de simulação foi reduzido de 1,0 s para 0,5 s.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=.5 \textwidth]{figuras/buck/sim2_power_cpl_variation.eps}
+  \captionsetup{justification=centering}
+  \caption{Sinal de perturbação $P_{cpl}$ durante a 2ª simulação do conversor Buck em torno do $P_{\mathrm{op}, 2}$.}
+  \label{fig:sim2_power_cpl_variation}
+\end{figure}
+
+A Figura \ref{fig:simulation2_op1} ilustra a resposta do modelo não linear e do linearizado do conversor Buck à perturbação operando em torno do $P_{\mathrm{op}, 1}$.  É possível observar que o conversor Buck mantém a estabilidade durante toda a simulação, e os comportamentos dos modelos não linear e linearizado coincidem. A tensão no capacitor é próxima do valor esperado durante a operação do conversor no \acrshort{po}, mas se desvia à medida que a potência da \acrshort{cpl} aumenta. Além disto, a corrente no indutor varia de acordo com a potência da \acrshort{cpl}, comportamento esperado devido à necessidade de ajustar a corrente para manter a potência na carga constante e a tensão de saída desejada.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/buck/simulation2_op1_nonlinear.eps}
+    \caption{Não linear.}
+    \label{fig:simulation2_op1_nonlinear}
+  \end{subfigure}
+  % \vspace{0.5cm}
+  \newline
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/buck/simulation2_op1_linear.eps}
+    \caption{Linearizado.}
+    \label{fig:simulation2_op1_linear}
+  \end{subfigure}
+  \caption{Resposta do conversor Buck em torno do $P_{\mathrm{op}, 1}$ à variação do sinal de perturbação apresentado na \autoref{fig:power_cpl_variation}.}
+  \label{fig:simulation2_op1}
+\end{figure}
+
+Na Figura \ref{fig:simulation2_op2}, é possível observar que a resposta do conversor Buck apresenta uma diferença significativa no comportamento entre o modelo não linear e o linearizado quando operando em torno do ponto $P_{\mathrm{op}, 2}$. No comportamento não linear, observa-se que entre 0 e 0,4 segundos, o sistema é estável. No entanto, a tensão do capacitor no ponto de equilíbrio neste intervalo de tempo apresenta desvios consideráveis do valor desejado (28 V). Após 0,4 s, o sistema se torna instável, como esperado, devido à proximidade da potência da \acrshort{cpl} com o valor no ponto de operação definido, que como observado na primeira simulação, é instável. Em contraste, o modelo linearizado permanece instável durante toda a simulação, diferenciando-se bastante do comportamento não linear quando opera sob o sinal de pertubação variável.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/buck/sim2_op2_nonlinear.eps}
+    \caption{Não linear.}
+    \label{fig:sim2_op2_nonlinear}
+  \end{subfigure}
+  % \vspace{0.5cm}
+  \newline
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=\linewidth]{figuras/buck/sim2_op2_linear.eps}
+    \caption{Linearizado.}
+    \label{fig:simulation2_op2_linear}
+  \end{subfigure}
+  \caption{Resposta do conversor Buck em torno do $P_{\mathrm{op}, 2}$ à variação do sinal de perturbação apresentado na \autoref{fig:sim2_power_cpl_variation}.}
+  \label{fig:simulation2_op2}
+\end{figure}
+
 
 
 
