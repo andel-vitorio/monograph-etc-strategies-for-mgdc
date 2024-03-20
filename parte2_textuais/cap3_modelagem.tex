@@ -52,13 +52,13 @@ A configuração básica do conversor Buck é apresentada na \autoref{fig:basic-
 \end{figure}
 
 % Buck: Valor médio de tensão
-O valor médio da tensão da carga, $\bar{v}_{out}$ é descrito como: \begin{equation} \bar{v}_{out} = \frac{t_c}{T}v_{in}, \end{equation} onde, $t_c$ é o tempo em que a chave $S$ permanece fechada, $t_a$ é o tempo em que a chave permanece aberta, e $T = t_c + t_a$ é o período de chaveamento. \cite{martins2008}.
+O valor médio da tensão da carga, $\bar{v}_{out}$ é descrito como: \begin{equation} \bar{v}_{out} = \frac{t_c}{T}v_{\mathrm{in}}, \end{equation} onde, $t_c$ é o tempo em que a chave $S$ permanece fechada, $t_a$ é o tempo em que a chave permanece aberta, e $T = t_c + t_a$ é o período de chaveamento. \cite{martins2008}.
 
 % Buck: parâmetros do circuito
-A razão cíclica, ou duty cycle, é definida como: \begin{equation} d = \frac{t_c}{T}. \end{equation} Logo, obtêm-se a característica de transferência do conversor Buck: \begin{equation} \bar{v}_{out} = dv_{in}. \label{eq:buck_feature}\end{equation} A partir desta equação, pode-se definir a corrente média: \begin{equation} \bar{i} = d\frac{v_{in}}{R}. \end{equation} E por fim, a potência de entrada é dada pela expressão: \begin{equation} P_{in} = d \frac{v_{in}^2}{R}. \end{equation}
+A razão cíclica, ou duty cycle, é definida como: \begin{equation} d = \frac{t_c}{T}. \end{equation} Logo, obtêm-se a característica de transferência do conversor Buck: \begin{equation} \bar{v}_{out} = dv_{\mathrm{in}}. \label{eq:buck_feature}\end{equation} A partir desta equação, pode-se definir a corrente média: \begin{equation} \bar{i} = d\frac{v_{\mathrm{in}}}{R}. \end{equation} E por fim, a potência de entrada é dada pela expressão: \begin{equation} P_{in} = d \frac{v_{\mathrm{in}}^2}{R}. \end{equation}
 
 % Buck: linearidade
-A partir da equação \eqref{eq:buck_feature}, pode-se observar que a tensão média sobre a carga é diretamente linear a tensão de entrada, cuja taxa de variação é igual ao valor do duty cycle $d$. Isto possibilita o controle da tensão média sobre a carga por meio da razão cíclica. Tal controle pode ser através da variação do tempo de condução $t_c$ da chave $S$. Desta forma, para $t_c = 0 \Rightarrow d = 0$ e $t_c = T \Rightarrow d = 1$, que representam a chave permanentemente aberta e fechada, respectivamente. Assim, a potência transferida à carga pode ser controlada, variando a sua tensão média entre 0 e $v_{in}$. \cite{martins2008}.
+A partir da equação \eqref{eq:buck_feature}, pode-se observar que a tensão média sobre a carga é diretamente linear a tensão de entrada, cuja taxa de variação é igual ao valor do duty cycle $d$. Isto possibilita o controle da tensão média sobre a carga por meio da razão cíclica. Tal controle pode ser através da variação do tempo de condução $t_c$ da chave $S$. Desta forma, para $t_c = 0 \Rightarrow d = 0$ e $t_c = T \Rightarrow d = 1$, que representam a chave permanentemente aberta e fechada, respectivamente. Assim, a potência transferida à carga pode ser controlada, variando a sua tensão média entre 0 e $v_{\mathrm{in}}$. \cite{martins2008}.
 
 % Buck: buck com carga RLE - introdução
 Para uma análise mais abrangente, é relevante mencionar o conversor Buck que alimenta uma carga RLE composta por resistor, indutor e uma fonte de tensão, conforme apresentado na \autoref{fig:buck_converter_rle}. No entanto, é crucial entender que uma fonte de tensão só pode ser conectada a uma carga com características de fonte de corrente. Isso implica que uma carga que se comporte como uma fonte de tensão deve ser associada em série com um indutor para refletir o comportamento de uma fonte de corrente. Além disso, é importante destacar que interromper abruptamente uma fonte de corrente, ou uma carga com tais características, não é permitido. Em situações onde essa operação é necessária, como em sistemas de eletrônica de potência, utiliza-se um diodo em antiparalelo com a fonte (ou carga) que será interrompida. \cite{martins2008}.
@@ -143,12 +143,12 @@ A \autoref{fig:basic_boost_converter_a} apresenta a estrutura básica do convers
 \end{figure}
 
 % Boost: relação tensão entrada-saída
-Considerando que a chave $S$ opera com frequência fixa e duty cycle variável, podemos expressar a energia fornecida pela fonte de entrada $v_{in}$ como: \begin{equation} \mathcal{E}_{in} = v_{in} i_{in} T, \end{equation} E a energia recebida pela carga como: \begin{equation} \mathcal{E}_{out} = v_{out} i_{in} t_a. \end{equation} Portanto, a energia recebida pela carga é dada por: \begin{equation} \mathcal{E}_{out} = v_{out} i_{in} (T - t_c). \end{equation} Considerando o sistema conservativo, isto é, $\mathcal{E}_{in} = \mathcal{E}_{out}$, obtemos: \begin{equation} v_{in} i_{in} T = v_{out} i_{in} (T - t_c). \end{equation} Assim, \begin{equation} \frac{v_{out}}{v_{in}} = \frac{1}{1-d} \label{eq:ideal_feature_boost}.\end{equation} Esta última equação representa a característica ideal de transferência do conversor Boost. Quando o duty cycle $d$ tende a 1, $v_{out}$ tende ao infinito. Além disso, a tensão mínima de saída é igual à tensão de entrada $v_{in}$. \cite{martins2008}.
+Considerando que a chave $S$ opera com frequência fixa e duty cycle variável, podemos expressar a energia fornecida pela fonte de entrada $v_{\mathrm{in}}$ como: \begin{equation} \mathcal{E}_{in} = v_{\mathrm{in}} i_{in} T, \end{equation} E a energia recebida pela carga como: \begin{equation} \mathcal{E}_{out} = v_{out} i_{in} t_a. \end{equation} Portanto, a energia recebida pela carga é dada por: \begin{equation} \mathcal{E}_{out} = v_{out} i_{in} (T - t_c). \end{equation} Considerando o sistema conservativo, isto é, $\mathcal{E}_{in} = \mathcal{E}_{out}$, obtemos: \begin{equation} v_{\mathrm{in}} i_{in} T = v_{out} i_{in} (T - t_c). \end{equation} Assim, \begin{equation} \frac{v_{out}}{v_{\mathrm{in}}} = \frac{1}{1-d} \label{eq:ideal_feature_boost}.\end{equation} Esta última equação representa a característica ideal de transferência do conversor Boost. Quando o duty cycle $d$ tende a 1, $v_{out}$ tende ao infinito. Além disso, a tensão mínima de saída é igual à tensão de entrada $v_{\mathrm{in}}$. \cite{martins2008}.
 
 % Boost: relação corrente entrada-saída
-A potência de entrada e saída são definidas da seguinte forma: \begin{align} P_{\text{in}} &= v_{\text{in}} \cdot i_{\text{md}} \\ P_{\text{out}} &= v_{\text{out}} \cdot i_{\text{out}}, \end{align} onde $i_{\text{md}}$ é a corrente média da entrada do conversor Boost. A partir destas equações e considerando que o conversor é conservativo, ou seja, $P_{\text{in}} = P_{\text{out}}$, tem-se: \begin{gather} v_{in} i_{\text{md}} = v_{\text{out}}i_{\text{out}} \\ \frac{i_{\text{out}}}{i_{md}} = \frac{v_{\text{in}}}{v_{\text{out}}} \label{eq:boost_converter_iv} \end{gather}
+A potência de entrada e saída são definidas da seguinte forma: \begin{align} P_{\mathrm{in}} &= v_{\mathrm{in}} \cdot i_{\text{md}} \\ P_{\text{out}} &= v_{\text{out}} \cdot i_{\text{out}}, \end{align} onde $i_{\text{md}}$ é a corrente média da entrada do conversor Boost. A partir destas equações e considerando que o conversor é conservativo, ou seja, $P_{\mathrm{in}} = P_{\text{out}}$, tem-se: \begin{gather} v_{\mathrm{in}} i_{\text{md}} = v_{\text{out}}i_{\text{out}} \\ \frac{i_{\text{out}}}{i_{md}} = \frac{v_{\mathrm{in}}}{v_{\text{out}}} \label{eq:boost_converter_iv} \end{gather}
 
-A partir das equações \eqref{eq:ideal_feature_boost} e \eqref{eq:boost_converter_iv}, a relação entre a corrente média de saída a corrente média de saída pode ser expressa como: \begin{equation} i_{\text{out}} = (1 - d) \cdot i_{\text{in}} \label{eq:boost_converter_current_transfer} \end{equation} e relação entre a tensão de entrada e tensão média de saída como: \begin{equation} v_{\text{out}} = \frac{1}{(1 - d)} \cdot v_{\text{in}}. \label{eq:boost_converter_voltage_transfer}\end{equation}
+A partir das equações \eqref{eq:ideal_feature_boost} e \eqref{eq:boost_converter_iv}, a relação entre a corrente média de saída a corrente média de saída pode ser expressa como: \begin{equation} i_{\text{out}} = (1 - d) \cdot i_{\mathrm{in}} \label{eq:boost_converter_current_transfer} \end{equation} e relação entre a tensão de entrada e tensão média de saída como: \begin{equation} v_{\text{out}} = \frac{1}{(1 - d)} \cdot v_{\mathrm{in}}. \label{eq:boost_converter_voltage_transfer}\end{equation}
 
 % Boost: Etapas de funcionamento
 O conversor Boost, ilustrado na \autoref{fig:boost_converter}, opera em duas etapas distintas, descritas como segue: na fase inicial $(0, t_c)$, representada na \autoref{fig:boost_converter_s1}, o processo tem início com o fechamento da chave S. Nesse intervalo, o diodo D é polarizado inversamente, isolando o estágio de saída da fonte de alimentação $i_{in}$, que está em curto-circuito. A corrente na chave é equivalente à corrente da fonte de alimentação, enquanto a corrente no diodo D é nula. Essa fase é concluída quando a chave S é aberta. Na segunda etapa $(t_c, T)$, representada na \autoref{fig:boost_converter_s2}, ocorre a condução do diodo D quando a chave S é aberta, permitindo que a fonte de corrente $i_{in}$ entregue energia à carga. Durante esse período, a corrente na chave é nula, e a corrente no diodo D é igual à corrente da fonte de alimentação. O término dessa etapa ocorre com o fechamento da chave S, dando início novamente à primeira etapa. \cite{martins2008}.
@@ -173,7 +173,7 @@ O conversor Boost, ilustrado na \autoref{fig:boost_converter}, opera em duas eta
 \end{figure}
 
 % Boost: Capacitor em paralelo com a carga
-Como visto anteriormente, a fonte de alimentação $V_{in}$, conectada em série com um indutor $L$, age como uma fonte de corrente. Portanto, a carga deve operar como uma fonte de tensão. Logo, se a carga for indutiva, é necessário conectar em paralelo a ela um capacitor de valor apropriado, conforme ilustrado na figura abaixo. \cite{martins2008}.
+Como visto anteriormente, a fonte de alimentação $V_{\mathrm{in}}$, conectada em série com um indutor $L$, age como uma fonte de corrente. Portanto, a carga deve operar como uma fonte de tensão. Logo, se a carga for indutiva, é necessário conectar em paralelo a ela um capacitor de valor apropriado, conforme ilustrado na figura abaixo. \cite{martins2008}.
 
 \begin{figure}[H]
   \centering
@@ -190,7 +190,7 @@ Nesta seção, será discutida a modelagem matemática de conversores Buck e Boo
 \subsection{Conversor Buck}
 
 % Modelagem Buck: Apresentação do circuito
-O sistema inicialmente utilizado neste estudo é um conversor constituído por um conversor Buck básico com filtro de tensão de saída $RLC$ conectado a uma \acrshort{cpl}. A \acrshort{cpl} é representada por um resistor e uma fonte de corrente dependente da potência da \acrshort{cpl}, conforme a seguinte equação: \begin{equation} i_{CPL}(t) = \frac{P_{CPL}(t)}{v_{out}(t)} \label{eq:cpl_current} \end{equation} onde $i_{CPL}(t)$ é a corrente da \acrshort{cpl} em função do tempo, a $P_{CPL}(t)$ é a potência da \acrshort{cpl} e $v_{out}(t)$ é a tensão de saída do conversor em função do tempo.
+O sistema inicialmente utilizado neste estudo é um conversor constituído por um conversor Buck básico com filtro de tensão de saída RLC conectado a uma \acrshort{cpl}. A \acrshort{cpl} é representada por um resistor e uma fonte de corrente dependente da potência da \acrshort{cpl}, conforme a seguinte equação: \begin{equation} i_{\mathrm{cpl}}(t) = \frac{P_{\mathrm{cpl}}(t)}{v_{\mathrm{out}}(t)} \label{eq:cpl_current} \end{equation} onde $i_{\mathrm{cpl}}(t)$ é a corrente da \acrshort{cpl} em função do tempo, a $P_{\mathrm{cpl}}(t)$ é a potência da \acrshort{cpl} e $v_{\mathrm{out}}(t)$ é a tensão de saída do conversor em função do tempo.
 
 \begin{figure}[H]
   \centering
@@ -201,13 +201,13 @@ O sistema inicialmente utilizado neste estudo é um conversor constituído por u
 \end{figure}
 
 % Modelagem Buck: Corrente do indutor
-Conforme abordado na \autoref{section:buck_converter}, a tensão fornecida pelo conversor Buck para o restante do circuito é igual ao produto entre a tensão de entrada $v_{in}$ e o duty cycle $d(t)$. Considerando esta característica e aplicando a \acrfull{lkt} no filtro, obtém-se a seguinte equação: \begin{equation} d(t)v_{in} - L \dt{i}_L - R_L i_L(t) - v_C(t) = 0, \end{equation} onde $i_L$ é corrente no indutor e $v_C$ é a tensão sobre o capacitor. Desta forma, é possível determinar a equação dinâmica da corrente do indutor, que é: \begin{equation} \dt{i}_L = - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{in}}{L}d(t). \label{eq:buck_converter_current} \end{equation}
+Conforme abordado na \autoref{section:buck_converter}, a tensão fornecida pelo conversor Buck para o restante do circuito é igual ao produto entre a tensão de entrada $v_{\mathrm{in}}$ e o duty cycle $d(t)$. Considerando esta característica e aplicando a \acrfull{lkt} no filtro, obtém-se a seguinte equação: \begin{equation} d(t)v_{\mathrm{in}} - L \dt{i}_L - R_L i_L(t) - v_C(t) = 0, \end{equation} onde $i_L$ é corrente no indutor e $v_C$ é a tensão sobre o capacitor. Desta forma, é possível determinar a equação dinâmica da corrente do indutor, que é: \begin{equation} \dt{i}_L = - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{\mathrm{in}}}{L}d(t). \label{eq:buck_converter_current} \end{equation}
 
 % Modelagem Buck: Tensão do capacitor
-Por meio da \acrfull{lkc}, pode-se definir a corrente do indutor $i_{L}$ como a soma das correntes através do capacitor $C$, da resistência $R_C$ e da \acrshort{cpl}: \begin{equation} i_L(t) = i_C(t) + i_R(t) + i_{CPL}(t). \end{equation} Dessa forma, considerando $i_C(t) = C\dt{v}_C$, $i_R(t) = \frac{v_C(t)}{R_C}$ e $i_{CPL}(t)$ definida em \eqref{eq:cpl_current}, obtém-se: \begin{equation} i_L(t) = C\dt{v}_C + \frac{v_C(t)}{R_C} + \frac{P_{CPL}}{v_C(t)}. \end{equation} Logo, a equação dinâmica da tensão do capacitor é expressa por: \begin{equation} \dt{v}_C = \frac{1}{C} i_L(t) - \frac{1}{CR_C}v_C(t) - \frac{P_{CPL}}{Cv_C(t)} \label{eq:buck_converter_voltage} \end{equation}
+Por meio da \acrfull{lkc}, pode-se definir a corrente do indutor $i_{L}$ como a soma das correntes através do capacitor $C$, da resistência $R_C$ e da \acrshort{cpl}: \begin{equation} i_L(t) = i_C(t) + i_R(t) + i_{\mathrm{cpl}}(t). \end{equation} Dessa forma, considerando $i_C(t) = C\dt{v}_C$, $i_R(t) = \frac{v_C(t)}{R_C}$ e $i_{\mathrm{cpl}}(t)$ definida em \eqref{eq:cpl_current}, obtém-se: \begin{equation} i_L(t) = C\dt{v}_C + \frac{v_C(t)}{R_C} + \frac{P_{\mathrm{cpl}}}{v_C(t)}. \end{equation} Logo, a equação dinâmica da tensão do capacitor é expressa por: \begin{equation} \dt{v}_C = \frac{1}{C} i_L(t) - \frac{1}{CR_C}v_C(t) - \frac{P_{\mathrm{cpl}}}{Cv_C(t)} \label{eq:buck_converter_voltage} \end{equation}
 
 % Modelagem Buck: Modelo não-linear
-A partir das equações dinâmicas \eqref{eq:buck_converter_current} e \eqref{eq:buck_converter_voltage}, pode-se estabelecer o modelo dinâmico do sistema como segue: \begin{equation}\begin{cases} \dt{i}_L &=  - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{in}}{L}d(t)  \\ \dt{v}_C &= \frac{1}{C} i_L(t) - \frac{1}{C R_C} v_C(t) - \frac{1}{C v_C(t)} P_{CPL}(t) \label{eq:buck_nonlinear_system} \end{cases}, \end{equation} onde $i_L(t)$ e $v_C(t)$ são os estados do sistema, e $d(t)$ e $P_{CPL}(t)$ são as entradas.
+A partir das equações dinâmicas \eqref{eq:buck_converter_current} e \eqref{eq:buck_converter_voltage}, pode-se estabelecer o modelo dinâmico do sistema como segue: \begin{equation}\begin{cases} \dt{i}_L &= \displaystyle - \frac{R_L}{L} i_L(t) - \frac{1}{L} v_C(t) + \frac{v_{\mathrm{in}}}{L}d(t)  \\[8pt] \dt{v}_C &= \displaystyle \frac{1}{C} i_L(t) - \frac{1}{C R_C} v_C(t) - \frac{1}{C v_C(t)} P_{\mathrm{cpl}}(t) \label{eq:buck_nonlinear_system} \end{cases}, \end{equation} onde $i_L(t)$ e $v_C(t)$ são os estados do sistema, e $d(t)$ e $P_{\mathrm{cpl}}(t)$ são as entradas.
 
 \subsection{Conversor Boost}
 
@@ -220,94 +220,115 @@ O segundo sistema utilizada neste estudo consiste em um conversor Boost conectad
   \label{fig:boost_converter_cpl}
 \end{figure}
 
-Por meio da relação entre a tensão de entrada e a tensão média de saída do conversor Boost, conforme descrito na equação \eqref{eq:boost_converter_voltage_transfer}, e da \acrshort{lkt}, obtém-se: \begin{equation} L \dt{i}_L - \frac{1}{1-d} v_{\text{in}} - v_c(t) = 0. \end{equation} Dessa forma, a equação dinâmica da corrente do indutor é expressa como: \begin{equation} \dt{i}_L = \frac{1}{L}v_{\text{in}} - \frac{1-d}{L}v_C(t) \label{eq:boost_converter_current}. \end{equation}
+Por meio da relação entre a tensão de entrada e a tensão média de saída do conversor Boost, conforme descrito na equação \eqref{eq:boost_converter_voltage_transfer}, e da \acrshort{lkt}, obtém-se: \begin{equation} L \dt{i}_L - \frac{1}{1-d} v_{\mathrm{in}} - v_C(t) = 0. \end{equation} Dessa forma, a equação dinâmica da corrente do indutor é expressa como: \begin{equation} \dt{i}_L = \frac{1}{L}v_{\mathrm{in}} - \frac{1-d}{L}v_C(t) \label{eq:boost_converter_current}. \end{equation}
 
-Ao aplicar a \acrshort{lkc}, temos que a corrente do diodo é igual à soma das correntes do capacitor, do resistor e da corrente $i_{CPL}(t)$, definida em \eqref{eq:cpl_current}. A corrente do diodo é igual à corrente média de saída do conversor Boost, expressa na equação \eqref{eq:boost_converter_current_transfer}. Portanto, \begin{equation} (1 - d) i_{\text{in}}(t) = C\dt{v}_C + \frac{v_C(t)}{R} + \frac{P_{CPL}(t)}{v_C(t)}.\end{equation} Considerando altas frequências de chaveamento, a corrente média de entrada pode ser considerada igual à corrente do indutor. Assim, a equação dinâmica da tensão do capacitor pode ser expressa como: \begin{equation} \dt{v}_C = \frac{1 - d}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{CPL}(t). \label{eq:boost_converter_voltage}\end{equation}
+Ao aplicar a \acrshort{lkc}, temos que a corrente do diodo é igual à soma das correntes do capacitor, do resistor e da corrente $i_{\mathrm{cpl}}(t)$, definida em \eqref{eq:cpl_current}. A corrente do diodo é igual à corrente média de saída do conversor Boost, expressa na equação \eqref{eq:boost_converter_current_transfer}. Portanto, \begin{equation} (1 - d) i_{\mathrm{in}}(t) = C\dt{v}_C + \frac{v_C(t)}{R} + \frac{P_{\mathrm{cpl}}(t)}{v_C(t)}.\end{equation} Considerando altas frequências de chaveamento, a corrente média de entrada pode ser considerada igual à corrente do indutor. Assim, a equação dinâmica da tensão do capacitor pode ser expressa como: \begin{equation} \dt{v}_C = \frac{1 - d}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{\mathrm{cpl}}(t). \label{eq:boost_converter_voltage}\end{equation}
 
-Desse modo, o modelo dinâmico médio do segundo sistema pode ser formulado a partir das equações \eqref{eq:boost_converter_current} e \eqref{eq:boost_converter_voltage}. Este modelo é representado por: \begin{equation} \begin{cases} \dt{i}_L(t) = - \frac{1-d(t)}{L}v_C(t) + \frac{1}{L}v_{in} \\ \dt{v}_C(t) = \frac{1 - d(t)}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{CPL}(t). \label{eq:boost_nonlinear_system}\end{cases} \end{equation} As grandezas $i_L(t)$ e $v_C(t)$ representam os estados do sistema. Enquanto que $d(t)$ e $P_{CPL}(t)$ representam as entadas do sistema, onde o duty cycle é controlável e a potência da \acrshort{cpl} é considerada a pertubação do sistema.
+Desse modo, o modelo dinâmico médio do segundo sistema pode ser formulado a partir das equações \eqref{eq:boost_converter_current} e \eqref{eq:boost_converter_voltage}. Este modelo é representado por: \begin{equation} \begin{cases} \dt{i}_L(t) &= \displaystyle - \frac{1-d(t)}{L}v_C(t) + \frac{1}{L}v_{\mathrm{in}} \\[8pt] \dt{v}_C(t) &= \displaystyle \frac{1 - d(t)}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{\mathrm{cpl}}(t). \label{eq:boost_nonlinear_system}\end{cases} \end{equation} As grandezas $i_L(t)$ e $v_C(t)$ representam os estados do sistema. Enquanto que $d(t)$ e $P_{\mathrm{cpl}}(t)$ representam as entadas do sistema, onde o duty cycle é controlável e a potência da \acrshort{cpl} é considerada a pertubação do sistema.
 
 \subsection{Transladação dos modelos obtidos}
 
 % Transladação: introdução
-Para estudo dos sistemas dinâmicos em um ponto de equilíbrio \begin{equation} P_{\text{o}} = \left({i_L}_{\text{o}}, \, {v_C}_{\text{o}}, \, d_{\text{o}}, \, {P_{cpl}}_{\text{o}} \right). \label{eq:operation_point} \end{equation} Ambos os sistemas serão transladados pelo método de mudança de variáveis. As variáveis de estado e as entradas de ambos os sistemas serão decompostas em termos constantes (seus valores no ponto de equilíbrio) e variantes no tempo, conforme apresentado nas equações a seguir: \begin{align}
-  {i_L}(t) & = {i_L}_o + \delta i_L(t), & {v_C}(t)     & = {v_C}_o + \delta v_C(t), \label{eq:tranlation_decomposed_states}        \\[12pt]
-  {d}(t)   & = d_o + \delta d(t),       & {P_{cpl}}(t) & = {P_{cpl}}_o + \delta P_{cpl}(t) \label{eq:tranlation_decomposed_inputs}
+Para estudo dos sistemas dinâmicos em um ponto de equilíbrio \begin{equation} P_{\mathrm{o}} = \left({i_L}_{\mathrm{o}}, \, {v_C}_{\mathrm{o}}, \, d_{\mathrm{o}}, \, {P_{\mathrm{cpl}}}_{\mathrm{o}} \right). \label{eq:operation_point} \end{equation} Ambos os sistemas serão transladados pelo método de mudança de variáveis. As variáveis de estado e as entradas de ambos os sistemas serão decompostas em termos constantes (seus valores no ponto de equilíbrio) e variantes no tempo, conforme apresentado nas equações a seguir: \begin{align}
+  {i_L}(t) & = {i_L}_{\mathrm{o}} + \delta i_L(t), & {v_C}(t)     & = {v_C}_{\mathrm{o}} + \delta v_C(t), \label{eq:tranlation_decomposed_states}        \\[8pt]
+  {d}(t)   & = d_{\mathrm{o}} + \delta d(t),       & {P_{\mathrm{cpl}}}(t) & = {P_{\mathrm{cpl}}}_{\mathrm{o}} + \delta P_{\mathrm{cpl}}(t) \label{eq:tranlation_decomposed_inputs}
 \end{align} Da mesma forma, as derivadas temporais das variáveis de estado também são decompostas: \begin{align}
-  \dt{i}_L = {\dt{i_L}}_o + \delta \dt{i_L}, \hspace{1cm}
-  \dt{v}_C = {\dt{v}_C}_o + \delta \dt{v}_C
-\end{align} Essa decomposição facilita a análise da estabilidade do ponto de equilíbrio $P_o$ e a obtenção de respostas lineares no entorno do ponto de equilíbrio.
+  \dt{i}_L = {\dt{i_L}}_{\mathrm{o}} + \delta \dt{i_L}, \hspace{1cm}
+  \dt{v}_C = {\dt{v}_C}_{\mathrm{o}} + \delta \dt{v}_C
+\end{align} Essa decomposição facilita a análise da estabilidade do ponto de equilíbrio $P_{\mathrm{o}}$ e a obtenção de respostas lineares no entorno do ponto de equilíbrio.
 
 % Transladação: regime permanente 
-Sob condições de operação em regime permanente, em ambos os sistemas, no ponto de operação, a corrente do indutor e a tensão do capacitor são nulos, ou seja: \begin{equation} {i_L}_o = 0, \hspace{1cm} {v_C}_o = 0. \label{eq:translation_null}\end{equation} Com base nisso, pode-se obter as equações transladadas da corrente do indutor e da tensão do capacitor nos sistemas dinâmicos obtidos. Substituindo a relação descrita em \eqref{eq:translation_null} na equação da corrente $i_L$ no sistema dinâmico \eqref{eq:buck_nonlinear_system} no ponto de equilíbrio $P_o$, obtém-se: \begin{gather}
-  - \frac{R_L}{L} {i_L}_o - \frac{1}{L} {v_C}_o + \frac{v_{in}}{L}  d_o = 0  \notag \\[12pt]
-  - R_L {i_L}_o - {v_C}_o + v_{in}  d_o = 0 \notag \\[12pt]
-  d_o = \frac{R_L}{v_{in}} {i_L}_o + \frac{{v_C}_o}{v_{in}} \label{eq:tranlation_buck_d_op}
-\end{gather} Dado os valores da corrente do indutor e da tensão do capacitor, ambos no ponto de operação, é possível determinar o valor de operação do duty cycle $d_o$ por meio da relação expressa em \eqref{eq:tranlation_buck_d_op}. Substituindo as variáveis decompostas apresentadas em \eqref{eq:tranlation_decomposed_states} e \eqref{eq:tranlation_decomposed_inputs} na equação da corrente do $\dt{i}_L$ do primeiro sistema, obtém-se a sua forma transladada: \begin{gather}
-  {\dot{i_L}}_o + \delta \dot{i_L}_ = - \frac{R_L}{L} \left({i_L}_o + \delta i_L(t)\right) - \frac{1}{L} \left({v_C}_o + \delta v_C(t)\right) + \frac{v_{in}}{L} \left(d_o + \delta d(t)\right) \notag\\[12pt]
-  \delta \dot{i_L} = - \frac{R_L}{L} {i_L}_o - \frac{R_L}{L} \delta i_L - \frac{1}{L} {v_C}_o - \frac{1}{L} \delta v_C + \frac{v_{in}}{L} d_o + \frac{v_{in}}{L} \delta d \label{eq:translation_buck_current}
+Sob condições de operação em regime permanente, em ambos os sistemas, no ponto de operação, a corrente do indutor e a tensão do capacitor são nulos, ou seja: \begin{equation} {i_L}_{\mathrm{o}} = 0, \hspace{1cm} {v_C}_{\mathrm{o}} = 0. \label{eq:translation_null}\end{equation} Com base nisso, pode-se obter as equações transladadas da corrente do indutor e da tensão do capacitor nos sistemas dinâmicos obtidos. Substituindo a relação descrita em \eqref{eq:translation_null} na equação da corrente $i_L$ no sistema dinâmico \eqref{eq:buck_nonlinear_system} no ponto de equilíbrio $P_{\mathrm{o}}$, obtém-se: \begin{gather}
+  - \frac{R_L}{L} {i_L}_{\mathrm{o}} - \frac{1}{L} {v_C}_{\mathrm{o}} + \frac{v_{\mathrm{in}}}{L}  d_{\mathrm{o}} = 0  \notag \\[8pt]
+  - R_L {i_L}_{\mathrm{o}} - {v_C}_{\mathrm{o}} + v_{\mathrm{in}}  d_{\mathrm{o}} = 0 \notag \\[8pt]
+  d_{\mathrm{o}} = \frac{R_L}{v_{\mathrm{in}}} {i_L}_{\mathrm{o}} + \frac{{v_C}_{\mathrm{o}}}{v_{\mathrm{in}}} \label{eq:tranlation_buck_d_op}
+\end{gather} Dado os valores da corrente do indutor e da tensão do capacitor, ambos no ponto de operação, é possível determinar o valor de operação do duty cycle $d_{\mathrm{o}}$ por meio da relação expressa em \eqref{eq:tranlation_buck_d_op}. Substituindo as variáveis decompostas apresentadas em \eqref{eq:tranlation_decomposed_states} e \eqref{eq:tranlation_decomposed_inputs} na equação da corrente do $\dt{i}_L$ do primeiro sistema, obtém-se a sua forma transladada: \begin{gather}
+  {\dt{i}_L}_{\mathrm{o}} + \delta \dt{i}_L = - \frac{R_L}{L} \left({i_L}_{\mathrm{o}} + \delta i_L(t)\right) - \frac{1}{L} \left({v_C}_{\mathrm{o}} + \delta v_C(t)\right) + \frac{v_{\mathrm{in}}}{L} \left(d_{\mathrm{o}} + \delta d(t)\right) \notag\\[8pt]
+  \delta \dt{i}_L = - \frac{R_L}{L} {i_L}_{\mathrm{o}} - \frac{R_L}{L} \delta i_L - \frac{1}{L} {v_C}_{\mathrm{o}} - \frac{1}{L} \delta v_C + \frac{v_{\mathrm{in}}}{L} d_{\mathrm{o}} + \frac{v_{\mathrm{in}}}{L} \delta d \label{eq:translation_buck_current}
 \end{gather} Por meio da relação expressa em \eqref{eq:tranlation_buck_d_op}, a equação \eqref{eq:translation_buck_current} pode ser simplificada como demonstrado a seguir: \begin{gather}
-  \delta \dot{i_L} = - \frac{R_L}{L} {i_L}_o - \frac{R_L}{L} \delta i_L - \frac{1}{L} {v_C}_o - \frac{1}{L} \delta v_C +  \frac{R_L}{L} {i_L}_o + \frac{1}{L} {v_C}_o + \frac{v_{in}}{L} \delta d \notag \\[12pt]
-  \delta \dot{i_L} = - \frac{R_L}{L} \delta i_L - \frac{1}{L} \delta v_C  + \frac{v_{in}}{L} \delta d \label{eq:translation_buck_current_simplified}
+  \delta \dt{i}_L = - \frac{R_L}{L} {i_L}_{\mathrm{o}} - \frac{R_L}{L} \delta i_L - \frac{1}{L} {v_C}_{\mathrm{o}} - \frac{1}{L} \delta v_C +  \frac{R_L}{L} {i_L}_{\mathrm{o}} + \frac{1}{L} {v_C}_{\mathrm{o}} + \frac{v_{\mathrm{in}}}{L} \delta d \notag \\[8pt]
+  \delta \dt{i}_L = - \frac{R_L}{L} \delta i_L - \frac{1}{L} \delta v_C  + \frac{v_{\mathrm{in}}}{L} \delta d \label{eq:translation_buck_current_simplified}
 \end{gather}
 
-Da mesma forma, a fim de transpor a equação de tensão do capacitor $\dt{v}_C$ do primeiro sistema \eqref{eq:buck_converter_voltage}, foi realizada uma análise no ponto de operação $P_o$, resultando na seguinte relação: \begin{gather}
-  - \frac{1}{C R_C} {v_C}_o + \frac{1}{C} {i_L}_o - \frac{1}{C {v_C}_o} {P_{CPL}}_o = 0 \notag \\[12pt]
-  - \frac{1}{R_C} {v_C}_o + {i_L}_o - \frac{1}{{v_C}_o} {P_{CPL}}_o = 0 \notag
-\end{gather} \begin{equation}{i_L}_o = \frac{1}{R_C} {v_C}_o + \frac{1}{{v_C}_o} {P_{CPL}}_o \label{eq:translation_buck_iL_op}\end{equation} Assim, dado os valores da tensão de capacitor e a potência \acrshort{cpl}, ambos no ponto de operação, é possível determinar a corrente do indutor no ponto de operação por meio da relação obtida expressa em \eqref{eq:translation_buck_iL_op}. Substituindo as variáveis decompostas definidas em \eqref{eq:tranlation_decomposed_states} e \eqref{eq:tranlation_decomposed_inputs} na equação da tensão do capacitor do primeiro sistema \eqref{eq:buck_converter_voltage}, obtém-se: \begin{equation}
-  \delta \dt{v}_C = - \frac{1}{C R_C} {v_C}_o - \frac{1}{C R_C} \delta v_C + \frac{1}{C} {i_L}_o + \frac{1}{C}  \delta i_L - \frac{1}{C \left({v_C}_o + \delta v_C\right)} \left({P_{cpl}}_o + \delta P_{cpl}\right) \label{eq:translation_buck_voltage}
+Da mesma forma, a fim de transpor a equação de tensão do capacitor $\dt{v}_C$ do primeiro sistema \eqref{eq:buck_converter_voltage}, foi realizada uma análise no ponto de operação $P_{\mathrm{o}}$, resultando na seguinte relação: \begin{gather}
+  - \frac{1}{C R_C} {v_C}_{\mathrm{o}} + \frac{1}{C} {i_L}_{\mathrm{o}} - \frac{1}{C {v_C}_{\mathrm{o}}} {P_{\mathrm{cpl}}}_{\mathrm{o}} = 0 \notag \\[8pt]
+  - \frac{1}{R_C} {v_C}_{\mathrm{o}} + {i_L}_{\mathrm{o}} - \frac{1}{{v_C}_{\mathrm{o}}} {P_{\mathrm{cpl}}}_{\mathrm{o}} = 0 \notag
+\end{gather} \begin{equation}{i_L}_{\mathrm{o}} = \frac{1}{R_C} {v_C}_{\mathrm{o}} + \frac{1}{{v_C}_{\mathrm{o}}} {P_{\mathrm{cpl}}}_{\mathrm{o}} \label{eq:translation_buck_iL_op}\end{equation} Assim, dado os valores da tensão de capacitor e a potência \acrshort{cpl}, ambos no ponto de operação, é possível determinar a corrente do indutor no ponto de operação por meio da relação obtida expressa em \eqref{eq:translation_buck_iL_op}. Substituindo as variáveis decompostas definidas em \eqref{eq:tranlation_decomposed_states} e \eqref{eq:tranlation_decomposed_inputs} na equação da tensão do capacitor do primeiro sistema \eqref{eq:buck_converter_voltage}, obtém-se: \begin{equation}
+  \delta \dt{v}_C = - \frac{1}{C R_C} {v_C}_{\mathrm{o}} - \frac{1}{C R_C} \delta v_C + \frac{1}{C} {i_L}_{\mathrm{o}} + \frac{1}{C}  \delta i_L - \frac{1}{C \left({v_C}_{\mathrm{o}} + \delta v_C\right)} \left({P_{\mathrm{cpl}}}_{\mathrm{o}} + \delta P_{\mathrm{cpl}}\right) \label{eq:translation_buck_voltage}
 \end{equation} Por meio da relação obtida expressa em \eqref{eq:translation_buck_iL_op}, a equação \eqref{eq:translation_buck_voltage} pode ser simplificada como demonstrado a seguir: \begin{gather}
-  \delta \dt{v}_C = - \frac{1}{C R_C} {v_C}_o - \frac{1}{C R_C} \delta v_C + \frac{1}{C} \left(\frac{{v_C}_o}{R_C} + \frac{{P_{cpl}}_o}{{v_C}_o}\right) + \frac{1}{C}  \delta i_L - \frac{{P_{cpl}}_o + \delta P_{cpl}}{C \left({v_C}_o + \delta v_C\right)} \notag \\[12pt]
-  \delta \dt{v}_C = - \frac{1}{C R_C} \delta v_C + \frac{1}{C {v_C}_o} {P_{cpl}}_o + \frac{1}{C}  \delta i_L - \frac{1}{C \left({v_C}_o + \delta v_C\right)} \left({P_{cpl}}_o + \delta P_{cpl}\right) \notag \\[12pt]
-  \delta \dt{v}_C = - \frac{1}{C R_C} \delta v_C  + \frac{1}{C}  \delta i_L + \frac{{P_{cpl}}_o \delta v_C - {v_C}_o \delta P_{cpl}}{C {v_C}_o \left({v_C}_o + \delta v_C\right)}
+  \delta \dt{v}_C = - \frac{1}{C R_C} {v_C}_{\mathrm{o}} - \frac{1}{C R_C} \delta v_C + \frac{1}{C} \left(\frac{{v_C}_{\mathrm{o}}}{R_C} + \frac{{P_{\mathrm{cpl}}}_{\mathrm{o}}}{{v_C}_{\mathrm{o}}}\right) + \frac{1}{C}  \delta i_L - \frac{{P_{\mathrm{cpl}}}_{\mathrm{o}} + \delta P_{\mathrm{cpl}}}{C \left({v_C}_{\mathrm{o}} + \delta v_C\right)} \notag \\[8pt]
+  \delta \dt{v}_C = - \frac{1}{C R_C} \delta v_C + \frac{1}{C {v_C}_{\mathrm{o}}} {P_{\mathrm{cpl}}}_{\mathrm{o}} + \frac{1}{C}  \delta i_L - \frac{1}{C \left({v_C}_{\mathrm{o}} + \delta v_C\right)} \left({P_{\mathrm{cpl}}}_{\mathrm{o}} + \delta P_{\mathrm{cpl}}\right) \notag \\[8pt]
+  \delta \dt{v}_C = - \frac{1}{C R_C} \delta v_C  + \frac{1}{C}  \delta i_L + \frac{{P_{\mathrm{cpl}}}_{\mathrm{o}} \delta v_C - {v_C}_{\mathrm{o}} \delta P_{\mathrm{cpl}}}{C {v_C}_{\mathrm{o}} \left({v_C}_{\mathrm{o}} + \delta v_C\right)}
 \end{gather}
 
-Portanto, o sistema transladado do primeiro sistema, em torno do ponto de operação $P_o$, é: \begin{equation}
+Portanto, o sistema transladado do primeiro sistema, em torno do ponto de operação $P_{\mathrm{o}}$, é: \begin{equation}
   \begin{cases}
-    \displaystyle \delta \dot{i_L} = - \frac{R_L}{L} \delta i_L - \frac{1}{L} \delta v_C  + \frac{v_{in}}{L} \delta d \\[12pt]
-    \displaystyle \delta \dt{v}_C = - \frac{1}{C R_C} \delta v_C  + \frac{1}{C}  \delta i_L + \frac{{P_{cpl}}_o \delta v_C - {v_C}_o \delta P_{cpl}}{C {v_C}_o \left({v_C}_o + \delta v_C\right)}
+    \displaystyle \delta \dt{i}_L = - \frac{R_L}{L} \delta i_L - \frac{1}{L} \delta v_C  + \frac{v_{\mathrm{in}}}{L} \delta d \\[8pt]
+    \displaystyle \delta \dt{v}_C = - \frac{1}{C R_C} \delta v_C  + \frac{1}{C}  \delta i_L + \frac{{P_{\mathrm{cpl}}}_{\mathrm{o}} \delta v_C - {v_C}_{\mathrm{o}} \delta P_{\mathrm{cpl}}}{C {v_C}_{\mathrm{o}} \left({v_C}_{\mathrm{o}} + \delta v_C\right)}
     \label{eq:translated_nonlinear_buck}
   \end{cases}
 \end{equation}
 
-Do mesmo modo que foi realizado o processo de translação para o primeiro sistema, o mesmo foi aplicado ao segundo sistema \eqref{eq:boost_nonlinear_system}. No ponto de operação $P_o$, pode-se obter a seguinte relação: \begin{gather}
-  - \frac{1 - d_o}{L}{v_C}_o + \frac{1}{L}v_{in} = 0 \notag \\[12pt]
-  {d}_o = 1 - \frac{v_{in}}{{v_C}_o} \label{eq:translation_boost_d_op},
+Do mesmo modo que foi realizado o processo de translação para o primeiro sistema, o mesmo foi aplicado ao segundo sistema \eqref{eq:boost_nonlinear_system}. No ponto de operação $P_{\mathrm{o}}$, pode-se obter a seguinte relação: \begin{gather}
+  - \frac{1 - d_{\mathrm{o}}}{L}{v_C}_{\mathrm{o}} + \frac{1}{L}v_{\mathrm{in}} = 0 \notag \\[8pt]
+  {d}_{\mathrm{o}} = 1 - \frac{v_{\mathrm{in}}}{{v_C}_{\mathrm{o}}} \label{eq:translation_boost_d_op},
 \end{gather} Logo, por meio desta relação, é possível determinar o duty cycle no ponto de operação dado o valor da tensão do capacitor também no ponto de operação. Reescrevendo a equação da corrente do segundo sistema, expressa em \eqref{eq:boost_converter_current}, substituindo as variáveis descritas em \eqref{eq:tranlation_decomposed_states} e \eqref{eq:tranlation_decomposed_inputs}, obtém-se: \begin{gather}
-  \dt{\delta i_L}  = - \frac{1 - (d_o + \delta d) }{L} ({v_C}_o + \delta v_C) + \frac{1}{L} v_{in} \label{eq:translation_boost_current}
+  \dt{\delta i_L}  = - \frac{1 - (d_{\mathrm{o}} + \delta d) }{L} ({v_C}_{\mathrm{o}} + \delta v_C) + \frac{1}{L} v_{\mathrm{in}} \label{eq:translation_boost_current}
 \end{gather} Substituindo a relação \eqref{eq:translation_boost_d_op} na equação \eqref{eq:translation_boost_current}, pode-se obter a sua forma simplificada: \begin{gather}
-  \dt{\delta i_L}  = - \frac{1 - (1 - \displaystyle \frac{v_{in}}{{v_C}_o} + \delta d) }{L} ({v_C}_o + \delta v_C) + \frac{1}{L} v_{in} \notag  \\[12pt]
-  \dt{\delta i_L}  = - \frac{\displaystyle \frac{v_{in}}{{v_C}_o} - \delta d }{L} ({v_C}_o + \delta v_C) + \frac{1}{L} v_{in} \notag  \\[12pt]
-  \dt{\delta i_L}  = - \frac{v_{in}}{L{v_C}_o}\delta v_C + \left(\frac{{v_C}_o + \delta {v_C}}{L}\right) \delta d
+  \dt{\delta i_L}  = - \frac{1 - (1 - \displaystyle \frac{v_{\mathrm{in}}}{{v_C}_{\mathrm{o}}} + \delta d) }{L} ({v_C}_{\mathrm{o}} + \delta v_C) + \frac{1}{L} v_{\mathrm{in}} \notag  \\[8pt]
+  \dt{\delta i_L}  = - \frac{\displaystyle \frac{v_{\mathrm{in}}}{{v_C}_{\mathrm{o}}} - \delta d }{L} ({v_C}_{\mathrm{o}} + \delta v_C) + \frac{1}{L} v_{\mathrm{in}} \notag  \\[8pt]
+  \dt{\delta i_L}  = - \frac{v_{\mathrm{in}}}{L{v_C}_{\mathrm{o}}}\delta v_C + \left(\frac{{v_C}_{\mathrm{o}} + \delta {v_C}}{L}\right) \delta d
 \end{gather}
 
-No ponto de operação $P_o$ do segundo sistema, da equação que descreve a tensão do capacitor $\dt{v}_C$, expressa em \eqref{eq:boost_converter_voltage}, pode-se obter a próxima relação do segundo sistema: \begin{gather}
-  0 = \frac{1 - d_o}{C} {i_L}_o - \frac{1}{RC}{v_C}_o - \frac{1}{C{v_C}_o}{P_{cpl}}_o \notag \\[12pt]
-  (1 - d_o){i_L}_o - \frac{1}{R}{v_C}_o - \frac{1}{{v_C}_o}{P_{cpl}}_o = 0 \notag \\[12pt]
-  {i_L}_o = \frac{{v_C}_o}{R(1-d_o)} + \frac{{P_{cpl}}_o}{{v_C}_o (1 - d_o)} \notag \\[12pt]
-  {i_L}_o = \frac{{v_C}^2_o + R{P_{cpl}}_o}{R{v_C}_o(1 - d_o)}
+No ponto de operação $P_{\mathrm{o}}$ do segundo sistema, da equação que descreve a tensão do capacitor $\dt{v}_C$, expressa em \eqref{eq:boost_converter_voltage}, pode-se obter a próxima relação do segundo sistema: \begin{gather}
+  0 = \frac{1 - d_{\mathrm{o}}}{C} {i_L}_{\mathrm{o}} - \frac{1}{RC}{v_C}_{\mathrm{o}} - \frac{1}{C{v_C}_{\mathrm{o}}}{P_{\mathrm{cpl}}}_{\mathrm{o}} \notag \\[8pt]
+  (1 - d_{\mathrm{o}}){i_L}_{\mathrm{o}} - \frac{1}{R}{v_C}_{\mathrm{o}} - \frac{1}{{v_C}_{\mathrm{o}}}{P_{\mathrm{cpl}}}_{\mathrm{o}} = 0 \notag \\[8pt]
+  {i_L}_{\mathrm{o}} = \frac{{v_C}_{\mathrm{o}}}{R(1-d_{\mathrm{o}})} + \frac{{P_{\mathrm{cpl}}}_{\mathrm{o}}}{{v_C}_{\mathrm{o}} (1 - d_{\mathrm{o}})} \notag \\[8pt]
+  {i_L}_{\mathrm{o}} = \frac{{v_C}^2_{\mathrm{o}} + R{P_{\mathrm{cpl}}}_{\mathrm{o}}}{R{v_C}_{\mathrm{o}}(1 - d_{\mathrm{o}})}
 \end{gather} Por meio da relação \eqref{eq:translation_boost_d_op}, a equação anterior pode ser simplificada para: \begin{equation}
-  {i_L}_o = \frac{{v_C}^2_o + R{P_{cpl}}_o}{R{v_{in}}}
+  {i_L}_{\mathrm{o}} = \frac{{v_C}^2_{\mathrm{o}} + R{P_{\mathrm{cpl}}}_{\mathrm{o}}}{R{v_{\mathrm{in}}}}
   \label{eq:translation_boost_iL_op}
 \end{equation} Dessa forma, tendo a tensão do capacitor e a potência da \acrshort{cpl} no ponto de operação, é possível determinar a corrente nesse ponto, utilizando a relação estabelecida em \eqref{eq:translation_boost_iL_op}. Por fim, ao realizar as substituições das variáveis decompostas conforme definidas em \eqref{eq:tranlation_decomposed_inputs} e \eqref{eq:tranlation_decomposed_states}, é obtida a forma transladada da equação da tensão $\dt{v}_C$ do segundo sistema definida em \eqref{eq:boost_converter_voltage}: \begin{gather}
-  {{\dt{v}_C}}_o + \dt{\delta {v}_C} = \frac{1 - (d_o + \delta d)}{C} ( {i_L}_o + \delta i_L) - \frac{{v_C}_o + \delta v_C}{RC} - \frac{{{P_{cpl}}_o + \delta P_{cpl}}}{C({v_C}_o + \delta {v_C})}
-\end{gather}
-
-Simplificando por meio das relações expressas em \eqref{eq:translation_boost_d_op} e \eqref{eq:translation_boost_iL_op}, obtém-se: \begin{gather}
-  \dt{\delta {v}_C} = \left( \frac{1 - d_o}{C} - \frac{\delta d}{C} \right)\left({i_L}_o + \delta i_L\right) - \frac{{v_C}_o + \delta v_C}{RC} - \frac{{{P_{cpl}}_o + \delta P_{cpl}}}{C({v_C}_o + \delta {v_C})}
-\end{gather}
+  {{\dt{v}_C}}_{\mathrm{o}} + \dt{\delta {v}_C} = \frac{1 - (d_{\mathrm{o}} + \delta d)}{C} ( {i_L}_{\mathrm{o}} + \delta i_L) - \frac{{v_C}_{\mathrm{o}} + \delta v_C}{RC} - \frac{{{P_{\mathrm{cpl}}}_{\mathrm{o}} + \delta P_{\mathrm{cpl}}}}{C({v_C}_{\mathrm{o}} + \delta {v_C})}
+\end{gather} Simplificando por meio das relações expressas em \eqref{eq:translation_boost_d_op} e \eqref{eq:translation_boost_iL_op}, obtém-se: \begin{gather}
+  \dt{\delta {v}_C} = \left( \frac{1 - d_{\mathrm{o}}}{C} - \frac{\delta d}{C} \right)\left({i_L}_{\mathrm{o}} + \delta i_L\right) - \frac{{v_C}_{\mathrm{o}} + \delta v_C}{RC} - \frac{{{P_{\mathrm{cpl}}}_{\mathrm{o}} + \delta P_{\mathrm{cpl}}}}{C({v_C}_{\mathrm{o}} + \delta {v_C})}
+\end{gather} Portanto, o sistema transladado do conversor Boost, em torno do ponto de operação $P_{\mathrm{o}}$, é: \begin{equation}
+  \begin{cases}
+    \dt{\delta i_L}  &= \displaystyle - \frac{v_{\mathrm{in}}}{L{v_C}_{\mathrm{o}}}\delta v_C + \left(\frac{{v_C}_{\mathrm{o}} + \delta {v_C}}{L}\right) \delta d
+    
+    \\[12pt]
+    
+    \dt{\delta {v}_C} &= \displaystyle \left( \frac{1 - d_{\mathrm{o}}}{C} - \frac{\delta d}{C} \right)\left({i_L}_{\mathrm{o}} + \delta i_L\right) - \frac{{v_C}_{\mathrm{o}} + \delta v_C}{RC} - \frac{{{P_{\mathrm{cpl}}}_{\mathrm{o}} + \delta P_{\mathrm{cpl}}}}{C({v_C}_{\mathrm{o}} + \delta {v_C})}
+  \end{cases}
+\end{equation}
 
 \subsection{Linearização dos modelos obtidos}
 
 % Linearização - introdução
-Por causa da presença de não linearidades em ambos os modelos, \eqref{eq:buck_nonlinear_system} e \eqref{eq:boost_nonlinear_system}, eles são intrinsecamente não lineares. Para abordar essa não linearidade, pode-se linearizá-los, obtendo um conjunto de equações que descrevem pequenas mudanças em torno do ponto de equilíbrio $P_{\text{eq}}$ nos estados dos sistemas, $i_L(t)$ e $v_C(t)$.
+Por causa da presença de não linearidades em ambos os modelos, \eqref{eq:buck_nonlinear_system} e \eqref{eq:boost_nonlinear_system}, eles são intrinsecamente não lineares. Para abordar essa não linearidade, pode-se linearizá-los, obtendo um conjunto de equações que descrevem pequenas mudanças em torno do ponto de equilíbrio $P_{\mathrm{o}}$ nos estados dos sistemas, $i_L(t)$ e $v_C(t)$.
 
 % Linearização - sistema linearizado genérico
-A linearização é feita por meio da aproximação de primeira ordem da série de Taylor em torno do ponto de equilíbrio $P_{\text{eq}} = ({i_L}_{\text{eq}}, \, {v_C}_{\text{eq}}, \, {d}_{\text{eq}}, \, {P_{CPL}}_{\text{eq}})$, conforme descrito a seguir: \begin{gather}  \dt{\delta i_L} = \frac{\partial \dt{i}_L}{\partial i_L}\delta i_L(t) + \frac{\partial \dt{i}_L}{\partial v_C}\delta v_C(t) + \frac{\partial {\dt{i}_L}}{\partial d}\delta d(t) + \frac{\partial {\dt{i}_L}}{\partial P_{CPL}}\delta P_{CPL}(t) \\ \nonumber \\ \dt{\delta v_C} = \frac{\partial \dt{v}_C}{\partial i_L}\delta i_L(t) + \frac{\partial \dt{v}_C}{\partial v_C}\delta v_C(t) + \frac{\partial \dt{v}_C}{\partial d}\delta d(t) + \frac{\partial \dt{v}_C}{\partial P_{CPL}}\delta P_{CPL}(t), \end{gather} onde, o símbolo $\delta$ indica a variação da variável em relação ao ponto de equilíbrio, isto é, \begin{equation} \delta f(t) = f(t) - f_{\text{op}}. \label{eq:delta}\end{equation}
+A linearização é feita por meio da aproximação de primeira ordem da série de Taylor em torno do ponto de equilíbrio $P_{\mathrm{o}} = ({i_L}_{\mathrm{o}}, \, {v_C}_{\mathrm{o}}, \, {d}_{\mathrm{o}}, \, {P_{\mathrm{cpl}}}_{\mathrm{o}})$, conforme descrito a seguir: \begin{gather}  \dt{\delta i_L} = \frac{\partial \dt{i}_L}{\partial i_L}\delta i_L(t) + \frac{\partial \dt{i}_L}{\partial v_C}\delta v_C(t) + \frac{\partial {\dt{i}_L}}{\partial d}\delta d(t) + \frac{\partial {\dt{i}_L}}{\partial P_{\mathrm{cpl}}}\delta P_{\mathrm{cpl}}(t) \\ \nonumber \\ \dt{\delta v_C} = \frac{\partial \dt{v}_C}{\partial i_L}\delta i_L(t) + \frac{\partial \dt{v}_C}{\partial v_C}\delta v_C(t) + \frac{\partial \dt{v}_C}{\partial d}\delta d(t) + \frac{\partial \dt{v}_C}{\partial P_{\mathrm{cpl}}}\delta P_{\mathrm{cpl}}(t), \end{gather} onde, o símbolo $\delta$ indica a variação da variável em relação ao ponto de equilíbrio, isto é, \begin{equation} \delta p(t) = p(t) - p_{\mathrm{o}}. \label{eq:delta}\end{equation}
 
 % Linearização - conversor buck
-A partir dessas equações, podemos derivar as expressões linearizadas de $\dt{i}_L$ e $\dt{v}_C$ para o primeiro sistema, como mostrado abaixo: \begin{equation} \begin{cases} \delta \dt{i}_L &= -\frac{R_L}{L} \delta i_L(t) - \frac{1}{L} \delta v_C(t) + \frac{v_{\text{in}}}{L} \delta d(t) \\ \delta \dt{v}_C &= \frac{1}{C} \delta i_L(t) + \frac{1}{C} \left(\frac{{P_{CPL}}_{\text{eq}}}{{v_C}^2_{\text{eq}}} - \frac{1}{R_C}\right) \delta v_C(t) - \frac{1}{C{v_C}_{\text{eq}}} \delta P_{CPL}(t), \end{cases} \end{equation} ou, na forma de espaço de estados: \begin{equation} \begin{bmatrix} \dt{\delta i_L} \\ \dt{\delta v_C} \end{bmatrix} = \begin{bmatrix} \displaystyle -\frac{R_L}{L} & \displaystyle -\frac{1}{L}  \\\\ \displaystyle \frac{1}{C} & \displaystyle \frac{1}{C}\left(\frac{{P_{CPL}}_{\text{eq}}}{{{v_{C}}^2_{\text{eq}}}} - \frac{1}{R_C}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\displaystyle \frac{v_{in}}{L}} & 0 \\ \\ 0 & \displaystyle {-\frac{1}{C{v_C}_{\text{eq}}}} \end{bmatrix}  \begin{bmatrix} \delta d(t) \\ \delta P_{CPL}(t) \end{bmatrix}. \label{eq:buck_linear_system}\end{equation}
-
-Para o segundo modelo dinâmico \eqref{eq:boost_nonlinear_system}, têm-se: \begin{equation} \begin{cases} \delta \dt{i}_L &= - \frac{1 - d_{\text{eq}}}{L} \delta v_C(t) + \frac{{v_C}_{\text{eq}}}{L}\delta d(t) \\ \delta \dt{v}_C &= \frac{1 - d_{\text{eq}}}{C} \delta i_L(t) + \frac{1}{C} \left(\frac{{P_{CPL}}_{\text{eq}}}{{v_C}^2_{\text{eq}}} - \frac{1}{R}\right) \delta v_C(t) - \frac{{i_L}_{\text{eq}}}{C} \delta d(t) - \frac{1}{C{v_C}_{\text{eq}}} \delta P_{CPL}(t), \end{cases} \end{equation} ou, expresso na forma de espaço de estados: \begin{equation} \begin{bmatrix} \dt{\delta i_L} \\ \dt{\delta v_C} \end{bmatrix} = \begin{bmatrix} \displaystyle 0 & \displaystyle -\frac{1 - d_{\text{eq}}}{L}  \\\\ \displaystyle \frac{1 - d_{\text{eq}}}{C} & \displaystyle \frac{1}{C}\left(\frac{{P_{CPL}}_{\text{eq}}}{{{v_{C}}^2_{\text{eq}}}} - \frac{1}{R}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\displaystyle \frac{{v_C}_{\text{eq}}}{L}} & 0 \\ \\ - \frac{{i_L}_{\text{eq}}}{C} & \displaystyle {-\frac{1}{C{v_C}_{\text{eq}}}} \end{bmatrix}  \begin{bmatrix} \delta d(t) \\ \delta P_{CPL}(t) \end{bmatrix}. \label{eq:boost_linear_system}\end{equation}
+A partir dessas equações, podemos derivar as expressões linearizadas de $\dt{i}_L$ e $\dt{v}_C$ para o conversor Buck, como mostrado abaixo: \begin{equation} \begin{cases} \delta \dt{i}_L &= \displaystyle -\frac{R_L}{L} \delta i_L(t) - \frac{1}{L} \delta v_C(t) + \frac{v_{\mathrm{in}}}{L} \delta d(t) \\[12pt] \delta \dt{v}_C &= \displaystyle \frac{1}{C} \delta i_L(t) + \frac{1}{C} \left(\frac{{P_{\mathrm{cpl}}}_{\mathrm{o}}}{{v_C}^2_{\mathrm{o}}} - \frac{1}{R_C}\right) \delta v_C(t) - \frac{1}{C{v_C}_{\mathrm{o}}} \delta P_{\mathrm{cpl}}(t), \end{cases} \end{equation} ou, na forma de espaço de estados: \begin{equation} \begin{bmatrix} \dt{\delta i_L} \\ \dt{\delta v_C} \end{bmatrix} = \begin{bmatrix} \displaystyle -\frac{R_L}{L} & \displaystyle -\frac{1}{L}  \\[12pt] \displaystyle \frac{1}{C} & \displaystyle \frac{1}{C}\left(\frac{{P_{\mathrm{cpl}}}_{\mathrm{o}}}{{{v_{C}}^2_{\mathrm{o}}}} - \frac{1}{R_C}\right) \end{bmatrix} \begin{bmatrix} \delta i_L(t) \\ \delta v_C(t) \end{bmatrix} + \begin{bmatrix} {\displaystyle \frac{v_{\mathrm{in}}}{L}} & 0 \\[12pt] 0 & \displaystyle {-\frac{1}{C{v_C}_{\mathrm{o}}}} \end{bmatrix}  \begin{bmatrix} \delta d(t) \\ \delta P_{\mathrm{cpl}}(t) \end{bmatrix}. \label{eq:buck_linear_system}\end{equation} E para o conversor Boost \eqref{eq:boost_nonlinear_system}, a sua forma linearizada é expressa por: \begin{equation} \begin{cases} \delta \dt{i}_L &= \displaystyle - \frac{1 - d_{\mathrm{o}}}{L} \delta v_C(t) + \frac{{v_C}_{\mathrm{o}}}{L}\delta d(t) \\[12pt] \delta \dt{v}_C &= \displaystyle \frac{1 - d_{\mathrm{o}}}{C} \delta i_L(t) + \frac{1}{C} \left(\frac{{P_{\mathrm{cpl}}}_{\mathrm{o}}}{{v_C}^2_{\mathrm{o}}} - \frac{1}{R}\right) \delta v_C(t) - \frac{{i_L}_{\mathrm{o}}}{C} \delta d(t) - \frac{1}{C{v_C}_{\mathrm{o}}} \delta P_{\mathrm{cpl}}(t), \end{cases} \end{equation} ou, na forma de espaço de estados: \begin{equation} 
+  \begin{bmatrix} 
+    \dt{\delta i_L} \\ \dt{\delta v_C} 
+  \end{bmatrix} = 
+  \begin{bmatrix} 
+    \displaystyle 0 & \displaystyle -\frac{1 - d_{\mathrm{o}}}{L}  \\[12pt]\displaystyle \frac{1 - d_{\mathrm{o}}}{C} & \displaystyle \frac{1}{C}\left(\frac{{P_{\mathrm{cpl}}}_{\mathrm{o}}}{{{v_{C}}^2_{\mathrm{o}}}} - \frac{1}{R}\right) 
+  \end{bmatrix} 
+  \begin{bmatrix} 
+    \delta i_L(t) \\ \delta v_C(t) 
+  \end{bmatrix} + 
+  \begin{bmatrix} 
+    \displaystyle \frac{{v_C}_{\mathrm{o}}}{L} & 0 \\[12pt] 
+    \displaystyle - \frac{{i_L}_{\mathrm{o}}}{C} & \displaystyle {-\frac{1}{C{v_C}_{\mathrm{o}}}} 
+  \end{bmatrix}  
+  \begin{bmatrix} 
+    \delta d(t) \\ \delta P_{\mathrm{cpl}}(t) 
+  \end{bmatrix}. \label{eq:boost_linear_system}
+\end{equation}
 
 \section{Simulação dos Conversores em Malha Aberta}
 
@@ -315,7 +336,7 @@ Nesta seção, será realizada uma análise dos dois conversores \acrshort{cc}-\
 
 \subsection{Conversor Buck}
 
-O conversor Buck foi analisado em dois pontos de operação distintos $P_{\mathrm{op}, 1}$ e $P_{\mathrm{op}, 2}$, considerando seu modelo não linear na forma transladada \eqref{eq:translated_nonlinear_buck} e seu modelo linearizado \eqref{eq:buck_linear_system}. Foram utilizados nas simulações, os parâmetros do circuito detalhados na \autoref{table:circuit_parameter_buck}.
+O conversor Buck foi analisado em dois pontos de operação distintos $P_{\mathrm{o}, 1}$ e $P_{\mathrm{o}, 2}$, considerando seu modelo não linear na forma transladada \eqref{eq:translated_nonlinear_buck} e seu modelo linearizado \eqref{eq:buck_linear_system}. Foram utilizados nas simulações, os parâmetros do circuito detalhados na \autoref{table:circuit_parameter_buck}.
 
 \vspace{8pt}
 \begin{table}[H]
@@ -335,7 +356,7 @@ O conversor Buck foi analisado em dois pontos de operação distintos $P_{\mathr
   \label{table:circuit_parameter_buck}
 \end{table}
 
-A \autoref{table:op_parameters_buck} apresenta os pontos de operação do conversor Buck utilizados na simulação, $P_{\mathrm{op}, 1}$ e $P_{\mathrm{op}, 2}$. Nesses pontos, a potência da carga e a tensão do capacitor são definidas, enquanto a corrente do indutor e o \textit{duty cycle} são calculados a partir da tensão do capacitor e da potência da carga, utilizando as equações \eqref{eq:translation_buck_iL_op} e \eqref{eq:tranlation_buck_d_op}, respectivamente.
+A \autoref{table:op_parameters_buck} apresenta os pontos de operação do conversor Buck utilizados na simulação, $P_{\mathrm{o}, 1}$ e $P_{\mathrm{o}, 2}$. Nesses pontos, a potência da carga e a tensão do capacitor são definidas, enquanto a corrente do indutor e o \textit{duty cycle} são calculados a partir da tensão do capacitor e da potência da carga, utilizando as equações \eqref{eq:translation_buck_iL_op} e \eqref{eq:tranlation_buck_d_op}, respectivamente.
 
 \vspace{8pt}
 \begin{table}[H]
@@ -345,9 +366,9 @@ A \autoref{table:op_parameters_buck} apresenta os pontos de operação do conver
     \toprule
     \multirow{2}{*}{\centering Parâmetros} & \multirow{2}{*}{\centering Símbolo} & \multicolumn{2}{c}{\centering Valor} & \multirow{2}{*}{\centering Unidade} \\
     \cmidrule{3-4}
-     &  & $P_{\mathrm{op}, 1}$ & $P_{\mathrm{op}, 2}$ &  \\
+     &  & $P_{\mathrm{o}, 1}$ & $P_{\mathrm{o}, 2}$ &  \\
     \midrule
-    Potência da \acrshort{cpl} & ${P_{\mathrm{cpl}}}_o$ & 50,00  & 250,00 & W \\
+    Potência da \acrshort{cpl} & ${P_{\mathrm{cpl}}}_{\mathrm{o}}$ & 50,00  & 250,00 & W \\
     Tensão do capacitor & ${v_C}_{\mathrm{o}}$ & 28,00 & 28,00  & V \\
     Corrente do indutor & ${i_L}_{\mathrm{o}}$ & 3,19 & 10,33 & A \\
     \textit{Duty cycle} & $d_{\mathrm{o}}$ & 0,59 & 0,60 & - \\  
@@ -357,60 +378,50 @@ A \autoref{table:op_parameters_buck} apresenta os pontos de operação do conver
   \label{table:op_parameters_buck}
 \end{table}
 
-Por fim, ao considerar o Buck em torno de $P_{\mathrm{op}, 1}$, a variação da corrente do indutor no instante inicial $\delta i_{L}(0)$ é de $-0,32 \textrm{ A}$, enquanto a variação da tensão do capacitor $\delta v_{C}(0)$ é de $-1,40 \textrm{ V}$. Para o ponto $P_{\mathrm{op}, 2}$, foi definido $\delta i_{L}(0) = -0,18 \textrm{ A}$ e $\delta v_{C}(0) = -1,40 \textrm{ V}$. 
+Por fim, para o conversor em torno de $P_{\mathrm{o}, 1}$, considera-se nas simulações que o valor inicial da corrente do indutor $i_L(0)$ é definido como 150\% do seu valor no ponto de operação e a tensão inicial do capacitor $v_C(0)$ é definida como 13\% do seu valor no mesmo ponto. De maneira análoga, para o conversor em torno de $P_{\mathrm{o}, 2}$, tanto a corrente inicial quanto a tensão inicial são iguais a 90\% dos seus valores no ponto de operação.
 
 \subsubsection{Sinais de Entrada Constantes}
 
-A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores definidos no \acrshort{po}. Não há diferença significativa entre os modelos não linear e linearizado, validando a precisão deste último na representação do sistema.
+A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores definidos no \acrshort{po}. Além disto, observa-se que o sistema linearizado diverge do sistema não linear em seu comportamento. Essa divergência se reduz gradativamente ao longo do tempo.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/buck/simulation_1.eps}
-  \caption{Simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{op}, 1}$ sob entradas constantes.}
+  \includegraphics[width=1.\textwidth]{figuras/buck/sim1/op1/result.eps}
+  \caption{Simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob entradas constantes.}
   \label{fig:simulation_1_buck_1}
 \end{figure}
 
-Para o conversor em torno do ponto $P_{\mathrm{op}, 2}$, no entanto, tanto a corrente do indutor quanto a tensão do capacitor apresentam um aumento gradativo e não se estabilizam, conforme mostrado na \autoref{fig:simulation_1_buck_2}. Portanto, não converge para um estado estacionário, o que indica instabilidade. Ademais, o modelo linearizado apresentou grande precisão, sem diferenças significativa.
+Para o conversor em torno do ponto $P_{\mathrm{o}, 2}$, no entanto, tanto a corrente do indutor quanto a tensão do capacitor apresentam um aumento gradativo e não se estabilizam, conforme mostrado na \autoref{fig:simulation_1_buck_2}. Portanto, não converge para um estado estacionário, o que indica instabilidade. Ademais, é possível observar que o modelo linearizado se distancia do modelo não linear no decorrer do tempo.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/buck/simulation_2.eps}
-  \caption{Simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{op}, 2}$ sob entradas constantes.}
+  \includegraphics[width=1.\textwidth]{figuras/buck/sim1/op2/result.eps}
+  \caption{Simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob entradas constantes.}
   \label{fig:simulation_1_buck_2}
 \end{figure}
 
 \subsubsection{Sinal de pertubação $P_{\textrm{cpl}}$ variável}
 
-A segunda simulação avaliou o impacto do sinal de perturbação $P_{cpl}$ no conversor Buck, variando a potência da \acrshort{cpl}. A \autoref{fig:power_cpl_variation} apresenta os valores do sinal de pertubação durante a simulação do conversor operando em torno do ponto $P_{\mathrm{op}, 1}$ definido anteriormente.
+A segunda simulação avaliou o impacto do sinal de perturbação $P_{\mathrm{cpl}}$ no conversor Buck, variando a potência da \acrshort{cpl}. A \autoref{fig:power_cpl_variation} apresenta os valores do sinal de pertubação durante a simulação do conversor operando em torno do ponto $P_{\mathrm{o}, 1}$ definido anteriormente.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.5\textwidth]{figuras/buck/power_cpl_variation.eps}
+  \includegraphics[width=.5\textwidth]{figuras/buck/sim2/op1/power_cpl_variation.eps}
   \captionsetup{justification=centering}
-  \caption{Sinal de perturbação $P_{cpl}$ durante a 2ª simulação do conversor Buck em torno do $P_{\mathrm{op}, 1}$.}
+  \caption{Sinal de perturbação $P_{\mathrm{cpl}}$ durante a 2ª simulação do conversor Buck em torno do $P_{\mathrm{o}, 1}$.}
   \label{fig:power_cpl_variation}
 \end{figure}
 
-O sinal de pertubação $P_{cpl}$ para o conversor operando em torno do $P_{\mathrm{op}, 2}$ está apresentado na \autoref{fig:sim2_power_cpl_variation}. Devido o ponto de operação $P_{\mathrm{op}, 2}$ ser instável, o tempo de simulação foi reduzido de 1,0 s para 0,5 s.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=.5 \textwidth]{figuras/buck/sim2_power_cpl_variation.eps}
-  \captionsetup{justification=centering}
-  \caption{Sinal de perturbação $P_{cpl}$ durante a 2ª simulação do conversor Buck em torno do $P_{\mathrm{op}, 2}$.}
-  \label{fig:sim2_power_cpl_variation}
-\end{figure}
-
-A Figura \ref{fig:simulation2_op1} ilustra a resposta do modelo não linear e do linearizado do conversor Buck à perturbação operando em torno do $P_{\mathrm{op}, 1}$.  É possível observar que o conversor Buck mantém a estabilidade durante toda a simulação, e os comportamentos dos modelos não linear e linearizado coincidem. A tensão no capacitor é próxima do valor esperado durante a operação do conversor no \acrshort{po}, mas se desvia à medida que a potência da \acrshort{cpl} aumenta. Além disto, a corrente no indutor varia de acordo com a potência da \acrshort{cpl}, comportamento esperado devido à necessidade de ajustar a corrente para manter a potência na carga constante e a tensão de saída desejada.
+A Figura \ref{fig:simulation2_op1} ilustra a resposta do modelo não linear e do linearizado do conversor Buck à perturbação operando em torno do $P_{\mathrm{o}, 1}$.  É possível observar que o conversor Buck mantém a estabilidade durante toda a simulação, e os comportamentos dos modelos não linear e linearizado coincidem. A tensão no capacitor é próxima do valor esperado durante a operação do conversor no \acrshort{po}, mas se desvia à medida que a potência da \acrshort{cpl} aumenta. Além disto, a corrente no indutor varia de acordo com a potência da \acrshort{cpl}, comportamento esperado devido à necessidade de ajustar a corrente para manter a potência na carga constante e a tensão de saída desejada.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figuras/buck/simulation2_op1_nonlinear.eps}
+    \includegraphics[width=1.\textwidth]{figuras/buck/sim2/op1/result_nonlinear.eps}
     \caption{Não linear.}
     \label{fig:simulation2_op1_nonlinear}
   \end{subfigure}
@@ -418,22 +429,32 @@ A Figura \ref{fig:simulation2_op1} ilustra a resposta do modelo não linear e do
   \newline
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figuras/buck/simulation2_op1_linear.eps}
+    \includegraphics[width=1.\textwidth]{figuras/buck/sim2/op1/result_linear.eps}
     \caption{Linearizado.}
     \label{fig:simulation2_op1_linear}
   \end{subfigure}
-  \caption{Resposta do conversor Buck em torno do $P_{\mathrm{op}, 1}$ à variação do sinal de perturbação apresentado na \autoref{fig:power_cpl_variation}.}
+  \caption{Resposta do conversor Buck em torno do $P_{\mathrm{o}, 1}$ à variação do sinal de perturbação apresentado na \autoref{fig:power_cpl_variation}.}
   \label{fig:simulation2_op1}
 \end{figure}
 
-Na Figura \ref{fig:simulation2_op2}, é possível observar que a resposta do conversor Buck apresenta uma diferença significativa no comportamento entre o modelo não linear e o linearizado quando operando em torno do ponto $P_{\mathrm{op}, 2}$. No comportamento não linear, observa-se que entre 0 e 0,4 segundos, o sistema é estável. No entanto, a tensão do capacitor no ponto de equilíbrio neste intervalo de tempo apresenta desvios consideráveis do valor desejado (28 V). Após 0,4 s, o sistema se torna instável, como esperado, devido à proximidade da potência da \acrshort{cpl} com o valor no ponto de operação definido, que como observado na primeira simulação, é instável. Em contraste, o modelo linearizado permanece instável durante toda a simulação, diferenciando-se bastante do comportamento não linear quando opera sob o sinal de pertubação variável.
+O sinal de pertubação $P_{\mathrm{cpl}}$ para o conversor operando em torno do $P_{\mathrm{o}, 2}$ está apresentado na \autoref{fig:sim2_power_cpl_variation}. Devido o ponto de operação $P_{\mathrm{o}, 2}$ ser instável, o tempo de simulação foi reduzido de 1,5 s para 1,0 s a fim de evitar problemas numéricos.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
+  \includegraphics[width=.5\textwidth]{figuras/buck/sim2/op2/power_cpl_variation.eps}
+  \caption{Sinal de perturbação $P_{\mathrm{cpl}}$ durante a 2ª simulação do conversor Buck em torno do $P_{\mathrm{o}, 2}$.}
+  \label{fig:sim2_power_cpl_variation}
+\end{figure}
+
+Na Figura \ref{fig:simulation2_op2}, é possível observar que a resposta do conversor Buck apresenta uma diferença significativa no comportamento entre o modelo não linear e o linearizado quando operando em torno do ponto $P_{\mathrm{o}, 2}$. No comportamento não linear, observa-se que entre 0 e 0,4 segundos, o sistema é estável. No entanto, a tensão do capacitor no ponto de equilíbrio neste intervalo de tempo apresenta desvios consideráveis do valor desejado (28 V). Após 0,4 s, o sistema se torna instável, como esperado, devido à proximidade da potência da \acrshort{cpl} com o valor no ponto de operação definido, que como observado na primeira simulação, é instável. Em contraste, o modelo linearizado permanece instável durante toda a simulação, diferenciando-se bastante do comportamento não linear quando opera sob o sinal de pertubação variável.
+
+\begin{figure}[ht]
+  \centering
+  \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figuras/buck/sim2_op2_nonlinear.eps}
+    \includegraphics[width=1.\textwidth]{figuras/buck/sim2/op2/result_nonlinear.eps}
     \caption{Não linear.}
     \label{fig:sim2_op2_nonlinear}
   \end{subfigure}
@@ -441,19 +462,122 @@ Na Figura \ref{fig:simulation2_op2}, é possível observar que a resposta do con
   \newline
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{figuras/buck/sim2_op2_linear.eps}
+    \includegraphics[width=1.\textwidth]{figuras/buck/sim2/op2/result_linear.eps}
     \caption{Linearizado.}
     \label{fig:simulation2_op2_linear}
   \end{subfigure}
-  \caption{Resposta do conversor Buck em torno do $P_{\mathrm{op}, 2}$ à variação do sinal de perturbação apresentado na \autoref{fig:sim2_power_cpl_variation}.}
+  \caption{Resposta do conversor Buck em torno do $P_{\mathrm{o}, 2}$ à variação do sinal de perturbação apresentado na \autoref{fig:sim2_power_cpl_variation}.}
   \label{fig:simulation2_op2}
 \end{figure}
 
 
-
-
 \subsection{Conversor Boost}
+
+Da mesma forma que o conversor Buck, o comportamento do conversor Boost foi analisado em dois pontos de operação distintos, $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$. A análise considerou o comportamento não linear e linearizado do conversor, conforme descrito nas equações \eqref{eq:boost_nonlinear_system} e \eqref{eq:boost_linear_system}, respectivamente. As simulações foram realizadas utilizando os parâmetros específicos do circuito detalhados na \autoref{table:circuit_parameter_boost},
+
+\vspace{8pt}
+\begin{table}[H]
+  \centering
+  \begin{tabular}{cccc}
+    \toprule
+    Parâmetros & Símbolo  & Valor & Unidade \\
+    \midrule
+    Tensão de entrada & $v_{\mathrm{in}}$ & 48,00 & V \\
+    Carga de resistência constante & R & 20,00 & $\Omega$ \\
+    Indutância & $L$ & 1,00 & mH \\
+    Capacitância  & $C$ & 2,20 & mC \\
+    \bottomrule
+  \end{tabular}
+  \caption{Parâmetros do circuito do conversor Boost.}
+  \label{table:circuit_parameter_boost}
+\end{table}
+
+Os pontos de operação do conversor Boost, usados para simulação, são apresentados na \autoref{table:op_parameters_boost} como $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$. Nestes pontos, a potência da carga e a tensão do capacitor são predefinidas, enquanto a corrente do indutor e o ciclo de trabalho são calculados com base na tensão do capacitor e na potência da carga. Isso é feito utilizando as equações \eqref{eq:translation_boost_iL_op} e \eqref{eq:translation_boost_d_op}, respectivamente.
+
+\vspace{8pt}
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{cccccc}
+    \toprule
+    \multirow{2}{*}{\centering Parâmetros} & \multirow{2}{*}{\centering Símbolo} & \multicolumn{2}{c}{\centering Valor} & \multirow{2}{*}{\centering Unidade} \\
+    \cmidrule{3-4}
+     &  & $P_{\mathrm{o}, 3}$ & $P_{\mathrm{o}, 4}$ &  \\
+    \midrule
+    Potência da \acrshort{cpl} & ${P_{\mathrm{cpl}}}_{\mathrm{o}}$ & 125,00  & 600,00 & W \\
+    Tensão do capacitor & ${v_C}_{\mathrm{o}}$ & 72,00 & 72,00  & V \\
+    Corrente do indutor & ${i_L}_{\mathrm{o}}$ & 8,00 & 17,9 & A \\
+    \textit{Duty cycle} & $d_{\mathrm{o}}$ & 0,33 & 0,33 & - \\  
+    \bottomrule
+  \end{tabular}
+  \caption{Pontos de operação do dois modelos do conversor Buck.}
+  \label{table:op_parameters_boost}
+\end{table}
 
 \subsubsection{Sinais de Entrada Constantes}
 
+Na primeira simulação, os parâmetros de entrada do sistema são mantidos constantes em seus valores no ponto de operação. Isso permite analisar o comportamento do conversor Boost nesse estado estável, sem variações em torno do ponto de operação. Na \autoref{fig:simulation_1_boost_1}, o modelo não linear apresenta estabilidade, com a corrente do indutor e a tensão do capacitor convergindo para seus valores no ponto de operação. Além disso, é possível observar uma diferença nos comportamentos entre os modelos não lineares e os linearizados, uma distinção que diminui à medida que os sinais convergem.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \includegraphics[width=1.\textwidth]{figuras/boost/sim1/op1/result.eps}
+  \caption{Simulação do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob entradas constantes.}
+  \label{fig:simulation_1_boost_1}
+\end{figure}
+
+Ao analisar o conversor em torno do ponto $P_{\mathrm{o}, 4}$, é evidente um comportamento instável: a corrente do indutor e a tensão do capacitor aumentam consideravelmente ao longo do tempo, como demonstrado na Figura \ref{fig:simulation_1_boost_2}. A divergência entre os modelos não linear e linearizado se intensifica com o tempo, indicando as limitações do modelo linearizado para representar o comportamento do conversor nesse ponto de operação.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \includegraphics[width=1.\textwidth]{figuras/boost/sim1/op2/result.eps}
+  \caption{Simulação do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob entradas constantes.}
+  \label{fig:simulation_1_boost_2}
+\end{figure}
+
 \subsubsection{Sinal de pertubação $P_{\textrm{cpl}}$ variável}
+
+Na segunda simulação, foi analisado o impacto do sinal de perturbação $P_{\mathrm{cpl}}$ no conversor Boost, variando a potência da \acrshort{cpl}. Os valores do sinal de perturbação durante a simulação do conversor operando em torno dos pontos $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$ previamente definidos são apresentados na \autoref{fig:boost_power_cpl_variation}.
+
+\begin{figure}[ht]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=1.\textwidth]{figuras/boost/sim2/op1/power_cpl_variation.eps}
+    \caption{Conversor em torno do ponto $P_{\mathrm{o}, 3}$.}
+    \label{fig:boost_power_cpl_variation_1}
+  \end{subfigure}%
+  \begin{subfigure}{.5\textwidth}
+    \centering
+    \captionsetup{justification=centering}
+    \includegraphics[width=1.\textwidth]{figuras/boost/sim2/op2/power_cpl_variation.eps}
+    \caption{Conversor em torno do ponto $P_{\mathrm{o}, 4}$.}
+    \label{fig:boost_power_cpl_variation_2}
+  \end{subfigure}
+  \caption{Sinal de perturbação $P_{\mathrm{cpl}}$ durante a 2ª simulação do conversor Boost.}
+  \label{fig:boost_power_cpl_variation}
+\end{figure}
+
+A Figura \ref{fig:simulation_2_boost_op1} mostra que o conversor Boost sob o sinal de perturbação apresentada na \autoref{fig:boost_power_cpl_variation_1} se mantém estável e, durante a simulação, observa-se que os modelos não linear e linearizado exibem um comportamento praticamente idêntico, com diferenças mínimas entre eles.
+
+ 
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \includegraphics[width=1.\textwidth]{figuras/boost/sim2/op1/result.eps}
+  \caption{Simulação do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob entradas constantes.}
+  \label{fig:simulation_2_boost_op1}
+\end{figure}
+
+A \autoref{fig:simulation_2_boost_op2} mostra o conversor Boost sob o sinal de perturbação apresentada na \autoref{fig:boost_power_cpl_variation_2}. É possível observar que tanto o modelo não linear quanto o linearizado permanece instável ao longo de toda a simulação. Além disto, o comportamento não linear  divergiu consideravelmente do comportamento não linear ao longo da simulação.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \includegraphics[width=1.\textwidth]{figuras/boost/sim2/op2/result.eps}
+  \caption{Simulação do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob entradas constantes.}
+  \label{fig:simulation_2_boost_op2}
+\end{figure}

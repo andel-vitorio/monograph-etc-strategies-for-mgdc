@@ -46,7 +46,7 @@ Com base nisso, é proposta uma função de evento onde $\alpha(\|x(t)\|) = x^T(
 No \acrshort{etm} dinâmico, a lei de acionamento de eventos é definida como: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t) < 0) \}, \, \forall k \in \mathbb{N} \end{equation} onde $\theta \in \mathbb{R}_{\geq 0}$ é um parâmetro de projeto, a função de evento $\Gamma(x, e)$ é a mesma definida para o \acrshort{etm} estático, em \eqref{eq:static_etm_gamma} e $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:dynamic-etm}\end{equation} onde $\lambda \in R_{\geq} 0 $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$.
 
 % ETM: Condições de Co-design
-\subsection{Otimização do \acrshort{etm}}
+\subsection{Minimização do número de eventos}
 
 
 Para reduzir o número de eventos gerados, é proposto o seguinte problema de otimização convexa que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{equation}\underset{Q, X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathbf{tr}(\tilde{\Xi} + \tilde{\Psi} + Q). \label{eq:optimization_problem}\end{equation} Este problema é sujeito a \acrshort{lmi} apresentada em \eqref{eq:etm_lmi_1} e à seguinte \acrshort{lmi}: \begin{equation}\begin{bmatrix}
