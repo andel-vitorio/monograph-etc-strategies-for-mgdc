@@ -191,9 +191,9 @@ Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou s
 \end{equation} onde $\mathcal{G}(x, e) := \displaystyle \frac{e^T\Xi e}{x^T\Psi x}$. Quando um novo evento é acionado, isto é, $t = t_k$, o erro $e(t)$  e $\mathcal{G}(x, e)$ são nulos. Por outro lado, enquanto um novo evento não é acionado, tém-se $0 < \mathcal{G}(x, e) < 1$. Considerando que \begin{equation} \mathcal{G}(x, e) \leq \Lambda \left(\frac{\|e(t)\|}{\|x(t)\|}\right) ^ 2, \end{equation} onde $\Lambda = \displaystyle \frac{\lambda_{\max}(\Xi)}{\lambda_{\min}(\Psi)}$, nenhum evento é acionado enquanto \begin{equation}
   \frac{\|e(t)\|}{\|x(t)\|} \leq \frac{1}{\sqrt{\Lambda}}.
 \end{equation} Seja a dinâmica de $\displaystyle \frac{\|e(t)\|}{\|x(t)\|}$ definida como: \begin{gather}
-  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) = - \frac{e^T\dt{x}(t)}{\|e(t)\|\|x(t)\|} - \frac{x^T\dt{x}(t) \|e(t)\|}{\|x(t)\|^2 \|x(t)\|} \notag \\[12pt]
-  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq - \frac{\|e(t)\|\|\dt{x}(t)\|}{\|e(t)\|\|x(t)\|} - \frac{\|x(t)\| \|\dt{x}(t)\| \|e(t)\|}{\|x(t)\|^2 \|x(t)\|} \notag \\[12pt]
-  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq \left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) \frac{\|\dt{x}(t)\|}{\|x(t)\|}.
+  \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) = - \frac{e^T\dt{x}(t)}{\|e(t)\|\|x(t)\|} - \frac{x^T\dt{x}(t) \|e(t)\|}{\|x(t)\|^2 \|x(t)\|} \notag \\[12pt]
+  \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq - \frac{\|e(t)\|\|\dt{x}(t)\|}{\|e(t)\|\|x(t)\|} - \frac{\|x(t)\| \|\dt{x}(t)\| \|e(t)\|}{\|x(t)\|^2 \|x(t)\|} \notag \\[12pt]
+  \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq \left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) \frac{\|\dt{x}(t)\|}{\|x(t)\|}.
   \label{eq:imee_inequation_1}
 \end{gather} Além disso, a partir do sistema em malha fechada \eqref{eq:etm_closed_loop}, é possível definir uma constante $L \in \mathbb{R}_{>0}$ tal que: \begin{gather}
   \|\dt{x}(t)\| = \| (A + BK) x(t) + BKe(t) \| \notag \\[12pt]
@@ -202,19 +202,26 @@ Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou s
 \end{gather} Desta forma, das inequações \eqref{eq:imee_inequation_1} e \eqref{eq:imee_inequation_2}, tém-se: \begin{gather}
   \frac{\|\dt{x}(t)\|}{\|x(t)\|} \leq L\left(1 + \frac{\|e(t)\|}{\|x(t)\|}\right) \notag \\[12pt]
   \left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) \frac{\|\dt{x}(t)\|}{\|x(t)\|} \leq L\left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) ^ 2 \notag \\[12pt]
-  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq L\left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) ^ 2.
+  \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq L\left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) ^ 2.
   \label{eq:imee_inequation_3}
 \end{gather} Definindo $\varphi (t) = \displaystyle \frac{\|e(t)\|}{\|x(t)\|}$, a inequação \eqref{eq:imee_inequation_3} pode ser reescrita como: \begin{equation}
-  \dt{\varphi}(t) \leq L \left(1 + \varphi(t)\right)^2
-\end{equation}
+  \dt{\varphi}(t) \leq L \left(1 + \varphi(t)\right)^2.
+\end{equation} Desta forma, é possível concluir que $\varphi(t) \leq \psi(t, \psi_0)$, onde $\psi(t, \psi_0)$ é o valor inicial de $\dt{\psi} = L(1 + \psi(t))^2$, com $\psi(0, \psi_0) = \psi_0$. Como $\mathcal{G}(x, e) > 1$, $\psi(t, 0)$ evolui de 0 a $\frac{1}{\sqrt{\Lambda}}$ e, portanto, leva mais tempo para evolui de 0 a 1, do que $\psi(t, 0)$ alcançar $\frac{1}{\sqrt{\Lambda}}$. Portanto, o tempo entre eventos são limitados pelo tempo que $\psi$ leva para evoluir de 0 a $\frac{1}{\sqrt{\Lambda}}$, o que significa que o tempo entre eventos são limitados pela solução $\tau \in \mathbb{R}_{>0}$ de $\psi(\tau, 0) = \frac{1}{\sqrt{\Lambda}}$. Como $\psi(\tau, 0) = \frac{\tau L}{1 - \tau L}$, então o \acrshort{imee} $\tau$ do \acrshort{etm} estático é definido por: \begin{gather}
+  % \frac{1}{\sqrt{\Lambda}} = \frac{\tau L}{1 - \tau L} \\[12pt]
+  % 1 - \tau L = \tau L \sqrt{\Lambda} \\[12pt]
+  % \tau L (1 + \sqrt{\Lambda}) = 1 \\[12pt]
+  \tau = \frac{1}{L(\sqrt{\Lambda} + 1)}.
+  \label{eq:imee_final_inequation}
+\end{gather} Além disto, sob mesmas condições iniciais, o \acrshort{imee} do \acrshort{etm} dinâmico é maior ou igual ao \acrshort{imee} do \acrshort{etm} estático, e portanto, há a exclusão do comportamento Zeno.
 
 % ETM: Condições de Co-design
 \subsection{Minimização do número de eventos}
 
-
-Para reduzir o número de eventos gerados, é proposto o seguinte problema de otimização convexa que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{equation}\underset{Q, X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathbf{tr}(\tilde{\Xi} + \tilde{\Psi} + Q). \label{eq:optimization_problem}\end{equation} Este problema é sujeito a \acrshort{lmi} apresentada em \eqref{eq:etm_lmi_1} e à seguinte \acrshort{lmi}: \begin{equation}\begin{bmatrix}
-    -Q & I \\ \star & -X
-  \end{bmatrix} < 0. \label{eq:constraints_2}\end{equation} A solução deste problema tende a minimizar os autovalores de $Q$, $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Se o problema for factível, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
+Por meio do \acrshort{imee} $\tau$ definido na equação \eqref{eq:imee_final_inequation}, pode-se observar que \acrshort{imee} apresenta uma relação inversa a $\Lambda$, definida como: \begin{equation}
+  \Lambda = \frac{\lambda_{\max}(\Xi)}{\lambda_{\min}(\Psi)}
+\end{equation} Desta forma, para reduzir o número de eventos gerados, pode-se aumentar o valor de \acrshort{imee} por meio da minimização de $\Lambda$. Para isto, é necessário minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$. Como $\Xi = X^{-1}\tilde{\Xi}X^{-1}$ e $\Psi = \tilde{\Psi}^{-1}$, para minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$, os autovalores de $\tilde{\Xi}$ e $\tilde{\Psi}$ precisam ser minimizados. 
+ 
+Portanto, é proposto o seguinte problema de otimização que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{gather}\underset{X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathrm{tr}(\tilde{\Xi} + \tilde{\Psi}). \\ \textrm{sujeito a \acrshort{lmi} } \eqref{eq:etm_lmi_1} \label{eq:optimization_problem}\end{gather} A solução deste problema tende a minimizar os autovalores de $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Se o problema for factível, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
 
 \section{Conversores em Malha Fechada sob o \acrshort{etc}}
 
