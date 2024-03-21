@@ -1,1 +1,446 @@
-\chapter{Determinação das Resistências dos Enrolamentos - MITs} 
+\chapter{Simulação de Sistemas Dinâmicos usando Python} 
+
+
+% Introdução
+Nesta seção, apresenta-se a simulação de dois conversores utilizando a linguagem de programação Python e bibliotecas específicas. O pacote \textit{Python Control Systems Library} é utilizado para simular os sistemas dinâmicos, enquanto o CVXPY resolve os problemas de otimização por \acrshortpl{lmi} para determinar os parâmetros de projeto do \acrshort{etm}. O NumPy é utilizado para a computação científica e o Matplotlib para a visualização dos resultados. Os modelos são simulados e o desempenho sob o \acrshort{etc} em diferentes cenários e condições de operação são obtidos.
+
+\subsection{Parâmetros dos Conversores \acrshort{cc}-\acrshort{cc}}
+
+A variável \texttt{params} é um dicionário que contém os parâmetros do conversor. Para diferentes valores desses parâmetros do circuito, os conversores apresentarão comportamentos distintos. No conversor Buck, os parâmetros são a tensão de entrada (\texttt{Vin}), as resistências (\texttt{rL} e \texttt{rC}), a indutância (\texttt{L}), a capacitância (\texttt{C}), a potência da CPL e a tensão desejada do capacitor (\texttt{Pcpl} e \texttt{vC}). Em seguida, são calculadas a corrente do indutor (\texttt{iL}) e o ciclo de trabalho (\texttt{d}) no ponto de operação, de acordo com as relações expressas em \eqref{eq:translation_buck_iL_op} e \eqref{eq:tranlation_buck_d_op}, respectivamente, para o conversor Buck. Com esses valores do ponto de operação, as entradas \texttt{U\_OP} e os estados \texttt{X\_OP} são definidos. Além disso, a entrada do sistema (\texttt{U}) é definida como os valores no ponto de operação, enquanto os estados iniciais (\texttt{X0}) são definidos como 95\% dos valores no ponto de operação. Por fim, são calculadas as variações nas entradas (\(\delta U\)) e nos estados iniciais ($\delta X0$) em relação ao ponto de operação. A definição completa dos parâmetros do conversor Buck está implementada no código a seguir: 
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Parâmetros do conversor Buck.}, label=cod:buck_params]
+  # Parâmetros do Circuito
+  params = {'Vin': 48, 'rL': 0.1, 'rC': 35,
+            'L': 40e-3, 'C': 10e-6, 'op': {'Pcpl': 15, 'vC': 24}}
+
+  # Cálculo da Corrente e Duty Cycle de Operação
+  op = params['op']
+  IL_OP = (op['vC'] / params['rC']) + op['Pcpl'] / op['vC']
+  D_OP = (params['rL'] * IL_OP) / params['Vin'] + op['vC'] / params['Vin']
+
+  params['op']['iL'] = IL_OP
+  params['op']['d'] = D_OP
+
+  # Ponto de operação de cada entrada e estado do sistema
+  U_OP = np.array([params['op']['d'], params['op']['Pcpl']])
+  X_OP = np.array([params['op']['iL'], params['op']['vC']])
+
+  # Entradas do Sistema
+  D = params['op']['d']
+  P_CPL = params['op']['Pcpl']
+  U = np.array([D, P_CPL])
+
+  # Estados Iniciais do Sistema
+  IL_INIT = 0.95 * params['op']['iL']
+  VC_INIT = 0.95 * params['op']['vC']
+  X0 = np.array([IL_INIT, VC_INIT])
+
+  δU = U - U_OP
+  δX0 = X0 - X_OP
+\end{lstlisting}
+
+No caso do conversor Boost, cuja implementação está no código \ref{cod:boost_params}, os valores da tensão de entrada (\texttt{Vin}), resistência (\texttt{R}), indutância (\texttt{L}), capacitância (\texttt{C}), potência da CPL e tensão desejada do capacitor (\texttt{Pcpl} e \texttt{vC}) são inicialmente definidos. A corrente do indutor e o duty cycle no ponto de operação são obtidos usando as equações \eqref{eq:translation_boost_iL_op} e \eqref{eq:translation_boost_d_op} e, por meio destes valores, as entradas (\texttt{U\_OP}) e os estados (\texttt{X\_OP}) são definidos. A entrada do sistema (\texttt{U}) é ajustada para os valores do ponto de operação, enquanto os estados iniciais (\texttt{X0}) são definidos como 95\% dos valores no ponto de operação. Variações nas entradas (\(\delta U\)) e nos estados iniciais ($\delta X0$) em relação ao ponto de operação são então calculadas.
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Parâmetros do conversor Boost.}, label=cod:boost_params]
+  params = {'Vin': 48, 'R': 50, 'L': 50e-3,
+          'C': 800e-6, 'op': {'Pcpl': 300, 'vC': 96}}
+
+  # Cálculo da Corrente e Duty Cycle de Operação
+  op = params['op']
+  IL_OP = (op['vC'] ** 2 + params['R'] * op['Pcpl']) / \
+      (params['R'] * params['Vin'])
+  D_OP = 1 - params['Vin'] / op['vC']
+
+  params['op']['iL'] = IL_OP
+  params['op']['d'] = D_OP
+
+  # Ponto de operação de cada entrada e estado do sistema
+  U_OP = np.array([params['op']['d'], params['op']['Pcpl']])
+  X_OP = np.array([params['op']['iL'], params['op']['vC']])
+
+  # # Entradas do Sistema
+  D = params['op']['d']
+  P_CPL = params['op']['Pcpl']
+  U = np.array([D, P_CPL])
+
+  # # Estados Iniciais do Sistema
+  IL_INIT = 0.95 * params['op']['iL']
+  VC_INIT = 0.95 * params['op']['vC']
+  X0 = np.array([IL_INIT, VC_INIT])
+
+  δU = U - U_OP
+  δX0 = X0 - X_OP
+\end{lstlisting}
+
+\subsection{Implementação dos Conversores \acrshort{cc}-\acrshort{cc}}
+
+% Implementação do Buck não linear
+No código \ref{cod:buck_nonlinear}, a função \texttt{update\_buck\_nonlinear} define o comportamento dinâmico do conversor buck não linear expressa em \eqref{eq:buck_nonlinear_system}. Ela recebe como entrada o tempo \texttt{t}, os estados do sistema \texttt{x}, as entradas do sistema \texttt{u} e os parâmetros do sistema \texttt{params}. A partir dessas informações, a função calcula as derivadas dos estados do sistema, que representam as mudanças da corrente do indutor \texttt{diL} e da tensão do capacitor \texttt{dvC}. A função \texttt{output\_buck\_nonlinear} define quais variáveis do sistema serão consideradas como saídas e recebe os mesmos parâmetros da função de atualização dos estados. Assim, a função retorna um vetor com as variáveis de interesse, neste caso, a corrente do indutor \texttt{iL} e a tensão do capacitor \texttt{vC}. Por fim, a variável \texttt{nonlinear\_system} define um sistema de tempo contínuo por meio da função (\texttt{ct.ss}) da biblioteca \textit{Python Control} utilizando as funções atualização e a função de saídas definidas anteriormente.
+\vspace{8pt}
+
+\begin{lstlisting}[language=Python, caption={Implementação do conversor Buck não linear.}, label=cod:buck_nonlinear]
+def update_buck_nonlinear(t, x, u, params):
+  # Parâmetros do sistema
+  V_IN = params.get('Vin')  # Tensão de Entrada
+  RL = params.get('rL')     # Resistência (indutor)
+  RC = params.get('rC')     # Resistência (capacitor)
+  L = params.get('L')       # Indutância
+  C = params.get('C')       # Capacitância
+
+  # Entradas do sistema: Duty Cycle e Potência da CPL
+  D, P_CPL = u
+
+  # Estados do sistema: corrente do indutor e tensão do capacitor
+  IL, VC = x
+
+  # Atualização da corrente do indutor
+  diL = (V_IN / L) * D - (RL / L) * IL - VC / L  
+
+  # Atualização da tensão do capacitor   
+  dvC = IL / C - VC / (C * RC) - P_CPL / (C * VC)
+
+  dx = np.array([diL, dvC])
+  return dx
+
+# Definição da saída do sistema
+def output_buck_nonlinear(t, x, u, params):
+  return x[0:2]
+
+# Definição do conversor cc-cc buck nao-linear
+buck_nonlinear = ct.ss(
+  update_buck_nonlinear, 
+  output_buck_nonlinear,
+  name='buck_nonlinear',
+  inputs=('d', 'P_cpl'),
+  outputs=('iL', 'vC'),
+  states=('iL', 'vC')
+)
+\end{lstlisting}
+
+Assim como a implementação do conversor Buck, as funções de atualização e saída foram desenvolvidas para o conversor Boost, conforme definido em \eqref{eq:boost_nonlinear_system}. O código de implementação do conversor Boost, representado por \texttt{boost\_nonlinear}, é apresentado a seguir:
+\vspace{8pt}
+
+\begin{lstlisting}[language=Python, caption={Implementação do conversor Boost não linear.}, label=cod:boost_nonlinear]
+  def update_boost_nonlinear(t, x, u, params):
+  # Definição dos parâmetros do sistema
+  V_IN = params.get('Vin')  # Tensão de Entrada
+  R = params.get('R')       # Resistência (indutor)
+  L = params.get('L')       # Indutância
+  C = params.get('C')       # Capacitância
+
+  # Entradas do sistema: Duty Cycle e Potência da CPL
+  D, P_CPL = u
+
+  # Estados do sistema: corrente do indutor e tensão do capacitor
+  IL, VC = x
+
+  # Atualização da corrente do indutor
+  dIl = - ((1. - D) / L) * VC + (V_IN / L)
+  
+  # Atualização da tensão do capacitor
+  dVc = ((1. - D) * IL) / C - VC / (R * C) - P_CPL / (C * VC)
+
+  dx = np.array([dIl, dVc])
+  return dx
+
+# Definição da saída do sistema
+def output_boost_nonlinear(t, x, u, params):
+  return x[0:2]
+
+# Definição do conversor cc-cc boost nao-linear
+boost_nonlinear = ct.ss(
+    update_boost_nonlinear, 
+    output_boost_nonlinear,
+    name='boost_nonlinear',
+    inputs=('d', 'P_cpl'),
+    outputs=('iL', 'vC'),
+    states=('iL', 'vC')
+)
+\end{lstlisting}
+
+\subsection{Implementação dos Modelos Linearizados} \label{subsection:implementation_of_linear_models}
+
+O código \ref{cod:buck_linear} implementa a linearização do conversor buck em torno do ponto de operação $P_o$ definido em \eqref{eq:operation_point}. A variável \texttt{OP} armazena os valores de $P_o$ contida no dicionário \texttt{params} e, portanto, representa o ponto de operação do conversor. Em seguida, são construídas as matrizes de estado \texttt{A}, de entrada \texttt{B}, de saída \texttt{C} e de alimentação \texttt{D} do sistema, de acordo com a linearização do conversor Buck definida em \eqref{eq:buck_linear_system}. Por último, a variável \texttt{buck\_linearized} é criada por meio da transformação do sistema linear, construído com base nas matrizes do sistema, para sua forma de representação entrada-saída. Isso é feito para aumentar a flexibilidade da simulação, permitindo a definição de tags para as entradas, saídas e estados, o que facilita a interconexão entre os sistemas.
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Implementação do conversor Buck linearizado.}, label=cod:buck_linear]
+  # Obtenção dos valores no ponto de operação (OP)
+  OP = params['op']
+
+  # Elementos da matriz de estados
+  A11 = - (params['rL'] / params['L'])
+  A12 = - (1. / params['L'])
+  A21 = 1. / params['C']
+  A22 = (1. / params['C']) * (OP['Pcpl'] /
+        (OP['vC'] * OP['vC']) - 1. / params['rC'])
+
+  # Elementos da matriz de entrada
+  B11 = params['Vin'] / params['L']
+  B12 = 0.
+  B21 = 0.
+  B22 = - 1.0 / (params['C'] * OP['vC'])
+
+  # Matriz de estados: iL e vC
+  A = [[A11, A12], [A21, A22]]
+
+  # Matriz de entradas: d e P_cpl
+  B = [[B11, B12], [B21, B22]]
+
+  # Matriz de saída: iL e vC
+  C = [[1., 0], [0., 1]]
+
+  # Matriz de alimentação: nula
+  D = [[0., 0.], [0., 0.]]
+
+  buck_linearized = ct.ss2io(
+    ss(A, B, C, D),
+    name='buck_linearized',
+    inputs=('δd', 'δPcpl'),
+    outputs=('δiL', 'δvC'),
+    states=('δiL', 'δvC')
+  )
+\end{lstlisting}
+
+Da mesma forma que foi implementada a linearização do conversor Buck em torno do ponto de operação definido, o código a seguir aborda a linearização do conversor Boost. O ponto de operação $P_o$, como definido em \eqref{eq:operation_point}, é armazenado na variável \texttt{OP}, extraída do dicionário \texttt{params}. A construção das matrizes de estado (\texttt{A}), de entrada (\texttt{B}), de saída (\texttt{C}), e de alimentação (\texttt{D}) segue o mesmo processo utilizado para o conversor Buck, conforme definido em \eqref{eq:boost_linear_system}. E assim, a variável \texttt{boost\_linearized} é criada para representar o conversor Boost linearizado.
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Implementação do conversor Boost linearizado.}, label=cod:boost_linear]
+  # Obtenção dos valores no ponto de operação (OP)
+  OP = params['op']
+  
+  # Elementos da matriz de estados
+  A11 = 0.
+  A12 = - ((1. - OP['d']) / params['L'])
+  A21 = (1. - OP['d']) / params['C']
+  A22 = (1. / params['C']) * \
+      ((OP['Pcpl'] / (OP['vC'] ** 2)) - (1. / params['R']))
+  
+  # Elementos da matriz de entrada
+  B21 = - (OP['iL'] / params['C'])
+  B22 = - 1. / (params['C'] * OP['vC'])
+  B11 = OP['vC'] / params['L']
+  B12 = 0.
+  
+  # Matriz de estados: iL e vC
+  A = [[A11, A12], [A21, A22]]
+  
+  # Matriz de entradas: d e P_cpl
+  B = [[B11, B12], [B21, B22]]
+  
+  # Matriz de saída: iL e vC
+  C = [[1., 0], [0., 1]]
+  
+  # Matriz de alimentação: nula
+  D = [[0., 0.], [0., 0.]]
+  
+  boost_linearized = ct.ss2io(
+      ss(A, B, C, D),
+      name='linearized_system',
+      inputs=('δd', 'δPcpl'),
+      outputs=('δIl', 'δVc'),
+      states=('δIl', 'δVc')
+  )
+\end{lstlisting}
+
+\subsection{Implementação dos Sistemas em Loop Fechado sob \acrshort{etc}}
+
+% A implementação do sistema Buck em loop fechado sob o ETC é detalhada no código \ref{cod:closed_loop_buck}. Neste sistema, é realizada a interconexão entre a planta (conversor Buck), o ETM, o ZOH e o controlador, conforme apresentado na subseção \ref{subsection:etc}.
+
+A partir dos parâmetros derivados da solução do problema de otimização discutido na seção anterior, é implementado o \acrshort{etm} estático, cujo código está apresentado em \ref{cod:static_etm}. Este possui quatro entradas, das quais as duas primeiras são os últimos estados enviados $\hat{x}$ provenientes do ZOH e os estados atuais $x$ obtidos da planta. Suas saídas consistem em $\Gamma$, uma variável booleana que, quando verdadeira, aciona um evento, e os estados atuais da planta. Essas saídas são determinadas pela função \texttt{etm\_output}, a qual recebe como parâmetros o tempo atual da simulação, o estado atual do \acrshort{etm}, a entrada do \acrshort{etm} e os parâmetros do sistema, respectivamente.
+
+Internamente, a função verifica o início da segunda simulação. Isso se deve ao fato de que a simulação é realizada duas vezes: a segunda vez com um passo de simulação maior e menos preciso. Esta distinção é crucial, pois o tempo de acionamento de eventos é registrado apenas na primeira simulação, que utiliza um passo de tempo menor e mais preciso. Além disso, o cálculo de $\Gamma$ é realizado, sendo este um valor real. Caso seja negativo, um novo evento deve ser acionado. Se isso ocorrer, os estados atuais serão definidos como a saída do \acrshort{etm}; caso contrário, serão os últimos estados enviados.
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Implementação do \acrshort{etm} estático.}, label=cod:static_etm]
+  zero = 0
+  event_times = [0.]
+
+  def get_gama(current_states, last_states_sent):
+    error = last_states_sent - current_states
+    return current_states.T @ Ψ @ current_states - error.T @ Ξ @ error
+
+
+  def etm_output(t, x, u, params):
+    global zero, event_times
+
+    if t != etm_output.previous_time:
+      etm_output.previous_time = t
+      if etm_output.first_simulation and t == 0.:
+        etm_output.first_simulation = False
+
+    last_states_sent = u[0:2]
+    current_states = u[2:4]
+
+    Γ = get_gama(current_states, last_states_sent)
+    trigger = Γ < 0
+
+    if etm_output.first_simulation and trigger:
+      event_times.append(t)
+
+    state_to_sent = (current_states if trigger or t == 0. else last_states_sent)
+    return [state_to_sent[0], state_to_sent[1]]
+
+  etm_output.previous_time = 0
+  etm_output.first_simulation = True
+
+  ETM = ct.ss(
+    None, etm_output,
+    name='etm',
+    inputs=('x1_hat', 'x2_hat', 'x1', 'x2'),
+    outputs=('x1', 'x2'),
+  )
+\end{lstlisting}
+
+No caso do \acrshort{etm} dinâmico, uma nova função, \texttt{etm\_update}, é criada. Esta função é responsável pela atualização da variável dinâmica $\eta$ do \acrshort{etm} dinâmico, conforme definido em \eqref{eq:dynamic-etm}. Na função de saída, a lei de acionamento é modificada para incorporar a versão dinâmica do \acrshort{etm}, conforme definido em \eqref{eq:etm-dynamic-trigger}. Além disso, uma nova saída do \acrshort{etm} é adicionada, representando a variável dinâmica do próprio \acrshort{etm}. Por fim, tanto a função de atualização quanto a saída do \acrshort{etm} dinâmico dependem dos parâmetros $\theta$ e $\epsilon$, que são previamente definidos.
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Implementação do \acrshort{etm} dinâmico.}, label=cod:dynamic_etm]
+  θ = 1.
+  λ = .1
+  
+  def etm_update(t, n, u, params):
+    Γ = get_gama(current_states=u[2:4], last_states_sent=u[0:2])
+    dn = -λ * n + Γ
+    return [dn]
+
+
+  def etm_output(t, n, u, params):
+    global zero, event_times
+
+    if t != etm_output.previous_time:
+      etm_output.previous_time = t
+      if etm_output.first_simulation and t == 0.:
+        etm_output.first_simulation = False
+
+    last_states_sent = u[0:2]
+    current_states = u[2:4]
+
+    Γ = get_gama(current_states, last_states_sent)
+    trigger = (n + θ * Γ) < 0
+
+    if etm_output.first_simulation and trigger:
+      event_times.append(t)
+
+    state_to_sent = (current_states if trigger or t == 0. else last_states_sent)
+    return [state_to_sent[0], state_to_sent[1], n[0]]
+
+
+  etm_output.previous_time = 0
+  etm_output.first_simulation = True
+
+  ETM = ct.ss(
+    etm_update, etm_output,
+    name='etm',
+    states=('n'),
+    inputs=('x1_hat', 'x2_hat', 'x1', 'x2'),
+    outputs=('x1', 'x2', 'n'),
+  )
+  \end{lstlisting}
+
+O código \ref{cod:zoh} é a implementação do \acrshort{zoh}. Inicialmente, é definida uma função chamada \texttt{zoh\_output}, que implementa a saída do \acrshort{zoh} para o sistema de controle contínuo. O método de saída \acrshort{zoh} retém o valor de entrada atual até o próximo instante. A função armazena o estado anterior \texttt{previous} e o tempo anterior \texttt{previous\_time}. Em cada chamada, se o tempo atual \texttt{t} for diferente do tempo anteriormente armazenado, o estado anterior é atualizado e o tempo anterior é atualizado para \texttt{t}. A função retorna os estados previamente armazenados \texttt{last\_states\_sent} que é inicializada com os valores iniciais dos estados da planta.
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Implementação do \acrshort{zoh}}, label=cod:zoh]
+  def zoh_output(t, x, u, params):
+    if t != zoh_output.previous_time:
+      zoh_output.last_states_sent = zoh_output.previous
+      zoh_output.previous_time = t
+    zoh_output.previous = u
+    return zoh_output.last_states_sent
+
+  zoh_output.previous_time = 0
+  zoh_output.second_simulation = False
+  zoh_output.previous = []
+  zoh_output.last_states_sent = δX0.tolist()
+
+  ZOH = ct.ss(
+    None, zoh_output,
+    name='zoh',
+    inputs=('x1', 'x2'),
+    outputs=('x1_hat', 'x2_hat'),
+  )
+\end{lstlisting}
+
+No código \ref{cod:controller}, é definida a função de saída do controlador, \texttt{control\_output}, responsável por implementar a operação de controle para a planta. Dentro dessa função, ocorre o cálculo do ciclo de trabalho, que consiste no produto escalar entre a matriz de ganho $K$ e os estados $\hat{x}$. Assim, a matriz de ganho representada pela variável \texttt{K} é aplicada aos estados representados por \texttt{u}, resultando no cálculo do ciclo de trabalho desejado. Este último é então retornado como saída do controlador. A seguir, é definido o sistema de controle \texttt{CONTROL}. Este sistema é estático (determinado por \texttt{None}) e utiliza a função \texttt{control\_output} como função de saída. O sistema conta com duas entradas, que correspondem aos estados provenientes do \acrshort{zoh}, e uma saída, que representa o ciclo de trabalho, entrada da planta.
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Implementação do controlador.}, label=cod:controller]
+  def control_output(t, x, u, params):
+    duty_cycle = K @ u
+    return [duty_cycle]
+
+
+  CONTROL = ct.ss(
+      None, control_output,
+      name='control',
+      inputs=('x1_hat', 'x2_hat'),
+      outputs=('u'),
+  )
+\end{lstlisting}
+
+O código \ref{cod:closed_loop} cria um sistema de controle em malha fechada para o conversor Buck sob o \acrshort{etc}. É utilizada a função \texttt{interconnect} para conectar os quatro subsistemas: o sistema linearizado do conversor buck, o \acrshort{etm}, o \acrshort{zoh}, e o controlador. As conexões entre esses componentes são especificadas para formar um loop de realimentação, conforme apresentado na subseção \ref{subsection:etc}. O sistema resultante é então nomeado como \texttt{closed\_loop\_buck\_system}, e suas entradas e saídas são definidas. Em seguida, define-se o tempo de simulação e o sinal de entrada, que neste caso é um sinal constante chamado \texttt{\ensuremath{\delta}Pcpl}, mas também pode ser um vetor contendo valores variados. Por fim, a função \texttt{input\_output\_response} é utilizada para simular a resposta do sistema fechado ao longo do tempo, armazenando as respostas do sistema em \texttt{t} (tempo) e \texttt{y} (saídas do sistema).
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Sistema em loop fechado sob o ETC.}, label=cod:closed_loop]
+  CLOSED_LOOP_BUCK_SYSTEM = ct.interconnect(
+      (buck_linearized, ETM, ZOH, CONTROL),
+      connections=(
+          # Conexão entre a saída do controlador e a planta
+          ('buck_linearized.δd', 'control.u'),
+
+          # Conexão entre as saídas do ZOH e da planta ao ETM
+          ('etm.x1_hat', 'zoh.x1_hat'),
+          ('etm.x2_hat', 'zoh.x2_hat'),
+          ('etm.x1', 'buck_linearized.δiL'),
+          ('etm.x2', 'buck_linearized.δvC'),
+
+          # Conexão da saída do ETM no ZOH
+          ('zoh.x1', 'etm.x1'),
+          ('zoh.x2', 'etm.x2'),
+
+          # Conexão da saída do ZOH no controlador
+          ('control.x1_hat', 'zoh.x1_hat'),
+          ('control.x2_hat', 'zoh.x2_hat'),
+      ),
+      name='closed_loop_buck_system',
+      inplist=('buck_linearized.δPcpl'),
+      outlist=('buck_linearized.δiL',
+              'buck_linearized.δvC',
+              'etm.Γ',
+              'buck_linearized.δd',
+              ),
+      output=('δiL', 'δvC', 'Γ', 'u')
+  )
+
+  print(CLOSED_LOOP_BUCK_SYSTEM)
+  print('')
+
+  step = 1e-6
+  timepts = np.arange(0, 1. + step, step)
+
+  # Simulação para a pertubação constante
+  δPcpl = 0.
+
+  # Simulação para a pertubação não constante
+  # δPcpl = np.zeros_like(timepts)
+  # δPcpl[np.where(timepts >= 0.3)] = 20
+  # δPcpl[np.where(timepts >= 0.6)] = 30
+
+  t, y = ct.input_output_response(
+      sys=CLOSED_LOOP_BUCK_SYSTEM, T=timepts,
+      U=δPcpl,
+      X0=δX0,
+      solve_ivp_method='RK45',
+      solve_ivp_kwargs={'max_step': step}
+  )
+\end{lstlisting}
+
+Por fim, o código simples abaixo tem como finalidade calcular os intervalos de tempo entre eventos consecutivos e armazená-los na variável \texttt{inter\_event\_times}, para análises futuras.
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Cálculo da intervalo entre eventos.}, label=cod:closed_loop]
+  inter_event_times = []
+  for i in range(1, len(event_times)):
+    inter_event_times.append(event_times[i] - event_times[i-1])
+\end{lstlisting}
