@@ -13,44 +13,214 @@ Como discutido na seção \ref{section:etm_classification}, quando uma amostra d
   e(t) = \hat{x}(t) - x(t), \quad \forall t \in [t_k, t_{k+1}).
 \end{equation} Este erro ocorre durante o intervalo de tempo entre eventos, $ [t_k, t_{k+1})$.
 
+Desta forma, considerando a seguinte lei de controle por realimentação de estados, ou seja, $u(t) = K\hat{x}(t)$, onde $K \in \mathbb{R}^{1 \times n}$, o sistema linear dinâmico em malha fechada \eqref{eq:linear_system_etm} pode ser expresso pela seguinte equação dinâmica: \begin{gather}
+  \dot{x}(t) = Ax(t) + BK\hat{x}(t) \notag \\[12pt]c
+  \dot{x}(t) = Ax(t) + BK[x(t) + e(t)] \notag \\[12pt]
+  \dot{x}(t) = (A + BK)x(t) + BKe(t)
+  \label{eq:etm_closed_loop}
+\end{gather}
+
+
 % Adicionar um conclusão
 
 \subsection{\acrshort{etm} Estático e Dinâmico}
 
 % Resumo sobre o ETM estático
-Como discutido anteriormente, o \acrshort{etm} estático opera considerando apenas os estados atuais do sistema $x(t)$ e o erro de transmissão $e(t)$. A sua lei de acionamento de eventos é definida como: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \Gamma(x(t), e(t)) < 0 \}, \, \forall k \in \mathbb{N},\end{equation} onde $\Gamma(x, e)$ representa a função de evento do \acrshort{etm}. Adicionalmente, para uma classe específica de funções $\Gamma$ dada por \begin{equation}
+Conforme apresentado anteriormente, o \acrshort{etm} estático opera considerando apenas os estados atuais do sistema $x(t)$ e o erro de transmissão $e(t)$, e a sua lei de acionamento de eventos é definida como: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \Gamma(x(t), e(t)) < 0 \}, \, \forall k \in \mathbb{N}, \label{eq:static_etm}\end{equation} onde $\Gamma(x, e)$ representa a função de acionamento do \acrshort{etm}. Adicionalmente, para uma classe específica de funções $\Gamma$ dada por \begin{equation}
   \Gamma(x(t), e(t)) = \sigma \alpha(\|x(t)\|) - \beta(\|e(t)\|),
 \end{equation} com $\sigma \in (0,1)$, o sistema em malha fechada é assintoticamente estável.
 
 % Função evento proposta
-Com base nisso, é proposta uma função de evento onde $\alpha(\|x(t)\|) = x^T(t)\Psi x(t)$, $\beta(\|e(t)\|) = e^T(t)\Xi e(t)$ e $\sigma = 1$, ou seja: \begin{equation}
+Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrshort{etm} estático e dinâmico usando a abordagem de co-design para o sistema dinâmico linear \eqref{eq:linear_system_etm} controlado por realimentação de estados. Para isso, é considerada uma função de acionamento tal que $\alpha(\|x(t)\|) = x^T(t)\Psi x(t)$, $\beta(\|e(t)\|) = e^T(t)\Xi e(t)$ e $\sigma = 1$, ou seja:  \begin{equation}
   \Gamma(x(t), e(t)) = x^T(t)\Psi x(t) - e^T(t)\Xi e(t),
-  \label{eq:static_etm_gamma}
-\end{equation} onde $\Psi, \, \Xi \in \mathbb{R}^{n \times n}$ e a condição suficiente para o projeto do \acrshort{etm} por co-design para o \acrshort{etc} contínuo e o controlador por realimentação de estados é declarada a seguir:
+  \label{eq:etm_gamma}
+\end{equation}  onde $\Psi, \, \Xi \in \mathbb{R}^{n \times n}$, e a formulação do seguinte teorema:
 
 \begin{theorem}
-  \label{theorem:constraints-2}
+  \label{theorem:etm_stability}
   Se existirem matrizes semidefinidas positivas $\Xi, \Psi, X \in \mathbb{R}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a seguinte \acrshort{lmi}:
   \begin{equation}
     \begin{bmatrix}
-      \mathrm{He}(AX +B\tilde{K}) & B\tilde{K}   & X             \\
-      \star              & -\tilde{\Xi} & 0             \\
-      \star              & \star        & -\tilde{\Psi}
+      \mathsf{He}(AX +B\tilde{K}) & B\tilde{K}   & X             \\
+      \star                       & -\tilde{\Xi} & 0             \\
+      \star                       & \star        & -\tilde{\Psi}
     \end{bmatrix} < 0,
     \label{eq:etm_lmi_1}
   \end{equation}
-  então, a origem do sistema de malha fechada é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e a função de Lyapunov $V(x)=x^TPx$.
+  então, a origem do sistema em malha fechada é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e a função de Lyapunov definida por $V(x)=x^TPx$.
 \end{theorem}
 
+\noindent \textit{Demostração.} Considere que a \acrshort{lmi} \eqref{eq:etm_lmi_1} é factível. Desde que $X$ seja uma matriz semidefinida positiva não singular, esta \acrshort{lmi} pode ser multiplicada por $\mathsf{diag}(X^{-1}, X^{-1}, I)$ no lado esquerdo e direito. Assim, \begin{gather}
+  \begin{bmatrix}
+    X^{-1} & 0      & 0 \\
+    0      & X^{-1} & 0 \\
+    0      & 0      & I
+  \end{bmatrix}
+  \begin{bmatrix}
+    \mathsf{He}(AX +B\tilde{K}) & B\tilde{K}   & X             \\
+    \star                       & -\tilde{\Xi} & 0             \\
+    \star                       & \star        & -\tilde{\Psi}
+  \end{bmatrix}
+  \begin{bmatrix}
+    X^{-1} & 0      & 0 \\
+    0      & X^{-1} & 0 \\
+    0      & 0      & I
+  \end{bmatrix}
+  < 0, \notag \notag \\[12pt]
+  \begin{bmatrix}
+    \mathsf{He}(X^{-1}AX +X^{-1}B\tilde{K}) & X^{-1}B\tilde{K}   & I             \\
+    \star                                   & -X^{-1}\tilde{\Xi} & 0             \\
+    \star                                   & \star              & -\tilde{\Psi}
+  \end{bmatrix}
+  \begin{bmatrix}
+    X^{-1} & 0      & 0 \\
+    \star  & X^{-1} & 0 \\
+    \star  & \star  & I
+  \end{bmatrix}
+  < 0, \notag \notag \\[12pt]
+  \begin{bmatrix}
+    \mathsf{He}(X^{-1}A +X^{-1}B\tilde{K}X^{-1}) & X^{-1}B\tilde{K}X^{-1}   & I             \\
+    \star                                        & -X^{-1}\tilde{\Xi}X^{-1} & 0             \\
+    \star                                        & \star                    & -\tilde{\Psi}
+  \end{bmatrix}
+  < 0,
+\end{gather} Como $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$, têm-se: \begin{equation}
+  \begin{bmatrix}
+    \mathsf{He}(PA +PBK) & PBK   & I             \\
+    \star                & -\Xi  & 0             \\
+    \star                & \star & -\tilde{\Psi}
+  \end{bmatrix} < 0
+  \label{eq:inequation_prove}
+\end{equation} Por meio do teorema de Schur, a inequação \eqref{eq:inequation_prove} pode ser reescrita como: \begin{equation}
+  A_{\mathrm{S}} - B_{\mathrm{S}}D_{\mathrm{S}}^{-1}C_{\mathrm{S}} < 0,
+\end{equation} onde, \begin{equation}
+  A_{\mathrm{S}} = \begin{bmatrix}
+    \mathsf{He}(PA +PBK) & PBK  \\
+    (PBK)^T              & -\Xi
+  \end{bmatrix}, \,
+  B_{\mathrm{S}} = \begin{bmatrix}
+    I \\ 0
+  \end{bmatrix}, \,
+  C_{\mathrm{S}} = \begin{bmatrix}
+    I & 0
+  \end{bmatrix} \, \mathrm{e} \,
+  D_{\mathrm{S}} = -\tilde{\Psi}
+\end{equation} Logo, \begin{gather}
+  \begin{bmatrix}
+    \mathsf{He}(PA +PBK) & PBK  \\
+    \star                & -\Xi
+  \end{bmatrix} -
+  \begin{bmatrix}
+    -\tilde{\Psi}^{-1} \\ 0
+  \end{bmatrix}
+  \begin{bmatrix}
+    I & 0
+  \end{bmatrix} < 0, \notag \notag \\[12pt]
+  \begin{bmatrix}
+    \mathsf{He}(PA +PBK) & PBK  \\
+    \star                & -\Xi
+  \end{bmatrix} -
+  \begin{bmatrix}
+    -\Psi & 0 \\ 0 & 0
+  \end{bmatrix} < 0, \notag \notag \\[12pt]
+  \begin{bmatrix}
+    \mathsf{He}(PA + PBK) + \Psi & PBK  \\
+    \star                        & -\Xi
+  \end{bmatrix} < 0
+  \label{eq:inequation_prove_2}
+\end{gather} Multiplicando a inequação \eqref{eq:inequation_prove_2} por $\begin{bmatrix}
+    x^T(t) & e^T(t)
+  \end{bmatrix}$ no lado esquerdo, e por $\begin{bmatrix}
+    x(t) & e(t)
+  \end{bmatrix}^T$ no lado direito, obtém-se: \begin{gather}
+  \begin{bmatrix}
+    x^T(t) & e^T(t)
+  \end{bmatrix}
+  \begin{bmatrix}
+    \mathsf{He}(PA + PBK) + \Psi & PBK  \\
+    \star                        & -\Xi
+  \end{bmatrix}
+  \begin{bmatrix}
+    x(t) \\ e(t)
+  \end{bmatrix} < 0 \notag \\[12pt]
+  \begin{bmatrix}
+    x^T(t) (\mathsf{He}(P(A + BK)) + \Psi) + e^T(t) (PBK)^T &
+    x^T(t) PBK - e^T(t) \Xi
+  \end{bmatrix}
+  \begin{bmatrix}
+    x(t) \\ e(t)
+  \end{bmatrix} < 0 \notag \\[12pt]
+  x^T(t) (\mathsf{He}(P(A + BK)) + \Psi) x(t) + e^T(t) (PBK)^T x(t) +
+  x^T(t) PBK e(t) - e(t)^T \Xi e(t)
+  < 0 \notag \\[12pt]
+  x^T(t) (P\mathsf{He}(A + BK) + \Psi) x(t) + e^T(t) (PBK)^T x(t) +
+  x^T(t) PBK e(t) - e(t)^T \Xi e(t)
+  < 0 \notag \\[12pt]
+  2x^T(t) P[(A + BK)x(t) + BKe(t)] + x^T(t)\Psi x(t) - e^T(t) \Xi e(t)
+  < 0
+  \label{eq:inequation_prove_3}
+\end{gather}  A partir das equações \eqref{eq:linear_system_etm} e \eqref{eq:etm_gamma}, a equação \eqref{eq:inequation_prove_3} pode ser reescrita como: \begin{gather}
+  2x^T(t) P\dt{x}(t) + x^T(t)\Psi x(t) - e^T(t) \Xi e(t)  < 0 \notag \\[12pt]
+  2x^T(t) P\dt{x}(t) + \Gamma(x(t), e(t)) < 0
+  \label{eq:inequation_prove_4}
+\end{gather} Como $2x^T(t) P\dt{x}(t) = x^T(t) P\dt{x}(t) + \dt{x}^T(t) P x(t)$ e $\Gamma(x, e) \geq 0, \, \forall t \in [t_k, t_{k+1}), \, \forall k \in \mathbb{N}$ então: \begin{equation}
+  x^T(t) P\dt{x}(t) + \dt{x}^T P x(t)  < - \Gamma(x(t), e(t)) < 0.
+\end{equation} Logo, \begin{equation}
+  x^T(t) P\dt{x}(t) + \dt{x}^T(t) P x(t) < 0.
+  \label{eq:final_inequation_prove}
+\end{equation} Considerando a função de Lyapunov $V(x) = x^T(t)Px(t)$, a desigualdade \eqref{eq:final_inequation_prove} garante que $\dt{V}(x) < 0$. Portanto, a origem do sistema em malha fechada sob o \acrshort{etm} estático \eqref{eq:static_etm} é assintoticamente estável.
+
 % ETM: Tempo de ocorrência dos eventos e a variável interna dinâmica
-No \acrshort{etm} dinâmico, a lei de acionamento de eventos é definida como: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t) < 0) \}, \, \forall k \in \mathbb{N} \end{equation} onde $\theta \in \mathbb{R}_{\geq 0}$ é um parâmetro de projeto, a função de evento $\Gamma(x, e)$ é a mesma definida para o \acrshort{etm} estático, em \eqref{eq:static_etm_gamma} e $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:dynamic-etm}\end{equation} onde $\lambda \in R_{\geq} 0 $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$.
+No \acrshort{etm} dinâmico, a lei de acionamento de eventos é definida como: \begin{equation} t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t)) < 0 \}, \, \forall k \in \mathbb{N} \label{eq:dinamic_etm}\end{equation} onde $\theta \in \mathbb{R}_{\geq 0}$ é um parâmetro de projeto, a função de acionamento $\Gamma(x, e)$ é a mesma definida para o \acrshort{etm} estático, em \eqref{eq:etm_gamma} e $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:eta_dynamic}\end{equation} onde $\lambda \in R_{> 0} $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$.
+
+Enquanto o \acrshort{etm} dinâmico não aciona um novo evento, têm-se $\eta(t) + \theta \Gamma(x(t), e(t)) \geq 0$. Se $\theta$ for nulo, então $\eta \geq 0$. Se $\theta$ não for nulo, então \begin{equation}
+  \Gamma(x(t), e(t)) \geq - \frac{1}{\theta}\eta(t).
+\end{equation} Logo, a partir de \eqref{eq:eta_dynamic},  \begin{equation}
+  \dt{\eta}(t) \geq - \left(\lambda + \frac{1}{\theta}\right) \eta(t).
+\end{equation} Assim, \begin{equation}
+  \eta(t) \geq \eta(0) e ^ {-\left(\lambda + \frac{1}{\theta}\right) t}.
+\end{equation} Portanto, $\eta(t) \geq 0$, para todo $t \in [t_k, t_{k+1}), \, \forall k \in \mathbb{N}$. Desta forma, têm-se que $\lambda \eta(t) \geq 0$ e, sob o \autoref{theorem:etm_stability}, a partir da equação \eqref{eq:inequation_prove_4} da demostração apresentada, obtém-se a seguinte inequação para o \acrshort{etm} dinâmico: \begin{gather}
+  2x^T(t) P\dt{x}(t) + \Gamma(x(t), e(t)) - \lambda \eta(t) < 0 \notag \\[12pt]
+  2x^T(t) P\dt{x}(t) + \dt{\eta}(t) < 0.
+\end{gather} Do \autoref{theorem:etm_stability}, foi definido a seguinte função de Lyapunov $V(x) = x^TPx$, logo: \begin{equation}\dt{V}(x) = x^T(t)P\dt{x}(t) + \dt{x}^T(t)Px(t) = 2x^T(t) P\dt{x}(t).\end{equation} Assim, \begin{equation}
+  \dt{V}(x) + \dt{\eta}(x) < 0.
+\end{equation} Portanto, conforme discutido na seção \ref{section:etm_classification}, para $\dt{W}(x, \eta) = \dt{V}(x) + \dt{\eta}(x) < 0$, a origem do sistema dinâmico \eqref{eq:linear_system_etm} em malha fechada sob o \acrshort{etm} dinâmico baseado no \autoref{theorem:etm_stability} é assintoticamente estável.
+
+Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou seja, $t_{k+1} - t_k \geq \tau , \, \forall k \in \mathbb{N}$, é fundamental para eliminar o comportamento Zeno, viabilizando, dessa forma, a implementação prática desses \acrshortpl{etm}. Para comprovar a existência do \acrshort{imee} mencionado no \acrshort{etm} estático, inicialmente, considera-se a seguinte inequação derivada da sua lei de acionamento \eqref{eq:static_etm}: \begin{equation}
+  \mathcal{G}(x, e) > 1,
+\end{equation} onde $\mathcal{G}(x, e) := \displaystyle \frac{e^T\Xi e}{x^T\Psi x}$. Quando um novo evento é acionado, isto é, $t = t_k$, o erro $e(t)$  e $\mathcal{G}(x, e)$ são nulos. Por outro lado, enquanto um novo evento não é acionado, tém-se $0 < \mathcal{G}(x, e) < 1$. Considerando que \begin{equation} \mathcal{G}(x, e) \leq \Lambda \left(\frac{\|e(t)\|}{\|x(t)\|}\right) ^ 2, \end{equation} onde $\Lambda = \displaystyle \frac{\lambda_{\max}(\Xi)}{\lambda_{\min}(\Psi)}$, nenhum evento é acionado enquanto \begin{equation}
+  \frac{\|e(t)\|}{\|x(t)\|} \leq \frac{1}{\sqrt{\Lambda}}.
+\end{equation} Seja a dinâmica de $\displaystyle \frac{\|e(t)\|}{\|x(t)\|}$ definida como: \begin{gather}
+  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) = - \frac{e^T\dt{x}(t)}{\|e(t)\|\|x(t)\|} - \frac{x^T\dt{x}(t) \|e(t)\|}{\|x(t)\|^2 \|x(t)\|} \notag \\[12pt]
+  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq - \frac{\|e(t)\|\|\dt{x}(t)\|}{\|e(t)\|\|x(t)\|} - \frac{\|x(t)\| \|\dt{x}(t)\| \|e(t)\|}{\|x(t)\|^2 \|x(t)\|} \notag \\[12pt]
+  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq \left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) \frac{\|\dt{x}(t)\|}{\|x(t)\|}.
+  \label{eq:imee_inequation_1}
+\end{gather} Além disso, a partir do sistema em malha fechada \eqref{eq:etm_closed_loop}, é possível definir uma constante $L \in \mathbb{R}_{>0}$ tal que: \begin{gather}
+  \|\dt{x}(t)\| = \| (A + BK) x(t) + BKe(t) \| \notag \\[12pt]
+  \|\dt{x}(t)\| \leq L(\|x(t)\| + \|e(t)\|)
+  \label{eq:imee_inequation_2}.
+\end{gather} Desta forma, das inequações \eqref{eq:imee_inequation_1} e \eqref{eq:imee_inequation_2}, tém-se: \begin{gather}
+  \frac{\|\dt{x}(t)\|}{\|x(t)\|} \leq L\left(1 + \frac{\|e(t)\|}{\|x(t)\|}\right) \notag \\[12pt]
+  \left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) \frac{\|\dt{x}(t)\|}{\|x(t)\|} \leq L\left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) ^ 2 \notag \\[12pt]
+  \frac{d}{dt}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq L\left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) ^ 2.
+  \label{eq:imee_inequation_3}
+\end{gather} Definindo $\varphi (t) = \displaystyle \frac{\|e(t)\|}{\|x(t)\|}$, a inequação \eqref{eq:imee_inequation_3} pode ser reescrita como: \begin{equation}
+  \dt{\varphi}(t) \leq L \left(1 + \varphi(t)\right)^2
+\end{equation}
 
 % ETM: Condições de Co-design
 \subsection{Minimização do número de eventos}
 
 
 Para reduzir o número de eventos gerados, é proposto o seguinte problema de otimização convexa que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{equation}\underset{Q, X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathbf{tr}(\tilde{\Xi} + \tilde{\Psi} + Q). \label{eq:optimization_problem}\end{equation} Este problema é sujeito a \acrshort{lmi} apresentada em \eqref{eq:etm_lmi_1} e à seguinte \acrshort{lmi}: \begin{equation}\begin{bmatrix}
-  -Q & I \\ \star & -X
-\end{bmatrix} < 0. \label{eq:constraints_2}\end{equation} A solução deste problema tende a minimizar os autovalores de $Q$, $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Se o problema for factível, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
+    -Q & I \\ \star & -X
+  \end{bmatrix} < 0. \label{eq:constraints_2}\end{equation} A solução deste problema tende a minimizar os autovalores de $Q$, $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Se o problema for factível, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
 
-\section{Conversores em Malha Fechada sob o \acrshort{etm}}
+\section{Conversores em Malha Fechada sob o \acrshort{etc}}
+
+\subsection{Conversor Buck}
+\subsubsection{Sinal de Pertubação Constante}
+\subsubsection{Sinal de Pertubação Variável}
+\subsection{Conversor Boost}
+\subsubsection{Sinal de Pertubação Constante}
+\subsubsection{Sinal de Pertubação Variável}
