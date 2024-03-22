@@ -27,6 +27,8 @@ Os conversores \acrshort{cc}-\acrshort{cc} são dispositivos bastante utilizados
   \label{fig:cpl_circuit}
 \end{figure}
 
+\textcolor{red}{[Aqui não temos apenas uma CPL (que precisa estar melhor caracterizada), a figura e o texto fala de CRL+CPL. É bom esclarecer.]}
+
 \noindent A partir deste circuito, pode-se derivar a seguinte equação dinâmica: \begin{equation} i_{\text{CPL}}(t) = i_R(t) + I_{\text{CPL}} = \frac{P_{\text{CPL}}}{(v_{\text{CPL}}(t))^2} + I_{\text{CPL}} \label{eq:cpl-circuit},\end{equation} onde $P_{\text{CPL}}$ representa a potência da \acrshort{cpl}. Ao linearizar a equação dinâmica \eqref{eq:cpl-circuit} em torno do ponto de operação $P_0$ para a potência da \acrshort{cpl} e $V_0$ para a tensão da \acrshort{cpl}, pode-se obter a seguinte expressão: \begin{equation} \delta i_{\text{CPL}}(t) = - \frac{P_0}{{V_0}^2}\delta v_{\text{CPL}}(t) + I_{\text{CPL}}. \end{equation} Considerando que $\frac{1}{R_0} = - \frac{P_0}{{V_0}^2}$, é possível observar a presença de uma impedância negativa e, da equação \eqref{eq:cpl-circuit}, a não linearidade da \acrshort{cpl}. Estas característica podem causar oscilações indesejadas que podem causar instabilidade e colapso do sistema das \acrshortpl{mr}. \cite{Bessa2020, Amiri2020}.
 
 % MR: Soluções Propostas
@@ -226,7 +228,7 @@ Ao aplicar a \acrshort{lkc}, temos que a corrente do diodo é igual à soma das 
 
 Desse modo, o modelo dinâmico médio do segundo sistema pode ser formulado a partir das equações \eqref{eq:boost_converter_current} e \eqref{eq:boost_converter_voltage}. Este modelo é representado por: \begin{equation} \begin{cases} \dt{i}_L(t) &= \displaystyle - \frac{1-d(t)}{L}v_C(t) + \frac{1}{L}v_{\mathrm{in}} \\[8pt] \dt{v}_C(t) &= \displaystyle \frac{1 - d(t)}{C} i_L(t) - \frac{1}{RC}v_C(t) - \frac{1}{Cv_C(t)}P_{\mathrm{cpl}}(t). \label{eq:boost_nonlinear_system}\end{cases} \end{equation} As grandezas $i_L(t)$ e $v_C(t)$ representam os estados do sistema. Enquanto que $d(t)$ e $P_{\mathrm{cpl}}(t)$ representam as entadas do sistema, onde o duty cycle é controlável e a potência da \acrshort{cpl} é considerada a pertubação do sistema.
 
-\subsection{Transladação dos modelos obtidos}
+\subsection{Transladação dos modelos para um ponto de operação}
 
 % Transladação: introdução
 Para estudo dos sistemas dinâmicos em um ponto de equilíbrio \begin{equation} P_{\mathrm{o}} = \left({i_L}_{\mathrm{o}}, \, {v_C}_{\mathrm{o}}, \, d_{\mathrm{o}}, \, {P_{\mathrm{cpl}}}_{\mathrm{o}} \right). \label{eq:operation_point} \end{equation} Ambos os sistemas serão transladados pelo método de mudança de variáveis. As variáveis de estado e as entradas de ambos os sistemas serão decompostas em termos constantes (seus valores no ponto de equilíbrio) e variantes no tempo, conforme apresentado nas equações a seguir: \begin{align}
@@ -380,6 +382,8 @@ A \autoref{table:op_parameters_buck} apresenta os pontos de operação do conver
 
 Por fim, para o conversor em torno de $P_{\mathrm{o}, 1}$, considera-se nas simulações que o valor inicial da corrente do indutor $i_L(0)$ é definido como 150\% do seu valor no ponto de operação e a tensão inicial do capacitor $v_C(0)$ é definida como 13\% do seu valor no mesmo ponto. De maneira análoga, para o conversor em torno de $P_{\mathrm{o}, 2}$, tanto a corrente inicial quanto a tensão inicial são iguais a 90\% dos seus valores no ponto de operação.
 
+\textcolor{red}{[Acho que o título "sinais de entrada constante" fica estranho. Sugiro fazer o seguinte, descrever aqui em uma lista os cenários de teste do simulador numerando-os (Cenário 1 e 2) e deixando claro que tipo de teste é feito em cada caso e qual o objetivo. Depois cria uma subsection para descrever só os resultados de cata cenário (o título pode ser cenário 1 e 2]}
+
 \subsubsection{Sinais de Entrada Constantes}
 
 A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores definidos no \acrshort{po}. Além disto, observa-se que o sistema linearizado diverge do sistema não linear em seu comportamento. Essa divergência se reduz gradativamente ao longo do tempo.
@@ -516,7 +520,7 @@ Os pontos de operação do conversor Boost, usados para simulação, são aprese
 
 \subsubsection{Sinais de Entrada Constantes}
 
-Na primeira simulação, os parâmetros de entrada do sistema são mantidos constantes em seus valores no ponto de operação. Isso permite analisar o comportamento do conversor Boost nesse estado estável, sem variações em torno do ponto de operação. Na \autoref{fig:simulation_1_boost_1}, o modelo não linear apresenta estabilidade, com a corrente do indutor e a tensão do capacitor convergindo para seus valores no ponto de operação. Além disso, é possível observar uma diferença nos comportamentos entre os modelos não lineares e os linearizados, uma distinção que diminui à medida que os sinais convergem.
+Na primeira simulação, os parâmetros de entrada do sistema são mantidos constantes em seus valores no ponto de operação. Isso permite analisar o comportamento do conversor Boost nesse estado estável, sem variações em torno do ponto de operação. Na \autoref{fig:simulation_1_boost_1}, o modelo não linear apresenta estabilidade, com a corrente do indutor e a tensão do capacitor convergindo para seus valores no ponto de operação. Além disso, é possível observar uma diferença nos comportamentos entre os modelos não lineares e os linearizados, uma distinção que diminui à medida que os sinais convergem. \textcolor{red}{[IB: a questão não é apenas convergir, mas sim as trajetórias se aproximarem do ponto de equilíbrio em torno do qual o sistema é linearizado.]}
 
 \begin{figure}[H]
   \centering
