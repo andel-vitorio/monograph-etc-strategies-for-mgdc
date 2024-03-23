@@ -300,7 +300,7 @@ Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresent
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
-  \caption{Entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
 \end{figure}
 
 Por outro lado, durante a simulação do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$, observou-se que o \acrshort{etm} desencadeou uma série de novos eventos, como mostrado na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}. Esse padrão de comportamento era previsto devido à instabilidade associada ao ponto $P_{\mathrm{o}, 2}$. À medida que o sistema tende a se desviar gradualmente nesse ponto, o erro de transmissão aumenta, resultando na função de acionamento $\Gamma$ do \acrshort{etm} tornando-se negativa, o que permite o disparo de novos eventos de transmissão. Esse ciclo pode se repetir várias vezes ao longo do tempo, mesmo que o sistema, em malha fechada, eventualmente se estabilize. Portanto, é esperado que o \acrshort{etm} continue a realizar acionamentos mesmo após a estabilização do sistema.
@@ -328,434 +328,489 @@ Por outro lado, durante a simulação do conversor Buck em torno do ponto $P_{\m
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
-  \caption{Entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
 \end{figure}
 
 
 \subsubsection{Sinal de Pertubação Variável}
 
+Nesta simulação, o conversor Buck em malha fechada foi analisado sob a influência de uma perturbação variável. O sina de  perturbação utilizada é a mesma da simulação em malha aberta do conversor Buck, permitindo a comparação dos resultados e a avaliação do \acrshort{etc} em malha fechada.
+
+Na Figura \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_a}, pode-se observar que o comportamento do conversor em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada é semelhante ao comportamento obtido em malha aberta. Além disso, foram necessários apenas três eventos de transmissão, como pode ser visto nas Figuras \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_b} e \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_c}.
+
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/result.eps}
-  \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/result.eps}
+    \caption{Estados do conversor.}
+    \label{fig:buck_converter_variable_pcpl_static_etm_op1_duty_a}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/duty-cycle.eps}
+    \caption{Duty Cycle $d(t)$}
+    \label{fig:buck_converter_variable_pcpl_static_etm_op1_duty_b}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/inter-event-times.eps}
+    \caption{Intervalo de tempo entre eventos.}
+    \label{fig:buck_converter_variable_pcpl_static_etm_op1_duty_c}
+  \end{subfigure}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+Na simulação do conversor Buck em torno do ponto instável sob perturbação variável, o \acrshort{etm} estático assegurou a estabilidade do sistema durante toda a simulação (\autoref{fig:buck_converter_variable_pcpl_static_etm_op2_duty_a}). O aumento da magnitude da perturbação evidenciou a diferença entre os modelos não linear e linearizado. Após a estabilização, o \acrshort{etm} não necessitava acionar novos eventos, exceto em caso de alterações no sinal de perturbação (\autoref{fig:buck_converter_variable_pcpl_static_etm_op2_duty_c}). O sistema não linear apresentou menor demanda por eventos em comparação ao sistema linearizado e, ao final da simulação, o sistema se estabilizou no ponto de operação definido.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-% Instável
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/result.eps}
-  \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/result.eps}
+    \caption{Estados do conversor.}
+    \label{fig:buck_converter_variable_pcpl_static_etm_op2_duty_a}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/duty-cycle.eps}
+    \caption{Duty Cycle $d(t)$}
+    \label{fig:buck_converter_variable_pcpl_static_etm_op2_duty_b}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/inter-event-times.eps}
+    \caption{Intervalo de tempo entre eventos.}
+    \label{fig:buck_converter_variable_pcpl_static_etm_op2_duty_c}
+  \end{subfigure}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
 \end{figure}
 
 \subsection{Conversor Boost}
+
+O conversor Boost, que anteriormente passou por análise em malha aberta conforme descrito na \autoref{section:open_loop}, foi submetido a simulações em malha fechada, mantendo as mesmas condições de operação. A avaliação foi realizada em dois pontos de operação distintos, $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$, em duas situações diferentes: uma com o sinal de perturbação $P_{\mathrm{cpl}}$ mantido constante e outra com variação desse sinal. Os pontos de operação e os sinais de perturbação utilizados nas duas situações são idênticos aos utilizados na análise em malha aberta.
+
+No desenvolvimento do \acrshort{etm} para as simulações com o sinal de perturbação mantido constante e variável, adotou-se o valor constante $\mu = 0,5$. Os parâmetros de projeto obtidos do problema de otimização multiobjetivo para o conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ são os seguintes: \begin{gather}
+  \Xi = \begin{bmatrix}
+    4,30 \cdot 10^5  & -3,26 \cdot 10^4 \\
+    -3,26 \cdot 10^4 & 2,01 \cdot 10^6  \\
+  \end{bmatrix}, \hspace{.5cm}
+  \Psi = \begin{bmatrix}
+    1,51 \cdot 10^8    & 1,03 \cdot 10^{-6} \\
+    1,03 \cdot 10^{-6} & 1,77 \cdot 10^8    \\
+  \end{bmatrix} \text{ e } \notag \\[12pt]
+  K = \begin{bmatrix}
+    -2,81 \cdot 10^{-7} & 3,08 \cdot 10^{-8}
+  \end{bmatrix} . \notag
+\end{gather} E, para o conversor em torno do ponto $P_{\mathrm{o}, 4}$, os parâmetros são: \begin{gather}
+  \Xi = \begin{bmatrix}
+    2,77\cdot 10^{13} & 1,03\cdot 10^{13} \\
+    1,03\cdot 10^{13} & 1,12\cdot 10^{13} \\
+  \end{bmatrix}, \hspace{.5cm}
+  \Psi = \begin{bmatrix}
+    6,18\cdot 10^{8}  & 4,44\cdot 10^{-5} \\
+    4,44\cdot 10^{-5} & 6,17\cdot 10^{8}  \\
+  \end{bmatrix} \text{ e } \notag \\[12pt]
+  K = \begin{bmatrix}
+    -2,24 \cdot 10^{-2} & -7,45\cdot 10^{-3}
+  \end{bmatrix} . \notag
+\end{gather}
+
 \subsubsection{Sinal de Pertubação Constante}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op1/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+Na simulação em malha aberta, a análise mostrou que conversor Boost em torno dos pontos de operação $P_{\mathrm{o}, 3}$ apresentava estabilidade, enquanto que em torno do ponto $P_{\mathrm{o}, 4}$ apresentava instabilidade. No entanto, ao considerarmos o comportamento do conversor em malha fechada com o \acrshort{etm} estático, observa-se uma estabilização em ambos os pontos, conforme apresentado na \autoref{fig:boost_converter_constant_pcpl_static_etm_op1_duty_a} e \autoref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_a}. Em $P_{\mathrm{o}, 3}$, não houve diferenças significativas entre os comportamentos em malha aberta e fechada. Já em $P_{\mathrm{o}, 4}$, embora os modelos linear e não linear tenham divergido em malha aberta, a estabilidade foi alcançada em malha fechada, com ambos os modelos se alinhando ao ponto de operação definido.
+
+Durante a simulação do conversor em torno de $P_{\mathrm{o}, 3}$ (\autoref{fig:boost_converter_constant_pcpl_static_etm_op1_duty_c}), foram necessários apenas dois eventos no modelo não linear e três eventos no modelo linearizado, durante todo o período de simulação, resultando em maiores intervalos de tempo entre os eventos. Entretanto, a variação causada na entrada duty cycle é bastante pequena em torno do ponto de operação do duty cycle, da ordem de $10^{-6}$. Essa pequena variação não causa mudanças significativas no sistema, o que justifica a semelhança observada com o sistema em malha aberta nessas circunstâncias.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op1/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op1/result.eps}
+    \caption{Estados do conversor.}
+    \label{fig:boost_converter_constant_pcpl_static_etm_op1_duty_a}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op1/duty-cycle.eps}
+    \caption{Duty Cycle $d(t)$}
+    \label{fig:boost_converter_constant_pcpl_static_etm_op1_duty_b}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op1/inter-event-times.eps}
+    \caption{Intervalo de tempo entre eventos.}
+    \label{fig:boost_converter_constant_pcpl_static_etm_op1_duty_c}
+  \end{subfigure}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
 \end{figure}
+
+A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$ revelou um comportamento similar ao do conversor Buck (\autoref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c}). O \acrshort{etm} gerou sucessivos eventos devido à instabilidade inerente a este ponto de operação. À medida que o sistema tende a se desviar gradualmente, o erro de transmissão aumenta, tornando a função de acionamento do \acrshort{etm}  negativa e permitindo o disparo de novos eventos. Esse ciclo pode se repetir mesmo após a estabilização do sistema em malha fechada, justificando a contínua atuação do \acrshort{etm}.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op1/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op2/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op2/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op2/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op2/result.eps}
+    \caption{Estados do conversor.}
+    \label{fig:boost_converter_constant_pcpl_static_etm_op2_duty_a}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op2/duty-cycle.eps}
+    \caption{Duty Cycle $d(t)$}
+    \label{fig:boost_converter_constant_pcpl_static_etm_op2_duty_b}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op2/inter-event-times.eps}
+    \caption{Intervalo de tempo entre eventos.}
+    \label{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c}
+  \end{subfigure}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
 \end{figure}
 
 \subsubsection{Sinal de Pertubação Variável}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+Na simulação do conversor Boost em malha fechada com perturbação variável, a mesma perturbação da simulação em malha aberta foi usada. O comportamento do conversor em torno do ponto $P_{\mathrm{o}, 3}$ foi similar em ambas as condições, com resposta rápida e poucos eventos, apesar das variações na perturbação, conforme apresentado na \autoref{fig:boost_converter_variable_pcpl_static_etm_op1_duty_a}. A pequena variação na entrada, da ordem de $10^{-6}$, não afetou significativamente o sistema, justificando a similaridade com a malha aberta. Isso ressalta a eficácia do \acrshort{etm} em manter a estabilidade da saída do conversor Boost no ponto de operação, mesmo sob perturbações.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/result.eps}
+    \caption{Estados do conversor.}
+    \label{fig:boost_converter_variable_pcpl_static_etm_op1_duty_a}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/duty-cycle.eps}
+    \caption{Duty Cycle $d(t)$}
+    \label{fig:boost_converter_variable_pcpl_static_etm_op1_duty_b}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/inter-event-times.eps}
+    \caption{Intervalo de tempo entre eventos.}
+    \label{fig:boost_converter_variable_pcpl_static_etm_op1_duty_c}
+  \end{subfigure}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
 \end{figure}
+
+O ETM estático assegurou a estabilidade do conversor Boost sob perturbação variável em torno do ponto de operação instável $P_{o, 4}$, conforme ilustrado na \autoref{fig:boost_converter_variable_pcpl_static_etm_op2_duty_a}. Apesar dos afastamentos da perturbação em determinados momentos em relação ao ponto de operação, não foram observadas diferenças significativas entre os modelos não linear e linearizado sob malha fechada, tornando-os praticamente idênticos. Embora haja semelhanças nos estados e na entrada do sistema, é evidente na \autoref{fig:boost_converter_variable_pcpl_static_etm_op2_duty_c} que os conjuntos de \acrshortpl{itee} são distintos entre o modelo não linear e o linearizado.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/result.eps}
+    \caption{Estados do conversor.}
+    \label{fig:boost_converter_variable_pcpl_static_etm_op2_duty_a}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/duty-cycle.eps}
+    \caption{Duty Cycle $d(t)$}
+    \label{fig:boost_converter_variable_pcpl_static_etm_op2_duty_b}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/inter-event-times.eps}
+    \caption{Intervalo de tempo entre eventos.}
+    \label{fig:boost_converter_variable_pcpl_static_etm_op2_duty_c}
+  \end{subfigure}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
 \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \section{Conversores em Malha Fechada sob \acrshort{etm} Dinâmico}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \subsection{Conversor Buck}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \subsubsection{Sinal de Pertubação Constante}
 
-\section{Conversores em Malha Fechada sob \acrshort{etm} Dinâmico}
+% % Estável
 
-\subsection{Conversor Buck}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/result.eps}
+%   \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\subsubsection{Sinal de Pertubação Constante}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-% Estável
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/result.eps}
-  \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% % % Instável
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/result.eps}
+%   \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
+
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
+
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
+
+% \subsubsection{Sinal de Pertubação Variável}
+
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/result.eps}
+%   \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
+
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
+
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
+
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
 % % Instável
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/result.eps}
-  \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/result.eps}
+%   \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\subsubsection{Sinal de Pertubação Variável}
+% \subsection{Conversor Boost}
+% \subsubsection{Sinal de Pertubação Constante}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/result.eps}
-  \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/result.eps}
+%   \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-% Instável
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/result.eps}
+%   \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/result.eps}
-  \caption{Estados do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 2}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \subsubsection{Sinal de Pertubação Variável}
 
-\subsection{Conversor Boost}
-\subsubsection{Sinal de Pertubação Constante}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/result.eps}
+%   \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/result.eps}
+%   \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/duty-cycle.eps}
+%   \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/inter-event-times.eps}
+%   \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
 
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\subsubsection{Sinal de Pertubação Variável}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 3}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/result.eps}
-  \caption{Estados do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/duty-cycle.eps}
-  \caption{Entrada duty cycle $d(t)$ do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/inter-event-times.eps}
-  \caption{Tempo entre evento do conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável e \acrshort{etm} estático.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \captionsetup{justification=centering}
-  \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/eta.eps}
-  \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável.}
-  % \label{fig:simulation_2_boost_op2}
-\end{figure}
+% \begin{figure}[H]
+%   \centering
+%   \captionsetup{justification=centering}
+%   \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/eta.eps}
+%   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico na simulação do conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 4}$ sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável.}
+%   % \label{fig:simulation_2_boost_op2}
+% \end{figure}
