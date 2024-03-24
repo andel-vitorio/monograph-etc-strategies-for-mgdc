@@ -332,9 +332,16 @@ A partir dessas equações, podemos derivar as expressões linearizadas de $\dt{
   \end{bmatrix}. \label{eq:boost_linear_system}
 \end{equation}
 
-\section{Simulação dos Conversores em Malha Aberta}
+\section{Simulação dos Conversores em Malha Aberta} \label{section:open_loop}
 
 Nesta seção, será realizada uma análise dos dois conversores \acrshort{cc}-\acrshort{cc} em malha aberta, analisando suas respostas em diversos cenários e condições operacionais. Utilizou-se a linguagem de programação Python juntamente com bibliotecas especializadas em simulação de sistemas dinâmicos para simular os modelos não lineares transladados e os linearizados dos conversores obtidos na seção anterior. Com base nos resultados obtidos, é possível observar a influência de fatores como a variação das entradas e das condições de operação nos comportamentos dos conversores.
+
+Nas simulações, os conversores Buck e Boost são avaliados em dois cenários distintos descritos abaixo:
+
+\begin{itemize}
+  \item \textbf{Cenário 1}: Neste cenário, os conversores Buck e Boost são simulados em duas situações distintas. No primeiro caso, o conversor Buck é simulado em torno do \acrshort{po} estável ($P_{\mathrm{o}, 1}$), enquanto o conversor Boost é simulado em torno do \acrshort{po} estável ($P_{\mathrm{o}, 3}$). No segundo caso, tanto o conversor Buck quanto o Boost são simulados em torno de um \acrshort{po} instável ($P_{\mathrm{o}, 2}$ para o Buck e $P_{\mathrm{o}, 4}$ para o Boost). Em cada caso, os parâmetros de entrada dos conversores são definidos com seus respectivos valores nos pontos de operação. O objetivo é avaliar a estabilidade e o desempenho dos conversores sob condições invariáveis, considerando o sinal de perturbação $P_{\mathrm{cpl}}(t)$ e a entrada controlável $d(t)$ fixos durante toda a simulação, analisando se eles mantêm sua operação dentro de limites aceitáveis. \label{cenario:1}
+  \item \textbf{Cenário 2}: Neste cenário, os conversores Buck e Boost, em cada um dos pontos de operação $P_{\mathrm{o}, 1}$ e $P_{\mathrm{o}, 2}$, são submetidos a um sinal de perturbação $P_{\mathrm{cpl}}$ variável, ou seja, a potência da \acrshort{cpl} conectada ao conversor é alterada em determinados momentos. O objetivo é analisar como os conversores respondem à variações na \acrshort{cpl}. Ele permite observar como os sistemas se ajustam dinamicamente a estas mudanças e avaliar se o conversor é capaz de manter sua estabilidade e desempenho. \label{cenario:2}
+\end{itemize}
 
 \subsection{Conversor Buck}
 
@@ -382,11 +389,9 @@ A \autoref{table:op_parameters_buck} apresenta os pontos de operação do conver
 
 Por fim, para o conversor em torno de $P_{\mathrm{o}, 1}$, considera-se nas simulações que o valor inicial da corrente do indutor $i_L(0)$ é definido como 150\% do seu valor no ponto de operação e a tensão inicial do capacitor $v_C(0)$ é definida como 13\% do seu valor no mesmo ponto. De maneira análoga, para o conversor em torno de $P_{\mathrm{o}, 2}$, tanto a corrente inicial quanto a tensão inicial são iguais a 90\% dos seus valores no ponto de operação.
 
-\textcolor{red}{[Acho que o título "sinais de entrada constante" fica estranho. Sugiro fazer o seguinte, descrever aqui em uma lista os cenários de teste do simulador numerando-os (Cenário 1 e 2) e deixando claro que tipo de teste é feito em cada caso e qual o objetivo. Depois cria uma subsection para descrever só os resultados de cata cenário (o título pode ser cenário 1 e 2]}
+\subsubsection{Cenário 1}
 
-\subsubsection{Sinais de Entrada Constantes}
-
-A primeira simulação consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores definidos no \acrshort{po}. Além disto, observa-se que o sistema linearizado diverge do sistema não linear em seu comportamento. Essa divergência se reduz gradativamente ao longo do tempo.
+Como já mencionado, este cenário consiste em manter os parâmetros de entrada do sistema constantes, definindo-os como seus valores no \acrshort{po}. Isso resulta em variação nula em torno do \acrshort{po}, permitindo a análise do comportamento do conversor nesse estado. Os resultados para ambos os modelos do conversor Buck estão nas Figuras \ref{fig:simulation_1_buck_1} e \ref{fig:simulation_1_buck_2}. Nos gráficos apresentados na \autoref{fig:simulation_1_buck_1}, o modelo demonstra estabilidade, com a corrente do indutor e a tensão do capacitor convergindo rapidamente para seus valores definidos no \acrshort{po}. Além disto, observa-se que o sistema linearizado diverge do sistema não linear em seu comportamento. Essa divergência se reduz gradativamente ao longo do tempo.
 
 \begin{figure}[H]
   \centering
@@ -406,9 +411,9 @@ Para o conversor em torno do ponto $P_{\mathrm{o}, 2}$, no entanto, tanto a corr
   \label{fig:simulation_1_buck_2}
 \end{figure}
 
-\subsubsection{Sinal de pertubação $P_{\textrm{cpl}}$ variável}
+\subsubsection{Cenário 2}
 
-A segunda simulação avaliou o impacto do sinal de perturbação $P_{\mathrm{cpl}}$ no conversor Buck, variando a potência da \acrshort{cpl}. A \autoref{fig:power_cpl_variation} apresenta os valores do sinal de pertubação durante a simulação do conversor operando em torno do ponto $P_{\mathrm{o}, 1}$ definido anteriormente.
+No segundo cenário, foi avaliado o impacto do sinal de perturbação $P_{\mathrm{cpl}}$ no conversor Buck, variando a potência da \acrshort{cpl}. A \autoref{fig:power_cpl_variation} apresenta os valores do sinal de pertubação durante a simulação do conversor operando em torno do ponto $P_{\mathrm{o}, 1}$ definido anteriormente.
 
 \begin{figure}[H]
   \centering
@@ -518,9 +523,9 @@ Os pontos de operação do conversor Boost, usados para simulação, são aprese
   \label{table:op_parameters_boost}
 \end{table}
 
-\subsubsection{Sinais de Entrada Constantes}
+\subsubsection{Cenário 1}
 
-Na primeira simulação, os parâmetros de entrada do sistema são mantidos constantes em seus valores no ponto de operação. Isso permite analisar o comportamento do conversor Boost nesse estado estável, sem variações em torno do ponto de operação. Na \autoref{fig:simulation_1_boost_1}, o modelo não linear apresenta estabilidade, com a corrente do indutor e a tensão do capacitor convergindo para seus valores no ponto de operação. Além disso, é possível observar uma diferença nos comportamentos entre os modelos não lineares e os linearizados, uma distinção que diminui à medida que os sinais convergem. \textcolor{red}{[IB: a questão não é apenas convergir, mas sim as trajetórias se aproximarem do ponto de equilíbrio em torno do qual o sistema é linearizado.]}
+No Cenário 1, os parâmetros de entrada do sistema são mantidos constantes em seus valores no ponto de operação. Isso permite analisar o comportamento do conversor Boost nesse estado estável, sem variações em torno do ponto de operação. Na \autoref{fig:simulation_1_boost_1}, o modelo não linear apresenta estabilidade, com a corrente do indutor e a tensão do capacitor convergindo para seus valores no ponto de operação. Além disso, é possível observar uma diferença nos comportamentos entre os modelos não lineares e os linearizados, uma distinção que diminui à medida que os sinais convergem. \textcolor{red}{[IB: a questão não é apenas convergir, mas sim as trajetórias se aproximarem do ponto de equilíbrio em torno do qual o sistema é linearizado.]}
 
 \begin{figure}[H]
   \centering
@@ -540,9 +545,9 @@ Ao analisar o conversor em torno do ponto $P_{\mathrm{o}, 4}$, é evidente um co
   \label{fig:simulation_1_boost_2}
 \end{figure}
 
-\subsubsection{Sinal de pertubação $P_{\textrm{cpl}}$ variável}
+\subsubsection{Cenário 2}
 
-Na segunda simulação, foi analisado o impacto do sinal de perturbação $P_{\mathrm{cpl}}$ no conversor Boost, variando a potência da \acrshort{cpl}. Os valores do sinal de perturbação durante a simulação do conversor operando em torno dos pontos $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$ previamente definidos são apresentados na \autoref{fig:boost_power_cpl_variation}.
+No Cenário 2, foi analisado o impacto do sinal de perturbação $P_{\mathrm{cpl}}$ no conversor Boost, variando a potência da \acrshort{cpl}. Os valores do sinal de perturbação durante a simulação do conversor operando em torno dos pontos $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$ previamente definidos são apresentados na \autoref{fig:boost_power_cpl_variation}.
 
 \begin{figure}[ht]
   \centering
