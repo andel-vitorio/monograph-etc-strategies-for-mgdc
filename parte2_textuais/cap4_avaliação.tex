@@ -403,6 +403,69 @@ Em relação ao \acrshort{etm} dinâmico, durante a simulação foi obtido um co
 
 Na \autoref{fig:buck_converter_constant_pcpl_dynamic_etm_eta}, são apresentadas as evoluções temporais da variável dinâmica $\eta(n)$ durante a simulação do conversor Buck nos \acrshortpl{po} estável e instável. É possível observar que $\eta(t)$ é não negativa para todos os valores de $t$, conforme esperado, e converge para o equilíbrio na origem ($\eta = 0$). O efeito de $\eta(t)$ produz o aumento dos \acrshort{itee}, como pode-se observar ao comparar as Figuras \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op1_c} e \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op2_c}, pois se comporta como um buffer que armazena a redução desnecessária da função de Lyapunov $V(x)$.
 
+% Esta análise investiga a relação entre o parâmetro $\mu$ do problema multiobjetivo e o comportamento do sistema em malha fechada. Para isso, o conversor Buck é considerado operando no ponto de operação instável $P_{\mathrm{o}, 2}$  com um sinal de perturbação constante igual ao valor do ponto de operação. O parâmetro $\mu$ variou entre 0 e 1, e foram obtidos o tempo de acomodação de 2\% e o tempo médio dos intervalos de tempo entre eventos.
+
+A \autoref{fig:buck_converter_mu} ilustra os resultados obtidos ao variar $\mu$. É observável que, à medida que $\mu$ aumenta, a média inicialmente aumenta até certo ponto, porém, em seguida, diminui gradualmente até tender a zero. Por outro lado, os tempos de acomodação aumentam à medida que $\mu$ aumenta. Além disto, não há diferenças significativas entre as respostas obtidas sob o \acrshort{etm} estático e dinâmico.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/itee-mean.eps}
+    \caption{Média dos \acrshort{itee} em relação a variação de $\mu$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static_ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático em resposta às mudanças em $\mu$.}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/dynamic_ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} dinâmico em resposta às mudanças em $\mu$.}
+  \end{subfigure}
+  \caption{Resposta do conversor Buck sob variação do parâmetro $\mu$}
+  \label{fig:buck_converter_mu}
+\end{figure}
+
+
+As Figuras \ref{fig:classic_buck_cen1_op1} e \ref{fig:classic_buck_cen1_op2} apresentam o comportamento do conversor Buck neste cenário, sob um controlador desenvolvido com base no critério de estabilidade de Hurwitz. É possível observar que o desempenho do sistema é diferente do comportamento sob o ETC. Enquanto o conversor permanece instável em malha fechada ao redor do ponto instável, sua resposta em torno do ponto estável é notavelmente lenta.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim1/op1/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
+    % \label{fig:buck_converter_dynamic_pcpl_dynamic_etm_op1_d}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim1/op1/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
+  \end{subfigure}
+  \caption{Conversor Buck no Cenário 1 operando em torno de $P_{\mathrm{o}, 1}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_buck_cen1_op1}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim1/op2/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim1/op2/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
+  \end{subfigure}
+  \caption{Conversor Buck no Cenário 1 em torno de $P_{\mathrm{o}, 2}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_buck_cen1_op2}
+\end{figure}
+
 \subsubsection{Cenário 2}
 
 Nesta simulação, o conversor Buck em malha fechada foi analisado sob a influência do sinal de perturbação variável. Na Figura \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_a}, pode-se observar que o comportamento do conversor em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada é semelhante ao comportamento obtido em malha aberta. Além disso, foram necessários apenas três eventos de transmissão, como pode ser visto nas Figuras \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_b} e \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_c}.
@@ -540,35 +603,39 @@ No entanto, ao considerar os pontos instáveis, como $P_{\mathrm{o}, 2}$, os int
   \label{fig:buck_converter_variable_pcpl_dynamic_etm_eta}
 \end{figure}
 
-\subsubsection{Variação do Parâmetro $\mu$ }
-
-Esta análise investiga a relação entre o parâmetro $\mu$ do problema multiobjetivo e o comportamento do sistema em malha fechada. Para isso, o conversor Buck é considerado operando no ponto de operação instável $P_{\mathrm{o}, 2}$  com um sinal de perturbação constante igual ao valor do ponto de operação. O parâmetro $\mu$ variou entre 0 e 1, e foram obtidos o tempo de acomodação de 2\% e o tempo médio dos intervalos de tempo entre eventos.
-
-A \autoref{fig:buck_converter_mu} ilustra os resultados obtidos ao variar $\mu$. É observável que, à medida que $\mu$ aumenta, a média inicialmente aumenta até certo ponto, porém, em seguida, diminui gradualmente até tender a zero. Por outro lado, os tempos de acomodação aumentam à medida que $\mu$ aumenta. Além disto, não há diferenças significativas entre as respostas obtidas sob o \acrshort{etm} estático e dinâmico.
+As Figuras \ref{fig:classic_buck_cen2_op1} e \ref{fig:classic_buck_cen2_op2} demonstram o comportamento do conversor Buck no Cenário 2, submetido por um controlador projetado conforme o critério de estabilidade de Hurwitz. É possível observar uma significativa diferença do desempenho do sistema em relação ao uso do \acrshort{etm}. Sob este controlador, o sistema exibe múltiplas oscilações, contrastando com o comportamento mais estável do \acrshort{etm}. Além disso, a resposta do sistema ainda permanece mais lenta em comparação com o \acrshort{etm}.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/itee-mean.eps}
-    \caption{Média dos \acrshort{itee} em relação a variação de $\mu$}
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim2/op1/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static_ts.eps}
-    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático em resposta às mudanças em $\mu$.}
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim2/op1/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
+  \end{subfigure}
+  \caption{Conversor Buck no Cenário 2 operando em torno de $P_{\mathrm{o}, 1}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_buck_cen2_op1}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim2/op2/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic_ts.eps}
-    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} dinâmico em resposta às mudanças em $\mu$.}
+    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim2/op2/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Resposta do conversor Buck sob variação do parâmetro $\mu$}
-  \label{fig:buck_converter_mu}
+  \caption{Conversor Buck no Cenário 2 em torno de $P_{\mathrm{o}, 2}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_buck_cen2_op2}
 \end{figure}
+
 
 \subsubsection{Análise Numérica de Desempenho}
 
@@ -729,21 +796,21 @@ A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/result.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/result.eps}
     \caption{Estados do conversor.}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op1_a}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/duty-cycle.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/duty-cycle.eps}
     \caption{Duty Cycle $d(t)$}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op1_b}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op1_c}
   \end{subfigure}
@@ -756,21 +823,21 @@ A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/result.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/result.eps}
     \caption{Estados do conversor.}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op2_a}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/duty-cycle.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/duty-cycle.eps}
     \caption{Duty Cycle $d(t)$}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op2_b}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op2_c}
   \end{subfigure}
@@ -785,13 +852,13 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/eta.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/eta.eps}
     \caption{Ponto de operação $P_{\mathrm{o}, 1}$}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/eta.eps}
+    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/eta.eps}
     \caption{Ponto de operação $P_{\mathrm{o}, 2}$}
   \end{subfigure}
   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ constante.}
@@ -799,6 +866,39 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
 \end{figure}
 
 Na \autoref{fig:boost_converter_constant_pcpl_dynamic_etm_eta}, é mostrada as variações temporais de $\eta(n)$ durante a simulação do conversor Boost em operações estáveis e instáveis, no Cenário 1. Observa-se que $\eta(t)$ permanece não negativa e converge para o equilíbrio na origem. Esse comportamento resulta em um aumento nos \acrshortpl{itee}, conforme evidenciado pela comparação entre as operações estáveis e instáveis.
+
+Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2}, é possível observar o comportamento do conversor Boost no Cenário 1, quando submetido a um controlador projetado com base no critério de estabilidade de Hurwitz. Em contrapartida ao \acrshort{etc}, no ponto de operação $P_{\mathrm{o}, 3}$, o sistema não linear não conseguiu estabilizar no ponto de operação estável, embora os demais modelos tenham mantido estabilidade. Além disso, em torno do ponto instável, o conversor apresentou várias oscilações, enquanto o \acrshort{etc} não demonstrou oscilações significativas.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim1/op1/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim1/op1/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
+  \end{subfigure}
+  \caption{Conversor Boost no Cenário 1 operando em torno de $P_{\mathrm{o}, 3}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_boost_cen1_op1}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim1/op2/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim1/op2/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
+  \end{subfigure}
+  \caption{Conversor Boost no Cenário 1 em torno de $P_{\mathrm{o}, 4}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_boost_cen1_op2}
+\end{figure}
 
 \subsubsection{Cenário 2}
 
@@ -933,6 +1033,40 @@ Ao considerar o ponto instável $P_{\mathrm{o}, 4}$, nota-se um aumento signific
   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável.}
   \label{fig:boost_converter_variable_pcpl_dynamic_etm_eta}
 \end{figure}
+
+Nas Figuras \ref{fig:classic_boost_cen2_op1} e \ref{fig:classic_boost_cen2_op2}, é possível observar o desempenho do conversor Boost no Cenário 2, quando sujeito a um controlador desenvolvido com base no critério de estabilidade de Hurwitz. Em contraste com o \acrshort{etc}, o sistema não linear falhou em estabilizar no ponto de operação estável, notavelmente em $P_{\mathrm{o}, 3}$, embora os outros modelos tenham mantido a estabilidade, da mesma forma como foi visto no Cenário 1. Além disso, ao redor do ponto instável, o comportamento do conversor divergiu das análises do \acrshort{etc}. Sob este último, os sinais parecem seguir um padrão de primeira ordem, ao passo que com o controlador baseado no critério de estabilidade de Hurwitz, essa característica não é observada.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim2/op1/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim2/op1/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
+  \end{subfigure}
+  \caption{Conversor Boost no Cenário 2 operando em torno de $P_{\mathrm{o}, 3}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_boost_cen2_op1}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim2/op2/result.eps}
+    \caption{Estados do Sistema $i_L(t)$  e $v_C(t)$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim2/op2/duty-cycle.eps}
+    \caption{Entrada controlável do Sistema $d(t)$}
+  \end{subfigure}
+  \caption{Conversor Boost no Cenário 2 em torno de $P_{\mathrm{o}, 4}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \label{fig:classic_boost_cen2_op2}
+\end{figure}
+
 
 \subsection{Análise Numérica de Desempenho}
 
