@@ -225,7 +225,7 @@ Portanto, é proposto o seguinte problema de otimização que visa minimizar $\l
 
 \section{Simulação dos Conversores em Malha Fechada}
 
-Esta seção aborda a análise dos conversores Buck e Boost em malha fechada sob o \acrshort{etm} estático e dinâmico, os quais foram previamente analisados em malha aberta na Seção \ref{section:open_loop}. Os ETMs foram projetados visando minimizar o número de eventos de transmissão de novos dados para o controlador, utilizando a abordagem por co-design proposta e discutida na seção anterior (\autoref{section:etm_models}). Para cada simulação, são apresentados o sinal de entrada duty cycle $d(t)$ determinado pelo controlador e os estados dos sistemas: a corrente do indutor $i_L(t)$, a tensão do capacitor $v_C(t)$, e $\eta(t)$, no caso do \acrshort{etm} dinâmico. O intervalo entre eventos (\acrshort{itee}) é calculado como a diferença de tempo entre o acionamento de eventos consecutivos, representado por $\Delta_{\acrshort{itee}} = t_{k + 1} - t_k, \, k \in \mathbb{N}$.
+Esta seção aborda a análise dos conversores Buck e Boost em malha fechada sob o \acrshort{etm} estático e dinâmico, os quais foram previamente analisados em malha aberta na Seção \ref{section:open_loop}. Os ETMs foram projetados visando minimizar o número de eventos de transmissão de novos dados para o controlador, utilizando a abordagem por co-design proposta e discutida na seção anterior (\autoref{section:etm_models}). Para cada simulação, são apresentados o sinal de entrada duty cycle $d(t)$ determinado pelo controlador e os estados dos sistemas: a corrente do indutor $i_L(t)$, a tensão do capacitor $v_C(t)$, e a variável dinâmica $\eta(t)$, no caso do \acrshort{etm} dinâmico. O intervalo entre eventos (\acrshort{itee}) é calculado como a diferença de tempo entre o acionamento de eventos consecutivos, representado por $\Delta_{\acrshort{itee}} = t_{k + 1} - t_k, \, k \in \mathbb{N}$.
 
 Para avaliar o desempenho, são obtidos e apresentados diversos parâmetros, tais como o valor médio dos \acrshortpl{itee} de cada simulação, os tempos de acomodação dos sinais de saída, a \acrfull{ise}, a \acrfull{itse} e a \acrfull{isc}. Tais integrais são definidas a seguir: \begin{gather}
   \acrshort{ise} = \int_0^{t_\mathrm{s}} e^2(t) \, \mathrm{d}t \\[12pt]
@@ -403,6 +403,88 @@ Em relação ao \acrshort{etm} dinâmico, durante a simulação foi obtido um co
   \label{fig:buck_converter_constant_pcpl_dynamic_etm_eta}
 \end{figure}
 
+\begin{table}[H]
+  \centering
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \setlength{\tabcolsep}{10pt}
+    \begin{tabular}{ccc}
+      \toprule
+      \multirow{2}{*}{\centering Cenário} & \multicolumn{2}{c}{\centering Modelo}                \\
+      \cmidrule{2-3}
+                                          & Não linear                            & Linearizado  \\
+      \midrule
+      1                                   & 0,278 ms                              & 0,261 ms     \\
+      2                                   & 0,583 $\mu$s                          & 0,581 $\mu$s \\
+      3                                   & 0,600 ms                              & 0,600 ms     \\
+      4                                   & 0,024 $\mu$s                          & 0,022 $\mu$s \\
+      \bottomrule
+    \end{tabular}
+    \captionsetup{justification=centering}
+
+    \caption{Médias dos \acrshortpl{imee} sob \newline \acrshort{etm} estático.}
+    \label{table:mean_imee_static_etm}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \setlength{\tabcolsep}{10pt}
+    \begin{tabular}{ccc}
+      \toprule
+      \multirow{2}{*}{\centering Cenário} & \multicolumn{2}{c}{\centering Modelo}                \\
+      \cmidrule{2-3}
+                                          & Não linear                            & Linearizado  \\
+      \midrule
+      1                                   & 0,291 ms                              & 0,158 ms     \\
+      2                                   & 0,583 $\mu$s                          & 0,585 $\mu$s \\
+      3                                   & 0,600 ms                              & 0,600 ms     \\
+      4                                   & 0,024 $\mu$s                          & 0,022 $\mu$s \\
+      \bottomrule
+    \end{tabular}
+    \captionsetup{justification=centering}
+
+    \caption{Médias dos \acrshortpl{imee} sob \newline \acrshort{etm} dinâmico.}
+    \label{table:mean_imee_dynamic_etm}
+  \end{minipage}
+\end{table}
+
+\vspace{8pt}
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{ccccccc}
+    \toprule
+    Cenário & Modelo & Tempo de acomodação & \acrshort{ise} & \acrshort{itse} & \acrshort{isc} \\
+    \midrule
+    1 & Não linear & 99,99 ms & 3,98 & 0,04 & 0,04\\  
+    1 & Linearizado & 99,99 ms & 2,57 & 0,02 & 0,04 \\  
+    2 & Não linear & 3,35 ms & 0,02 & 21,70 $\cdot 10^{-6}$ & 0,04 \\  
+    2 & Linearizado & 3,30 ms & 0,02 & 20,40 $\cdot 10^{-6}$ & 0,04 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Pontos de operação do dois modelos do conversor Buck. Estático}
+  \label{table:op_parameters_boost}
+\end{table}
+
+\vspace{8pt}
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{ccccccc}
+    \toprule
+    Cenário & Modelo & Tempo de acomodação & \acrshort{ise} & \acrshort{itse} & \acrshort{isc} \\
+    \midrule
+    1 & Não linear & 100,00 ms & 3,98 & 0,04 & 0,04\\  
+    1 & Linearizado & 100,00 ms & 2,57 & 0,02 & 0,04 \\  
+    2 & Não linear & 3,35 ms & 0,02 & 21,70 $\cdot 10^{-6}$ & 0,04 \\  
+    2 & Linearizado & 3,30 ms & 0,02 & 20,40 $\cdot 10^{-6}$ & 0,04 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Pontos de operação do dois modelos do conversor Buck. Dinâmico}
+  \label{table:op_parameters_boost}
+\end{table}
+
+
+
 \subsubsection{Sinal de Pertubação Variável}
 
 Nesta simulação, o conversor Buck em malha fechada foi analisado sob a influência de uma perturbação variável. O sina de  perturbação utilizada é a mesma da simulação em malha aberta do conversor Buck, permitindo a comparação dos resultados e a avaliação do \acrshort{etc} em malha fechada.
@@ -535,6 +617,36 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \end{subfigure}
   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável.}
   \label{fig:buck_converter_variable_pcpl_dynamic_etm_eta}
+\end{figure}
+
+\subsubsection{Variação do Parâmetro $\mu$ }
+
+Esta análise investiga a relação entre o parâmetro $\mu$ do problema multiobjetivo e o comportamento do sistema em malha fechada. Para isso, o conversor Buck é considerado operando no ponto de operação instável $P_{\mathrm{o}, 2}$  com um sinal de perturbação constante igual ao valor do ponto de operação. O parâmetro $\mu$ variou entre 0 e 1, e foram obtidos o tempo de acomodação de 2\% e o tempo médio dos intervalos de tempo entre eventos.
+
+A \autoref{fig:buck_converter_mu} ilustra os resultados obtidos ao variar $\mu$. É observável que, à medida que $\mu$ aumenta, a média inicialmente aumenta até certo ponto, porém, em seguida, diminui gradualmente até tender a zero. Por outro lado, os tempos de acomodação aumentam à medida que $\mu$ aumenta. Além disto, não há diferenças significativas entre as respostas obtidas sob o \acrshort{etm} estático e dinâmico.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/itee-mean.eps}
+    \caption{Média dos \acrshort{itee} em relação a variação de $\mu$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/static_ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático em resposta às mudanças em $\mu$.}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/dynamic_ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} dinâmico em resposta às mudanças em $\mu$.}
+  \end{subfigure}
+  \caption{Resposta do conversor Buck sob variação do parâmetro $\mu$}
+  \label{fig:buck_converter_mu}
 \end{figure}
 
 \subsection{Conversor Boost}
@@ -832,3 +944,83 @@ No contexto do \acrshort{etm} dinâmico, ao estudar o comportamento dos converso
   \caption{Variável dinâmica $\eta(t)$ do \acrshort{etm} dinâmico sob sinal de pertubação $P_{\mathrm{cpl}}(t)$ variável.}
   \label{fig:boost_converter_variable_pcpl_dynamic_etm_eta}
 \end{figure}
+
+\begin{table}[H]
+  \centering
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \setlength{\tabcolsep}{10pt}
+    \begin{tabular}{ccc}
+      \toprule
+      \multirow{2}{*}{\centering Cenário} & \multicolumn{2}{c}{\centering Modelo}                \\
+      \cmidrule{2-3}
+                                          & Não linear                            & Linearizado  \\
+      \midrule
+      1                                   & 0,147 s                               & 0,148 s      \\
+      2                                   & 10,01 $\mu$s                          & 8,897 $\mu$s \\
+      3                                   & 0,142 s                               & 0,077 s      \\
+      4                                   & 21,62 $\mu$s                          & 21,65 $\mu$s \\
+      \bottomrule
+    \end{tabular}
+    \captionsetup{justification=centering}
+
+    \caption{Médias dos \acrshortpl{imee} sob \newline \acrshort{etm} estático.}
+    \label{table:mean_imee_static_etm_boost}
+  \end{minipage}%
+  \begin{minipage}{.5\textwidth}
+    \centering
+    \setlength{\tabcolsep}{10pt}
+    \begin{tabular}{ccc}
+      \toprule
+      \multirow{2}{*}{\centering Cenário} & \multicolumn{2}{c}{\centering Modelo}                \\
+      \cmidrule{2-3}
+                                          & Não linear                            & Linearizado  \\
+      \midrule
+      1                                   & 0,091 s                               & 0,148 s      \\
+      2                                   & 83,47 $\mu$s                          & 91,45 $\mu$s \\
+      3                                   & 0,159 s                               & 0,128 s      \\
+      4                                   & 33,07 $\mu$s                          & 34,21 $\mu$s \\
+      \bottomrule
+    \end{tabular}
+    \captionsetup{justification=centering}
+
+    \caption{Médias dos \acrshortpl{imee} sob \newline \acrshort{etm} dinâmico.}
+    \label{table:mean_imee_dynamic_etm_boost}
+  \end{minipage}
+\end{table}
+
+\vspace{8pt}
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{ccccccc}
+    \toprule
+    Cenário & Modelo & Tempo de acomodação & \acrshort{ise} & \acrshort{itse} & \acrshort{isc} \\
+    \midrule
+    5 & Não linear & 0,75 s & 201 & 21,30 & 0,08\\  
+    5 & Linearizado & 0,75 s & 124 & 10,60 & 0,08 \\  
+    6 & Não linear & 0,11 ms & 0,08 & 96,80 $\cdot 10^{-6}$ & 0,01 \\  
+    6 & Linearizado & 0,11 ms & 0,08 & 120,00 $\cdot 10^{-6}$ & 0,01 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Pontos de operação do dois modelos do conversor Buck. Estático}
+  \label{table:op_parameters_boost}
+\end{table}
+
+\vspace{8pt}
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \begin{tabular}{ccccccc}
+    \toprule
+    Cenário & Modelo & Tempo de acomodação & \acrshort{ise} & \acrshort{itse} & \acrshort{isc} \\
+    \midrule
+    5 & Não linear & 0,75 s & 201 & 21,30 & 0,08\\  
+    5 & Linearizado & 0,75 s & 124 & 10,60 & 0,08 \\  
+    6 & Não linear & 0,11 ms & 0,08 & 96,80 $\cdot 10^{-6}$ & 0,01 \\  
+    6 & Linearizado & 0,11 ms & 0,08 & 120,00 $\cdot 10^{-6}$ & 0,01 \\
+    \bottomrule
+  \end{tabular}
+  \caption{Pontos de operação do dois modelos do conversor Buck. Dinâmico}
+  \label{table:op_parameters_boost}
+\end{table}
