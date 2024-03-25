@@ -446,6 +446,54 @@ A \autoref{fig:buck_converter_rho} apresenta os resultados obtidos ao variar o p
   \label{fig:buck_converter_rho}
 \end{figure}
 
+As Tabelas \ref{table:dynamic_etm_approaches_buck_sl} e \ref{table:dynamic_etm_approaches_buck_snl} apresentam as médias dos \acrshortpl{itee} obtidos em diferentes \acrshortpl{etm} dinâmicos, projetados com distintos valores de $\lambda$ e $\theta$, bem como do \acrshort{etm} estático, tanto para o modelo não linear quanto para o linearizado. Esses valores foram calculados para o conversor Buck operando no ponto instável $P_{\mathrm{o}, 2}$, uma vez que este ponto tende a gerar mais eventos acionados em comparação com o ponto estável. Observa-se que não há uma relação direta ou inversa entre os parâmetros $\lambda$ e $\theta$ com as médias dos \acrshortpl{itee}. No entanto, quando $\lambda = 10^3$ , as médias obtidas para todos os valores de $\theta$ foram semelhantes, ao contrário do que ocorreu com os demais valores de $\lambda$. Além disso, as médias para $\lambda = 10^3$ são bastante próximas da média obtida no \acrshort{etm} estático. E, quanto maior o valor de $\theta$,as médias obtidas eram reduzidas.
+
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \captionsetup{justification=centering}
+  \begin{tabular}{lcccc}
+    \toprule
+      ETM Estático \\
+    \midrule
+      ETM (referir) & 7,639 $\mu$s \\
+    \bottomrule
+    \toprule
+    ETM Dinâmico & $\lambda = 10$ & $\lambda = 10^2$ & $\lambda = 10^3$ \\
+    \midrule
+      Teorema (x) ($\theta = 1$) & 66,34 $\mu$s & 58,51 $\mu$s & 7,695 $\mu$s   \\
+      Teorema (x) ($\theta = 10^2$) & 13,61 $\mu$s & 38,21 $\mu$s & 7,675$\mu$s\\
+      Teorema (x) ($\theta = 10^5$) & 19,65 $\mu$s & 24,49 $\mu$s & 7,673$\mu$s\\
+      Teorema (x) ($\theta = 10^8$) & 20,32 $\mu$s & 18,31 $\mu$s & 7,648 $\mu$s\\
+    \bottomrule
+  \end{tabular} \\[4pt]
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Buck não linear em torno do ponto instável.}
+  \label{table:dynamic_etm_approaches_buck_sl}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \captionsetup{justification=centering}
+  \begin{tabular}{lcccc}
+    \toprule
+      ETM Estático \\
+    \midrule
+      ETM (referir) & 7,677 $\mu$s \\
+    \bottomrule
+    \toprule
+      ETM Dinâmico & $\lambda = 10$ & $\lambda = 10^2$ & $\lambda = 10^3$ \\
+    \midrule
+      Teorema (x) ($\theta = 1$) & 33,17 $\mu$s & 58,29 $\mu$s & 7,687 $\mu$s \\
+      Teorema (x) ($\theta = 10^2$) & 28,02 $\mu$s &  38,16 $\mu$s & 7.652  $\mu$s\\
+      Teorema (x) ($\theta = 10^5$) & 16,80 $\mu$s & 24,25 $\mu$s & 7,648  $\mu$s\\
+      Teorema (x) ($\theta = 10^8$) & 20,37 $\mu$s & 17,98 $\mu$s & 7,673  $\mu$s\\
+    \bottomrule
+  \end{tabular} \\[4pt]
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Buck linearizado em torno do ponto instável.}
+  \label{table:dynamic_etm_approaches_buck_snl}
+\end{table}
+
 
 As Figuras \ref{fig:classic_buck_cen1_op1} e \ref{fig:classic_buck_cen1_op2} apresentam o comportamento do conversor Buck neste cenário, sob um controlador desenvolvido com base no critério de estabilidade de Hurwitz. É possível observar que o desempenho do sistema é diferente do comportamento sob o ETC. Enquanto o conversor permanece instável em malha fechada ao redor do ponto instável, sua resposta em torno do ponto estável é notavelmente lenta.
 
@@ -901,6 +949,54 @@ A \autoref{fig:boost_converter_mu} apresenta os resultados obtidos ao variar o p
   \caption{Resposta do conversor Boost sob variação do parâmetro $\rho$.}
   \label{fig:boost_converter_mu}
 \end{figure}
+
+As Tabelas \ref{table:dynamic_etm_approaches_boost_sl} e \ref{table:dynamic_etm_approaches_boost_snl} apresentam as médias dos \acrshortpl{itee} obtidos com diferentes \acrshort{etm} projetados com diferentes valores dos parâmetros $\lambda$ e $\theta$, além do \acrshort{etm} estático, tanto para o modelo linear quanto o não-linear. Essas análises foram realizadas para o conversor Boost operando no ponto instável $P_{\mathrm{o}, 4}$, onde foi observado uma maior ocorrência de eventos de acionamento em comparação com o ponto estável. É interessante observar que não há uma relação direta ou inversa entre os parâmetros $\lambda$ e $\theta$ com as médias dos \acrshortpl{itee}, da mesma forma como visto no caso do conversor Buck. No entanto, destaca-se que, para $\lambda = 10^3$, as médias dos \acrshortpl{itee} obtidas para todos os valores de $\theta$ foram similares em cada modelo de conversor Boost, ao contrário das variações observadas para outros valores de $\lambda$. Além disso, as médias para $\lambda = 10^3$ estão bastante próximas da média obtida no \acrshort{etm} estático. Adicionalmente, observou-se que, à medida que o valor de $\theta$ aumenta, as médias dos \acrshortpl{itee} tendem a diminuir.
+
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \captionsetup{justification=centering}
+  \begin{tabular}{lcccc}
+    \toprule
+      ETM Estático \\
+    \midrule
+      ETM (referir) & 10,01 $\mu$s \\
+    \bottomrule
+    \toprule
+    ETM Dinâmico & $\lambda = 10$ & $\lambda = 10^2$ & $\lambda = 10^3$ \\
+    \midrule
+      Teorema (x) ($\theta = 1$) & 103,70 $\mu$s & 91,45 $\mu$s &  10,03 $\mu$s   \\
+      Teorema (x) ($\theta = 10^2$) & 62,34 $\mu$s & 54,27 $\mu$s & 10,05 $\mu$s\\
+      Teorema (x) ($\theta = 10^5$) & 38,57 $\mu$s & 35,25 $\mu$s & 10,05 $\mu$s\\
+      Teorema (x) ($\theta = 10^8$) & 28,48 $\mu$s & 25,55 $\mu$s & 10,05 $\mu$s\\
+    \bottomrule
+  \end{tabular} \\[4pt]
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Boost não linear em torno do ponto instável.}
+  \label{table:dynamic_etm_approaches_boost_sl}
+\end{table}
+
+\begin{table}[H]
+  \centering
+  \setlength{\tabcolsep}{10pt}
+  \captionsetup{justification=centering}
+  \begin{tabular}{lcccc}
+    \toprule
+      ETM Estático \\
+    \midrule
+      ETM (referir) & 8,897 $\mu$s \\
+    \bottomrule
+    \toprule
+      ETM Dinâmico & $\lambda = 10$ & $\lambda = 10^2$ & $\lambda = 10^3$ \\
+    \midrule
+      Teorema (x) ($\theta = 1$) & 88,80 $\mu$s & 83,47 $\mu$s & 8,902 $\mu$s \\
+      Teorema (x) ($\theta = 10^2$) & 19,44 $\mu$s & 53,35 $\mu$s & 8,902   $\mu$s\\
+      Teorema (x) ($\theta = 10^5$) & 15,66 $\mu$s & 34,39 $\mu$s &  8,902 $\mu$s\\
+      Teorema (x) ($\theta = 10^8$) & 28,87 $\mu$s & 25,05 $\mu$s & 8,902  $\mu$s\\
+    \bottomrule
+  \end{tabular} \\[4pt]
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Boost linearizado em torno do ponto instável.}
+  \label{table:dynamic_etm_approaches_boost_snl}
+\end{table}
 
 Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2}, é possível observar o comportamento do conversor Boost no Cenário 1, quando submetido a um controlador projetado com base no critério de estabilidade de Hurwitz. Em contrapartida ao \acrshort{etc}, no ponto de operação $P_{\mathrm{o}, 3}$, o sistema não linear não conseguiu estabilizar no ponto de operação estável, embora os demais modelos tenham mantido estabilidade. Além disso, em torno do ponto instável, o conversor apresentou várias oscilações, enquanto o \acrshort{etc} não demonstrou oscilações significativas.
 
