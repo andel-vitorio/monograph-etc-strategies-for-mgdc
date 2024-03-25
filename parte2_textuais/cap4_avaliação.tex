@@ -876,6 +876,32 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
 
 Na \autoref{fig:boost_converter_constant_pcpl_dynamic_etm_eta}, é mostrada as variações temporais de $\eta(n)$ durante a simulação do conversor Boost em operações estáveis e instáveis, no Cenário 1. Observa-se que $\eta(t)$ permanece não negativa e converge para o equilíbrio na origem. Esse comportamento resulta em um aumento nos \acrshortpl{itee}, conforme evidenciado pela comparação entre as operações estáveis e instáveis.
 
+A \autoref{fig:boost_converter_mu} ilustra os resultados obtidos ao variar $\mu$. É observável que, à medida que $\mu$ aumenta, a média inicialmente aumenta até certo ponto, porém, em seguida, diminui gradualmente até tender a zero. Por outro lado, os tempos de acomodação aumentam à medida que $\mu$ aumenta. Além disto, não há diferenças significativas entre as respostas obtidas sob o \acrshort{etm} estático e dinâmico.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/boost/itee-mean.eps}
+    \caption{Média dos \acrshort{itee} em relação a variação de $\mu$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/boost/static_ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático em resposta às mudanças em $\mu$.}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/boost/dynamic_ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} dinâmico em resposta às mudanças em $\mu$.}
+  \end{subfigure}
+  \caption{Resposta do conversor Boost sob variação do parâmetro $\mu$}
+  \label{fig:boost_converter_mu}
+\end{figure}
+
 Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2}, é possível observar o comportamento do conversor Boost no Cenário 1, quando submetido a um controlador projetado com base no critério de estabilidade de Hurwitz. Em contrapartida ao \acrshort{etc}, no ponto de operação $P_{\mathrm{o}, 3}$, o sistema não linear não conseguiu estabilizar no ponto de operação estável, embora os demais modelos tenham mantido estabilidade. Além disso, em torno do ponto instável, o conversor apresentou várias oscilações, enquanto o \acrshort{etc} não demonstrou oscilações significativas.
 
 \begin{figure}[H]
