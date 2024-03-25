@@ -217,10 +217,22 @@ Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou s
 % ETM: Condições de Co-design
 \subsection{Minimização do número de eventos}
 
+\textcolor{red}{[IB: Faltou discutir o efeito dessas matrizes também no desempenho do sistema (ex: tempo de acomodação). Além disso, o $\mu$ que aparece nos gráficos a seguir não aparece aqui (e deveria...)]}
+
 Por meio do \acrshort{imee} $\tau$ definido na equação \eqref{eq:imee_final_inequation}, pode-se observar que \acrshort{imee} apresenta uma relação inversa a $\Lambda$, definida como: \begin{equation}
   \Lambda = \frac{\lambda_{\max}(\Xi)}{\lambda_{\min}(\Psi)}
 \end{equation} Desta forma, para reduzir o número de eventos gerados, pode-se aumentar o valor de \acrshort{imee} por meio da minimização de $\Lambda$. Para isto, é necessário minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$. Como $\Xi = X^{-1}\tilde{\Xi}X^{-1}$ e $\Psi = \tilde{\Psi}^{-1}$, para minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$, os autovalores de $\tilde{\Xi}$ e $\tilde{\Psi}$ precisam ser minimizados.
 
+As matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ possuem autovalores limitados por uma faixa de valores, dependente da constante $\mu \in \mathbb{R}_{\geq 0}$. Maiores valores de $\mu$ ampliam essa faixa, permitindo a escolha de valores para $\tilde{\Xi}$ e $\tilde{\Psi}$ que facilitam a análise do \acrshort{etm}, especialmente em simulações, ao garantir resultados precisos e prevenir problemas numéricos. Para isto, é definida as seguinte \acrshortpl{lmi}: \begin{gather}
+  10^{-\mu} \mathrm{I} \leq \tilde{\Xi} \leq 10^{\mu} \mathrm{I} \label{eq:etm_lmi_2}\\
+  10^{-\mu} \mathrm{I} \leq \tilde{\Psi} \leq 10^{\mu} \mathrm{I} \label{eq:etm_lmi_3}.
+\end{gather}
+
+Portanto, para aumentar os \acrshortpl{imee}, é proposto o seguinte problema de otimização multiobjetivo que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$, com $0 \leq \rho \leq 1, \, \rho \in \mathbb{R}$: \begin{gather}\underset{X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathrm{tr}\left(\,\rho \, \tilde{\Xi} + (1 - \rho)\tilde{\Psi}\right), \\[12pt] \textrm{sujeito as \acrshortpl{lmi} } \eqref{eq:etm_lmi_1}, \hspace{0.1cm} \eqref{eq:etm_lmi_2} \hspace{0.1cm} \mathrm{e} \hspace{0.1cm} \eqref{eq:etm_lmi_3}. \notag \label{eq:optimization_problem}\end{gather} 
+
+O parâmetro $\rho$ é usado para ponderar a combinação das duas matrizes. Na função objetivo proposta, $\rho$ determina a proporção de cada matriz na soma ponderada das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$. Quando $\rho = 1$, $\tilde{\Xi}$ tem peso total; quando $\rho = 0$, $\tilde{\Psi}$ tem peso total. Valores intermediários de $\rho$ ajustam a combinação das matrizes. Em suma, $\rho$ permite ajustar a influência relativa das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ na função objetivo, útil para enfatizar características desejadas do sistema otimizado.
+
+Se o problema de otimização for factível, a sua solução tende a minimizar os autovalores de $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Logo, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
 As matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ possuem autovalores limitados por uma faixa de valores, dependente da constante $\mu \in \mathbb{R}_{\geq 0}$. Maiores valores de $\mu$ ampliam essa faixa, permitindo a escolha de valores para $\tilde{\Xi}$ e $\tilde{\Psi}$ que facilitam a análise do \acrshort{etm}, especialmente em simulações, ao garantir resultados precisos e prevenir problemas numéricos. Para isto, é definida as seguinte \acrshortpl{lmi}: \begin{gather}
   10^{-\mu} \mathrm{I} \leq \tilde{\Xi} \leq 10^{\mu} \mathrm{I} \label{eq:etm_lmi_2}\\
   10^{-\mu} \mathrm{I} \leq \tilde{\Psi} \leq 10^{\mu} \mathrm{I} \label{eq:etm_lmi_3}.
