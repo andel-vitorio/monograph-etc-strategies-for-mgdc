@@ -221,7 +221,16 @@ Por meio do \acrshort{imee} $\tau$ definido na equação \eqref{eq:imee_final_in
   \Lambda = \frac{\lambda_{\max}(\Xi)}{\lambda_{\min}(\Psi)}
 \end{equation} Desta forma, para reduzir o número de eventos gerados, pode-se aumentar o valor de \acrshort{imee} por meio da minimização de $\Lambda$. Para isto, é necessário minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$. Como $\Xi = X^{-1}\tilde{\Xi}X^{-1}$ e $\Psi = \tilde{\Psi}^{-1}$, para minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$, os autovalores de $\tilde{\Xi}$ e $\tilde{\Psi}$ precisam ser minimizados.
 
-Portanto, é proposto o seguinte problema de otimização que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$: \begin{gather}\underset{X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathrm{tr}(\tilde{\Xi} + \tilde{\Psi}). \\ \textrm{sujeito a \acrshort{lmi} } \eqref{eq:etm_lmi_1} \label{eq:optimization_problem}\end{gather} A solução deste problema tende a minimizar os autovalores de $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Se o problema for factível, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
+As matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ possuem autovalores limitados por uma faixa de valores, dependente da constante $\mu \in \mathbb{R}_{\geq 0}$. Maiores valores de $\mu$ ampliam essa faixa, permitindo a escolha de valores para $\tilde{\Xi}$ e $\tilde{\Psi}$ que facilitam a análise do \acrshort{etm}, especialmente em simulações, ao garantir resultados precisos e prevenir problemas numéricos. Para isto, é definida as seguinte \acrshortpl{lmi}: \begin{gather}
+  10^{-\mu} \mathrm{I} \leq \tilde{\Xi} \leq 10^{\mu} \mathrm{I} \label{eq:etm_lmi_2}\\
+  10^{-\mu} \mathrm{I} \leq \tilde{\Psi} \leq 10^{\mu} \mathrm{I} \label{eq:etm_lmi_3}.
+\end{gather}
+
+Portanto, para aumentar os \acrshortpl{imee}, é proposto o seguinte problema de otimização multiobjetivo que visa minimizar $\lambda_{\max} (\Xi)$ e maximizar $\lambda_{\min}(\Psi)$, com $0 \leq \rho \leq 1, \, \rho \in \mathbb{R}$: \begin{gather}\underset{X, \tilde{\Xi}, \tilde{\Psi}, \tilde{K}}\min \quad \mathrm{tr}\left(\,\rho \, \tilde{\Xi} + (1 - \rho)\tilde{\Psi}\right), \\[12pt] \textrm{sujeito as \acrshortpl{lmi} } \eqref{eq:etm_lmi_1}, \hspace{0.1cm} \eqref{eq:etm_lmi_2} \hspace{0.1cm} \mathrm{e} \hspace{0.1cm} \eqref{eq:etm_lmi_3}. \notag \label{eq:optimization_problem}\end{gather} 
+
+O parâmetro $\rho$ é usado para ponderar a combinação das duas matrizes. Na função objetivo proposta, $\rho$ determina a proporção de cada matriz na soma ponderada das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$. Quando $\rho = 1$, $\tilde{\Xi}$ tem peso total; quando $\rho = 0$, $\tilde{\Psi}$ tem peso total. Valores intermediários de $\rho$ ajustam a combinação das matrizes. Em suma, $\rho$ permite ajustar a influência relativa das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ na função objetivo, útil para enfatizar características desejadas do sistema otimizado.
+
+Se o problema de otimização for factível, a sua solução tende a minimizar os autovalores de $\tilde{\Xi}$ e $\tilde{\Psi}$ e a aumentar o intervalo de tempo entre os eventos. Logo, é possível determinar as variáveis do problema e obter os parâmetros de projeto do \acrshort{etm} capazes de reduzir o número de transmissões geradas pelo \acrshort{etm}.
 
 \section{Simulação dos Conversores em Malha Fechada}
 
@@ -405,30 +414,24 @@ Na \autoref{fig:buck_converter_constant_pcpl_dynamic_etm_eta}, são apresentadas
 
 % Esta análise investiga a relação entre o parâmetro $\mu$ do problema multiobjetivo e o comportamento do sistema em malha fechada. Para isso, o conversor Buck é considerado operando no ponto de operação instável $P_{\mathrm{o}, 2}$  com um sinal de perturbação constante igual ao valor do ponto de operação. O parâmetro $\mu$ variou entre 0 e 1, e foram obtidos o tempo de acomodação de 2\% e o tempo médio dos intervalos de tempo entre eventos.
 
-A \autoref{fig:buck_converter_mu} ilustra os resultados obtidos ao variar $\mu$. É observável que, à medida que $\mu$ aumenta, a média inicialmente aumenta até certo ponto, porém, em seguida, diminui gradualmente até tender a zero. Por outro lado, os tempos de acomodação aumentam à medida que $\mu$ aumenta. Além disto, não há diferenças significativas entre as respostas obtidas sob o \acrshort{etm} estático e dinâmico.
+A \autoref{fig:buck_converter_rho} apresenta os resultados obtidos ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. À medida que $\rho$ aumenta, nota-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Os tempos de acomodação entre o \acrshort{etm} dinâmico e estático mostraram-se notavelmente semelhantes, assim como entre os modelos não linear e linearizado. No entanto, é possível observar que as médias dos \acrshortpl{itee} são maiores no \acrshort{etm} dinâmico em comparação com o \acrshort{etm} estático.
 
 \begin{figure}[H]
   \centering
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/itee-mean.eps}
-    \caption{Média dos \acrshort{itee} em relação a variação de $\mu$}
+    \includegraphics[width=1.\textwidth]{figuras/buck/itee-mean.eps}
+    \caption{Médias dos \acrshortpl{itee} em relação a variação de $\rho$}
   \end{subfigure}
   \\[6pt]
-  \begin{subfigure}{1.\textwidth}
+  \begin{subfigure}{1.\textwidth} 
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static_ts.eps}
-    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático em resposta às mudanças em $\mu$.}
+    \includegraphics[width=1.\textwidth]{figuras/buck/ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático e dinâmico em resposta às mudanças em $\rho$.}
   \end{subfigure}
-  \\[6pt]
-  \begin{subfigure}{1.\textwidth}
-    \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic_ts.eps}
-    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} dinâmico em resposta às mudanças em $\mu$.}
-  \end{subfigure}
-  \caption{Resposta do conversor Buck sob variação do parâmetro $\mu$}
-  \label{fig:buck_converter_mu}
+  \caption{Resposta do conversor Buck sob variação do parâmetro $\rho$.}
+  \label{fig:buck_converter_rho}
 \end{figure}
 
 
@@ -866,6 +869,26 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
 \end{figure}
 
 Na \autoref{fig:boost_converter_constant_pcpl_dynamic_etm_eta}, é mostrada as variações temporais de $\eta(n)$ durante a simulação do conversor Boost em operações estáveis e instáveis, no Cenário 1. Observa-se que $\eta(t)$ permanece não negativa e converge para o equilíbrio na origem. Esse comportamento resulta em um aumento nos \acrshortpl{itee}, conforme evidenciado pela comparação entre as operações estáveis e instáveis.
+
+A \autoref{fig:boost_converter_mu} apresenta os resultados obtidos ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. Conforme $\rho$ aumenta, observa-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Durante a simulação do conversor sob \acrshort{etm} dinâmico, notaram-se diferenças nas médias dos \acrshortpl{itee} entre o modelo não linear e o linearizado, especialmente para valores de $\rho$ entre 0 e 0,8. Nesse intervalo, o modelo linearizado registrou médias superiores em relação ao modelo não linear. Esta diferenças também podem ser observadas nas simulações anteriores, apresentadas nas Figuras \ref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c} e \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op2_c}, onde, com $\rho = 0,5$, o modelo linear demonstrou acionar menos eventos em comparação ao modelo não linear. No \acrshort{etm} estático, as diferenças nas médias dos \acrshortpl{itee} não foram muito diferentes. Por outro lado, as médias dos \acrshortpl{itee} são maiores no \acrshort{etm} dinâmico que no estático. Além disso, os tempos de acomodação entre o \acrshort{etm} dinâmico e estático mostraram-se bastante semelhantes, assim como entre os modelos não linear e linearizado.
+
+\begin{figure}[H]
+  \centering
+  \captionsetup{justification=centering}
+  \begin{subfigure}{1.\textwidth}
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/boost/itee-mean.eps}
+    \caption{Médias dos \acrshortpl{itee} em relação a variação de $\rho$}
+  \end{subfigure}
+  \\[6pt]
+  \begin{subfigure}{1.\textwidth} 
+    \centering
+    \includegraphics[width=1.\textwidth]{figuras/boost/ts.eps}
+    \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático e dinâmico em resposta às mudanças em $\rho$.}
+  \end{subfigure}
+  \caption{Resposta do conversor Boost sob variação do parâmetro $\rho$.}
+  \label{fig:boost_converter_mu}
+\end{figure}
 
 Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2}, é possível observar o comportamento do conversor Boost no Cenário 1, quando submetido a um controlador projetado com base no critério de estabilidade de Hurwitz. Em contrapartida ao \acrshort{etc}, no ponto de operação $P_{\mathrm{o}, 3}$, o sistema não linear não conseguiu estabilizar no ponto de operação estável, embora os demais modelos tenham mantido estabilidade. Além disso, em torno do ponto instável, o conversor apresentou várias oscilações, enquanto o \acrshort{etc} não demonstrou oscilações significativas.
 
