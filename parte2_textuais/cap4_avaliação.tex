@@ -31,7 +31,7 @@ Conforme apresentado anteriormente, o \acrshort{etm} estático opera considerand
 \end{equation} com $\sigma \in (0,1)$, o sistema em malha fechada é assintoticamente estável.
 
 % Função evento proposta
-Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrshort{etm} estático usando a abordagem de co-design para o sistema dinâmico linear \eqref{eq:linear_system_etm} controlado por realimentação de estados. Para isso, é considerada uma função de acionamento tal que $\alpha(\|x(t)\|) = x^T(t)\Psi x(t)$, $\beta(\|e(t)\|) = e^T(t)\Xi e(t)$ e $\sigma = 1$, ou seja:  \begin{equation}
+Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrshort{etm} estático usando a abordagem de \textit{co-design} para o sistema dinâmico linear \eqref{eq:linear_system_etm} controlado por realimentação de estados. Para isso, é considerada uma função de acionamento tal que $\alpha(\|x(t)\|) = x^T(t)\Psi x(t)$, $\beta(\|e(t)\|) = e^T(t)\Xi e(t)$ e $\sigma = 1$, ou seja:  \begin{equation}
   \Gamma(x(t), e(t)) = x^T(t)\Psi x(t) - e^T(t)\Xi e(t),
   \label{eq:etm_gamma}
 \end{equation}  onde $\Psi, \, \Xi \in \mathbb{R}^{n \times n}$, e a formulação do seguinte teorema:
@@ -47,7 +47,7 @@ Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrsh
     \end{bmatrix} < 0,
     \label{eq:etm_lmi_1}
   \end{equation}
-  então, a origem do sistema linear \eqref{eq:linear_system_etm} em malha fechada sob o \acrshort{etm} estático \eqref{eq:static_etm} é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e a função de Lyapunov definida por $V(x)=x^TPx$.
+  então, a origem do sistema linear \eqref{eq:linear_system_etm} em malha fechada sob o \acrshort{etm} estático \eqref{eq:static_etm} é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e a função de \textit{Lyapunov} definida por $V(x)=x^TPx$.
 \end{theorem}
 
 \noindent \textit{Demostração.} Considere que a \acrshort{lmi} \eqref{eq:etm_lmi_1} é factível. Desde que $X$ seja uma matriz semidefinida positiva não singular, esta \acrshort{lmi} pode ser multiplicada por $\mathsf{diag}(X^{-1}, X^{-1}, I)$ no lado esquerdo e direito. Assim, \begin{gather}
@@ -168,7 +168,7 @@ Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrsh
 \end{equation} Logo, \begin{equation}
   x^T(t) P\dt{x}(t) + \dt{x}^T(t) P x(t) < 0.
   \label{eq:final_inequation_prove}
-\end{equation} Considerando a função de Lyapunov $V(x) = x^T(t)Px(t)$, a desigualdade \eqref{eq:final_inequation_prove} garante que $\dt{V}(x) < 0$. Portanto, a origem do sistema em malha fechada sob o \acrshort{etm} estático \eqref{eq:static_etm} é assintoticamente estável.
+\end{equation} Considerando a função de \textit{Lyapunov} $V(x) = x^T(t)Px(t)$, a desigualdade \eqref{eq:final_inequation_prove} garante que $\dt{V}(x) < 0$. Portanto, a origem do sistema em malha fechada sob o \acrshort{etm} estático \eqref{eq:static_etm} é assintoticamente estável.
 
 \subsection{\acrshort{etm} Dinâmico}
 
@@ -176,10 +176,10 @@ Conforme mencionado anteriormente, o \acrshort{etm} dinâmico opera considerando
   t_0 = 0, t_{k+1} = \inf \{t > t_k : \eta(t) + \theta \Gamma(x(t), e(t)) < 0 \}, \, \forall k \in \mathbb{N} \label{eq:dynamic_etm}.
 \end{equation}
 
-Para o projeto do \acrshort{etm} dinâmico, uma condição suficiente é proposta utilizando a abordagem de co-design para o sistema dinâmico linear \eqref{eq:linear_system_etm} controlado por realimentação de estados. Essa condição é derivada da condição proposta para o projeto do \acrshort{etm} estático sob as mesmas circunstâncias. Desta forma, a função de acionamento $\Gamma(x, e)$ do \acrshort{etm} dinâmico proposto é a mesma função do \acrshort{etm} estático, juntamente com a proposição do seguinte corolário:
+Para o projeto do \acrshort{etm} dinâmico, uma condição suficiente é proposta utilizando a abordagem de \textit{co-design} para o sistema dinâmico linear \eqref{eq:linear_system_etm} controlado por realimentação de estados. Essa condição é derivada da condição proposta para o projeto do \acrshort{etm} estático sob as mesmas circunstâncias. Desta forma, a função de acionamento $\Gamma(x, e)$ do \acrshort{etm} dinâmico proposto é a mesma função do \acrshort{etm} estático, juntamente com a proposição do seguinte corolário:
 
 \begin{corollary}
-  \label{corollary:etm_stability} A partir do \autoref{theorem:etm_stability}, pode-se estender o conceito para a estabilidade da origem do sistema linear \eqref{eq:linear_system_etm} em malha fechada sob \acrshort{etm} dinâmico \eqref{eq:dynamic_etm} considerando uma função de Lyapunov definida por \begin{equation}W(x) = V(x) + \eta(t) \label{eq:lyapunov_w},\end{equation} onde $\eta \in \mathbb{R}_{\geq 0}$ onde $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:eta_dynamic}\end{equation} onde $\lambda \in R_{> 0} $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$. Desta forma, se existirem matrizes semidefinidas positivas $\Xi, \Psi, X \in \mathbb{R}^{n \times n}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a \acrshort{lmi} \eqref{eq:lmi1}, então, a origem do sistema em malha fechada é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e $V(x)=x^TPx$.
+  \label{corollary:etm_stability} A partir do \autoref{theorem:etm_stability}, pode-se estender o conceito para a estabilidade da origem do sistema linear \eqref{eq:linear_system_etm} em malha fechada sob \acrshort{etm} dinâmico \eqref{eq:dynamic_etm} considerando uma função de \textit{Lyapunov} definida por \begin{equation}W(x) = V(x) + \eta(t) \label{eq:lyapunov_w},\end{equation} onde $\eta \in \mathbb{R}_{\geq 0}$ onde $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:eta_dynamic}\end{equation} onde $\lambda \in R_{> 0} $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$. Desta forma, se existirem matrizes semidefinidas positivas $\Xi, \Psi, X \in \mathbb{R}^{n \times n}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a \acrshort{lmi} \eqref{eq:lmi1}, então, a origem do sistema em malha fechada é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e $V(x)=x^TPx$.
 \end{corollary}
 
 \noindent \textit{Demostração.} Enquanto o \acrshort{etm} dinâmico não aciona um novo evento de transmissão, têm-se $\eta(t) + \theta \Gamma(x(t), e(t)) \geq 0$. Se $\theta$ for nulo, então $\eta \geq 0$. Se $\theta$ não for nulo, então \begin{equation}
@@ -191,7 +191,7 @@ Para o projeto do \acrshort{etm} dinâmico, uma condição suficiente é propost
 \end{equation} Portanto, $\eta(t) \geq 0$, para todo $t \in [t_k, t_{k+1}), \, \forall k \in \mathbb{N}$. Desta forma, têm-se que $\lambda \eta(t) \geq 0$ e, sob o \autoref{theorem:etm_stability}, a partir da equação \eqref{eq:inequation_prove_4} da demostração apresentada, obtém-se a seguinte inequação para o \acrshort{etm} dinâmico: \begin{gather}
   2x^T(t) P\dt{x}(t) + \Gamma(x(t), e(t)) - \lambda \eta(t) < 0 \notag \\[12pt]
   2x^T(t) P\dt{x}(t) + \dt{\eta}(t) < 0.
-\end{gather} Da função de Lyapunov $V(x) = x^TPx$, tém-se: \begin{equation}\dt{V}(x) = x^T(t)P\dt{x}(t) + \dt{x}^T(t)Px(t) = 2x^T(t) P\dt{x}(t).\end{equation} Logo, \begin{equation}
+\end{gather} Da função de \textit{Lyapunov} $V(x) = x^TPx$, tém-se: \begin{equation}\dt{V}(x) = x^T(t)P\dt{x}(t) + \dt{x}^T(t)Px(t) = 2x^T(t) P\dt{x}(t).\end{equation} Logo, \begin{equation}
   \dt{V}(x) + \dt{\eta}(x) < 0.
 \end{equation} Portanto, conforme discutido na seção \ref{section:etm_classification}, para $\dt{W}(x, \eta) = \dt{V}(x) + \dt{\eta}(x) < 0$, a origem do sistema dinâmico \eqref{eq:linear_system_etm} em malha fechada sob o \acrshort{etm} dinâmico \eqref{eq:dynamic_etm}, sob o Corolário \ref{corollary:etm_stability}, é assintoticamente estável.
 
@@ -225,7 +225,7 @@ Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou s
   \label{eq:imee_final_inequation}
 \end{gather} Além disto, sob mesmas condições iniciais, o \acrshort{imee} do \acrshort{etm} dinâmico é maior ou igual ao \acrshort{imee} do \acrshort{etm} estático, e portanto, há a exclusão do comportamento Zeno.
 
-% ETM: Condições de Co-design
+% ETM: Condições de \textit{Co-desig}n
 \subsection{Minimização do número de eventos}
 
 Por meio do \acrshort{imee} $\tau$ definido na equação \eqref{eq:imee_final_inequation}, pode-se observar que \acrshort{imee} apresenta uma relação inversa a $\Lambda$, definida como: \begin{equation}
@@ -250,7 +250,7 @@ As matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ possuem autovalores limitados por uma
 
 \section{Simulação dos Conversores em Malha Fechada}
 
-Esta seção aborda a análise dos conversores Buck e Boost em malha fechada, os quais foram previamente analisados em malha aberta na Seção \ref{section:open_loop}, sob o \acrshort{etm} estático \eqref{eq:static_etm} e dinâmico \eqref{eq:dynamic_etm}. Os ETMs foram projetados visando minimizar o número de eventos de transmissão de novos dados para o controlador, utilizando a abordagem por co-design proposta e discutida na seção anterior (\autoref{section:etm_models}). Nas análises, são apresentados o sinal de entrada duty cycle $d(t)$ determinado pelo controlador e os estados dos sistemas: a corrente do indutor $i_L(t)$, a tensão do capacitor $v_C(t)$, e a variável dinâmica $\eta(t)$, no caso do \acrshort{etm} dinâmico. Também são apresentados os \acrfull{itee} calculados como a diferença de tempo entre o acionamento de eventos consecutivos, representado por $\acrshort{itee} = t_{k + 1} - t_k, \, k \in \mathbb{N}$.
+Esta seção aborda a análise dos conversores \textit{Buck} e \textit{Boost }em malha fechada, os quais foram previamente analisados em malha aberta na Seção \ref{section:open_loop}, sob o \acrshort{etm} estático \eqref{eq:static_etm} e dinâmico \eqref{eq:dynamic_etm}. Os ETMs foram projetados visando minimizar o número de eventos de transmissão de novos dados para o controlador, utilizando a abordagem por \textit{co-design} proposta e discutida na seção anterior (\autoref{section:etm_models}). Nas análises, são apresentados o sinal de entrada \textit{duty cycle} $d(t)$ determinado pelo controlador e os estados dos sistemas: a corrente do indutor $i_L(t)$, a tensão do capacitor $v_C(t)$, e a variável dinâmica $\eta(t)$, no caso do \acrshort{etm} dinâmico. Também são apresentados os \acrfull{itee} calculados como a diferença de tempo entre o acionamento de eventos consecutivos, representado por $\acrshort{itee} = t_{k + 1} - t_k, \, k \in \mathbb{N}$.
 
 A análise do desempenho do \acrshort{etm} dinâmico envolveu a avaliação da resposta do sistema à variação dos parâmetros $\rho$ no problema de otimização multiobjetivo \eqref{eq:optimization_problem}, utilizados para obter os parâmetros de projeto do \acrshort{etm}. Para uma análise mais aprofundada, o Cenário 1 foi considerado em ambos os conversores, cada um operando em seu ponto instável, cujo motivo será explicado posteriormente. Além disso, foi investigado o impacto da variação dos parâmetros de sua lei de acionamento \eqref{eq:dynamic_etm}, $\lambda$ e $\theta$, calculando a média dos \acrshortpl{itee} para cada configuração de \acrshort{etm}, projetada com diferentes valores de $\lambda$ e $\theta$.
 
@@ -262,9 +262,9 @@ Para avaliar o desempenho do sistema em malha fechada, são obtidos e apresentad
 
 Os parâmetros $\Xi$, $\Psi$ e $K$ para projeto dos \acrshortpl{etm} são obtidos por meio do problema de otimização multiobjetivo \eqref{eq:optimization_problem} proposta nesta pesquisa. Para fins de comparação entre o \acrshort{etm} estático e dinâmico, este parâmetros são os mesmos para cada configuração dos conversores. Por fim, é feita um comparação entre o comportamento dos conversores em malha fechada sob o \acrshort{etm} dinâmico e sob um controlador projetado utilizando o critério de estabilidade de Hurwitz discutida por \cite{Duan2013}.
 
-\subsection{Conversor Buck}
+\subsection{Conversor \acrshort{cc}-\acrshort{cc} \textit{Buck}}
 
-O conversor Buck, foi simulado em malha fechada mantendo os mesmos cenários definidos para a análise em malha aberta. No projeto do \acrshort{etm} estático e dinâmico, o parâmetro $\rho$ do problema de otimização \eqref{eq:optimization_problem} foi definido como $0,5$, a fim de uniformizar os pesos das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ no processo de otimização. Os parâmetros de projeto dos \acrshortpl{etm} para o conversor Buck em torno do ponto de operação $P_{\mathrm{o}, 1}$ são: \begin{gather}
+O conversor \textit{Buck}, foi simulado em malha fechada mantendo os mesmos cenários definidos para a análise em malha aberta. No projeto do \acrshort{etm} estático e dinâmico, o parâmetro $\rho$ do problema de otimização \eqref{eq:optimization_problem} foi definido como $0,5$, a fim de uniformizar os pesos das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ no processo de otimização. Os parâmetros de projeto dos \acrshortpl{etm} para o conversor \textit{Buck} em torno do ponto de operação $P_{\mathrm{o}, 1}$ são: \begin{gather}
   \Xi = \begin{bmatrix}
     4,4 \cdot 10^3  & 7,63 \cdot 10^2 \\
     7,63 \cdot 10^2 & 1,81 \cdot 10^4 \\
@@ -292,9 +292,9 @@ O conversor Buck, foi simulado em malha fechada mantendo os mesmos cenários def
 
 \subsubsection{Cenário 1}
 
-Conforme foi discutido, o conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada apresenta estabilidade, enquanto que, em torno do ponto $P_{\mathrm{o}, 2}$, apresenta instabilidade. No entanto, ao observar o comportamento do conversor em malha fechada sob o \acrshort{etm} estático, é possível observar que tanto o conversor em torno do ponto $P_{\mathrm{o}, 1}$ quanto de $P_{\mathrm{o}, 2}$, apresenta estabilidade conforme esperado.
+Conforme foi discutido, o conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada apresenta estabilidade, enquanto que, em torno do ponto $P_{\mathrm{o}, 2}$, apresenta instabilidade. No entanto, ao observar o comportamento do conversor em malha fechada sob o \acrshort{etm} estático, é possível observar que tanto o conversor em torno do ponto $P_{\mathrm{o}, 1}$ quanto de $P_{\mathrm{o}, 2}$, apresenta estabilidade conforme esperado.
 
-Como visto anteriormente, o conversor Buck é estável em malha fechada no ponto de operação  $P_{\mathrm{o}, 1}$ e instável no ponto  $P_{\mathrm{o}, 2}$. No entanto, é possível observar nas \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a} e \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_a} que o conversor em malha fechada sob o \acrshort{etm} estático, em ambos os pontos de operação,  apresenta estabilidade, conforme é atestado pelo \autoref{theorem:etm_stability}. O comportamento do conversor Buck clássico no ponto de operação $P_{\mathrm{o}, 1}$ não apresenta diferenças significativas em malha aberta e fechada. Por outro lado, na análise em malha aberta do segundo ponto, os modelos linear e não linear do conversor divergem ao longo do tempo. No entanto, em malha fechada, os modelos coincidem e estabilizam no ponto de operação definido.
+Como visto anteriormente, o conversor \textit{Buck} é estável em malha fechada no ponto de operação  $P_{\mathrm{o}, 1}$ e instável no ponto  $P_{\mathrm{o}, 2}$. No entanto, é possível observar nas \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a} e \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_a} que o conversor em malha fechada sob o \acrshort{etm} estático, em ambos os pontos de operação,  apresenta estabilidade, conforme é atestado pelo \autoref{theorem:etm_stability}. O comportamento do conversor \textit{Buck} clássico no ponto de operação $P_{\mathrm{o}, 1}$ não apresenta diferenças significativas em malha aberta e fechada. Por outro lado, na análise em malha aberta do segundo ponto, os modelos linear e não linear do conversor divergem ao longo do tempo. No entanto, em malha fechada, os modelos coincidem e estabilizam no ponto de operação definido.
 
 \begin{figure}[H]
   \centering
@@ -309,7 +309,7 @@ Como visto anteriormente, o conversor Buck é estável em malha fechada no ponto
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim1/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_constant_pcpl_static_etm_op1_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -319,10 +319,10 @@ Como visto anteriormente, o conversor Buck é estável em malha fechada no ponto
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ no Cenário 1  e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ no Cenário 1  e \acrshort{etm} estático.}
 \end{figure}
 
-Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresentada a evolução da entrada do sistema $d(t)$ durante toda a simulação. Durante a simulação do conversor em torno do ponto $P_{\mathrm{o}, 1}$, a entrada permanece constante até 0,08 s, momento em que ocorre um aumento. Este comportamento indica que entre 0 e 0,08 segundos, nenhum novo evento foi acionado para atualizar o controlador com novos estados, ou seja, a condição da lei de acionamento não era atendida e, portanto, o controlador tinha acesso apenas ao último estado transmitido mantido pelo \acrshort{zoh}. Quando atingiu o tempo de 0,08 s, a condição da lei de acionamento do \acrshort{etm} estático foi satisfeita, resultando no acionamento de um novo evento e permitindo a transmissão de um novo estado. Consequentemente, uma nova entrada é obtida e foi mantida até o final da simulação. Portanto, durante a simulação do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$, apenas dois eventos foram acionados, conforme pode ser confirmado pelo gráfico dos \acrshortpl{itee} na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}.
+Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresentada a evolução da entrada do sistema $d(t)$ durante toda a simulação. Durante a simulação do conversor em torno do ponto $P_{\mathrm{o}, 1}$, a entrada permanece constante até 0,08 s, momento em que ocorre um aumento. Este comportamento indica que entre 0 e 0,08 segundos, nenhum novo evento foi acionado para atualizar o controlador com novos estados, ou seja, a condição da lei de acionamento não era atendida e, portanto, o controlador tinha acesso apenas ao último estado transmitido mantido pelo \acrshort{zoh}. Quando atingiu o tempo de 0,08 s, a condição da lei de acionamento do \acrshort{etm} estático foi satisfeita, resultando no acionamento de um novo evento e permitindo a transmissão de um novo estado. Consequentemente, uma nova entrada é obtida e foi mantida até o final da simulação. Portanto, durante a simulação do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$, apenas dois eventos foram acionados, conforme pode ser confirmado pelo gráfico dos \acrshortpl{itee} na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}.
 
 \begin{figure}[H]
   \centering
@@ -337,7 +337,7 @@ Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresent
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim1/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -347,10 +347,10 @@ Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresent
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 1 e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 1 e \acrshort{etm} estático.}
 \end{figure}
 
-Por outro lado, durante a simulação do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$, observou-se que o \acrshort{etm} desencadeou uma série de novos eventos, como mostrado na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}. Esse padrão de comportamento era previsto devido à instabilidade associada ao ponto $P_{\mathrm{o}, 2}$. À medida que o sistema tende a se desviar gradualmente nesse ponto, o erro de transmissão aumenta, resultando na função de acionamento $\Gamma$ do \acrshort{etm} tornando-se negativa, o que permite o disparo de novos eventos de transmissão. Esse ciclo pode se repetir várias vezes ao longo do tempo, mesmo que o sistema, em malha fechada, eventualmente se estabilize. Portanto, é esperado que o \acrshort{etm} continue a realizar acionamentos mesmo após a estabilização do sistema.
+Por outro lado, durante a simulação do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$, observou-se que o \acrshort{etm} desencadeou uma série de novos eventos, como mostrado na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}. Esse padrão de comportamento era previsto devido à instabilidade associada ao ponto $P_{\mathrm{o}, 2}$. À medida que o sistema tende a se desviar gradualmente nesse ponto, o erro de transmissão aumenta, resultando na função de acionamento $\Gamma$ do \acrshort{etm} tornando-se negativa, o que permite o disparo de novos eventos de transmissão. Esse ciclo pode se repetir várias vezes ao longo do tempo, mesmo que o sistema, em malha fechada, eventualmente se estabilize. Portanto, é esperado que o \acrshort{etm} continue a realizar acionamentos mesmo após a estabilização do sistema.
 
 \begin{figure}[H]
   \centering
@@ -365,7 +365,7 @@ Por outro lado, durante a simulação do conversor Buck em torno do ponto $P_{\m
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_constant_pcpl_dynamic_etm_op1_b}
   \end{subfigure}
   \\[6pt]
@@ -375,7 +375,7 @@ Por outro lado, durante a simulação do conversor Buck em torno do ponto $P_{\m
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_dynamic_etm_op1_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ Cenário 1 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ Cenário 1 e \acrshort{etm} dinâmico.}
   \label{fig:buck_converter_constant_pcpl_dynamic_etm_op1}
 \end{figure}
 
@@ -392,7 +392,7 @@ Por outro lado, durante a simulação do conversor Buck em torno do ponto $P_{\m
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_constant_pcpl_dynamic_etm_op2_b}
   \end{subfigure}
   \\[6pt]
@@ -402,7 +402,7 @@ Por outro lado, durante a simulação do conversor Buck em torno do ponto $P_{\m
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_dynamic_etm_op2_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 1 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 1 e \acrshort{etm} dinâmico.}
   \label{fig:buck_converter_constant_pcpl_dynamic_etm_op2}
 \end{figure}
 
@@ -428,11 +428,11 @@ Em relação ao \acrshort{etm} dinâmico, durante a simulação foi obtido um co
   \label{fig:buck_converter_constant_pcpl_dynamic_etm_eta}
 \end{figure}
 
-Na \autoref{fig:buck_converter_constant_pcpl_dynamic_etm_eta}, são apresentadas as evoluções temporais da variável dinâmica $\eta(n)$ durante a simulação do conversor Buck nos \acrshortpl{po} estável e instável. É possível observar que $\eta(t)$ é não negativa para todos os valores de $t$, conforme esperado, e converge para o equilíbrio na origem ($\eta = 0$). O efeito de $\eta(t)$ produz o aumento dos \acrshort{itee}, como pode-se observar ao comparar as Figuras \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op1_c} e \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op2_c}, pois se comporta como um buffer que armazena a redução desnecessária da função de Lyapunov $V(x)$.
+Na \autoref{fig:buck_converter_constant_pcpl_dynamic_etm_eta}, são apresentadas as evoluções temporais da variável dinâmica $\eta(n)$ durante a simulação do conversor \textit{Buck} nos \acrshortpl{po} estável e instável. É possível observar que $\eta(t)$ é não negativa para todos os valores de $t$, conforme esperado, e converge para o equilíbrio na origem ($\eta = 0$). O efeito de $\eta(t)$ produz o aumento dos \acrshort{itee}, como pode-se observar ao comparar as Figuras \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op1_c} e \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op2_c}, pois se comporta como um buffer que armazena a redução desnecessária da função de \textit{Lyapunov} $V(x)$.
 
-% Esta análise investiga a relação entre o parâmetro $\mu$ do problema multiobjetivo e o comportamento do sistema em malha fechada. Para isso, o conversor Buck é considerado operando no ponto de operação instável $P_{\mathrm{o}, 2}$  com um sinal de perturbação constante igual ao valor do ponto de operação. O parâmetro $\mu$ variou entre 0 e 1, e foram obtidos o tempo de acomodação de 2\% e o tempo médio dos intervalos de tempo entre eventos.
+% Esta análise investiga a relação entre o parâmetro $\mu$ do problema multiobjetivo e o comportamento do sistema em malha fechada. Para isso, o conversor \textit{Buck} é considerado operando no ponto de operação instável $P_{\mathrm{o}, 2}$  com um sinal de perturbação constante igual ao valor do ponto de operação. O parâmetro $\mu$ variou entre 0 e 1, e foram obtidos o tempo de acomodação de 2\% e o tempo médio dos intervalos de tempo entre eventos.
 
-A \autoref{fig:buck_converter_rho} apresenta os resultados obtidos na simulação do conversor Buck operando no ponto instável ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. O ponto instável é escolhido devido à sua facilidade a apresentar mais eventos acionados do que o conversor no ponto estável, o que contribui para a obtenção de resultados mais abrangentes e facilita uma análise mais aprofundada. À medida que $\rho$ aumenta, nota-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Os tempos de acomodação entre o \acrshort{etm} dinâmico e estático mostraram-se notavelmente semelhantes, assim como entre os modelos não linear e linearizado. No entanto, é possível observar que as médias dos \acrshortpl{itee} são maiores no \acrshort{etm} dinâmico em comparação com o \acrshort{etm} estático.
+A \autoref{fig:buck_converter_rho} apresenta os resultados obtidos na simulação do conversor \textit{Buck} operando no ponto instável ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. O ponto instável é escolhido devido à sua facilidade a apresentar mais eventos acionados do que o conversor no ponto estável, o que contribui para a obtenção de resultados mais abrangentes e facilita uma análise mais aprofundada. À medida que $\rho$ aumenta, nota-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Os tempos de acomodação entre o \acrshort{etm} dinâmico e estático mostraram-se notavelmente semelhantes, assim como entre os modelos não linear e linearizado. No entanto, é possível observar que as médias dos \acrshortpl{itee} são maiores no \acrshort{etm} dinâmico em comparação com o \acrshort{etm} estático.
 
 \begin{figure}[H]
   \centering
@@ -448,11 +448,11 @@ A \autoref{fig:buck_converter_rho} apresenta os resultados obtidos na simulaçã
     \includegraphics[width=1.\textwidth]{figuras/buck/ts.eps}
     \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático e dinâmico em resposta às mudanças em $\rho$.}
   \end{subfigure}
-  \caption{Resposta do conversor Buck sob variação do parâmetro $\rho$.}
+  \caption{Resposta do conversor \textit{Buck} sob variação do parâmetro $\rho$.}
   \label{fig:buck_converter_rho}
 \end{figure}
 
-As Tabelas \ref{table:dynamic_etm_approaches_buck_sl} e \ref{table:dynamic_etm_approaches_buck_snl} apresentam as médias dos \acrshortpl{itee} obtidos em diferentes \acrshortpl{etm} dinâmicos, projetados com distintos valores de $\lambda$ e $\theta$, bem como do \acrshort{etm} estático, tanto para o modelo não linear quanto para o linearizado. Esses valores foram calculados para o conversor Buck operando no ponto instável $P_{\mathrm{o}, 2}$, uma vez que este ponto tende a gerar mais eventos acionados em comparação com o ponto estável. Observa-se que não há uma relação direta ou inversa entre os parâmetros $\lambda$ e $\theta$ com as médias dos \acrshortpl{itee}. No entanto, quando $\lambda = 10^3$ , as médias obtidas para todos os valores de $\theta$ foram semelhantes, ao contrário do que ocorreu com os demais valores de $\lambda$. Além disso, as médias para $\lambda = 10^3$ são bastante próximas da média obtida no \acrshort{etm} estático. E, quanto maior o valor de $\theta$,as médias obtidas eram reduzidas.
+As Tabelas \ref{table:dynamic_etm_approaches_buck_sl} e \ref{table:dynamic_etm_approaches_buck_snl} apresentam as médias dos \acrshortpl{itee} obtidos em diferentes \acrshortpl{etm} dinâmicos, projetados com distintos valores de $\lambda$ e $\theta$, bem como do \acrshort{etm} estático, tanto para o modelo não linear quanto para o linearizado. Esses valores foram calculados para o conversor \textit{Buck} operando no ponto instável $P_{\mathrm{o}, 2}$, uma vez que este ponto tende a gerar mais eventos acionados em comparação com o ponto estável. Observa-se que não há uma relação direta ou inversa entre os parâmetros $\lambda$ e $\theta$ com as médias dos \acrshortpl{itee}. No entanto, quando $\lambda = 10^3$ , as médias obtidas para todos os valores de $\theta$ foram semelhantes, ao contrário do que ocorreu com os demais valores de $\lambda$. Além disso, as médias para $\lambda = 10^3$ são bastante próximas da média obtida no \acrshort{etm} estático. E, quanto maior o valor de $\theta$,as médias obtidas eram reduzidas.
 
 \begin{table}[H]
   \centering
@@ -473,7 +473,7 @@ As Tabelas \ref{table:dynamic_etm_approaches_buck_sl} e \ref{table:dynamic_etm_a
       \autoref{corollary:etm_stability} ($\theta = 10^8$) & 20,32 $\mu$s & 18,31 $\mu$s & 7,648 $\mu$s\\
     \bottomrule
   \end{tabular} \\[4pt]
-  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Buck não linear em torno do ponto instável.}
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor \textit{Buck} não linear em torno do ponto instável.}
   \label{table:dynamic_etm_approaches_buck_sl}
 \end{table}
 
@@ -485,7 +485,7 @@ As Tabelas \ref{table:dynamic_etm_approaches_buck_sl} e \ref{table:dynamic_etm_a
     \toprule
       \acrshort{etm} Estático \\
     \midrule
-      \acrshort{etm} (referir) & 7,677 $\mu$s \\
+      \acrshort{etm} \eqref{eq:static_etm} & 7,677 $\mu$s \\
     \bottomrule
     \toprule
       \acrshort{etm} Dinâmico & $\lambda = 10$ & $\lambda = 10^2$ & $\lambda = 10^3$ \\
@@ -496,12 +496,12 @@ As Tabelas \ref{table:dynamic_etm_approaches_buck_sl} e \ref{table:dynamic_etm_a
       \autoref{corollary:etm_stability} ($\theta = 10^8$) & 20,37 $\mu$s & 17,98 $\mu$s & 7,673  $\mu$s\\
     \bottomrule
   \end{tabular} \\[4pt]
-  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Buck linearizado em torno do ponto instável.}
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor \textit{Buck} linearizado em torno do ponto instável.}
   \label{table:dynamic_etm_approaches_buck_snl}
 \end{table}
 
 
-As Figuras \ref{fig:classic_buck_cen1_op1} e \ref{fig:classic_buck_cen1_op2} apresentam o comportamento do conversor Buck neste cenário, sob um controlador desenvolvido com base no critério de estabilidade de Hurwitz. É possível observar que o desempenho do sistema é diferente do comportamento sob o ETC. Enquanto o conversor permanece instável em malha fechada ao redor do ponto instável, sua resposta em torno do ponto estável é notavelmente lenta.
+As Figuras \ref{fig:classic_buck_cen1_op1} e \ref{fig:classic_buck_cen1_op2} apresentam o comportamento do conversor \textit{Buck} neste cenário, sob um controlador desenvolvido com base no critério de estabilidade de Hurwitz. É possível observar que o desempenho do sistema difere do comportamento sob o ETC. Enquanto o conversor permanece instável em malha fechada ao redor do ponto instável, sua resposta em torno do ponto estável é notavelmente lenta.
 
 \begin{figure}[H]
   \centering
@@ -518,7 +518,7 @@ As Figuras \ref{fig:classic_buck_cen1_op1} e \ref{fig:classic_buck_cen1_op2} apr
     \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim1/op1/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Buck no Cenário 1 operando em torno de $P_{\mathrm{o}, 1}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Buck} no Cenário 1 operando em torno de $P_{\mathrm{o}, 1}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_buck_cen1_op1}
   \begin{subfigure}{1.\textwidth}
     \centering
@@ -531,13 +531,13 @@ As Figuras \ref{fig:classic_buck_cen1_op1} e \ref{fig:classic_buck_cen1_op2} apr
     \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim1/op2/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Buck no Cenário 1 em torno de $P_{\mathrm{o}, 2}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Buck} no Cenário 1 em torno de $P_{\mathrm{o}, 2}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_buck_cen1_op2}
 \end{figure}
 
 \subsubsection{Cenário 2}
 
-Nesta simulação, o conversor Buck em malha fechada foi analisado sob a influência do sinal de perturbação variável. Na Figura \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_a}, pode-se observar que o comportamento do conversor em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada é semelhante ao comportamento obtido em malha aberta. Além disso, foram necessários apenas três eventos de transmissão, como pode ser visto nas Figuras \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_b} e \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_c}.
+Nesta simulação, o conversor \textit{Buck} em malha fechada foi analisado sob a influência do sinal de perturbação variável. Na Figura \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_a}, pode-se observar que o comportamento do conversor em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada é semelhante ao comportamento obtido em malha aberta. Além disso, foram necessários apenas três eventos de transmissão, como pode ser visto nas Figuras \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_b} e \ref{fig:buck_converter_variable_pcpl_static_etm_op1_duty_c}.
 
 \begin{figure}[H]
   \centering
@@ -552,7 +552,7 @@ Nesta simulação, o conversor Buck em malha fechada foi analisado sob a influê
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_variable_pcpl_static_etm_op1_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -562,10 +562,10 @@ Nesta simulação, o conversor Buck em malha fechada foi analisado sob a influê
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_variable_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ no Cenário 2 e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ no Cenário 2 e \acrshort{etm} estático.}
 \end{figure}
 
-Na simulação do conversor Buck em torno do ponto instável sob perturbação variável, o \acrshort{etm} estático assegurou a estabilidade do sistema durante toda a simulação (\autoref{fig:buck_converter_variable_pcpl_static_etm_op2_duty_a}). O aumento da magnitude da perturbação evidenciou a diferença entre os modelos não linear e linearizado. Após a estabilização, o \acrshort{etm} não necessitava acionar novos eventos, exceto em caso de alterações no sinal de perturbação (\autoref{fig:buck_converter_variable_pcpl_static_etm_op2_duty_c}). O sistema não linear apresentou menor demanda por eventos em comparação ao sistema linearizado e, ao final da simulação, o sistema se estabilizou no ponto de operação definido.
+Na simulação do conversor \textit{Buck} em torno do ponto instável sob perturbação variável, o \acrshort{etm} estático assegurou a estabilidade do sistema durante toda a simulação (\autoref{fig:buck_converter_variable_pcpl_static_etm_op2_duty_a}). O aumento da magnitude da perturbação evidenciou a diferença entre os modelos não linear e linearizado. Após a estabilização, o \acrshort{etm} não necessitava acionar novos eventos, exceto em caso de alterações no sinal de perturbação (\autoref{fig:buck_converter_variable_pcpl_static_etm_op2_duty_c}). O sistema não linear apresentou menor demanda por eventos em comparação ao sistema linearizado e, ao final da simulação, o sistema se estabilizou no ponto de operação definido.
 
 \begin{figure}[H]
   \centering
@@ -580,7 +580,7 @@ Na simulação do conversor Buck em torno do ponto instável sob perturbação v
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_variable_pcpl_static_etm_op2_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -590,10 +590,10 @@ Na simulação do conversor Buck em torno do ponto instável sob perturbação v
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_variable_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 2 e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 2 e \acrshort{etm} estático.}
 \end{figure}
 
-No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do conversor Buck (Figura \ref{fig:buck_converter_variable_pcpl_dynamic_etm_op1}) em torno dos pontos estáveis, observamos uma semelhança com os resultados obtidos com o \acrshort{etm} estático. Tanto o modelo não linear quanto o linearizado exigem apenas alguns novos eventos, evidenciando uma estabilização da variável dinâmica do \acrshort{etm} na origem, conforme confirmado pela \autoref{fig:buck_converter_variable_pcpl_dynamic_etm_eta_a}.
+No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do conversor \textit{Buck} (Figura \ref{fig:buck_converter_variable_pcpl_dynamic_etm_op1}) em torno dos pontos estáveis, observamos uma semelhança com os resultados obtidos com o \acrshort{etm} estático. Tanto o modelo não linear quanto o linearizado exigem apenas alguns novos eventos, evidenciando uma estabilização da variável dinâmica do \acrshort{etm} na origem, conforme confirmado pela \autoref{fig:buck_converter_variable_pcpl_dynamic_etm_eta_a}.
 
 \begin{figure}[H]
   \centering
@@ -608,7 +608,7 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_variable_pcpl_dynamic_etm_op1_b}
   \end{subfigure}
   \\[6pt]
@@ -618,7 +618,7 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_variable_pcpl_dynamic_etm_op1_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 1}$ no Cenário 2 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ no Cenário 2 e \acrshort{etm} dinâmico.}
   \label{fig:buck_converter_variable_pcpl_dynamic_etm_op1}
 \end{figure}
 
@@ -635,7 +635,7 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:buck_converter_variable_pcpl_dynamic_etm_op2_b}
   \end{subfigure}
   \\[6pt]
@@ -645,7 +645,7 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_variable_pcpl_dynamic_etm_op2_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Buck em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 2 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 2 e \acrshort{etm} dinâmico.}
   \label{fig:buck_converter_variable_pcpl_dynamic_etm_op2}
 \end{figure}
 
@@ -672,7 +672,7 @@ No entanto, ao considerar os pontos instáveis, como $P_{\mathrm{o}, 2}$, os int
   \label{fig:buck_converter_variable_pcpl_dynamic_etm_eta}
 \end{figure}
 
-As Figuras \ref{fig:classic_buck_cen2_op1} e \ref{fig:classic_buck_cen2_op2} demonstram o comportamento do conversor Buck no Cenário 2, submetido por um controlador projetado conforme o critério de estabilidade de Hurwitz. É possível observar uma significativa diferença do desempenho do sistema em relação ao uso do \acrshort{etm}. Sob este controlador, o sistema exibe múltiplas oscilações, contrastando com o comportamento mais estável do \acrshort{etm}. Além disso, a resposta do sistema ainda permanece mais lenta em comparação com o \acrshort{etm}.
+As Figuras \ref{fig:classic_buck_cen2_op1} e \ref{fig:classic_buck_cen2_op2} demonstram o comportamento do conversor \textit{Buck} no Cenário 2, submetido por um controlador projetado conforme o critério de estabilidade de Hurwitz. É possível observar uma significativa diferença do desempenho do sistema em relação ao uso do \acrshort{etm}. Sob este controlador, o sistema exibe múltiplas oscilações, contrastando com o comportamento mais estável do \acrshort{etm}. Além disso, a resposta do sistema permanece mais lenta em comparação com o \acrshort{etm}.
 
 \begin{figure}[H]
   \centering
@@ -688,7 +688,7 @@ As Figuras \ref{fig:classic_buck_cen2_op1} e \ref{fig:classic_buck_cen2_op2} dem
     \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim2/op1/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Buck no Cenário 2 operando em torno de $P_{\mathrm{o}, 1}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Buck} no Cenário 2 operando em torno de $P_{\mathrm{o}, 1}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_buck_cen2_op1}
   \begin{subfigure}{1.\textwidth}
     \centering
@@ -701,14 +701,14 @@ As Figuras \ref{fig:classic_buck_cen2_op1} e \ref{fig:classic_buck_cen2_op2} dem
     \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim2/op2/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Buck no Cenário 2 em torno de $P_{\mathrm{o}, 2}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Buck} no Cenário 2 em torno de $P_{\mathrm{o}, 2}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_buck_cen2_op2}
 \end{figure}
 
 
 \subsubsection{Análise Numérica de Desempenho}
 
-A \autoref{table:imees_buck_static_dynamic} apresenta as médias dos \acrshortpl{itee} obtidas durante a simulação do conversor Buck sob os \acrshort{etm} dinâmico e estático. Ao analisar os resultados para o ponto de operação $P_{\mathrm{o}, 1}$, observa-se que a diferença entre os \acrshortpl{itee} obtidos com o ETM estático e dinâmico não é expressiva. Isso indica que, neste ponto de operação, o ETM estático já apresenta um desempenho satisfatório. No entanto, no ponto de operação $P_{\mathrm{o}, 2}$, os \acrshortpl{itee} obtidos com o ETM dinâmico são consideravelmente superiores aos do ETM estático. Essa diferença evidencia a capacidade do ETM dinâmico em reduzir o número de eventos acionados. Os resultados demonstram que o ETM dinâmico apresenta um desempenho superior ao ETM estático ao reduzir o número de eventos.
+A \autoref{table:imees_buck_static_dynamic} apresenta as médias dos \acrshortpl{itee} obtidas durante a simulação do conversor \textit{Buck} sob os \acrshort{etm} dinâmico e estático. Ao analisar os resultados para o ponto de operação $P_{\mathrm{o}, 1}$, observa-se que a diferença entre os \acrshortpl{itee} obtidos com o ETM estático e dinâmico não é expressiva. Isso indica que, neste ponto de operação, o ETM estático já apresenta um desempenho satisfatório. No entanto, no ponto de operação $P_{\mathrm{o}, 2}$, os \acrshortpl{itee} obtidos com o ETM dinâmico são consideravelmente superiores aos do ETM estático. Essa diferença evidencia a capacidade do ETM dinâmico em reduzir o número de eventos acionados. Os resultados demonstram que o ETM dinâmico apresenta um desempenho superior ao ETM estático ao reduzir o número de eventos.
 
 \vspace{12pt}
 \begin{table}[H]
@@ -726,11 +726,11 @@ A \autoref{table:imees_buck_static_dynamic} apresenta as médias dos \acrshortpl
     2                                   & $P_{\mathrm{o}, 2}$                       & 39,19 $\mu$s                          & 38,89 $\mu$s                        & 2                                         & $P_{\mathrm{o}, 2}$                   & 0,24 ms & 0,22 ms \\
     \bottomrule
   \end{tabular}
-  \caption{\acrshortpl{imee} do conversor Buck sob \acrshort{etm} estático (à esquerda) e dinâmico (à direita).}
+  \caption{\acrshortpl{imee} do conversor \textit{Buck} sob \acrshort{etm} estático (à esquerda) e dinâmico (à direita).}
   \label{table:imees_buck_static_dynamic}
 \end{table}
 
-As Tabelas \ref{table:indices_desempenho_etm_estático} e \ref{table:indices_desempenho_etm_dinamico} detalham os tempos de acomodação, os \acrshortpl{ise}, os \acrshortpl{itse} e os \acrshortpl{isc} do conversor Buck operando no Cenário 1, tanto no contexto do \acrshort{etm} estático quanto no dinâmico, considerando a saída $v_C(t)$ do conversor e a entrada $d(t)$ determinada pelo controlador. Notavelmente, os valores obtidos são praticamente idênticos em ambas as configurações, sugerindo que não há diferenças significativas entre a saída $v_C(t)$ e a entrada $d(t)$ quando o conversor opera sob o \acrshort{etm} dinâmico ou estático. Além disso, observa-se que o controlador apresenta um acúmulo de esforço semelhante em todos os casos. 
+As Tabelas \ref{table:indices_desempenho_etm_estático} e \ref{table:indices_desempenho_etm_dinamico} detalham os tempos de acomodação, os \acrshortpl{ise}, os \acrshortpl{itse} e os \acrshortpl{isc} do conversor \textit{Buck} operando no Cenário 1, tanto no contexto do \acrshort{etm} estático quanto no dinâmico, considerando a saída $v_C(t)$ do conversor e a entrada $d(t)$ determinada pelo controlador. Notavelmente, os valores obtidos são praticamente idênticos em ambas as configurações, sugerindo não haver diferenças significativas entre a saída $v_C(t)$ e a entrada $d(t)$ quando o conversor opera sob o \acrshort{etm} dinâmico ou estático. Além disso, observa-se que o controlador apresenta um acúmulo de esforço semelhante em todos os casos. 
 
 \vspace{8pt}
 \begin{table}[H]
@@ -747,7 +747,7 @@ As Tabelas \ref{table:indices_desempenho_etm_estático} e \ref{table:indices_des
     2       & L & 3,30 ms             & 0,02           & 20,40 $\cdot 10^{-6}$ & 0,04           \\
     \bottomrule
   \end{tabular}
-  \caption{Tempo de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor Buck sob \acrshort{etm} estático.}
+  \caption{Tempo de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor \textit{Buck} sob \acrshort{etm} estático.}
   \label{table:indices_desempenho_etm_estático}
 \end{table}
 
@@ -766,15 +766,15 @@ As Tabelas \ref{table:indices_desempenho_etm_estático} e \ref{table:indices_des
     2       & L & 3,30 ms             & 0,02           & 20,40 $\cdot 10^{-6}$ & 0,04           \\
     \bottomrule
   \end{tabular}
-  \caption{Tempo de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor Buck sob \acrshort{etm} dinâmico.}
+  \caption{Tempo de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor \textit{Buck} sob \acrshort{etm} dinâmico.}
   \label{table:indices_desempenho_etm_dinamico}
 \end{table}
 
-\subsection{Conversor Boost}
+\subsection{Conversor \acrshort{cc}-\acrshort{cc} \textit{Boost}}
 
-O conversor Boost, que anteriormente passou por análise em malha aberta conforme descrito na \autoref{section:open_loop}, foi submetido a simulações em malha fechada, mantendo as mesmas condições de operação. A avaliação foi realizada em dois pontos de operação distintos, $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$, em duas situações diferentes: uma com o sinal de perturbação $P_{\mathrm{cpl}}$ mantido constante e outra com variação desse sinal. Os pontos de operação e os sinais de perturbação utilizados nas duas situações são idênticos aos utilizados na análise em malha aberta.
+O conversor \textit{Boost}, que anteriormente passou por análise em malha aberta conforme descrito na \autoref{section:open_loop}, foi submetido a simulações em malha fechada, mantendo as mesmas condições de operação. A avaliação foi realizada em dois pontos de operação distintos, $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$, em duas situações diferentes: uma com o sinal de perturbação $P_{\mathrm{cpl}}$ mantido constante e outra com variação desse sinal. Os pontos de operação e os sinais de perturbação utilizados nas duas situações são idênticos aos utilizados na análise em malha aberta.
 
-No desenvolvimento do \acrshort{etm} para as simulações com o sinal de perturbação mantido constante e variável, adotou-se o valor constante $\mu = 0,5$. Os parâmetros de projeto obtidos do problema de otimização multiobjetivo para o conversor Boost em torno do ponto de operação $P_{\mathrm{o}, 3}$ são os seguintes: \begin{gather}
+No desenvolvimento do \acrshort{etm} para as simulações com o sinal de perturbação mantido constante e variável, adotou-se o valor constante $\mu = 0,5$. Os parâmetros de projeto obtidos do problema de otimização multiobjetivo para o conversor \textit{Boost }em torno do ponto de operação $P_{\mathrm{o}, 3}$ são os seguintes: \begin{gather}
   \Xi = \begin{bmatrix}
     4,30 \cdot 10^5  & -3,26 \cdot 10^4 \\
     -3,26 \cdot 10^4 & 2,01 \cdot 10^6  \\
@@ -798,11 +798,11 @@ No desenvolvimento do \acrshort{etm} para as simulações com o sinal de perturb
   K = \begin{bmatrix}
     -2,24 \cdot 10^{-2} & -7,45\cdot 10^{-3}
   \end{bmatrix} . \notag
-\end{gather} Os parâmetros $\theta$ e $\lambda$ da lei de acionamento dos \acrshortpl{etm} dinâmicos utilizados nas simulações foram estabelecidos como 0.1 e 100, respectivamente.
+\end{gather} Os parâmetros $\theta$ e $\lambda$ da lei de acionamento dos \acrshortpl{etm} dinâmicos utilizados nas simulações foram estabelecidos como 0,1 e 100, respectivamente.
 
 \subsubsection{Cenário 1}
 
-Na simulação em malha aberta, a análise mostrou que conversor Boost em torno dos pontos de operação $P_{\mathrm{o}, 3}$ apresentava estabilidade, enquanto que em torno do ponto $P_{\mathrm{o}, 4}$ apresentava instabilidade. No entanto, ao considerarmos o comportamento do conversor em malha fechada com o \acrshort{etm} estático, observa-se uma estabilização em ambos os pontos, conforme apresentado na \autoref{fig:boost_converter_constant_pcpl_static_etm_op1_duty_a} e \autoref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_a}. 
+Na simulação em malha aberta, a análise mostrou que conversor \textit{Boost }em torno dos pontos de operação $P_{\mathrm{o}, 3}$ apresentava estabilidade, enquanto em torno do ponto $P_{\mathrm{o}, 4}$ apresentava instabilidade. No entanto, ao considerarmos o comportamento do conversor em malha fechada com o \acrshort{etm} estático, observa-se uma estabilização em ambos os pontos, conforme apresentado na \autoref{fig:boost_converter_constant_pcpl_static_etm_op1_duty_a} e \autoref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_a}. 
 
 \begin{figure}[H]
   \centering
@@ -817,7 +817,7 @@ Na simulação em malha aberta, a análise mostrou que conversor Boost em torno 
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_constant_pcpl_static_etm_op1_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -827,10 +827,10 @@ Na simulação em malha aberta, a análise mostrou que conversor Boost em torno 
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_constant_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 1 e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Boost }em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 1 e \acrshort{etm} estático.}
 \end{figure}
 
-Em $P_{\mathrm{o}, 3}$, não houve diferenças significativas entre os comportamentos em malha aberta e fechada. Já em $P_{\mathrm{o}, 4}$, embora os modelos linear e não linear tenham divergido em malha aberta, a estabilidade foi alcançada em malha fechada, com ambos os modelos se alinhando ao ponto de operação definido. Durante a simulação do conversor em torno de $P_{\mathrm{o}, 3}$ (\autoref{fig:boost_converter_constant_pcpl_static_etm_op1_duty_c}), foram necessários apenas dois eventos no modelo não linear e três eventos no modelo linearizado, durante todo o período de simulação, resultando em maiores intervalos de tempo entre os eventos. Entretanto, a variação causada na entrada duty cycle é bastante pequena em torno do ponto de operação do duty cycle, da ordem de $10^{-6}$. Essa pequena variação não causa mudanças significativas no sistema, o que justifica a semelhança observada com o sistema em malha aberta nessas circunstâncias.
+Em $P_{\mathrm{o}, 3}$, não houve diferenças significativas entre os comportamentos em malha aberta e fechada. Já em $P_{\mathrm{o}, 4}$, embora os modelos linear e não linear tenham divergido em malha aberta, a estabilidade foi alcançada em malha fechada, com ambos os modelos se alinhando ao ponto de operação definido. Durante a simulação do conversor em torno de $P_{\mathrm{o}, 3}$ (\autoref{fig:boost_converter_constant_pcpl_static_etm_op1_duty_c}), foram necessários apenas dois eventos no modelo não linear e três eventos no modelo linearizado, durante todo o período de simulação, resultando em maiores intervalos de tempo entre os eventos. Entretanto, a variação causada na entrada \textit{duty cycle} é bastante pequena em torno do ponto de operação do duty cycle, da ordem de $10^{-6}$. Essa pequena variação não causa mudanças significativas no sistema, justificando a semelhança observada com o sistema em malha aberta nessas circunstâncias.
 
 \begin{figure}[H]
   \centering
@@ -845,7 +845,7 @@ Em $P_{\mathrm{o}, 3}$, não houve diferenças significativas entre os comportam
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim1/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_constant_pcpl_static_etm_op2_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -855,10 +855,10 @@ Em $P_{\mathrm{o}, 3}$, não houve diferenças significativas entre os comportam
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 1 e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Boost }em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 1 e \acrshort{etm} estático.}
 \end{figure}
 
-A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$ revelou um comportamento similar ao do conversor Buck (\autoref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c}). O \acrshort{etm} gerou sucessivos eventos devido à instabilidade inerente a este ponto de operação. À medida que o sistema tende a se desviar gradualmente, o erro de transmissão aumenta, tornando a função de acionamento do \acrshort{etm}  negativa e permitindo o disparo de novos eventos. Esse ciclo pode se repetir mesmo após a estabilização do sistema em malha fechada, justificando a contínua atuação do \acrshort{etm}.
+A simulação do conversor \textit{Boost }em torno do ponto instável $P_{\mathrm{o}, 4}$ revelou um comportamento similar ao do conversor \textit{Buck} (\autoref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c}). O \acrshort{etm} gerou sucessivos eventos devido à instabilidade inerente a este ponto de operação. À medida que o sistema tende a se desviar gradualmente, o erro de transmissão aumenta, tornando a função de acionamento do \acrshort{etm}  negativa e permitindo o disparo de novos eventos. Esse ciclo pode se repetir mesmo após a estabilização do sistema em malha fechada, justificando a contínua atuação do \acrshort{etm}.
 
 \begin{figure}[H]
   \centering
@@ -873,7 +873,7 @@ A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op1_b}
   \end{subfigure}
   \\[6pt]
@@ -883,7 +883,7 @@ A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op1_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor boost em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 1 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{boost }em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 1 e \acrshort{etm} dinâmico.}
   \label{fig:boost_converter_constant_pcpl_dynamic_etm_op1}
 \end{figure}
 
@@ -900,7 +900,7 @@ A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op2_b}
   \end{subfigure}
   \\[6pt]
@@ -910,11 +910,11 @@ A simulação do conversor Boost em torno do ponto instável $P_{\mathrm{o}, 4}$
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_constant_pcpl_dynamic_etm_op2_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor boost em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 1 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{boost }em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 1 e \acrshort{etm} dinâmico.}
   \label{fig:boost_converter_constant_pcpl_dynamic_etm_op2}
 \end{figure}
 
-No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do conversor Boost, nota-se uma semelhança entre o desempenho do \acrshort{etm} dinâmico e estático em torno do ponto $P_{\mathrm{o}, 3}$, como indicado pelas Figuras \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_a}, \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_b} e \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_c}. Não foram observadas discrepâncias significativas nessas condições. No entanto, ao examinar a distribuição de eventos perturbadores, observamos uma diferença marcante na Figura \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_c}. Com o \acrshort{etm} dinâmico, houve uma redução significativa na quantidade de eventos, com uma distribuição mais uniforme ao longo do tempo, em contraste com a concentração de eventos vista com o \acrshort{etm} estático. Essa uniformidade na distribuição de eventos sugere uma maior estabilidade e controle do sistema, destacando a eficácia do \acrshort{etm} dinâmico em cenários de perturbação constante no contexto de conversores Boost.
+No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do conversor \textit{Boost}, nota-se uma semelhança entre o desempenho do \acrshort{etm} dinâmico e estático em torno do ponto $P_{\mathrm{o}, 3}$, como indicado pelas Figuras \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_a}, \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_b} e \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_c}. Não foram observadas discrepâncias significativas nessas condições. No entanto, ao examinar a distribuição de eventos perturbadores, observamos uma diferença marcante na Figura \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op1_c}. Com o \acrshort{etm} dinâmico, houve uma redução significativa na quantidade de eventos, com uma distribuição mais uniforme ao longo do tempo, em contraste com a concentração de eventos vista com o \acrshort{etm} estático. Essa uniformidade na distribuição de eventos sugere uma maior estabilidade e controle do sistema, destacando a eficácia do \acrshort{etm} dinâmico em cenários de perturbação constante no contexto de conversores \textit{Boost}.
 
 \begin{figure}[H]
   \centering
@@ -934,9 +934,9 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \label{fig:boost_converter_constant_pcpl_dynamic_etm_eta}
 \end{figure}
 
-Na \autoref{fig:boost_converter_constant_pcpl_dynamic_etm_eta}, é mostrada as variações temporais de $\eta(n)$ durante a simulação do conversor Boost em operações estáveis e instáveis, no Cenário 1. Observa-se que $\eta(t)$ permanece não negativa e converge para o equilíbrio na origem. Esse comportamento resulta em um aumento nos \acrshortpl{itee}, conforme evidenciado pela comparação entre as operações estáveis e instáveis.
+Na \autoref{fig:boost_converter_constant_pcpl_dynamic_etm_eta}, é mostrada as variações temporais de $\eta(n)$ durante a simulação do conversor \textit{Boost }em operações estáveis e instáveis, no Cenário 1. Observa-se que $\eta(t)$ permanece não negativa e converge para o equilíbrio na origem. Esse comportamento resulta em um aumento nos \acrshortpl{itee}, conforme evidenciado pela comparação entre as operações estáveis e instáveis.
 
-A \autoref{fig:boost_converter_mu} apresenta os resultados obtidos na simulação do conversor Boost operando em torno do ponto de operação instável ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. A escolha do ponto instável é baseada na sua tendência de gerar mais eventos acionados em comparação ao conversor no ponto estável, resultando em análises mais abrangentes.  Conforme $\rho$ aumenta, observa-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Durante a simulação do conversor sob \acrshort{etm} dinâmico, notaram-se diferenças nas médias dos \acrshortpl{itee} entre o modelo não linear e o linearizado, especialmente para valores de $\rho$ entre 0 e 0,8. Nesse intervalo, o modelo linearizado registrou médias superiores em relação ao modelo não linear. Esta diferenças também podem ser observadas nas simulações anteriores, apresentadas nas Figuras \ref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c} e \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op2_c}, onde, com $\rho = 0,5$, o modelo linear demonstrou acionar menos eventos em comparação ao modelo não linear. 
+A \autoref{fig:boost_converter_mu} apresenta os resultados obtidos na simulação do conversor \textit{Boost }operando em torno do ponto de operação instável ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. A escolha do ponto instável é baseada na sua tendência de gerar mais eventos acionados em comparação ao conversor no ponto estável, resultando em análises mais abrangentes.  Conforme $\rho$ aumenta, observa-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Durante a simulação do conversor sob \acrshort{etm} dinâmico, notaram-se diferenças nas médias dos \acrshortpl{itee} entre o modelo não linear e o linearizado, especialmente para valores de $\rho$ entre 0 e 0,8. Nesse intervalo, o modelo linearizado registrou médias superiores em relação ao modelo não linear. Estas diferenças também podem ser observadas nas simulações anteriores, apresentadas nas Figuras \ref{fig:boost_converter_constant_pcpl_static_etm_op2_duty_c} e \ref{fig:boost_converter_constant_pcpl_dynamic_etm_op2_c}, onde, com $\rho = 0,5$, o modelo linear demonstrou acionar menos eventos em comparação ao modelo não linear. 
 
 No \acrshort{etm} estático, as diferenças nas médias dos \acrshortpl{itee} não foram muito diferentes. Por outro lado, as médias dos \acrshortpl{itee} são maiores no \acrshort{etm} dinâmico que no estático. Além disso, os tempos de acomodação entre o \acrshort{etm} dinâmico e estático mostraram-se bastante semelhantes, assim como entre os modelos não linear e linearizado.
 
@@ -946,7 +946,7 @@ No \acrshort{etm} estático, as diferenças nas médias dos \acrshortpl{itee} n�
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/boost/itee-mean.eps}
-    \caption{Médias dos \acrshortpl{itee} em relação a variação de $\rho$}
+    \caption{Médias dos \acrshortpl{itee} em relação à variação de $\rho$}
   \end{subfigure}
   \\[6pt]
   \begin{subfigure}{1.\textwidth} 
@@ -954,11 +954,11 @@ No \acrshort{etm} estático, as diferenças nas médias dos \acrshortpl{itee} n�
     \includegraphics[width=1.\textwidth]{figuras/boost/ts.eps}
     \caption{Os tempos de acomodação dos estados do sistema sob o \acrshort{etm} estático e dinâmico em resposta às mudanças em $\rho$.}
   \end{subfigure}
-  \caption{Resposta do conversor Boost sob variação do parâmetro $\rho$.}
+  \caption{Resposta do conversor \textit{Boost }sob variação do parâmetro $\rho$.}
   \label{fig:boost_converter_mu}
 \end{figure}
 
-As Tabelas \ref{table:dynamic_etm_approaches_boost_sl} e \ref{table:dynamic_etm_approaches_boost_snl} apresentam as médias dos \acrshortpl{itee} obtidos com diferentes \acrshort{etm} projetados com diferentes valores dos parâmetros $\lambda$ e $\theta$, além do \acrshort{etm} estático, tanto para o modelo linear quanto o não-linear. Essas análises foram realizadas para o conversor Boost operando no ponto instável $P_{\mathrm{o}, 4}$, onde foi observado uma maior ocorrência de eventos de acionamento em comparação com o ponto estável. É interessante observar que não há uma relação direta ou inversa entre os parâmetros $\lambda$ e $\theta$ com as médias dos \acrshortpl{itee}, da mesma forma como visto no caso do conversor Buck. No entanto, destaca-se que, para $\lambda = 10^3$, as médias dos \acrshortpl{itee} obtidas para todos os valores de $\theta$ foram similares em cada modelo de conversor Boost, ao contrário das variações observadas para outros valores de $\lambda$. Além disso, as médias para $\lambda = 10^3$ estão bastante próximas da média obtida no \acrshort{etm} estático. Adicionalmente, observou-se que, à medida que o valor de $\theta$ aumenta, as médias dos \acrshortpl{itee} tendem a diminuir.
+As Tabelas \ref{table:dynamic_etm_approaches_boost_sl} e \ref{table:dynamic_etm_approaches_boost_snl} apresentam as médias dos \acrshortpl{itee} obtidos com diferentes \acrshort{etm} projetados com diferentes valores dos parâmetros $\lambda$ e $\theta$, além do \acrshort{etm} estático, tanto para o modelo linear quanto o não-linear. Essas análises foram realizadas para o conversor \textit{Boost }operando no ponto instável $P_{\mathrm{o}, 4}$, onde foi observado uma maior ocorrência de eventos de acionamento em comparação com o ponto estável. É interessante observar que não há uma relação direta ou inversa entre os parâmetros $\lambda$ e $\theta$ com as médias dos \acrshortpl{itee}, da mesma forma como visto no caso do conversor \textit{Buck}. No entanto, destaca-se que, para $\lambda = 10^3$, as médias dos \acrshortpl{itee} obtidas para todos os valores de $\theta$ foram similares em cada modelo de conversor \textit{Boost}, ao contrário das variações observadas para outros valores de $\lambda$. Além disso, as médias para $\lambda = 10^3$ estão bastante próximas da média obtida no \acrshort{etm} estático. Adicionalmente, observou-se que, à medida que o valor de $\theta$ aumenta, as médias dos \acrshortpl{itee} tendem a diminuir.
 
 \begin{table}[H]
   \centering
@@ -979,7 +979,7 @@ As Tabelas \ref{table:dynamic_etm_approaches_boost_sl} e \ref{table:dynamic_etm_
       \autoref{corollary:etm_stability} ($\theta = 10^8$) & 28,48 $\mu$s & 25,55 $\mu$s & 10,05 $\mu$s\\
     \bottomrule
   \end{tabular} \\[4pt]
-  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Boost não linear em torno do ponto instável.}
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor \textit{Boost }não linear em torno do ponto instável.}
   \label{table:dynamic_etm_approaches_boost_sl}
 \end{table}
 
@@ -1002,11 +1002,11 @@ As Tabelas \ref{table:dynamic_etm_approaches_boost_sl} e \ref{table:dynamic_etm_
       \autoref{corollary:etm_stability} ($\theta = 10^8$) & 28,87 $\mu$s & 25,05 $\mu$s & 8,902  $\mu$s\\
     \bottomrule
   \end{tabular} \\[4pt]
-  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor Boost linearizado em torno do ponto instável.}
+  \caption{Médias dos \acrshortpl{itee} em diferentes \acrshortpl{etm} dinâmicos e no \acrshort{etm} estático \newline para o conversor \textit{Boost }linearizado em torno do ponto instável.}
   \label{table:dynamic_etm_approaches_boost_snl}
 \end{table}
 
-Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2}, é possível observar o comportamento do conversor Boost no Cenário 1, quando submetido a um controlador projetado com base no critério de estabilidade de Hurwitz. Em contrapartida ao \acrshort{etc}, no ponto de operação $P_{\mathrm{o}, 3}$, o sistema não linear não conseguiu estabilizar no ponto de operação estável, embora os demais modelos tenham mantido estabilidade. Além disso, em torno do ponto instável, o conversor apresentou várias oscilações, enquanto o \acrshort{etc} não demonstrou oscilações significativas.
+Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2}, é possível observar o comportamento do conversor \textit{Boost }no Cenário 1, quando submetido a um controlador projetado com base no critério de estabilidade de Hurwitz. Em contrapartida, ao \acrshort{etc}, no ponto de operação $P_{\mathrm{o}, 3}$, o sistema não linear não conseguiu estabilizar no ponto de operação estável, embora os demais modelos tenham mantido estabilidade. Além disso, em torno do ponto instável, o conversor apresentou várias oscilações, enquanto o \acrshort{etc} não demonstrou oscilações significativas.
 
 \begin{figure}[H]
   \centering
@@ -1022,7 +1022,7 @@ Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2},
     \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim1/op1/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Boost no Cenário 1 operando em torno de $P_{\mathrm{o}, 3}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Boost }no Cenário 1 operando em torno de $P_{\mathrm{o}, 3}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_boost_cen1_op1}
   \begin{subfigure}{1.\textwidth}
     \centering
@@ -1035,13 +1035,13 @@ Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2},
     \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim1/op2/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Boost no Cenário 1 em torno de $P_{\mathrm{o}, 4}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Boost }no Cenário 1 em torno de $P_{\mathrm{o}, 4}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_boost_cen1_op2}
 \end{figure}
 
 \subsubsection{Cenário 2}
 
-Na simulação do conversor Boost em malha fechada com perturbação variável, a mesma perturbação da simulação em malha aberta foi usada. O comportamento do conversor em torno do ponto $P_{\mathrm{o}, 3}$ foi similar em ambas as condições, com resposta rápida e poucos eventos, apesar das variações na perturbação, conforme apresentado na \autoref{fig:boost_converter_variable_pcpl_static_etm_op1_duty_a}. A pequena variação na entrada, da ordem de $10^{-6}$, não afetou significativamente o sistema, justificando a similaridade com a malha aberta. Isso ressalta a eficácia do \acrshort{etm} em manter a estabilidade da saída do conversor Boost no ponto de operação, mesmo sob perturbações.
+Na simulação do conversor \textit{Boost }em malha fechada com perturbação variável, a mesma perturbação da simulação em malha aberta foi usada. O comportamento do conversor em torno do ponto $P_{\mathrm{o}, 3}$ foi similar em ambas as condições, com resposta rápida e poucos eventos, apesar das variações na perturbação, conforme apresentado na \autoref{fig:boost_converter_variable_pcpl_static_etm_op1_duty_a}. A pequena variação na entrada, da ordem de $10^{-6}$, não afetou significativamente o sistema, justificando a similaridade com a malha aberta. Isso ressalta a eficácia do \acrshort{etm} em manter a estabilidade da saída do conversor \textit{Boost }no ponto de operação, mesmo sob perturbações.
 
 \begin{figure}[H]
   \centering
@@ -1056,7 +1056,7 @@ Na simulação do conversor Boost em malha fechada com perturbação variável, 
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_variable_pcpl_static_etm_op1_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -1066,10 +1066,10 @@ Na simulação do conversor Boost em malha fechada com perturbação variável, 
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_variable_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 2 e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Boost }em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 2 e \acrshort{etm} estático.}
 \end{figure}
 
-O ETM estático assegurou a estabilidade do conversor Boost sob perturbação variável em torno do ponto de operação instável $P_{o, 4}$, conforme ilustrado na \autoref{fig:boost_converter_variable_pcpl_static_etm_op2_duty_a}. Apesar dos afastamentos da perturbação em determinados momentos em relação ao ponto de operação, não foram observadas diferenças significativas entre os modelos não linear e linearizado sob malha fechada, tornando-os praticamente idênticos. Embora haja semelhanças nos estados e na entrada do sistema, é evidente na \autoref{fig:boost_converter_variable_pcpl_static_etm_op2_duty_c} que os conjuntos de \acrshortpl{itee} são distintos entre o modelo não linear e o linearizado.
+O ETM estático assegurou a estabilidade do conversor \textit{Boost }sob perturbação variável em torno do ponto de operação instável $P_{o, 4}$, conforme ilustrado na \autoref{fig:boost_converter_variable_pcpl_static_etm_op2_duty_a}. Apesar dos afastamentos da perturbação em determinados momentos em relação ao ponto de operação, não foram observadas diferenças significativas entre os modelos não linear e linearizado sob malha fechada, tornando-os praticamente idênticos. Embora haja semelhanças nos estados e na entrada do sistema, é evidente na \autoref{fig:boost_converter_variable_pcpl_static_etm_op2_duty_c} que os conjuntos de \acrshortpl{itee} são distintos entre o modelo não linear e o linearizado.
 
 \begin{figure}[H]
   \centering
@@ -1084,7 +1084,7 @@ O ETM estático assegurou a estabilidade do conversor Boost sob perturbação va
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_variable_pcpl_static_etm_op2_duty_b}
   \end{subfigure}
   \\[6pt]
@@ -1094,10 +1094,10 @@ O ETM estático assegurou a estabilidade do conversor Boost sob perturbação va
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_variable_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor Boost em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 2 e \acrshort{etm} estático.}
+  \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Boost }em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 2 e \acrshort{etm} estático.}
 \end{figure}
 
-No contexto do \acrshort{etm} dinâmico, ao estudar o comportamento dos conversores Boost em situações de perturbação variável, notamos padrões semelhantes aos observados nos conversores Buck. Em torno dos pontos estáveis, como $P_{\mathrm{o}, 4}$ para o Boost (Figura \ref{fig:buck_converter_variable_pcpl_dynamic_etm_op2}), tanto o \acrshort{etm} dinâmico quanto o estático demonstram comportamentos comparáveis, com poucos novos eventos necessários para estabilização. No entanto, ao considerar pontos instáveis, os intervalos entre eventos aumentam, indicando uma menor frequência de ocorrências com o \acrshort{etm} dinâmico em comparação com o estático. Embora a variável dinâmica não convirja para a origem nessas situações, o \acrshort{etm} dinâmico garante a estabilidade global do sistema ao longo da simulação, mantendo-o operando dentro de limites aceitáveis e garantindo sua robustez diante de perturbações variáveis.
+No contexto do \acrshort{etm} dinâmico, ao estudar o comportamento dos conversores \textit{Boost }em situações de perturbação variável, notamos padrões semelhantes aos observados nos conversores \textit{Buck}. Em torno dos pontos estáveis, como $P_{\mathrm{o}, 4}$ para o \textit{Boost }(Figura \ref{fig:buck_converter_variable_pcpl_dynamic_etm_op2}), tanto o \acrshort{etm} dinâmico quanto o estático demonstram comportamentos comparáveis, com poucos novos eventos necessários para estabilização. No entanto, ao considerar pontos instáveis, os intervalos entre eventos aumentam, indicando uma menor frequência de ocorrências com o \acrshort{etm} dinâmico em comparação com o estático. Embora a variável dinâmica não convirja para a origem nessas situações, o \acrshort{etm} dinâmico garante a estabilidade global do sistema ao longo da simulação, mantendo-o operando dentro de limites aceitáveis e garantindo sua robustez diante de perturbações variáveis.
 
 \begin{figure}[H]
   \centering
@@ -1112,7 +1112,7 @@ No contexto do \acrshort{etm} dinâmico, ao estudar o comportamento dos converso
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_variable_pcpl_dynamic_etm_op1_b}
   \end{subfigure}
   \\[6pt]
@@ -1122,7 +1122,7 @@ No contexto do \acrshort{etm} dinâmico, ao estudar o comportamento dos converso
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_variable_pcpl_dynamic_etm_op1_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor boost em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 2 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{boost }em torno do ponto $P_{\mathrm{o}, 3}$ no Cenário 2 e \acrshort{etm} dinâmico.}
   \label{fig:boost_converter_variable_pcpl_dynamic_etm_op1}
 \end{figure}
 
@@ -1139,7 +1139,7 @@ No contexto do \acrshort{etm} dinâmico, ao estudar o comportamento dos converso
   \begin{subfigure}{1.\textwidth}
     \centering
     \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op2/duty-cycle.eps}
-    \caption{Duty Cycle $d(t)$}
+    \caption{\textit{Duty Cycle} $d(t)$}
     \label{fig:boost_converter_variable_pcpl_dynamic_etm_op2_b}
   \end{subfigure}
   \\[6pt]
@@ -1149,7 +1149,7 @@ No contexto do \acrshort{etm} dinâmico, ao estudar o comportamento dos converso
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_variable_pcpl_dynamic_etm_op2_c}
   \end{subfigure}
-  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada duty cycle $d(t)$ e os \acrshortpl{itee} do conversor boost em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 2 e \acrshort{etm} dinâmico.}
+  \caption{Estados $i_L(t)$, $v_C(t)$ e $\eta(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{boost }em torno do ponto $P_{\mathrm{o}, 4}$ no Cenário 2 e \acrshort{etm} dinâmico.}
   \label{fig:boost_converter_variable_pcpl_dynamic_etm_op2}
 \end{figure}
 
@@ -1173,7 +1173,7 @@ Ao considerar o ponto instável $P_{\mathrm{o}, 4}$, nota-se um aumento signific
   \label{fig:boost_converter_variable_pcpl_dynamic_etm_eta}
 \end{figure}
 
-Nas Figuras \ref{fig:classic_boost_cen2_op1} e \ref{fig:classic_boost_cen2_op2}, é possível observar o desempenho do conversor Boost no Cenário 2, quando sujeito a um controlador desenvolvido com base no critério de estabilidade de Hurwitz. Em contraste com o \acrshort{etc}, o sistema não linear falhou em estabilizar no ponto de operação estável, notavelmente em $P_{\mathrm{o}, 3}$, embora os outros modelos tenham mantido a estabilidade, da mesma forma como foi visto no Cenário 1. Além disso, ao redor do ponto instável, o comportamento do conversor divergiu das análises do \acrshort{etc}. Sob este último, os sinais parecem seguir um padrão de primeira ordem, ao passo que com o controlador baseado no critério de estabilidade de Hurwitz, essa característica não é observada.
+Nas Figuras \ref{fig:classic_boost_cen2_op1} e \ref{fig:classic_boost_cen2_op2}, é possível observar o desempenho do conversor \textit{Boost }no Cenário 2, quando sujeito a um controlador desenvolvido com base no critério de estabilidade de Hurwitz. Em contraste com o \acrshort{etc}, o sistema não linear falhou em estabilizar no ponto de operação estável, notavelmente em $P_{\mathrm{o}, 3}$, embora os outros modelos tenham mantido a estabilidade, da mesma forma como foi visto no Cenário 1. Além disso, ao redor do ponto instável, o comportamento do conversor divergiu das análises do \acrshort{etc}. Sob este último, os sinais parecem seguir um padrão de primeira ordem, ao passo que com o controlador baseado no critério de estabilidade de Hurwitz, essa característica não é observada.
 
 \begin{figure}[H]
   \centering
@@ -1189,7 +1189,7 @@ Nas Figuras \ref{fig:classic_boost_cen2_op1} e \ref{fig:classic_boost_cen2_op2},
     \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim2/op1/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Boost no Cenário 2 operando em torno de $P_{\mathrm{o}, 3}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Boost }no Cenário 2 operando em torno de $P_{\mathrm{o}, 3}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_boost_cen2_op1}
   \begin{subfigure}{1.\textwidth}
     \centering
@@ -1202,14 +1202,14 @@ Nas Figuras \ref{fig:classic_boost_cen2_op1} e \ref{fig:classic_boost_cen2_op2},
     \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim2/op2/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
-  \caption{Conversor Boost no Cenário 2 em torno de $P_{\mathrm{o}, 4}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
+  \caption{Conversor \textit{Boost }no Cenário 2 em torno de $P_{\mathrm{o}, 4}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_boost_cen2_op2}
 \end{figure}
 
 
 \subsubsection{Análise Numérica de Desempenho}
 
-A \autoref{table:imees_boost_static_dynamic} exibe as médias dos \acrshortpl{itee} durante a simulação do conversor Boost com os \acrshort{etm} dinâmico e estático. Ao analisar os resultados para o ponto de operação $P_{\mathrm{o}, 1}$, observa-se uma diferença mínima entre os \acrshortpl{itee} obtidos com o \acrshort{etm} estático e dinâmico, sugerindo que o \acrshort{etm} estático atinge um desempenho satisfatório nesse ponto de operação. No entanto, para o ponto de operação $P_{\mathrm{o}, 2}$, os \acrshortpl{itee} obtidos com o \acrshort{etm} dinâmico são consideravelmente maiores do que os do \acrshort{etm} estático, evidenciando a capacidade do \acrshort{etm} dinâmico em reduzir o número de eventos acionados. Esses resultados destacam o desempenho superior do \acrshort{etm} dinâmico na redução do número de eventos.
+A \autoref{table:imees_boost_static_dynamic} exibe as médias dos \acrshortpl{itee} durante a simulação do conversor \textit{Boost }com os \acrshort{etm} dinâmico e estático. Ao analisar os resultados para o ponto de operação $P_{\mathrm{o}, 1}$, observa-se uma diferença mínima entre os \acrshortpl{itee} obtidos com o \acrshort{etm} estático e dinâmico, sugerindo que o \acrshort{etm} estático atinge um desempenho satisfatório nesse ponto de operação. No entanto, para o ponto de operação $P_{\mathrm{o}, 2}$, os \acrshortpl{itee} obtidos com o \acrshort{etm} dinâmico são consideravelmente maiores do que os do \acrshort{etm} estático, evidenciando a capacidade do \acrshort{etm} dinâmico em reduzir o número de eventos acionados. Esses resultados destacam o desempenho superior do \acrshort{etm} dinâmico na redução do número de eventos.
 
 \vspace{12pt}
 \begin{table}[H]
@@ -1231,11 +1231,11 @@ A \autoref{table:imees_boost_static_dynamic} exibe as médias dos \acrshortpl{it
       2 & $P_{\mathrm{o}, 4}$                                    & 33,07 $\mu$s                          & 34,21 $\mu$s \\
     \bottomrule
   \end{tabular}
-  \caption{\acrshortpl{imee} do conversor Buck sob \acrshort{etm} estático (à esquerda) e dinâmico (à direita).}
+  \caption{\acrshortpl{imee} do conversor \textit{Buck} sob \acrshort{etm} estático (à esquerda) e dinâmico (à direita).}
   \label{table:imees_boost_static_dynamic}
 \end{table}
 
-As Tabelas \ref{table:indices_desempenho_etm_estático_boost} e \ref{table:indices_desempenho_etm_dinamico_boost} detalham os tempos de acomodação, índices de desempenho como \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor Boost, considerando tanto o \acrshort{etm} estático quanto o dinâmico, operando no Cenário 1. Os dados são analisados em relação à saída e à entrada determinadas pelo controlador. É notável que os valores obtidos são praticamente idênticos em ambas as configurações, sugerindo consistência entre a saída e a entrada independentemente do \acrshort{etm} utilizado. 
+As Tabelas \ref{table:indices_desempenho_etm_estático_boost} e \ref{table:indices_desempenho_etm_dinamico_boost} detalham os tempos de acomodação, índices de desempenho como \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor \textit{Boost}, considerando tanto o \acrshort{etm} estático quanto o dinâmico, operando no Cenário 1. Os dados são analisados em relação à saída e à entrada determinadas pelo controlador. É notável que os valores obtidos são praticamente idênticos em ambas as configurações, sugerindo consistência entre a saída e a entrada independentemente do \acrshort{etm} utilizado. 
 
 \vspace{8pt}
 \begin{table}[H]
@@ -1251,7 +1251,7 @@ As Tabelas \ref{table:indices_desempenho_etm_estático_boost} e \ref{table:indic
     $P_{\mathrm{o}, 4}$       & Linearizado & 0,01 ms             & 0,08           & 120,00 $\cdot 10^{-6}$ & 0,01           \\
     \bottomrule
   \end{tabular}
-  \caption{Pontos de operação do dois modelos do conversor Buck. Estático}
+  \caption{Tempos de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor \textit{Boost} sob \acrshort{etm} estático}
   \label{table:indices_desempenho_etm_estático_boost}
 \end{table}
 
@@ -1269,6 +1269,6 @@ As Tabelas \ref{table:indices_desempenho_etm_estático_boost} e \ref{table:indic
     $P_{\mathrm{o}, 4}$       & Linearizado & 0,11 ms             & 0,08           & 120,00 $\cdot 10^{-6}$ & 0,01           \\
     \bottomrule
   \end{tabular}
-  \caption{Pontos de operação do dois modelos do conversor Buck. Dinâmico}
+  \caption{Tempos de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor \textit{Boost} sob \acrshort{etm} dinâmico}
   \label{table:indices_desempenho_etm_dinamico_boost}
 \end{table}
