@@ -1,9 +1,8 @@
 \chapter{Controle Baseado em Eventos de Conversores CC-CC} \label{cap4}
 
-% Essa análise fornece insights sobre a aplicação das abordagens de ETC e permite comparar suas vantagens e desvantagens.
+Este capítulo explora uma abordagem para o controle de conversores \acrshort{cc}-\acrshort{cc} com base em eventos. Apresentando uma proposta de projeto de \acrshortpl{etm} estáticos e dinâmicos que garantem a estabilidade do ponto de equilíbrio de sistemas lineares em malha fechada por realimentação de estados,  capaz de reduzir o número de eventos gerados. Posteriormente, os conversores simulados em malha aberta no capítulo anterior, são submetidos a simulações e análises em malha fechada utilizando os \acrshortpl{etm} propostos.
 
-
-\section{Modelo de \acrshort{etm} para Sistemas Lineares} \label{section:etm_models}
+\section{Modelos de \acrshort{etm} para Sistemas Lineares} \label{section:etm_models}
 
 % ETM: Apresentação do sistema dinâmico
 Nesta pesquisa, é proposto um modelo de \acrshort{etm} dinâmico para sistemas lineares, representada pela equação diferencial abaixo: \begin{equation} \dot{x}(t) = Ax(t) + Bu(t). \label{eq:linear_system_etm}\end{equation} Nesta equação, $ x(t) \in \mathbb{R}^n $ representa o estado do sistema, $ u(t) \in \mathbb{R}^m $ é a entrada de controle, e $ A \in \mathbb{R}^{n \times n} $ e $ B \in \mathbb{R}^{n \times m}$ são a matriz de estados e a matriz de entrada, respectivamente. Além disto, a origem do sistema é considerada o ponto de equilíbrio de interesse.
@@ -193,7 +192,7 @@ Para o projeto do \acrshort{etm} dinâmico, uma condição suficiente é propost
   2x^T(t) P\dt{x}(t) + \dt{\eta}(t) < 0.
 \end{gather} Da função de \textit{Lyapunov} $V(x) = x^TPx$, tém-se: \begin{equation}\dt{V}(x) = x^T(t)P\dt{x}(t) + \dt{x}^T(t)Px(t) = 2x^T(t) P\dt{x}(t).\end{equation} Logo, \begin{equation}
   \dt{V}(x) + \dt{\eta}(x) < 0.
-\end{equation} Portanto, conforme discutido na seção \ref{section:etm_classification}, para $\dt{W}(x, \eta) = \dt{V}(x) + \dt{\eta}(x) < 0$, a origem do sistema dinâmico \eqref{eq:linear_system_etm} em malha fechada sob o \acrshort{etm} dinâmico \eqref{eq:dynamic_etm}, sob o Corolário \ref{corollary:etm_stability}, é assintoticamente estável.
+\end{equation} Portanto, como $\dt{W}(x, \eta) = \dt{V}(x) + \dt{\eta}(x) < 0$, a origem do sistema dinâmico \eqref{eq:linear_system_etm} em malha fechada sob o \acrshort{etm} dinâmico \eqref{eq:dynamic_etm} é assintoticamente estável.
 
 \subsection{Intervalo Mínimo entre Eventos}
 
@@ -260,9 +259,9 @@ Para avaliar o desempenho do sistema em malha fechada, são obtidos e apresentad
   \acrshort{isc} = \int_0^{t_\mathrm{s}} u^2(t) \, \mathrm{d}t,
 \end{gather} onde $t_{\mathrm{s}}$ é o tempo de acomodação da saída do sistema, $u(t)$ é a entrada determinada pelo controlador para a planta e $e(t) = y_{\mathrm{ref}} - y(t)$, sendo $y_{\mathrm{ref}}$ o valor de referência, neste caso, o valor no ponto de operação, e $y(t)$ é o sinal de saída da planta.
 
-Os parâmetros $\Xi$, $\Psi$ e $K$ para projeto dos \acrshortpl{etm} são obtidos por meio do problema de otimização multiobjetivo \eqref{eq:optimization_problem} proposta nesta pesquisa. Para fins de comparação entre o \acrshort{etm} estático e dinâmico, este parâmetros são os mesmos para cada configuração dos conversores. Por fim, é feita um comparação entre o comportamento dos conversores em malha fechada sob o \acrshort{etm} dinâmico e sob um controlador projetado utilizando o critério de estabilidade de Hurwitz discutida por \cite{Duan2013}.
+Os parâmetros $\Xi$, $\Psi$ e $K$ para projeto dos \acrshortpl{etm} são obtidos por meio do problema de otimização multiobjetivo \eqref{eq:optimization_problem} proposta nesta pesquisa \footnote{A implementação em \textit{Python} do método de resolução do problema de otimização multiobjetivo utilizando CVXPY pode ser encontrada no seguinte repositório do GitHub: \url{https://github.com/andel-vitorio/etc-for-dc-converters} mantido pelo autor deste trabalho e seguindo um procedimento detalhado apresentado no \autoref{apendiceB}.}. Para fins de comparação entre o \acrshort{etm} estático e dinâmico, este parâmetros são os mesmos para cada configuração dos conversores. Por fim, é feita um comparação entre o comportamento dos conversores em malha fechada sob o \acrshort{etm} dinâmico e sob um controlador projetado utilizando o critério de estabilidade de Hurwitz discutida por \cite{Duan2013}.
 
-\subsection{Conversor \acrshort{cc}-\acrshort{cc} \textit{Buck}}
+\subsection{Conversor \textit{Buck}}
 
 O conversor \textit{Buck}, foi simulado em malha fechada mantendo os mesmos cenários definidos para a análise em malha aberta. No projeto do \acrshort{etm} estático e dinâmico, o parâmetro $\rho$ do problema de otimização \eqref{eq:optimization_problem} foi definido como $0,5$, a fim de uniformizar os pesos das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$ no processo de otimização. Os parâmetros de projeto dos \acrshortpl{etm} para o conversor \textit{Buck} em torno do ponto de operação $P_{\mathrm{o}, 1}$ são: \begin{gather}
   \Xi = \begin{bmatrix}
@@ -770,7 +769,7 @@ As Tabelas \ref{table:indices_desempenho_etm_estático} e \ref{table:indices_des
   \label{table:indices_desempenho_etm_dinamico}
 \end{table}
 
-\subsection{Conversor \acrshort{cc}-\acrshort{cc} \textit{Boost}}
+\subsection{Conversor \textit{Boost}}
 
 O conversor \textit{Boost}, que anteriormente passou por análise em malha aberta conforme descrito na \autoref{section:open_loop}, foi submetido a simulações em malha fechada, mantendo as mesmas condições de operação. A avaliação foi realizada em dois pontos de operação distintos, $P_{\mathrm{o}, 3}$ e $P_{\mathrm{o}, 4}$, em duas situações diferentes: uma com o sinal de perturbação $P_{\mathrm{cpl}}$ mantido constante e outra com variação desse sinal. Os pontos de operação e os sinais de perturbação utilizados nas duas situações são idênticos aos utilizados na análise em malha aberta.
 

@@ -1,6 +1,8 @@
-\chapter{Conversores CC com Cargas de Potência Constante} \label{cap3}
+\chapter{Conversores CC-CC Conectados a CPL e CRL} \label{cap3}
 
-\section{Microrredes de Corrente Contínua}
+No contexto das \acrshortpl{mr} de \acrshort{cc}, este capítulo visa explorar os conversores \acrshort{cc}-\acrshort{cc} com \acrshort{cpl} e \acrshort{crl}, destacando tanto os princípios fundamentais quanto as aplicações práticas. Ao abordar os conversores \textit{Buck} e \textit{Boost}, serão apresentadas suas características, operações e modelagens, incluindo análises dos modelos não lineares e linearizados de cada conversor para compreender seu comportamento em diferentes cenários por meio de simulações.
+
+\section{Microrredes de \acrshort{cc}}
 
 No século XX, a "Guerra das Correntes" entre defensores da \acrshortpl{ca}, liderados por \textit{Westinghouse} e \textit{Tesla}, e proponentes da \acrshort{cc}, liderados por \textit{Edison}, resultou na prevalência da \acrshort{ca} devido à sua facilidade de expansão da rede. Apesar disso, a \acrshort{cc} permaneceu relevante com os avanços na eletrônica de potência. Paralelamente, a crescente adoção de microrredes \acrshortpl{cc}, com \acrfullpl{fer}, \acrfullpl{sae} e novas cargas, reflete das preocupações ambientais e escassez de combustíveis fósseis, mas sua integração descoordenada apresenta desafios técnicos e operacionais, como perfil de tensão comprometido e congestionamentos nas linhas de transmissão \citep{Elsayed2015, Dragicevic2015}.
 
@@ -333,9 +335,9 @@ A partir dessas equações, podemos derivar as expressões linearizadas de $\dt{
 
 \section{Simulação dos Conversores em Malha Aberta} \label{section:open_loop}
 
-Nesta seção, será realizada uma análise dos dois conversores \acrshort{cc}-\acrshort{cc} em malha aberta, analisando suas respostas em diversos cenários e condições operacionais. Utilizou-se a linguagem de programação Python juntamente com bibliotecas especializadas em simulação de sistemas dinâmicos para simular os modelos não lineares transladados e os linearizados dos conversores obtidos na seção anterior. Com base nos resultados obtidos, é possível observar a influência de fatores como a variação das entradas e das condições de operação nos comportamentos dos conversores.
+Nesta seção, será realizada uma análise dos dois conversores \acrshort{cc}-\acrshort{cc} em malha aberta, analisando suas respostas em diversos cenários e condições operacionais. Utilizou-se a linguagem de programação \textit{Python} juntamente com bibliotecas especializadas em simulação de sistemas dinâmicos para simular os modelos não lineares transladados e os linearizados dos conversores obtidos na seção anterior. Com base nos resultados obtidos, é possível observar a influência de fatores como a variação das entradas e das condições de operação nos comportamentos dos conversores.
 
-Nas simulações, os conversores \textit{Buck} e \textit{Boost} são avaliados em dois cenários distintos descritos abaixo:
+Nas simulações \footnote{As simulações foram realizadas utilizando implementações em \textit{Python} disponíveis em um repositório no GitHub (\url{https://github.com/andel-vitorio/etc-for-dc-converters}) mantido pelo autor deste trabalho e seguindo um procedimento detalhado apresentado no \autoref{apendice_a}.}, os conversores \textit{Buck} e \textit{Boost} são avaliados em dois cenários distintos descritos abaixo:
 
 \begin{itemize}
   \item \textbf{Cenário 1}: Neste cenário, os conversores \textit{Buck} e \textit{Boost} são simulados em duas situações distintas. No primeiro caso, o conversor \textit{Buck} é simulado em torno do \acrshort{po} estável ($P_{\mathrm{o}, 1}$), enquanto o conversor \textit{Boost} é simulado em torno do \acrshort{po} estável ($P_{\mathrm{o}, 3}$). No segundo caso, tanto o conversor \textit{Buck} quanto o \textit{Boost} são simulados em torno de um \acrshort{po} instável ($P_{\mathrm{o}, 2}$ para o \textit{Buck} e $P_{\mathrm{o}, 4}$ para o \textit{Boost}). Em cada caso, os parâmetros de entrada dos conversores são definidos com seus respectivos valores nos pontos de operação. O objetivo é avaliar a estabilidade e o desempenho dos conversores sob condições invariáveis, considerando o sinal de perturbação $P_{\mathrm{cpl}}(t)$ e a entrada controlável $d(t)$ fixos durante toda a simulação, analisando se eles mantêm sua operação dentro de limites aceitáveis. \label{cenario:1}

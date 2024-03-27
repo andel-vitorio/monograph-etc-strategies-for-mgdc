@@ -78,7 +78,7 @@ Nesta seção, é apresentado dois exemplos de definição e resolução de prob
 
 \subsection{Cálculo da Norma $\mathcal{H}_{2}$}
 
-Para determinar a norma $\mathscr{H} _2$ de um sistema dinâmico linear definido por: \begin{gather} \dt{x}(t) = Ax(t) + Bu(t) \\ y(t) = Cx(t) + Du(t), \end{gather} pode-se usar o seguinte problema de otimização: \begin{equation} \underset{\rho, \space W = W^T > 0}{\min} \space\space \rho \end{equation} sujeito a \begin{equation}
+Para determinar a norma $\mathscr{H} _2$ de um sistema dinâmico linear definido por: \begin{gather} \dt{x}(t) = Ax(t) + Bu(t) \\ y(t) = Cx(t) + Du(t), \label{sistema_linear_h2}\end{gather} pode-se usar o seguinte problema de otimização: \begin{equation} \underset{\rho, \space W = W^T > 0}{\min} \space\space \rho \end{equation} sujeito a \begin{equation}
 \rho \geq Tr(CWC^T), \space
 AW + WA^T + BB^T < 0
 \end{equation} Na solução ótima $\rho = \rho^\star$, têm se \begin{equation} \lVert H(s) \rVert ^ 2 _ 2 = \rho^\star, \end{equation} onde $H(s)$ é a matriz de transferência do sistema, dada por: \begin{equation} H(s) = C(sI- A)^{-1}B +D  \end{equation}
@@ -134,7 +134,65 @@ print("Norma H2 = ", math.sqrt(rho.value), '\n')
 
 O código apresentado resolve o problema de otimização para determinar a norma $\mathscr{H}_2$ do sistema dinâmico massa-mola, conforme definido pelas equações de estado e de saída. Primeiramente, são definidos os parâmetros do sistema, incluindo as matrizes de estado $A$, de entrada $B$, e de saída $C$, que descrevem as propriedades físicas do sistema massa-mola fornecido. Em seguida, são definidas variáveis de otimização, como $\rho$ e $W$, juntamente com o problema de otimização, que busca minimizar $\rho$ sujeito a restrições específicas. Estas restrições garantem que a norma $\mathscr{H}_2$ seja calculada corretamente. O problema de otimização é então resolvido usando o \textit{solver MOSEK}, e os resultados são apresentados, incluindo o valor ótimo de $\rho$ e a norma $\mathscr{H}_2$ calculada a partir desse valor. 
 
+\subsection{Cálculo da Norma $\mathcal{H}_{\infty}$}
 
+Para determinar a norma $\mathscr{H}_{\infty}$ de um sistema dinâmico linear definido em \eqref{sistema_linear_h2}, pode-se usar o seguinte problema de otimização: $$ \underset{P = P^T > 0}{\min} \space \space \mu $$ sujeito a \begin{equation}
+  \begin{bmatrix}
+  A^TP + PA + C^TC & PB + C^TD\\
+  B^TP + D^TC & D^TD - \mu
+  \end{bmatrix} 
+  < 0
+\end{equation} Na solução ótima de  $\mu = \mu^{\star}$, a norma $\mathscr{H}_{\infty}$ é dada por \begin{equation} \lVert H(s) \rVert _ \infty = \sqrt{\mu ^ \star}. \end{equation}
+  
+Considerando novamente o sistema massa-mola apresentado no \autoref{apendice_a}, a sua norma $\mathscr{H}_{\infty}$ pode ser obtida através do seguinte código: 
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python,  caption={Cálculo da norma $\mathcal{H}_{\infty}$}., label=cod:params_etm]
+# Definição dos Parâmetros
+m1 = 1.
+m2 = 0.5
+k1 = 1.
+k2 = 1.
+c0 = 2.
+
+A = cp.Parameter((4, 4), value=[[0., 0., - ((k1 + k2) / m1), (k2 / m2)],
+                              [0., 0., (k2 / m1), - (k2 / m2)],
+                              [1., 0., - (c0 / m1), 0],
+                              [0., 1., 0., -(c0 / m2)]])
+B = cp.Parameter((4, 1), value=[[0., 0., 1. / m1, 0.]])
+C = cp.Parameter((1, 4), value=[[0], [1], [0], [0]])
+D = cp.Parameter((1, 1), value=[[0]])
+I = cp.Parameter((1, 1), value=np.identity(1))
+
+print('Parâmetros:\n')
+print('A = \n', A.value)
+print('B = \n', B.value)
+print('C = \n', C.value)
+print('D = \n', D.value)
+
+# Definição das Variáveis
+P = cp.Variable((4, 4), symmetric=True)
+mu = cp.Variable()
+M = cp.bmat([[A.T @ P + P @ A + C.T @ C, P @ B + C.T @ D], 
+          [B.T @ P + D.T @ C, D.T @ D - mu * I]])
+
+
+# Definição do Problema: Objetivo e Restrições
+obj = cp.Minimize(mu)
+constraints = [P >> 0, M << 0]
+
+prob = cp.Problem(obj, constraints)
+
+# Resolução do Problema usando o solver MOSEK
+prob.solve(solver=cp.MOSEK, verbose=False)
+print("\nValor ótimo:", prob.value, '\n')
+
+# Apresentação dos Resultados
+print('P = \n', P.value)
+print("mu = ", mu.value, '\n')
+print("Norma Hinf = ", math.sqrt(mu.value), '\n')
+
+\end{lstlisting}
 
 \subsection{Obtenção dos Parâmetros de Projeto de um \acrshort{etm}}
 
