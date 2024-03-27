@@ -1,75 +1,239 @@
-\chapter{Definição e Resolução de Problemas de Otimização por meio de LMIs}\label{apendiceB}
+\chapter{Definição e Resolução de Problemas de Otimização usando CVXPY}\label{apendiceB}
 
-\subsection{Obtenção dos Parâmetros de Projeto do \acrshort{etm}}
+\section{Visão Geral}
 
-O código \ref{cod:params_etm} aborda a resolução do problema de minimização estabelecido em \eqref{eq:optimization_problem} que busca aumentar o intervalo de tempo entre os eventos. Através desta abordagem, busca-se determinar os valores ótimos dos parâmetros $\Xi$ e $\Psi$, que são essenciais para determinar o momento de acionamento de um evento, além do ganho $K$ utilizado no controle em malha fechada.
+O CVXPY é uma linguagem de modelagem em Python para otimização convexa, permitindo que os usuários definam problemas de forma intuitiva, sem a necessidade de lidar diretamente com algoritmos de solução. Ele transforma automaticamente os problemas em uma forma padrão, simplificando o processo de prototipagem e implementação, além de lidar bem com problemas convexos, garantindo convergência para o ótimo global. Com suporte a uma variedade de solvers, o CVXPY é uma ferramenta popular entre pesquisadores, engenheiros e cientistas de dados para resolver problemas de otimização em diversas áreas. A seguir, serão destacados os principais recursos do CVXPY para a definição e resolução de problemas.
+
+\subsection{Parâmetros e Variáveis}
+
+Os parâmetros são símbolos que representam constantes, permitindo a modificação dos valores constantes em um problema sem a necessidade de reconstruí-lo por completo. Essa abordagem possibilita resolver um programa parametrizado de forma mais eficiente do que criar um novo problema repetidamente. Ao criar parâmetros no CVXPY, é possível definir atributos como o sinal dos valores, simetria, entre outros. Esses atributos não são definidos por padrão e podem ser atribuídos a uma constante a qualquer momento, mantendo as mesmas dimensões e atributos especificados durante a criação do parâmetro. O código a seguir apresenta a criação básica de alguns parâmetros usando o CVXPY:
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Criação de parâmetros usando CVXPY.}]
+import cvxpy as cp
+import numpy as np
+
+# Parâmetro escalar sem sinal definido.
+A = cp.Parameter()
+
+# Parâmetro escalar não negativo.
+B = cp.Parameter(nonneg=True)
+
+# Parâmetro matricial com elementos não positivos.
+C = cp.Parameter((2, 3), nonpos=True)
+
+# Definindo um valor a um parâmetro.
+A.value = 2
+D = cp.Parameter(value=3)
+E = cp.Parameter((2, 2), value=np.array([[1, 2], [3, 4]]))
+
+# Atribuindo nomes à parâmetros 
+F = cp.Parameter(2, value=np.array([1, 2]), name='F')
+G = cp.Parameter(name='G')
+
+\end{lstlisting}
+
+Variáveis no CVXPY podem assumir forma de escalares, vetores ou matrizes, sendo sua criação bastante similar à dos parâmetros, podendo inclusive definir alguns atributos. Assim como os parâmetros, as variáveis oferecem uma flexibilidade essencial na modelagem de problemas de otimização. O código a seguir exemplifica a criação de variáveis:
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python, caption={Criação de variáveis usando CVXPY.}]
+import cvxpy as cp
+import numpy as np
+
+# Variável escalar sem sinal definido.
+A = cp.Variable()
+
+# Variável escalar não negativa.
+B = cp.Variable(nonneg=True)
+
+# Variável matricial semidefinida positiva.
+C = cp.Variable((2, 2), PSD=True)
+
+# Variável matricial simétrica.
+C = cp.Variable((3, 3), symmetric=True)
+
+# Definindo um valor a um variável.
+A.value = 2
+D = cp.Variable(value=3)
+E = cp.Variable((2, 2), np.array([[1, 2], [3, 4]]))
+
+# Atribuindo nomes à variáveis 
+F = cp.Variable(2, value=np.array([1, 2]), name='F')
+C.name = 'C'
+\end{lstlisting}
+
+\subsection{Função Objetivo, Restrições}
+
+Para criar restrições em CVXPY, são utilizados os operadores \texttt{==}, \texttt{<=} e \texttt{>=}. Essas restrições são aplicáveis a escalares, vetores e matrizes, representando igualdades e desigualdades. No caso de desigualdades de matriz que representem restrições semidefinidas, são utilizados os operadores \texttt{<<} e \texttt{>>}. É importante destacar que não é permitido o uso dos operadores \texttt{<} e \texttt{>} para definir desigualdades, uma vez que desigualdades estritas não possuem aplicação direta em contextos do mundo real.
+
+O CVXPY disponibiliza os métodos \texttt{cvxpy.Minimize()} e \texttt{cvxpy.Maximize()} para a minimização e maximização de objetivos, respectivamente. Ambas as funções requerem um único parâmetro, que é a expressão a ser otimizada. Além disso, o CVXPY oferece diversas funções utilitárias que podem ser úteis na definição da função objetivo, tais como o cálculo do traço de matrizes (\texttt{cvxpy.trace}) e a soma dos quadrados (\texttt{cvxpy.sum\_square}).
+
+\subsection{Definição e Resolução dos Problemas de Otimização}
+
+Para definir um problema de otimização em CVXPY, é utilizado o seguinte método \texttt{cvxpy.Problem(obj, constraints)}, onde \texttt{obj} representa a função objetivo e \texttt{constraints} é uma lista de restrições. Para resolver o problema definido, é necessário chamar o método \texttt{solve()} do objeto criado. Após a resolução do problema, as variáveis são atualizadas, e os valores ótimos da função objetivo e das variáveis podem ser obtidos. É importante ressaltar que a função \texttt{solve()} não apenas retorna o valor ótimo, mas também atualiza os atributos do objeto criado, como \texttt{status}, \texttt{value}, e os valores das variáveis com as soluções encontradas.
+
+\section{Exemplos}
+
+Nesta seção, é apresentado dois exemplos de definição e resolução de problemas de otimização utilizando o CVXPY: o cálculo da norma $\mathcal{H}_{2}$ e a otimização dos parâmetros de projeto de um \acrshort{etm}. Cada exemplo será acompanhado de uma explicação detalhada do código, abordando a definição do problema, a formulação da função objetivo e das restrições, bem como a resolução do problema.
+
+\subsection{Cálculo da Norma $\mathcal{H}_{2}$}
+
+Para determinar a norma $\mathscr{H} _2$ de um sistema dinâmico linear definido por: \begin{gather} \dt{x}(t) = Ax(t) + Bu(t) \\ y(t) = Cx(t) + Du(t), \end{gather} pode-se usar o seguinte problema de otimização: \begin{equation} \underset{\rho, \space W = W^T > 0}{\min} \space\space \rho \end{equation} sujeito a \begin{equation}
+\rho \geq Tr(CWC^T), \space
+AW + WA^T + BB^T < 0
+\end{equation} Na solução ótima $\rho = \rho^\star$, têm se \begin{equation} \lVert H(s) \rVert ^ 2 _ 2 = \rho^\star, \end{equation} onde $H(s)$ é a matriz de transferência do sistema, dada por: \begin{equation} H(s) = C(sI- A)^{-1}B +D  \end{equation}
+
+Considerando o sistema massa-mola apresentado no \autoref{apendice_a}, a sua norma $\mathscr{H}_2$ pode ser obtida através do seguinte código: 
+
+\vspace{8pt}
+\begin{lstlisting}[language=Python,  caption={Cálculo da norma $\mathcal{H}_2$}., label=cod:params_etm]
+import cvxpy as cp
+import numpy as np
+import math
+
+# Definição dos Parâmetros
+m1 = 1.
+m2 = 0.5
+k1 = 1.
+k2 = 1.
+c0 = 2.
+
+A = cp.Parameter((4, 4), value=[[0., 0., - ((k1 + k2) / m1), (k2 / m2)],
+                              [0., 0., (k2 / m1), - (k2 / m2)],
+                              [1., 0., - (c0 / m1), 0],
+                              [0., 1., 0., -(c0 / m2)]])
+B = cp.Parameter((4, 1), value=[[0., 0., 1. / m1, 0.]])
+C = cp.Parameter((2, 4), value=[[0, 1], [1, 0], [0, 0], [0, 0]])
+
+print('Parâmetros:\n')
+print('A = \n', A.value)
+print('B', B.value)
+print('C', C.value)
+
+# Definição das Variáveis
+rho = cp.Variable()
+W = cp.Variable((4, 4), symmetric=True)
+
+# Definição do Problema: Objetivo e Restrições
+obj = cp.Minimize(rho)
+constraints = [W >> 0]
+constraints += [rho >= cp.trace(C @ W @ C.T)]
+constraints += [A @ W + W @ A.T + B @ B.T << 0]
+prob = cp.Problem(obj, constraints)
+
+# Resolução do Problema usando o solver MOSEK
+prob.solve(solver=cp.MOSEK, verbose=False)
+print("\nValor ótimo:", prob.value, '\n')
+
+# Apresentação dos Resultados
+print('W = \n', W.value)
+print("rho = ", rho.value, '\n')
+print("Norma H2 = ", math.sqrt(rho.value), '\n')
+
+\end{lstlisting}
+
+O código apresentado resolve o problema de otimização para determinar a norma $\mathscr{H}_2$ do sistema dinâmico massa-mola, conforme definido pelas equações de estado e de saída. Primeiramente, são definidos os parâmetros do sistema, incluindo as matrizes de estado $A$, de entrada $B$, e de saída $C$, que descrevem as propriedades físicas do sistema massa-mola fornecido. Em seguida, são definidas variáveis de otimização, como $\rho$ e $W$, juntamente com o problema de otimização, que busca minimizar $\rho$ sujeito a restrições específicas. Estas restrições garantem que a norma $\mathscr{H}_2$ seja calculada corretamente. O problema de otimização é então resolvido usando o \textit{solver MOSEK}, e os resultados são apresentados, incluindo o valor ótimo de $\rho$ e a norma $\mathscr{H}_2$ calculada a partir desse valor. 
+
+
+
+\subsection{Obtenção dos Parâmetros de Projeto de um \acrshort{etm}}
+
+
+O código \ref{cod:params_etm} aborda a resolução do problema de otimização proposto neste trabalho estabelecido em \eqref{eq:optimization_problem} que busca aumentar o intervalo de tempo entre os eventos para o \acrshort{etm} do conversor \textit{Buck} linearizado implementado e discutido na \autoref{seção_apendice_a_conversor_buck}. Através desta abordagem, busca-se determinar os valores ótimos dos parâmetros $\Xi$ e $\Psi$, que são essenciais para determinar o momento de acionamento de um evento, além do ganho $K$ utilizado no controle em malha fechada.
 
 \vspace{8pt}
 \begin{lstlisting}[language=Python, caption={Resolução do problema de otimização definida em \eqref{eq:optimization_problem}.}, label=cod:params_etm]
-  # Definição dos parâmetros do problema de otimização
-  A = cp.Parameter((2, 2),
-                   value=np.array([[A11, A12], [A21, A22]]))
-  BU = cp.Parameter((2, 1), value=np.array([[B11], [B21]]))
-  I = cp.Parameter((2, 2), name='I', value=np.identity(2))
-  
-  # Definição das variáveis do problema de otimização
-  Q = cp.Variable((2, 2), name='Q', PSD=True)
-  X = cp.Variable((2, 2), name='X', PSD=True)
-  Ξ_TIL = cp.Variable((2, 2), name='Ξ_TIL', PSD=True)
-  Ψ_TIL = cp.Variable((2, 2), name='Ψ_TIL', PSD=True)
-  K_TIL = cp.Variable((1, 2), name='K_TIL')
-  
-  # Definição do problema: objetivo e restrições
-  obj = cp.Minimize(cp.trace(Ξ_TIL + Ψ_TIL + Q))
-  
-  M11 = A @ X + BU @ K_TIL + X @ A.T + K_TIL.T @ BU.T
-  M12 = BU @ K_TIL
-  M13 = X
-  
-  M21 = K_TIL.T @ BU.T
-  M22 = -Ξ_TIL
-  M23 = np.zeros(shape=(2, 2))
-  
-  M31 = X
-  M32 = np.zeros(shape=(2, 2))
-  M33 = -Ψ_TIL
-  
-  M = cp.bmat([[M11, M12, M13],
-               [M21, M22, M23],
-               [M31, M32, M33]])
-  
-  N11 = -Q
-  N12 = I
-  N21 = I.T
-  N22 = -X
-  N = cp.bmat([[N11, N12],
-               [N21, N22]])
-  
-  constraints = [M << 0, N << 0]
-  prob = cp.Problem(obj, constraints)
-  
-  # Resolução do problema usando o solver MOSEK
-  prob.solve(solver=cp.MOSEK, verbose=False)
-  
-  K = None
-  Ξ = None
-  Ψ = None
-  P = None
-  
-  # Apresentação dos Resultados
-  if prob.status not in ["infeasible", "unbounded"]:
-    X_INV = np.linalg.inv(X.value)
-    Ξ = X_INV @ Ξ_TIL.value @ X_INV
-  
-    _K = K_TIL @ X_INV
-    K = _K.value
-  
-    Ψ = np.linalg.inv(Ψ_TIL.value)
-    P = X_INV
+# Definição dos parâmetros do problema de otimização
+
+# Obtenção dos valores no ponto de operação (OP)
+OP = params['op']
+
+# Elementos da matriz de estados
+A11 = - (params['rL'] / params['L'])
+A12 = - (1. / params['L'])
+A21 = 1. / params['C']
+A22 = (1. / params['C']) * (OP['Pcpl'] /
+                            (OP['vC'] * OP['vC']) - 1. / params['rC'])
+
+# Elementos da matriz de entrada
+B11 = params['Vin'] / params['L']
+B12 = 0.
+
+A = cp.Parameter((2, 2),
+                 value=np.array([[A11, A12], [A21, A22]]))
+BU = cp.Parameter((2, 1), value=np.array([[B11], [B12]]))
+I = cp.Parameter((2, 2), name='I', value=np.identity(2))
+
+# Definição das variáveis do problema de otimização
+Ξ_TIL = cp.Variable((2, 2), name='Ξ_TIL', PSD=True)
+Ψ_TIL = cp.Variable((2, 2), name='Ψ_TIL', PSD=True)
+X = cp.Variable((2, 2), name='X', PSD=True)
+K_TIL = cp.Variable((1, 2), name='K_TIL')
+
+rho = .5
+
+# Definição do problema: objetivo e restrições
+obj = cp.Minimize(cp.trace(rho * Ξ_TIL + (1 - rho) * Ψ_TIL))
+
+M11 = A @ X + BU @ K_TIL + X @ A.T + K_TIL.T @ BU.T
+M12 = BU @ K_TIL
+M13 = X
+
+M21 = K_TIL.T @ BU.T
+M22 = -Ξ_TIL
+M23 = np.zeros(shape=(2, 2))
+
+M31 = X
+M32 = np.zeros(shape=(2, 2))
+M33 = -Ψ_TIL
+
+M = cp.bmat([[M11, M12, M13],
+             [M21, M22, M23],
+             [M31, M32, M33]])
+
+print(M.shape)
+constraints = [M << 0]
+constraints += [1e-9 * np.eye(2) <= Ξ_TIL]
+constraints += [Ξ_TIL <= 1e9 * np.eye(2)]
+constraints += [1e-9 * np.eye(2) <= Ψ_TIL]
+constraints += [Ψ_TIL <= 1e9 * np.eye(2)]
+prob = cp.Problem(obj, constraints)
+
+# Resolução do problema usando o solver MOSEK
+prob.solve(solver=cp.MOSEK, verbose=False)
+
+K = None
+Ξ = None
+Ψ = None
+P = None
+
+# Apresentação dos Resultados
+if prob.status not in ["infeasible", "unbounded"]:
+  print("Valor ótimo: %s\n" % prob.value)
+  for variable in prob.variables():
+    if len(variable.shape) == 2:
+      print(variable.name() + '= \n', variable.value)
+    else:
+      print(variable.name(), '=', variable.value, '\n')
+
+  X_INV = np.linalg.inv(X.value)
+  Ξ = X_INV @ Ξ_TIL.value @ X_INV
+
+  _K = K_TIL @ X_INV
+  K = _K.value
+
+  print('K', K)
+
+  Ψ = np.linalg.inv(Ψ_TIL.value)
+
+  print('Ξ = \n', Ξ),
+  print('Ψ = \n', Ψ),
+else:
+  print('O problema não é factível')
 \end{lstlisting}
 
-Inicialmente, são estabelecidos os parâmetros do problema de otimização, em que \texttt{A} representa a matriz de estados e \texttt{BU}, a matriz de entrada controlável, isto é, o duty cycle. Ambas são formadas utilizando os elementos previamente definidos na subseção anterior, \ref{subsection:implementation_of_linear_models}. Além disso, é definida a matriz identidade $I_2$, representada por \texttt{I}, uma vez que tanto o sistema Buck quanto o Boost possuem dois estados. Em seguida, as variáveis do problema são definidas. São elas: $Q$, $X$, $\tilde{\Xi}$, $\tilde{\Psi}$, todas matrizes semidefinidas positivas indicadas por \texttt{PSD=True}, e $\tilde{K}$, conforme definido em \eqref{eq:optimization_problem}.
+Inicialmente, são estabelecidos os parâmetros do problema de otimização, em que \texttt{A} representa a matriz de estados e \texttt{BU}, a matriz de entrada controlável, isto é, o duty cycle. Além disso, é definida a matriz identidade $I_2$, representada por \texttt{I}, uma vez que tanto o conversor \textit{Buck} possui dois estados. Em seguida, as variáveis do problema são definidas. São elas: $Q$, $X$, $\tilde{\Xi}$, $\tilde{\Psi}$, todas matrizes semidefinidas positivas indicadas por \texttt{PSD=True}, e $\tilde{K}$.
 
-Após a definição dos parâmetros e das variáveis do problema, o objetivo, representado por \texttt{obj}, é estabelecido. Ele é construído utilizando a função \texttt{Minimize} da biblioteca CVXPY, indicando que se trata de um problema de minimização. Como argumento, esta função recebe o que deve ser minimizado, sendo o traço da soma das matrizes $\tilde{\Xi}$, $\tilde{\Psi}$ e $Q$, como definido em \eqref{eq:optimization_problem}. O traço é calculado através da função \texttt{trace}, também da biblioteca CVXPY. Logo após, as restrições do problema são definidas, onde a variável \texttt{M} representa a \acrshort{lmi} de restrição conforme \eqref{eq:constraints_1}, e \texttt{N} representa a segunda \acrshort{lmi} de restrição, como definido em \eqref{eq:constraints_2}. Ambas são construídas utilizando a função \texttt{bmat} do CVXPY, que gera blocos de matrizes. O operador \texttt{<<}, pertencente à biblioteca CVXPY, indica que as matrizes são semidefinidas negativas, conforme determinado nas \acrshortpl{lmi} de restrição.
+Após a definição dos parâmetros e das variáveis do problema, o objetivo, representado por \texttt{obj}, é estabelecido. Ele é construído utilizando a função \texttt{Minimize}, indicando que se trata de um problema de minimização. Como argumento, esta função recebe o que deve ser minimizado, sendo o traço da soma ponderada das matrizes $\tilde{\Xi}$ e $\tilde{\Psi}$. O traço é calculado através da função \texttt{trace}. Logo após, as restrições do problema são definidas, onde a variável \texttt{M} representa a \acrshort{lmi} de restrição que é construída utilizando a função \texttt{bmat} do CVXPY, que gera blocos de matrizes. O operador \texttt{<<} indica que as matrizes são semidefinidas negativas.
 
-Por fim, o problema é criado e representado por \texttt{prob}, utilizando a função \texttt{Problem}, que recebe dois parâmetros: o objetivo e as restrições previamente definidos. Em seguida, o problema é resolvido pelo solucionador MOSEK, utilizando o método \texttt{solve} da variável \texttt{prob}. Após a conclusão da resolução, é verificado se o problema é factível. Se for o caso, os parâmetros $\Psi$, $\Xi$, $K$ e $P$ do projeto do \acrshort{etm} são obtidos.
+Por fim, o problema é criado e representado por \texttt{prob}, utilizando a função \texttt{Problem}, que recebe dois parâmetros: o objetivo e as restrições previamente definidos. Em seguida, o problema é resolvido pelo solucionador MOSEK, utilizando o método \texttt{solve} da variável \texttt{prob}. Após a conclusão da resolução, é verificado se o problema é factível. Se for o caso, os parâmetros $\Psi$, $\Xi$, $K$ do projeto do \acrshort{etm} são obtidos.
