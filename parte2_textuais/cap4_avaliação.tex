@@ -90,7 +90,7 @@ Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrsh
     \star                & \star & -\tilde{\Psi}
   \end{bmatrix} < 0
   \label{eq:inequation_prove}
-\end{equation} Por meio do teorema de Schur, a inequação \eqref{eq:inequation_prove} pode ser reescrita como: \begin{equation}
+\end{equation} Por meio do Lemma do Complemento de Schur, a inequação \eqref{eq:inequation_prove} pode ser reescrita como: \begin{equation}
   A_{\mathrm{S}} - B_{\mathrm{S}}D_{\mathrm{S}}^{-1}C_{\mathrm{S}} < 0,
 \end{equation} onde, \begin{equation}
   A_{\mathrm{S}} = \begin{bmatrix}
@@ -186,7 +186,7 @@ Para o projeto do \acrshort{etm} dinâmico, uma condição suficiente é propost
 \end{equation} Logo, a partir de \eqref{eq:eta_dynamic},  \begin{equation}
   \dt{\eta}(t) \geq - \left(\lambda + \frac{1}{\theta}\right) \eta(t).
 \end{equation} Assim, \begin{equation}
-  \eta(t) \geq \eta(0) e ^ {-\left(\lambda + \frac{1}{\theta}\right) t}.
+  \eta(t) \geq \eta(0) \, \mathrm{exp}\left(-\left(\lambda + \frac{1}{\theta}\right) t\right).
 \end{equation} Portanto, $\eta(t) \geq 0$, para todo $t \in [t_k, t_{k+1}), \, \forall k \in \mathbb{N}$. Desta forma, têm-se que $\lambda \eta(t) \geq 0$ e, sob o \autoref{theorem:etm_stability}, a partir da equação \eqref{eq:inequation_prove_4} da demostração apresentada, obtém-se a seguinte inequação para o \acrshort{etm} dinâmico: \begin{gather}
   2x^T(t) P\dt{x}(t) + \Gamma(x(t), e(t)) - \lambda \eta(t) < 0 \notag \\[12pt]
   2x^T(t) P\dt{x}(t) + \dt{\eta}(t) < 0.
@@ -209,20 +209,20 @@ Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou s
   \|\dt{x}(t)\| = \| (A + BK) x(t) + BKe(t) \| \notag \\[12pt]
   \|\dt{x}(t)\| \leq L(\|x(t)\| + \|e(t)\|)
   \label{eq:imee_inequation_2}.
-\end{gather} Desta forma, das inequações \eqref{eq:imee_inequation_1} e \eqref{eq:imee_inequation_2}, tém-se: \begin{gather}
+\end{gather} Desta forma, das inequações \eqref{eq:imee_inequation_1} e \eqref{eq:imee_inequation_2}, tem-se: \begin{gather}
   \frac{\|\dt{x}(t)\|}{\|x(t)\|} \leq L\left(1 + \frac{\|e(t)\|}{\|x(t)\|}\right) \notag \\[12pt]
   \left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) \frac{\|\dt{x}(t)\|}{\|x(t)\|} \leq L\left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) ^ 2 \notag \\[12pt]
   \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\|e(t)\|}{\|x(t)\|}\right) \leq L\left( 1 + \frac{\|e(t)\|}{\|x(t)\|} \right) ^ 2.
   \label{eq:imee_inequation_3}
 \end{gather} Definindo $\varphi (t) = \displaystyle \frac{\|e(t)\|}{\|x(t)\|}$, a inequação \eqref{eq:imee_inequation_3} pode ser reescrita como: \begin{equation}
   \dt{\varphi}(t) \leq L \left(1 + \varphi(t)\right)^2.
-\end{equation} Desta forma, é possível concluir que $\varphi(t) \leq \psi(t, \psi_0)$, onde $\psi(t, \psi_0)$ é o valor inicial de $\dt{\psi} = L(1 + \psi(t))^2$, com $\psi(0, \psi_0) = \psi_0$. Como $\mathcal{G}(x, e) > 1$, $\psi(t, 0)$ evolui de 0 a $\frac{1}{\sqrt{\Lambda}}$ e, portanto, leva mais tempo para evolui de 0 a 1, do que $\psi(t, 0)$ alcançar $\frac{1}{\sqrt{\Lambda}}$. Portanto, o tempo entre eventos são limitados pelo tempo que $\psi$ leva para evoluir de 0 a $\frac{1}{\sqrt{\Lambda}}$, o que significa que o tempo entre eventos são limitados pela solução $\tau \in \mathbb{R}_{>0}$ de $\psi(\tau, 0) = \frac{1}{\sqrt{\Lambda}}$. Como $\psi(\tau, 0) = \frac{\tau L}{1 - \tau L}$, então o \acrshort{imee} $\tau$ do \acrshort{etm} estático é definido por: \begin{gather}
+\end{equation} Desta forma, é possível concluir que $\varphi(t) \leq \psi(t, \psi_0)$, onde $\psi(t, \psi_0)$ é o valor inicial de $\dt{\psi} = L(1 + \psi(t))^2$, com $\psi(0, \psi_0) = \psi_0$. Como $\mathcal{G}(x, e) > 1$, $\psi(t, 0)$ evolui de 0 a $\frac{1}{\sqrt{\Lambda}}$ e, portanto, leva mais tempo para evolui de 0 a 1, do que $\psi(t, 0)$ alcançar $\frac{1}{\sqrt{\Lambda}}$. Portanto, o tempo entre eventos são limitados pelo tempo que $\psi$ leva para evoluir de 0 a $\frac{1}{\sqrt{\Lambda}}$, o que significa que o tempo entre eventos são limitados pela solução $\tau \in \mathbb{R}_{>0}$ de $\psi(\tau, 0) = \frac{1}{\sqrt{\Lambda}}$. Como $\psi(\tau, 0) = \frac{\tau L}{1 - \tau L}$, então, o \acrshort{imee} $\tau$ do \acrshort{etm} estático é definido por: \begin{gather}
   % \frac{1}{\sqrt{\Lambda}} = \frac{\tau L}{1 - \tau L} \\[12pt]
   % 1 - \tau L = \tau L \sqrt{\Lambda} \\[12pt]
   % \tau L (1 + \sqrt{\Lambda}) = 1 \\[12pt]
   \tau = \frac{1}{L(\sqrt{\Lambda} + 1)}.
   \label{eq:imee_final_inequation}
-\end{gather} Além disto, sob mesmas condições iniciais, o \acrshort{imee} do \acrshort{etm} dinâmico é maior ou igual ao \acrshort{imee} do \acrshort{etm} estático, e portanto, há a exclusão do comportamento Zeno.
+\end{gather} Além disto, sob mesmas condições iniciais, o \acrshort{imee} do \acrshort{etm} dinâmico é maior ou igual ao \acrshort{imee} do \acrshort{etm} estático, e, portanto, há a exclusão do comportamento Zeno.
 
 % ETM: Condições de \textit{Co-desig}n
 \subsection{Minimização do número de eventos}
@@ -291,7 +291,7 @@ O conversor \textit{Buck}, foi simulado em malha fechada mantendo os mesmos cen�
 
 \subsubsection{Cenário 1}
 
-Conforme foi discutido, o conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada apresenta estabilidade, enquanto que, em torno do ponto $P_{\mathrm{o}, 2}$, apresenta instabilidade. No entanto, ao observar o comportamento do conversor em malha fechada sob o \acrshort{etm} estático, é possível observar que tanto o conversor em torno do ponto $P_{\mathrm{o}, 1}$ quanto de $P_{\mathrm{o}, 2}$, apresenta estabilidade conforme esperado.
+Conforme foi discutido, o conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ em malha fechada apresenta estabilidade, enquanto, em torno do ponto $P_{\mathrm{o}, 2}$, apresenta instabilidade. No entanto, ao observar o comportamento do conversor em malha fechada sob o \acrshort{etm} estático, é possível observar que tanto o conversor em torno do ponto $P_{\mathrm{o}, 1}$ quanto de $P_{\mathrm{o}, 2}$, apresenta estabilidade conforme esperado.
 
 Como visto anteriormente, o conversor \textit{Buck} é estável em malha fechada no ponto de operação  $P_{\mathrm{o}, 1}$ e instável no ponto  $P_{\mathrm{o}, 2}$. No entanto, é possível observar nas \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a} e \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_a} que o conversor em malha fechada sob o \acrshort{etm} estático, em ambos os pontos de operação,  apresenta estabilidade, conforme é atestado pelo \autoref{theorem:etm_stability}. O comportamento do conversor \textit{Buck} clássico no ponto de operação $P_{\mathrm{o}, 1}$ não apresenta diferenças significativas em malha aberta e fechada. Por outro lado, na análise em malha aberta do segundo ponto, os modelos linear e não linear do conversor divergem ao longo do tempo. No entanto, em malha fechada, os modelos coincidem e estabilizam no ponto de operação definido.
 
@@ -321,7 +321,7 @@ Como visto anteriormente, o conversor \textit{Buck} é estável em malha fechada
   \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$ no Cenário 1  e \acrshort{etm} estático.}
 \end{figure}
 
-Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresentada a evolução da entrada do sistema $d(t)$ durante toda a simulação. Durante a simulação do conversor em torno do ponto $P_{\mathrm{o}, 1}$, a entrada permanece constante até 0,08 s, momento em que ocorre um aumento. Este comportamento indica que entre 0 e 0,08 segundos, nenhum novo evento foi acionado para atualizar o controlador com novos estados, ou seja, a condição da lei de acionamento não era atendida e, portanto, o controlador tinha acesso apenas ao último estado transmitido mantido pelo \acrshort{zoh}. Quando atingiu o tempo de 0,08 s, a condição da lei de acionamento do \acrshort{etm} estático foi satisfeita, resultando no acionamento de um novo evento e permitindo a transmissão de um novo estado. Consequentemente, uma nova entrada é obtida e foi mantida até o final da simulação. Portanto, durante a simulação do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$, apenas dois eventos foram acionados, conforme pode ser confirmado pelo gráfico dos \acrshortpl{itee} na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}.
+Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresentada a evolução da entrada do sistema $d(t)$ durante toda a simulação. Durante a simulação do conversor em torno do ponto $P_{\mathrm{o}, 1}$, a entrada permanece constante até 0,08 s, momento em que ocorre um aumento. Este comportamento indica que entre 0 e 0,08 segundos, nenhum novo evento foi acionado para atualizar o controlador com novos estados, ou seja, a condição da lei de acionamento não era atendida e, portanto, o controlador tinha acesso apenas ao último estado transmitido mantido pelo \acrshort{zoh}. Quando atingiu o tempo de 0,08 s, a condição da lei de acionamento do \acrshort{etm} estático foi satisfeita, resultando no acionamento de um novo evento e permitindo a transmissão de um novo estado. Consequentemente, uma nova entrada é obtida sendo mantida até o final da simulação. Portanto, durante a simulação do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 1}$, apenas dois eventos foram acionados, conforme pode ser confirmado pelo gráfico dos \acrshortpl{itee} na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}.
 
 \begin{figure}[H]
   \centering
@@ -349,7 +349,7 @@ Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresent
   \caption{Estados $i_L(t)$ e $v_C(t)$, a entrada \textit{duty cycle} $d(t)$ e os \acrshortpl{itee} do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$ no Cenário 1 e \acrshort{etm} estático.}
 \end{figure}
 
-Por outro lado, durante a simulação do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$, observou-se que o \acrshort{etm} desencadeou uma série de novos eventos, como mostrado na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}. Esse padrão de comportamento era previsto devido à instabilidade associada ao ponto $P_{\mathrm{o}, 2}$. À medida que o sistema tende a se desviar gradualmente nesse ponto, o erro de transmissão aumenta, resultando na função de acionamento $\Gamma$ do \acrshort{etm} tornando-se negativa, o que permite o disparo de novos eventos de transmissão. Esse ciclo pode se repetir várias vezes ao longo do tempo, mesmo que o sistema, em malha fechada, eventualmente se estabilize. Portanto, é esperado que o \acrshort{etm} continue a realizar acionamentos mesmo após a estabilização do sistema.
+Por outro lado, durante a simulação do conversor \textit{Buck} em torno do ponto $P_{\mathrm{o}, 2}$, observou-se que o \acrshort{etm} desencadeou uma série de novos eventos, como mostrado na \autoref{fig:buck_converter_constant_pcpl_static_etm_op2_duty_b}. Esse padrão de comportamento era previsto devido à instabilidade associada ao ponto $P_{\mathrm{o}, 2}$. À medida que o sistema tende a se desviar gradualmente nesse ponto, o erro de transmissão aumenta, resultando na função de acionamento $\Gamma$ do \acrshort{etm} tornando-se negativa, permitindo o disparo de novos eventos de transmissão. Esse ciclo pode se repetir várias vezes ao longo do tempo, mesmo que o sistema, em malha fechada, eventualmente se estabilize. Portanto, é esperado que o \acrshort{etm} continue a realizar acionamentos mesmo após a estabilização do sistema.
 
 \begin{figure}[H]
   \centering
@@ -427,11 +427,11 @@ Em relação ao \acrshort{etm} dinâmico, durante a simulação foi obtido um co
   \label{fig:buck_converter_constant_pcpl_dynamic_etm_eta}
 \end{figure}
 
-Na \autoref{fig:buck_converter_constant_pcpl_dynamic_etm_eta}, são apresentadas as evoluções temporais da variável dinâmica $\eta(n)$ durante a simulação do conversor \textit{Buck} nos \acrshortpl{po} estável e instável. É possível observar que $\eta(t)$ é não negativa para todos os valores de $t$, conforme esperado, e converge para o equilíbrio na origem ($\eta = 0$). O efeito de $\eta(t)$ produz o aumento dos \acrshort{itee}, como pode-se observar ao comparar as Figuras \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op1_c} e \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op2_c}, pois se comporta como um buffer que armazena a redução desnecessária da função de \textit{Lyapunov} $V(x)$.
+Na \autoref{fig:buck_converter_constant_pcpl_dynamic_etm_eta}, são apresentadas as evoluções temporais da variável dinâmica $\eta(n)$ durante a simulação do conversor \textit{Buck} nos \acrshortpl{po} estável e instável. É possível observar que $\eta(t)$ é não negativa para todos os valores de $t$, conforme esperado, e converge para o equilíbrio na origem ($\eta = 0$). O efeito de $\eta(t)$ produz o aumento dos \acrshort{itee}, como se pode observar ao comparar as Figuras \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op1_c} e \ref{fig:buck_converter_constant_pcpl_dynamic_etm_op2_c}, pois se comporta como um buffer que armazena a redução desnecessária da função de \textit{Lyapunov} $V(x)$.
 
 % Esta análise investiga a relação entre o parâmetro $\mu$ do problema multiobjetivo e o comportamento do sistema em malha fechada. Para isso, o conversor \textit{Buck} é considerado operando no ponto de operação instável $P_{\mathrm{o}, 2}$  com um sinal de perturbação constante igual ao valor do ponto de operação. O parâmetro $\mu$ variou entre 0 e 1, e foram obtidos o tempo de acomodação de 2\% e o tempo médio dos intervalos de tempo entre eventos.
 
-A \autoref{fig:buck_converter_rho} apresenta os resultados obtidos na simulação do conversor \textit{Buck} operando no ponto instável ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. O ponto instável é escolhido devido à sua facilidade a apresentar mais eventos acionados do que o conversor no ponto estável, o que contribui para a obtenção de resultados mais abrangentes e facilita uma análise mais aprofundada. À medida que $\rho$ aumenta, nota-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Os tempos de acomodação entre o \acrshort{etm} dinâmico e estático mostraram-se notavelmente semelhantes, assim como entre os modelos não linear e linearizado. No entanto, é possível observar que as médias dos \acrshortpl{itee} são maiores no \acrshort{etm} dinâmico em comparação com o \acrshort{etm} estático.
+A \autoref{fig:buck_converter_rho} apresenta os resultados obtidos na simulação do conversor \textit{Buck} operando no ponto instável ao variar o parâmetro $\rho$ da função objetivo do problema de otimização \eqref{eq:optimization_problem}. O ponto instável é escolhido devido à sua facilidade a apresentar mais eventos acionados do que o conversor no ponto estável, contribuindo para a obtenção de resultados mais abrangentes e facilita uma análise mais aprofundada. À medida que $\rho$ aumenta, nota-se uma diminuição gradual na média dos \acrshortpl{itee}, aproximando-se de zero, enquanto os tempos de acomodação aumentam. Os tempos de acomodação entre o \acrshort{etm} dinâmico e estático mostraram-se notavelmente semelhantes, assim como entre os modelos não linear e linearizado. No entanto, é possível observar que as médias dos \acrshortpl{itee} são maiores no \acrshort{etm} dinâmico em comparação com o \acrshort{etm} estático.
 
 \begin{figure}[H]
   \centering
@@ -648,7 +648,7 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \label{fig:buck_converter_variable_pcpl_dynamic_etm_op2}
 \end{figure}
 
-No entanto, ao considerar os pontos instáveis, como $P_{\mathrm{o}, 2}$, os intervalos entre eventos aumentam consideravelmente, indicando uma redução na frequência de ocorrências em comparação com a simulação utilizando o \acrshort{etm} estático. Nesses casos, a variável dinâmica não converge para a origem quando a perturbação se afasta do ponto de operação, como pode ser observado na \autoref{fig:buck_converter_variable_pcpl_dynamic_etm_eta}. Apesar disso, o \acrshort{etm} dinâmico assegura a estabilidade global do sistema ao longo de toda a simulação, mantendo-o dentro de limites aceitáveis de operação.
+No entanto, ao considerar os pontos instáveis, como $P_{\mathrm{o}, 2}$, os intervalos entre eventos aumentam consideravelmente, indicando uma redução na frequência de ocorrências em comparação com a simulação utilizando o \acrshort{etm} estático. Nesses casos, a variável dinâmica não converge para a origem quando a perturbação se afasta do ponto de operação, como pode ser observado na \autoref{fig:buck_converter_variable_pcpl_dynamic_etm_eta}. Apesar disso, o \acrshort{etm} dinâmico assegura a estabilidade global do sistema ao longo de toda a simulação, mantendo-o em limites aceitáveis de operação.
 
 \begin{figure}[H]
   \centering
@@ -717,7 +717,7 @@ A \autoref{table:imees_buck_static_dynamic} apresenta as médias dos \acrshortpl
   \begin{tabular}{cccccccc}
     \toprule
     \multirow{2}{*}{\centering Cenário} & \multirow{2}{*}{\centering \acrshort{po}} & \multicolumn{2}{c}{\centering Modelo} & \multirow{2}{*}{\centering Cenário} & \multirow{2}{*}{\centering \acrshort{po}} & \multicolumn{2}{c}{\centering Modelo}                     \\
-    \cmidrule(lr){3-4} \cmidrule(lr){7-8}                      &                                           & NL                                    & L                                   &                                           &                                       & NL      & L       \\
+    \cmidrule(lr){3-4} \cmidrule(lr){7-8}                      &                                           & \acrshort{snl}                                    & \acrshort{sl}                                   &                                           &                                       & \acrshort{snl}      & \acrshort{sl}       \\
     \midrule
     1                                   & $P_{\mathrm{o}, 1}$                       & 0,28 ms                               & 0,26 ms                             & 1                                         & $P_{\mathrm{o}, 1}$                   & 0,29 ms & 0,16 ms \\
     2                                   & $P_{\mathrm{o}, 1}$                       & 0,60 ms                               & 0,42 ms                             & 2                                         & $P_{\mathrm{o}, 1}$                   & 0,60 ms & 0,60 ms \\
@@ -740,10 +740,10 @@ As Tabelas \ref{table:indices_desempenho_etm_estático} e \ref{table:indices_des
     \toprule
     Cenário & Modelo      & Tempo de acomodação & \acrshort{ise} & \acrshort{itse}       & \acrshort{isc} \\
     \midrule
-    1       & NL  & 99,99 ms            & 3,98           & 0,04                  & 0,04           \\
-    1       & L & 99,99 ms            & 2,57           & 0,02                  & 0,04           \\
-    2       & NL  & 3,35 ms             & 0,02           & 21,70 $\cdot 10^{-6}$ & 0,04           \\
-    2       & L & 3,30 ms             & 0,02           & 20,40 $\cdot 10^{-6}$ & 0,04           \\
+    1       & \acrshort{snl}  & 99,99 ms            & 3,98           & 0,04                  & 0,04           \\
+    1       & \acrshort{sl} & 99,99 ms            & 2,57           & 0,02                  & 0,04           \\
+    2       & \acrshort{snl}  & 3,35 ms             & 0,02           & 21,70 $\cdot 10^{-6}$ & 0,04           \\
+    2       & \acrshort{sl} & 3,30 ms             & 0,02           & 20,40 $\cdot 10^{-6}$ & 0,04           \\
     \bottomrule
   \end{tabular}
   \caption{Tempo de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor \textit{Buck} sob \acrshort{etm} estático.}
@@ -759,10 +759,10 @@ As Tabelas \ref{table:indices_desempenho_etm_estático} e \ref{table:indices_des
     \toprule
     Cenário & Modelo      & Tempo de acomodação & \acrshort{ise} & \acrshort{itse}       & \acrshort{isc} \\
     \midrule
-    1       & NL  & 100,00 ms           & 3,98           & 0,04                  & 0,04           \\
-    1       & L & 100,00 ms           & 2,57           & 0,02                  & 0,04           \\
-    2       & NL  & 3,35 ms             & 0,02           & 21,70 $\cdot 10^{-6}$ & 0,04           \\
-    2       & L & 3,30 ms             & 0,02           & 20,40 $\cdot 10^{-6}$ & 0,04           \\
+    1       & \acrshort{snl}  & 100,00 ms           & 3,98           & 0,04                  & 0,04           \\
+    1       & \acrshort{sl} & 100,00 ms           & 2,57           & 0,02                  & 0,04           \\
+    2       & \acrshort{snl}  & 3,35 ms             & 0,02           & 21,70 $\cdot 10^{-6}$ & 0,04           \\
+    2       & \acrshort{sl} & 3,30 ms             & 0,02           & 20,40 $\cdot 10^{-6}$ & 0,04           \\
     \bottomrule
   \end{tabular}
   \caption{Tempo de acomodação, \acrshort{ise}, \acrshort{itse} e \acrshort{isc} do conversor \textit{Buck} sob \acrshort{etm} dinâmico.}
@@ -1020,7 +1020,7 @@ Nas Figuras \ref{fig:classic_boost_cen1_op1} e \ref{fig:classic_boost_cen1_op2},
     \centering
     \includegraphics[width=1.\textwidth]{figuras/classic/boost/sim1/op1/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
-  \end{subfigure}
+  \end{subfigure}8
   \caption{Conversor \textit{Boost }no Cenário 1 operando em torno de $P_{\mathrm{o}, 3}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
   \label{fig:classic_boost_cen1_op1}
   \begin{subfigure}{1.\textwidth}
@@ -1218,7 +1218,7 @@ A \autoref{table:imees_boost_static_dynamic} exibe as médias dos \acrshortpl{it
   \begin{tabular}{cccccccc}
     \toprule
     \multirow{2}{*}{\centering Cenário} & \multirow{2}{*}{\centering \acrshort{po}} & \multicolumn{2}{c}{\centering Modelo} & \multirow{2}{*}{\centering Cenário} & \multirow{2}{*}{\centering \acrshort{po}} & \multicolumn{2}{c}{\centering Modelo}                     \\
-    \cmidrule(lr){3-4} \cmidrule(lr){7-8}                      &                                           & NL                                    & L                                   &                                           &                                       & NL      & L       \\
+    \cmidrule(lr){3-4} \cmidrule(lr){7-8}                      &                                           & \acrshort{snl}                                    & \acrshort{sl}                                   &                                           &                                       & \acrshort{snl}      & \acrshort{sl}       \\
     \midrule
     1  & $P_{\mathrm{o}, 3}$                                  & 0,147 s                               & 0,148 s      &
     1   & $P_{\mathrm{o}, 3}$                                 & 0,091 s                               & 0,148 s      \\
