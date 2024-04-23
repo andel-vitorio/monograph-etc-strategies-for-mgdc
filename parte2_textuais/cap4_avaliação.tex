@@ -37,7 +37,7 @@ Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrsh
 
 \begin{theorem}
   \label{theorem:etm_stability}
-  Se existirem matrizes semidefinidas positivas $\tilde{\Xi}, \tilde{\Psi}, X \in \mathbb{R}^{n \times n}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a seguinte \acrshort{lmi}:
+  Se existirem matrizes definidas positivas $\tilde{\Xi}, \tilde{\Psi}, X \in \mathbb{R}^{n \times n}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a seguinte \acrshort{lmi}:
   \begin{equation}
     \begin{bmatrix}
       \mathsf{He}(AX +B\tilde{K}) & B\tilde{K}   & X             \\
@@ -90,7 +90,7 @@ Baseado nisso, é proposta uma condição suficiente para o projeto de um \acrsh
     \star                & \star & -\tilde{\Psi}
   \end{bmatrix} < 0
   \label{eq:inequation_prove}
-\end{equation} Por meio do Lemma do Complemento de Schur, a inequação \eqref{eq:inequation_prove} pode ser reescrita como: \begin{equation}
+\end{equation} Por meio do Lemma do Complemento de \textit{Schur}, a inequação \eqref{eq:inequation_prove} pode ser reescrita como: \begin{equation}
   A_{\mathrm{S}} - B_{\mathrm{S}}D_{\mathrm{S}}^{-1}C_{\mathrm{S}} < 0,
 \end{equation} onde, \begin{equation}
   A_{\mathrm{S}} = \begin{bmatrix}
@@ -178,7 +178,7 @@ Conforme mencionado anteriormente, o \acrshort{etm} dinâmico opera considerando
 Para o projeto do \acrshort{etm} dinâmico, uma condição suficiente é proposta utilizando a abordagem de \textit{co-design} para o sistema dinâmico linear \eqref{eq:linear_system_etm} controlado por realimentação de estados. Essa condição é derivada da condição proposta para o projeto do \acrshort{etm} estático sob as mesmas circunstâncias. Desta forma, a função de acionamento $\Gamma(x, e)$ do \acrshort{etm} dinâmico proposto é a mesma função do \acrshort{etm} estático, juntamente com a proposição do seguinte corolário:
 
 \begin{corollary}
-  \label{corollary:etm_stability} A partir do \autoref{theorem:etm_stability}, pode-se estender o conceito para a estabilidade da origem do sistema linear \eqref{eq:linear_system_etm} em malha fechada sob \acrshort{etm} dinâmico \eqref{eq:dynamic_etm} considerando uma função de \textit{Lyapunov} definida por \begin{equation}W(x) = V(x) + \eta(t) \label{eq:lyapunov_w},\end{equation} onde $\eta \in \mathbb{R}_{\geq 0}$ onde $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:eta_dynamic}\end{equation} onde $\lambda \in R_{> 0} $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$. Desta forma, se existirem matrizes semidefinidas positivas $\Xi, \Psi, X \in \mathbb{R}^{n \times n}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a \acrshort{lmi} \eqref{eq:lmi1}, então, a origem do sistema em malha fechada é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e $V(x)=x^TPx$.
+  \label{corollary:etm_stability} A partir do \autoref{theorem:etm_stability}, pode-se estender o conceito para a estabilidade da origem do sistema linear \eqref{eq:linear_system_etm} em malha fechada sob \acrshort{etm} dinâmico \eqref{eq:dynamic_etm} considerando uma função de \textit{Lyapunov} definida por \begin{equation}W(x) = V(x) + \eta(t) \label{eq:lyapunov_w},\end{equation} onde $\eta \in \mathbb{R}_{\geq 0}$ onde $\eta$ é a variável dinâmica definida por: \begin{equation}  \dot{\eta} = - \lambda \eta(t) + \Gamma(x(t), e(t)), \label{eq:eta_dynamic}\end{equation} onde $\lambda \in R_{> 0} $ é o parâmetro de projeto relacionado à taxa de decaimento de $\eta(t)$. Desta forma, se existirem matrizes definidas positivas $\Xi, \Psi, X \in \mathbb{R}^{n \times n}$ e uma matriz $\tilde{K} \in \mathbb{R}^{m \times n}$ que satisfaçam a \acrshort{lmi} \eqref{eq:lmi1}, então, a origem do sistema em malha fechada é assintoticamente estável com $K = \tilde{K}X^{-1}$, $\Xi= X^{-1}\tilde{\Xi}X^{-1}$, $\Psi = \tilde{\Psi}^{-1}$, $P = X^{-1}$ e $V(x)=x^TPx$.
 \end{corollary}
 
 \noindent \textit{Demostração.} Enquanto o \acrshort{etm} dinâmico não aciona um novo evento de transmissão, têm-se $\eta(t) + \theta \Gamma(x(t), e(t)) \geq 0$. Se $\theta$ for nulo, então $\eta \geq 0$. Se $\theta$ não for nulo, então \begin{equation}
@@ -196,7 +196,7 @@ Para o projeto do \acrshort{etm} dinâmico, uma condição suficiente é propost
 
 \subsection{Intervalo Mínimo entre Eventos}
 
-Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou seja, $t_{k+1} - t_k \geq \tau , \, \forall k \in \mathbb{N}$, é fundamental para eliminar o comportamento Zeno, viabilizando, dessa forma, a implementação prática desses \acrshortpl{etm}. Para comprovar a existência do \acrshort{imee} mencionado no \acrshort{etm} estático, inicialmente, considera-se a seguinte inequação derivada da sua lei de acionamento \eqref{eq:static_etm}: \begin{equation}
+Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou seja, $t_{k+1} - t_k \geq \tau , \, \forall k \in \mathbb{N}$, é fundamental para eliminar o comportamento \textit{Zeno}, viabilizando, dessa forma, a implementação prática desses \acrshortpl{etm}. Para comprovar a existência do \acrshort{imee} mencionado no \acrshort{etm} estático, inicialmente, considera-se a seguinte inequação derivada da sua lei de acionamento \eqref{eq:static_etm}: \begin{equation}
   \mathcal{G}(x, e) > 1,
 \end{equation} onde $\mathcal{G}(x, e) := \displaystyle \frac{e^T\Xi e}{x^T\Psi x}$. Quando um novo evento é acionado, isto é, $t = t_k$, o erro $e(t)$  e $\mathcal{G}(x, e)$ são nulos. Por outro lado, enquanto um novo evento não é acionado, tém-se $0 < \mathcal{G}(x, e) < 1$. Considerando que \begin{equation} \mathcal{G}(x, e) \leq \Lambda \left(\frac{\|e(t)\|}{\|x(t)\|}\right) ^ 2, \end{equation} onde $\Lambda = \displaystyle \frac{\lambda_{\max}(\Xi)}{\lambda_{\min}(\Psi)}$, nenhum evento é acionado enquanto \begin{equation}
   \frac{\|e(t)\|}{\|x(t)\|} \leq \frac{1}{\sqrt{\Lambda}}.
@@ -222,7 +222,7 @@ Nos \acrshortpl{etm} propostos, a existência de um \acrshort{imee} $\tau$, ou s
   % \tau L (1 + \sqrt{\Lambda}) = 1 \\[12pt]
   \tau = \frac{1}{L(\sqrt{\Lambda} + 1)}.
   \label{eq:imee_final_inequation}
-\end{gather} Além disto, sob mesmas condições iniciais, o \acrshort{imee} do \acrshort{etm} dinâmico é maior ou igual ao \acrshort{imee} do \acrshort{etm} estático, e, portanto, há a exclusão do comportamento Zeno.
+\end{gather} Além disto, sob mesmas condições iniciais, o \acrshort{imee} do \acrshort{etm} dinâmico é maior ou igual ao \acrshort{imee} do \acrshort{etm} estático, e, portanto, há a exclusão do comportamento \textit{Zeno}.
 
 % ETM: Condições de \textit{Co-desig}n
 \subsection{Minimização do número de eventos}
@@ -314,7 +314,7 @@ Como visto anteriormente, o conversor \textit{Buck} é estável em malha fechada
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim1/op1/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/static-etm/buck/sim1/op1/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
@@ -342,7 +342,7 @@ Na \autoref{fig:buck_converter_constant_pcpl_static_etm_op1_duty_a}, é apresent
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim1/op2/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/static-etm/buck/sim1/op2/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
@@ -397,7 +397,7 @@ Por outro lado, durante a simulação do conversor \textit{Buck} em torno do pon
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op2/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/dynamic-etm/buck/sim1/op2/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_constant_pcpl_dynamic_etm_op2_c}
   \end{subfigure}
@@ -412,7 +412,7 @@ Em relação ao \acrshort{etm} dinâmico, durante a simulação foi obtido um co
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim1/op1/eta.eps}
+    \includegraphics[width=1.\textwidth, trim={0 50pt 0 0}, clip]{figuras/dynamic-etm/buck/sim1/op1/eta.eps}
     \caption{Ponto de operação $P_{\mathrm{o}, 1}$}
     % \label{fig:buck_converter_dynamic_pcpl_dynamic_etm_op1_d}
   \end{subfigure}
@@ -557,7 +557,7 @@ Nesta simulação, o conversor \textit{Buck} em malha fechada foi analisado sob 
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op1/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/static-etm/buck/sim2/op1/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_variable_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
@@ -585,7 +585,7 @@ Na simulação do conversor \textit{Buck} em torno do ponto instável sob pertur
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static-etm/buck/sim2/op2/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/static-etm/buck/sim2/op2/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_variable_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
@@ -613,7 +613,7 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/dynamic-etm/buck/sim2/op1/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:buck_converter_variable_pcpl_dynamic_etm_op1_c}
   \end{subfigure}
@@ -655,7 +655,7 @@ No entanto, ao considerar os pontos instáveis, como $P_{\mathrm{o}, 2}$, os int
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/buck/sim2/op1/eta.eps}
+    \includegraphics[width=1.\textwidth, trim={0 50pt 0 0}, clip]{figuras/dynamic-etm/buck/sim2/op1/eta.eps}
     \caption{Ponto de operação $P_{\mathrm{o}, 1}$}
     \label{fig:buck_converter_variable_pcpl_dynamic_etm_eta_a}
   \end{subfigure}
@@ -697,7 +697,7 @@ As Figuras \ref{fig:classic_buck_cen2_op1} e \ref{fig:classic_buck_cen2_op2} dem
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/classic/buck/sim2/op2/duty-cycle.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/classic/buck/sim2/op2/duty-cycle.eps}
     \caption{Entrada controlável do Sistema $d(t)$}
   \end{subfigure}
   \caption{Conversor \textit{Buck} no Cenário 2 em torno de $P_{\mathrm{o}, 2}$ sob controlador projetado utilizando o critério de estabilidade de Hurwitz.}
@@ -920,7 +920,7 @@ No contexto do \acrshort{etm} dinâmico, ao analisar o comportamento do converso
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim1/op1/eta.eps}
+    \includegraphics[width=1.\textwidth, trim={0 50pt 0 0}, clip]{figuras/dynamic-etm/boost/sim1/op1/eta.eps}
     \caption{Ponto de operação $P_{\mathrm{o}, 3}$}
   \end{subfigure}
   \\[6pt]
@@ -1061,7 +1061,7 @@ Na simulação do conversor \textit{Boost }em malha fechada com perturbação va
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op1/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/static-etm/boost/sim2/op1/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_variable_pcpl_static_etm_op1_duty_c}
   \end{subfigure}
@@ -1089,7 +1089,7 @@ O ETM estático assegurou a estabilidade do conversor \textit{Boost }sob perturb
   \\[6pt]
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/static-etm/boost/sim2/op2/inter-event-times.eps}
+    \includegraphics[width=1.\textwidth, trim={0 0 0 50pt}, clip]{figuras/static-etm/boost/sim2/op2/inter-event-times.eps}
     \caption{Intervalo de tempo entre eventos.}
     \label{fig:boost_converter_variable_pcpl_static_etm_op2_duty_c}
   \end{subfigure}
@@ -1159,7 +1159,7 @@ Ao considerar o ponto instável $P_{\mathrm{o}, 4}$, nota-se um aumento signific
   \captionsetup{justification=centering}
   \begin{subfigure}{1.\textwidth}
     \centering
-    \includegraphics[width=1.\textwidth]{figuras/dynamic-etm/boost/sim2/op1/eta.eps}
+    \includegraphics[width=1.\textwidth, trim={0 50pt 0 0}, clip]{figuras/dynamic-etm/boost/sim2/op1/eta.eps}
     \caption{Ponto de operação $P_{\mathrm{o}, 3}$}
   \end{subfigure}
   \\[6pt]
@@ -1230,7 +1230,7 @@ A \autoref{table:imees_boost_static_dynamic} exibe as médias dos \acrshortpl{it
       2 & $P_{\mathrm{o}, 4}$                                    & 33,07 $\mu$s                          & 34,21 $\mu$s \\
     \bottomrule
   \end{tabular}
-  \caption{\acrshortpl{imee} do conversor \textit{Buck} sob \acrshort{etm} estático (à esquerda) e dinâmico (à direita).}
+  \caption{\acrshortpl{imee} do conversor \textit{Boost} sob \acrshort{etm} estático (à esquerda) e dinâmico (à direita).}
   \label{table:imees_boost_static_dynamic}
 \end{table}
 

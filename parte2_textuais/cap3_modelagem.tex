@@ -213,7 +213,7 @@ A partir das equações dinâmicas \eqref{eq:buck_converter_current} e \eqref{eq
 
 \subsection{Conversor \textit{Boost}}
 
-O segundo sistema utilizada neste estudo consiste em um conversor \textit{Boost} conectado a uma \acrshort{cpl}, onde um capacitor é adicionado em paralelo, uma vez que a carga é considerada possuir características indutivas. A modelagem da \acrshort{cpl} segue a mesma metodologia do sistema anterior, representando-a por uma fonte de corrente dependente. A Figura \autoref{fig:boost_converter_cpl} ilustra o circuito completo deste sistema para a modelagem.
+O segundo sistema utilizada neste estudo consiste em um conversor \textit{Boost} conectado a uma \acrshort{cpl}, onde um capacitor é adicionado em paralelo, uma vez que a carga é considerada possuir características indutivas. A modelagem da \acrshort{cpl} segue a mesma metodologia do sistema anterior, representando-a por uma fonte de corrente dependente. A \autoref{fig:boost_converter_cpl} ilustra o circuito completo deste sistema para a modelagem.
 
 \begin{figure}[H]
   \centering
@@ -240,7 +240,7 @@ Para estudo dos sistemas dinâmicos em um ponto de equilíbrio \begin{equation} 
 \end{align} Essa decomposição facilita a análise da estabilidade do ponto de equilíbrio $P_{\mathrm{o}}$ e a obtenção de respostas lineares no entorno do ponto de equilíbrio.
 
 % Transladação: regime permanente 
-Sob condições de operação em regime permanente, em ambos os sistemas, no ponto de operação, a corrente do indutor e a tensão do capacitor são nulos, ou seja: \begin{equation} {i_L}_{\mathrm{o}} = 0, \hspace{1cm} {v_C}_{\mathrm{o}} = 0. \label{eq:translation_null}\end{equation} Com base nisso, pode-se obter as equações transladadas da corrente do indutor e da tensão do capacitor nos sistemas dinâmicos obtidos. Substituindo a relação descrita em \eqref{eq:translation_null} na equação da corrente $i_L$ no sistema dinâmico \eqref{eq:buck_nonlinear_system} no ponto de equilíbrio $P_{\mathrm{o}}$, obtém-se: \begin{gather}
+Sob condições de operação em regime permanente, em ambos os sistemas, no ponto de operação, as derivadas temporais da corrente do indutor e da tensão do capacitor são nulos, ou seja: \begin{equation} \dt{i_L}_{\mathrm{o}} = 0, \hspace{1cm} \dt{v_C}_{\mathrm{o}} = 0. \label{eq:translation_null}\end{equation} Com base nisso, pode-se obter as equações transladadas da corrente do indutor e da tensão do capacitor nos sistemas dinâmicos obtidos. Substituindo a relação descrita em \eqref{eq:translation_null} na equação da corrente $i_L$ no sistema dinâmico \eqref{eq:buck_nonlinear_system} no ponto de equilíbrio $P_{\mathrm{o}}$, obtém-se: \begin{gather}
   - \frac{R_L}{L} {i_L}_{\mathrm{o}} - \frac{1}{L} {v_C}_{\mathrm{o}} + \frac{v_{\mathrm{in}}}{L}  d_{\mathrm{o}} = 0  \notag \\[8pt]
   - R_L {i_L}_{\mathrm{o}} - {v_C}_{\mathrm{o}} + v_{\mathrm{in}}  d_{\mathrm{o}} = 0 \notag \\[8pt]
   d_{\mathrm{o}} = \frac{R_L}{v_{\mathrm{in}}} {i_L}_{\mathrm{o}} + \frac{{v_C}_{\mathrm{o}}}{v_{\mathrm{in}}} \label{eq:tranlation_buck_d_op}
@@ -356,10 +356,10 @@ O conversor \textit{Buck} foi analisado em dois pontos de operação distintos $
     Parâmetros & Símbolo  & Valor & Unidade \\
     \midrule
     Tensão de entrada & $v_{\mathrm{in}}$ & 48,00 & V \\
-    Resistência de enrolamento do indutor & $r_L$ & 0,10 & $\Omega$ \\
-    Carga de Resistência Constante & $r_{C}$ & 20,00 & $\Omega$ \\
+    Resistência de enrolamento do indutor & $R_L$ & 0,10 & $\Omega$ \\
+    Carga de resistência constante & $R_{C}$ & 20,00 & $\Omega$ \\
     Indutância & $L$ & 1,00 & mH \\
-    Capacitância  & $C$ & 2,20 & mC \\
+    Capacitância  & $C$ & 2,20 & mF \\
     \bottomrule
   \end{tabular}
   \caption{Parâmetros do circuito do conversor \textit{Buck}.}
@@ -495,7 +495,7 @@ Da mesma forma que o conversor \textit{Buck}, o comportamento do conversor \text
     Tensão de entrada & $v_{\mathrm{in}}$ & 48,00 & V \\
     Carga de resistência constante & R & 20,00 & $\Omega$ \\
     Indutância & $L$ & 1,00 & mH \\
-    Capacitância  & $C$ & 2,20 & mC \\
+    Capacitância  & $C$ & 2,20 & mF \\
     \bottomrule
   \end{tabular}
   \caption{Parâmetros do circuito do conversor \textit{Boost}.}

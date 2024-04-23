@@ -360,7 +360,7 @@ O código \ref{cod:buck_linear} implementa a linearização do conversor \textit
   # Matriz de alimentação: nula
   D = [[0., 0.], [0., 0.]]
 
-  \textit{Buck}_linearized = ct.ss(
+  buck_linearized = ct.ss(
     A, B, C, D,
     name='buck_linearized',
     inputs=('δd', 'δPcpl'),
